@@ -33,7 +33,9 @@ export default function Navbar({}: Props) {
                   href={`/api/auth/signin`}
                   onClick={(e) => {
                     e.preventDefault()
-                    signIn()
+                    signIn("spotify", {
+                      callbackUrl: `${window.location.origin}/protected`,
+                    })
                   }}
                   className="inline-block mr-2"
                 >
@@ -72,7 +74,9 @@ export default function Navbar({}: Props) {
                   <div className="flex px-4 py-3 cursor-pointer rounded-md whitespace-nowrap hover:bg-[#00CA4E] transition duration-500 ease-in-out group mr-2">
                     <span
                       className="flex items-center"
-                      onClick={() => signOut()}
+                      onClick={() =>
+                        signOut({ callbackUrl: `${window.location.origin}` })
+                      }
                     >
                       <span className="hidden md:block">LOGOUT</span>
                       <svg
