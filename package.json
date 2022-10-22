@@ -3,10 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "description": "An example project for NextAuth.js using Typescript",
-  "repository": "https://github.com/nextauthjs/next-auth-typescript-example.git",
-  "bugs": {
-    "url": "https://github.com/nextauthjs/next-auth/issues"
-  },
   "homepage": "http://next-auth-typescript-example.now.sh",
   "main": "",
   "scripts": {
@@ -15,18 +11,13 @@
     "start": "next start",
     "types": "tsc --noEmit"
   },
-  "author": "Lluis Agusti <lluis@hey.com>",
-  "contributors": [
-    "Balázs Orbán <info@balazsorban.com>",
-    "Iain Collins <me@iaincollins.com>",
-    "Nico Domino <yo@ndo.dev>"
-  ],
   "license": "ISC",
   "prettier": {
     "semi": false
   },
   "dependencies": {
-    "next": "^11.0.0",
+    "gsap": "^3.11.2",
+    "next": "^12.2.5",
     "next-auth": "^4.0.1",
     "nodemailer": "^6.6.3",
     "react": "^17.0.2",
@@ -36,6 +27,9 @@
     "@types/node": "^15.12.4",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
+    "autoprefixer": "^10.4.12",
+    "postcss": "^8.4.17",
+    "tailwindcss": "^3.1.8",
     "typescript": "^4.3.4"
   }
 }

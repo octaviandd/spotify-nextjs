@@ -7,10 +7,10 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <>
+    <div className="grid grid-rows-layout">
       <Header />
-      <main>{children}</main>
+      <main className="">{children}</main>
       <Footer />
-    </>
+    </div>
   )
 }
