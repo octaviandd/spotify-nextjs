@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
-import AccessDenied from "../components/access-denied"
 import Layout from "../components/layout"
 
 export default function Page() {
@@ -25,11 +24,7 @@ export default function Page() {
 
   // If no session exists, display access denied message
   if (!session) {
-    return (
-      <Layout>
-        <AccessDenied />
-      </Layout>
-    )
+    return <Layout>test</Layout>
   }
 
   // If session exists, display content
