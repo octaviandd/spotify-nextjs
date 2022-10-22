@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react"
-import { useIsomorphicLayoutEffect } from "./utils"
 
 type Props = {
   title: string

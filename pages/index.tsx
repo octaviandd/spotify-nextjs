@@ -1,10 +1,10 @@
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import { gsap } from "gsap"
 import ScrollTrigger from "gsap/dist/ScrollTrigger"
 import TextPlugin from "gsap/dist/TextPlugin"
 import { useRef, useEffect, useLayoutEffect } from "react"
-import SongsFilter from "../components/songs-filters"
-import MockupPage from "../components/mockup-page"
+import SongsFilter from "../components/landing-page/SongFilters"
+import MockupPage from "../components/landing-page/MockupPage"
 
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect

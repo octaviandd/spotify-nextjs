@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 
 export default function Page() {
   const { data: session, status } = useSession()

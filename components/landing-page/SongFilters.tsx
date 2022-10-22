@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
-import { SongFilter } from "./song-filter"
-import { useIsomorphicLayoutEffect, useArrayRef } from "./utils"
+import { SongFilter } from "./SongFilter"
+import { useIsomorphicLayoutEffect, useArrayRef } from "../utils"
 import Image from "next/image"
 import { gsap } from "gsap"
 
