@@ -9,11 +9,9 @@ import { useIsomorphicLayoutEffect, useArrayRef } from "./utils"
 export default function MockupPage() {
   const inputBarRef = useRef<HTMLDivElement>(null)
   gsap.registerPlugin(ScrollTrigger, TextPlugin, Flip)
-  const buttonRef = useRef<HTMLDivElement>(null)
   const tl: any = useRef()
 
   const el = useRef()
-  const q = gsap.utils.selector(el)
 
   const [refs, setRefs] = useArrayRef()
 
