@@ -15,7 +15,7 @@ export type Ref = HTMLDivElement
 export const SongCard = forwardRef<Ref, Props>((props, ref) => {
   return (
     <div
-      className="flex items-center shadow-md w-full bg-white"
+      className="flex items-center shadow-md w-full bg-white py-4"
       ref={ref}
       id={props.item.id ? props.item.id : undefined}
     >

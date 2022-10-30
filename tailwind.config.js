@@ -9,10 +9,12 @@ module.exports = {
       gridTemplateRows: {
         layout: "auto 1fr auto",
         mockup: "150px 1fr",
-        hero: "auto 1fr 1fr 1fr",
+        hero: "auto 1fr 1fr 1fr 1fr",
+        hero2: "300px 300px 300px",
       },
       gridTemplateColumns: {
         hero: "minmax(700px, 25%) 1fr",
+        hero2: "minmax(700px, 25%) 1fr",
         mockup: "1fr",
       },
       keyframes: {

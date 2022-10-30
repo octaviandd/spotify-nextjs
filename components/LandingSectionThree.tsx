@@ -3,7 +3,7 @@ import { SongFilter } from "./song-filter"
 import { useIsomorphicLayoutEffect, useArrayRef } from "./utils"
 import { gsap } from "gsap"
 
-export default function SongsFilter() {
+export default function LandingSectionThree() {
   const secondTl: any = useRef()
   const [refs, setRefs] = useArrayRef()
 
@@ -32,12 +32,12 @@ export default function SongsFilter() {
   })
 
   return (
-    <div className="row-start-3 row-end-4 col-start-1">
-      <h1 className="text-[40px] leading-none mt-5">
+    <div>
+      <h1 className="text-[40px] leading-none mt-5 lg:pl-20">
         The search algorithm takes precedence over the user's capability of
         filtering.
       </h1>
-      <h1 className="text-[40px] leading-none mt-5">
+      <h1 className="text-[40px] leading-none mt-5 lg:pl-20">
         Here are some ways you can filter your music in more depth
       </h1>
       <div className="mt-16">

@@ -1,9 +1,10 @@
 import Layout from "../components/layout"
 import { useEffect } from "react"
-import SongsFilter from "../components/songs-filters"
+import LandingSectionThree from "../components/LandingSectionThree"
 import MockupPage from "../components/mockup-page"
 import LandingSectionOne from "../components/LandingSectionOne"
 import LandingSectionTwo from "../components/LandingSectionTwo"
+import LandingSectionFour from "../components/LandingSectionFour"
 
 export default function Page() {
   useEffect(() => {
@@ -15,12 +16,9 @@ export default function Page() {
       <div className="grid grid-cols-hero grid-rows-hero relative" id="starter">
         <MockupPage></MockupPage>
         <LandingSectionOne></LandingSectionOne>
-        <LandingSectionTwo></LandingSectionTwo>
-        <SongsFilter></SongsFilter>
-        <div className="row-start-3 row-end-4 col-start-1">
-          <div className="pt-20 pl-20 move">move it here</div>
-        </div>
+        <LandingSectionFour></LandingSectionFour>
       </div>
+      <div className="grid grid-cols-hero2 grid-rows-hero2 relative"></div>
     </Layout>
   )
 }

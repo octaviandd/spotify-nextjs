@@ -30,7 +30,7 @@ export default function LandingSectionTwo({}: Props) {
     }
   })
   return (
-    <div className="row-start-2 row-end-3 col-start-1 flex flex-wrap mr-4 items-center justify-center songs-filter relative lg:pl-20">
+    <div className="flex flex-wrap mr-4 items-center justify-center songs-filter relative lg:pl-20">
       <div className="flex flex-col pr-10">
         <h1 className="text-[40px] leading-none mb-8">
           Spotify offers a general method of filtering using{" "}
