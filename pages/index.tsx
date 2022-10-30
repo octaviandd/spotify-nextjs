@@ -13,6 +13,10 @@ export default function Page() {
   gsap.registerPlugin(ScrollTrigger, TextPlugin)
   const buttonRef = useRef<HTMLDivElement>(null)
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   useIsomorphicLayoutEffect(() => {
     if (buttonRef.current) {
       let ctx = gsap.context(() => {
