@@ -21,8 +21,9 @@ export default function MockupPage() {
         trigger: document.querySelector("#pin"),
         pin: true,
         start: "top top",
-        end: "+=1575",
+        end: "+=1000",
         scrub: true,
+        pinSpacing: false,
       },
     })
   }, [])

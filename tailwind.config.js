@@ -11,11 +11,13 @@ module.exports = {
         mockup: "150px 1fr",
         hero: "auto 1fr 1fr 1fr 1fr",
         hero2: "300px 300px 300px",
+        search: "auto",
       },
       gridTemplateColumns: {
         hero: "minmax(700px, 25%) 1fr",
         hero2: "minmax(700px, 25%) 1fr",
         mockup: "1fr",
+        search: "minmax(500px, 25%) 1fr",
       },
       keyframes: {
         loud: {

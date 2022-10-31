@@ -26,7 +26,7 @@ export default function LandingSectionOne({}: Props) {
   })
 
   return (
-    <div className="row-start-1 row-end-2 col-start-1">
+    <div className="row-start-1 row-end-2 col-start-1 mb-20">
       <div className="flex flex-row flex-wrap pt-20 pb-20 lg:pl-20 ">
         <div className="pb-6 text-[30px] text-slate-400">
           Looking for new music?
