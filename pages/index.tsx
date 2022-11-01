@@ -4,7 +4,7 @@ import { useSession, getSession } from "next-auth/react"
 import { useEffect } from "react"
 import LandingSectionFour from "../components/landing-page/LandingSectionFour"
 import LandingSectionOne from "../components/landing-page/LandingSectionOne"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import MockupPage from "../components/landing-page/MockupPage"
 
 export default function Page() {
