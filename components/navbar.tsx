@@ -22,9 +22,15 @@ export default function Navbar({}: Props) {
             </div>
           </div>
           <div className="flex">
-            <div className="pr-3">Text 1</div>
-            <div className="pr-3">Text2</div>
-            <div className="pr-3">Text3</div>
+            <div className="pr-3">
+              <a href="/search">Search</a>
+            </div>
+            <div className="pr-3">
+              <a href="/discovery">Discovery</a>
+            </div>
+            <div className="pr-3">
+              <a href="/profile">Profile</a>
+            </div>
           </div>
           <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <div className="ml-3 relative">
@@ -34,7 +40,7 @@ export default function Navbar({}: Props) {
                   onClick={(e) => {
                     e.preventDefault()
                     signIn("spotify", {
-                      callbackUrl: `${window.location.origin}/protected`,
+                      callbackUrl: `${window.location.origin}/search`,
                     })
                   }}
                   className="inline-block mr-2"

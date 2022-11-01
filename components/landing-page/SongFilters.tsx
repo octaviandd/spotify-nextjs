@@ -6,8 +6,8 @@ import { gsap } from "gsap"
 
 export default function SongsFilter() {
   const underlineRef = useRef<HTMLElement>(null)
-  const tl: GSAPTimeline = useRef()
-  const secondTl: GSAPTimeline = useRef()
+  const tl: any = useRef()
+  const secondTl: any = useRef()
   const [refs, setRefs] = useArrayRef()
 
   useIsomorphicLayoutEffect(() => {
@@ -34,7 +34,7 @@ export default function SongsFilter() {
   useIsomorphicLayoutEffect(() => {
     if (refs.current) {
       let ctx = gsap.context(() => {
-        secondTl = gsap.timeline().fromTo(
+        secondTl.current = gsap.timeline().fromTo(
           refs.current,
           {
             left: 0,

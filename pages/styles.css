@@ -10,28 +10,83 @@ body {
   color: #333;
 }
 
-input[type="range"] {
-  width: 100%;
-  outline: none;
-  padding: 0;
+.range-slider {
+  border-radius: 10%;
+  display: block;
   height: 4px;
-  background-color: #404040;
-  background-image: linear-gradient(#b3b3b3, #b3b3b3);
-  background-repeat: no-repeat;
-  border-radius: 10px;
-  cursor: pointer;
-  -webkit-appearance: none;
+  width: 100%;
+  background: rgba(59, 173, 227, 1);
+  background: -moz-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -webkit-gradient(
+    left bottom,
+    right top,
+    color-stop(0%, rgba(59, 173, 227, 1)),
+    color-stop(25%, rgba(87, 111, 230, 1)),
+    color-stop(51%, rgba(152, 68, 183, 1)),
+    color-stop(100%, rgba(255, 53, 127, 1))
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgba(59, 173, 227, 1) 0%,
+    rgba(87, 111, 230, 1) 25%,
+    rgba(152, 68, 183, 1) 51%,
+    rgba(255, 53, 127, 1) 100%
+  );
+  height: 2px;
 }
-input[type="range"]::-webkit-slider-thumb {
-  width: 12px;
-  height: 12px;
-  border: 0;
-  background: #fff;
+
+.range-slider-thumb {
+  display: block;
+  border: 2px solid;
   border-radius: 100%;
-  box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.1);
-  -webkit-appearance: none;
-  opacity: 0;
+  height: 17.5px;
+  width: 17.5px;
+  max-width: 80px;
+  position: relative;
+  bottom: 10px;
+  background-color: #fff;
+  cursor: grab;
+  -webkit-transition: border 1000ms ease;
+  transition: border 1000ms ease;
 }
-input[type="range"]:hover::-webkit-slider-thumb {
-  opacity: 1;
+
+.range-slider-thumb-filter {
+  display: block;
+  border: 2px solid;
+  border-radius: 100%;
+  height: 17.5px;
+  width: 17.5px;
+  max-width: 80px;
+  position: absolute;
+  background-color: #fff;
+  cursor: grab;
+  -webkit-transition: border 1000ms ease;
+  transition: border 1000ms ease;
 }
