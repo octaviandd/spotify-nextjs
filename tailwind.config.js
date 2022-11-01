@@ -12,12 +12,14 @@ module.exports = {
         hero: "auto 1fr 1fr 1fr 1fr",
         hero2: "300px 300px 300px",
         search: "auto",
+        item: "auto",
       },
       gridTemplateColumns: {
         hero: "minmax(700px, 25%) 1fr",
         hero2: "minmax(700px, 25%) 1fr",
         mockup: "1fr",
         search: "minmax(500px, 25%) 1fr",
+        item: "repeat(auto-fill, minmax(170px, 1fr))",
       },
       keyframes: {
         loud: {
