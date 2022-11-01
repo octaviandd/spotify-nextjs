@@ -12,7 +12,7 @@ export default function RangeFilter({ type }: Props) {
     setRangeState([...val])
   }
   return (
-    <div className="h-full relative w-3/4">
+    <div className="relative w-3/4">
       <label className="">{type}</label>
       <Range
         step={1}
@@ -36,7 +36,6 @@ export default function RangeFilter({ type }: Props) {
                   color: "#fff",
                   fontWeight: "bold",
                   fontSize: "14px",
-                  fontFamily: "Arial,Helvetica Neue,Helvetica,sans-serif",
                   padding: "4px",
                   borderRadius: "4px",
                   backgroundColor: "#548BF4",

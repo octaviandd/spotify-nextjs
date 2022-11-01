@@ -47,7 +47,7 @@ export interface Item {
       album_type: string
       images: Array<{ url: string }>
     }
-    artists: object[]
+    artists: Array<{ name: string }>
     duration_ms: number
     episode: boolean
     explicit: false

@@ -76,3 +76,17 @@ body {
   -webkit-transition: border 1000ms ease;
   transition: border 1000ms ease;
 }
+
+.range-slider-thumb-filter {
+  display: block;
+  border: 2px solid;
+  border-radius: 100%;
+  height: 17.5px;
+  width: 17.5px;
+  max-width: 80px;
+  position: absolute;
+  background-color: #fff;
+  cursor: grab;
+  -webkit-transition: border 1000ms ease;
+  transition: border 1000ms ease;
+}

@@ -7,8 +7,6 @@ type Props = {}
 
 export default function SongsContainer({}: Props) {
   const { data: session, status } = useSession()
-
-  const loading = status === "loading"
   const [items, setItems] = useState<Item[]>([])
 
   useEffect(() => {
@@ -17,16 +15,21 @@ export default function SongsContainer({}: Props) {
       searchParams: null,
       queryLink: "playlists/37i9dQZEVXbNG2KDcFcKOF",
     }).then((data: PopularSongsData) => {
-      console.log(data.tracks.items)
       setItems(data.tracks.items)
     })
   }, [])
 
   return (
-    <div className="grid grid-cols-5 grid-rows-auto">
+    <div className="grid grid-cols-item grid-rows-item gap-y-5 gap-x-3 px-4">
       {items.length > 0 &&
         items.map((item) => (
-          <img key={item.track.id} src={item.track.album.images[2].url}></img>
+          <div key={item.track.id}>
+            <img src={item.track.album.images[1].url}></img>
+            <div className="flex flex-col flex-start pt-2">
+              <span>{item.track.name}</span>
+              <span>{item.track.artists[0].name}</span>
+            </div>
+          </div>
         ))}
     </div>
   )
