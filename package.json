@@ -16,6 +16,7 @@
     "semi": false
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.6",
     "gsap": "^3.11.2",
     "next": "^12.2.5",
     "next-auth": "^4.0.1",
