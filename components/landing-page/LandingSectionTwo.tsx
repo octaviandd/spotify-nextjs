@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { useIsomorphicLayoutEffect } from "./utils"
+import { useIsomorphicLayoutEffect } from "../utils"
 import Image from "next/image"
 import { gsap } from "gsap"
 

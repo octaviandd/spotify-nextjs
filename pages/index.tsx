@@ -2,10 +2,10 @@ import { GetServerSideProps } from "next"
 import type { Session } from "next-auth"
 import { useSession, getSession } from "next-auth/react"
 import { useEffect } from "react"
-import LandingSectionFour from "../components/LandingSectionFour"
-import LandingSectionOne from "../components/LandingSectionOne"
+import LandingSectionFour from "../components/landing-page/LandingSectionFour"
+import LandingSectionOne from "../components/landing-page/LandingSectionOne"
 import Layout from "../components/layout"
-import MockupPage from "../components/mockup-page"
+import MockupPage from "../components/landing-page/MockupPage"
 
 export default function Page() {
   const { data: session, status } = useSession()

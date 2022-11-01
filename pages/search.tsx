@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react"
-import AccessDenied from "../components/access-denied"
+import AccessDenied from "../components/AccessDenied"
 import Layout from "../components/layout"
 import RangeFilter from "../components/search-page/RangeFilter"
 import SearchInput from "../components/search-page/SearchInput"
@@ -24,18 +24,6 @@ export default function Page() {
       <div className="grid grid-cols-search grid-rows-search pt-10">
         <div className="flex flex-col items-center">
           <SearchInput></SearchInput>
-          {/* <div>
-            <label>Seed artists</label>
-            <input></input>
-          </div>
-          <div>
-            <label>Seed genres</label>
-            <input></input>
-          </div>
-          <div>
-            <label>Seed tracks</label>
-            <input></input>
-          </div> */}
           <RangeFilter type="Acousticness"></RangeFilter>
           <RangeFilter type="Danceability"></RangeFilter>
           <RangeFilter type="Duration"></RangeFilter>
