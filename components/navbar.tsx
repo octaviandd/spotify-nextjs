@@ -40,7 +40,7 @@ export default function Navbar({}: Props) {
                   onClick={(e) => {
                     e.preventDefault()
                     signIn("spotify", {
-                      callbackUrl: `${window.location.origin}/protected`,
+                      callbackUrl: `${window.location.origin}/search`,
                     })
                   }}
                   className="inline-block mr-2"
