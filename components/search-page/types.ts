@@ -34,7 +34,34 @@ export type PopularSongsData = {
   primary_color: string
   public: boolean
   snapshot_id: string
-  tracks: object
+  tracks: {
+    items: Item[]
+  }
   type: string
   uri: string
+}
+
+export interface Item {
+  track: {
+    album: {
+      album_type: string
+      images: Array<{ url: string }>
+    }
+    artists: object[]
+    duration_ms: number
+    episode: boolean
+    explicit: false
+    external_ids: object
+    external_urls: object
+    href: string
+    id: string
+    is_local: boolean
+    name: string
+    popularity: number
+    preview_url: string
+    track: boolean
+    track_number: number | null
+    type: string
+    uri: string
+  }
 }

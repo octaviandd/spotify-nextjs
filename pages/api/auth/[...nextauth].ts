@@ -2,7 +2,6 @@ import NextAuth from "next-auth"
 import SpotifyProvider from "next-auth/providers/spotify"
 
 async function refreshAccessToken(token: any) {
-  console.log("refreshing")
   try {
     const url =
       `http://localhost:3000/refresh_token#refresh_token=${token}` +
@@ -87,6 +86,8 @@ export default NextAuth({
       return refreshAccessToken(token)
     },
     async session({ session, token }) {
+      console.log({ session, token }, Date.now(), "date")
+      console.log(Date.now() < token.accessTokenExpires)
       session.accessToken = token.accessToken
       session.refreshToken = token.refreshToken
       session.error = token.error

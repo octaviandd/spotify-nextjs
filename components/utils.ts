@@ -1,8 +1,5 @@
 import { useRef, useLayoutEffect, useEffect } from "react"
-import {
-  SpotifyRequestParameters,
-  PopularSongsData,
-} from "../components/search-page/types"
+import { SpotifyRequestParameters, PopularSongsData } from "./search-page/types"
 
 export const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect
@@ -13,7 +10,7 @@ export const useArrayRef = () => {
   return [refs, (ref: HTMLElement) => ref && refs.current.push(ref)]
 }
 
-export const getSpotifyData = async <PopularSongsData>({
+export const getSpotifyData = async ({
   token,
   searchParams,
   queryLink,
@@ -30,7 +27,7 @@ export const getSpotifyData = async <PopularSongsData>({
       },
     })
 
-    let data = await res.json()
+    let data: PopularSongsData = await res.json()
     return data
   } catch (error) {
     throw error
