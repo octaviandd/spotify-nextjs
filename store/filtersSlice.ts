@@ -14,6 +14,7 @@ const initialState: filtersInitialState = {
   speechiness: [0, 100],
   tempo: [0, 100],
   valence: [0, 100],
+  mode: [0, 100],
 }
 
 interface IObjectKeys {
@@ -33,64 +34,23 @@ interface filtersInitialState extends IObjectKeys {
   speechiness: number[]
   tempo: number[]
   valence: number[]
+  mode: number[]
 }
 
 export const filterSlice = createSlice({
   name: "update",
   initialState,
   reducers: {
-    updateAccousticness: (state, action: PayloadAction<number[]>) => {
-      state.acousticness = action.payload
-    },
-    updateDanceability: (state, action: PayloadAction<number[]>) => {
-      state.danceability = action.payload
-    },
-    updateDuration: (state, action: PayloadAction<number[]>) => {
-      state.duration = action.payload
-    },
-    updateEnergy: (state, action: PayloadAction<number[]>) => {
-      state.energy = action.payload
-    },
-    updateInstrumentalness: (state, action: PayloadAction<number[]>) => {
-      state.instrumentalness = action.payload
-    },
-    updateKey: (state, action: PayloadAction<number[]>) => {
-      state.key = action.payload
-    },
-    updateLiveness: (state, action: PayloadAction<number[]>) => {
-      state.liveness = action.payload
-    },
-    updateLoudness: (state, action: PayloadAction<number[]>) => {
-      state.loudness = action.payload
-    },
-    updatePopularity: (state, action: PayloadAction<number[]>) => {
-      state.popularity = action.payload
-    },
-    updateSpeechiness: (state, action: PayloadAction<number[]>) => {
-      state.speechiness = action.payload
-    },
-    updateTempo: (state, action: PayloadAction<number[]>) => {
-      state.tempo = action.payload
-    },
-    updateValence: (state, action: PayloadAction<number[]>) => {
-      state.valence = action.payload
+    updateValue: (
+      state,
+      action: PayloadAction<{ values: number[]; type: string }>
+    ) => {
+      state[action.payload.type] = action.payload.values
     },
   },
 })
 
-export const {
-  updateAccousticness,
-  updateDanceability,
-  updateEnergy,
-  updateInstrumentalness,
-  updateKey,
-  updateLoudness,
-  updateSpeechiness,
-  updatePopularity,
-  updateTempo,
-  updateDuration,
-  updateValence,
-} = filterSlice.actions
+export const { updateValue } = filterSlice.actions
 
 export const selectProperty = (state: RootState, property: string) =>
   state.filters[property]

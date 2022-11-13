@@ -1,16 +1,26 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Range } from "react-range"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../store"
+import { updateValue } from "../../store/filtersSlice"
+
+const selectProperty = (state: RootState) => state.filters
 
 type Props = {
   type: String
 }
 
 export default function RangeFilter({ type }: Props) {
-  const [rangeState, setRangeState] = useState<number[]>([0, 100])
+  const filters = useSelector(selectProperty)
+  const dispatch = useDispatch()
 
   const setRange = (val: number[]) => {
-    setRangeState([...val])
+    dispatch(updateValue({ values: [...val], type: type.toLocaleLowerCase() }))
   }
+  useEffect(() => {
+    console.log(filters[type.toLocaleLowerCase()])
+  }, [filters])
+
   return (
     <div className="relative w-3/4">
       <label className="">{type}</label>
@@ -19,7 +29,7 @@ export default function RangeFilter({ type }: Props) {
         min={0}
         max={100}
         allowOverlap={false}
-        values={rangeState}
+        values={filters[type.toLocaleLowerCase()]}
         onChange={(values) => setRange(values)}
         renderTrack={({ props, children }) => (
           <div {...props} className="range-slider my-5">
@@ -41,7 +51,7 @@ export default function RangeFilter({ type }: Props) {
                   backgroundColor: "#548BF4",
                 }}
               >
-                {rangeState[index].toFixed(1)}
+                {filters[type.toLocaleLowerCase()][index].toFixed(1)}
               </div>
             )}
           </div>

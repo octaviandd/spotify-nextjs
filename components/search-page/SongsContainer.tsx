@@ -22,7 +22,17 @@ export default function SongsContainer({}: Props) {
     }).then((data: PopularSongsData) => {
       setItems(data.tracks.items)
     })
-  }, [search])
+  }, [])
+
+  // useEffect(() => {
+  //   getSpotifyData({
+  //     token: session?.accessToken as string,
+  //     searchParams: null,
+  //     queryLink: "playlists/37i9dQZEVXbNG2KDcFcKOF",
+  //   }).then((data: PopularSongsData) => {
+  //     setItems(data.tracks.items)
+  //   })
+  // }, [search])
 
   return (
     <div className="grid grid-cols-item grid-rows-item gap-y-5 gap-x-3 px-4">
