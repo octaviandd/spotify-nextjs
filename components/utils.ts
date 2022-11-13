@@ -16,10 +16,16 @@ export const getSpotifyData = async ({
   queryLink,
 }: SpotifyRequestParameters): Promise<PopularSongsData> => {
   let urlParams = new URLSearchParams()
+  if (searchParams) {
+    for (const [key, value] of Object.entries(searchParams)) {
+      urlParams.append(key, value)
+    }
+  }
   try {
     let link = "https://api.spotify.com/v1/"
-    if (queryLink) link += queryLink
+    if (queryLink) link += queryLink + "?"
     if (searchParams) link += urlParams
+    console.log(link)
     let res = await fetch(link, {
       headers: {
         "Content-Type": "application/json",

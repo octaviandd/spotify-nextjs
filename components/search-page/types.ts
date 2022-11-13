@@ -1,23 +1,24 @@
-export interface paramsInterface extends URLSearchParams {
-  time_range: null | string
-  limit: null | string
-  id: null | number
-  ids: null | []
-  type: null | string
-  name: null | string
-  seed_artists: null | []
-  target_danceability: null | number
-  target_acousticness: null | number
-  target_energy: null | number
-  target_instrumentalness: null | number
-  target_liveness: null | number
-  target_loudness: null | number
-  target_speechiness: null | number
-  target_valence: null | number
+export interface paramsInterface {
+  time_range?: undefined | string
+  limit?: undefined | string
+  id?: undefined | number
+  ids?: undefined | []
+  type?: undefined | string
+  name?: undefined | string
+  seed_artists?: undefined | []
+  target_danceability?: undefined | number
+  target_acousticness?: undefined | number
+  target_energy?: undefined | number
+  target_instrumentalness?: undefined | number
+  target_liveness?: undefined | number
+  target_loudness?: undefined | number
+  target_speechiness?: undefined | number
+  target_valence?: undefined | number
+  q?: undefined | string
 }
 export interface SpotifyRequestParameters {
   token: string
-  searchParams: paramsInterface | null
+  searchParams: paramsInterface | undefined
   queryLink: string | null
 }
 

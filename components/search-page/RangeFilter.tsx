@@ -6,20 +6,13 @@ import { updateValue } from "../../store/filtersSlice"
 
 const selectProperty = (state: RootState) => state.filters
 
-type Props = {
-  type: String
-}
-
-export default function RangeFilter({ type }: Props) {
-  const filters = useSelector(selectProperty)
+export default function RangeFilter({ type }: { type: string }) {
+  const filters = useSelector(selectProperty).filters
   const dispatch = useDispatch()
 
   const setRange = (val: number[]) => {
     dispatch(updateValue({ values: [...val], type: type.toLocaleLowerCase() }))
   }
-  useEffect(() => {
-    console.log(filters[type.toLocaleLowerCase()])
-  }, [filters])
 
   return (
     <div className="relative w-3/4">
