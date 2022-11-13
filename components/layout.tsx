@@ -1,5 +1,5 @@
-import Header from "./Header"
 import Footer from "./Footer"
+import Header from "./header"
 
 interface LayoutProps {
   children: React.ReactNode

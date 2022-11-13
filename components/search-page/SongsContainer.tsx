@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react"
 import { getSpotifyData } from "../utils"
 import { useSession } from "next-auth/react"
 import { PopularSongsData, Item } from "./types"
+import { RootState } from "../../store"
+import { useSelector } from "react-redux"
+
+const selectSearch = (state: RootState) => state.search
 
 type Props = {}
 
 export default function SongsContainer({}: Props) {
   const { data: session, status } = useSession()
   const [items, setItems] = useState<Item[]>([])
+  const { search, status: loading } = useSelector(selectSearch)
 
   useEffect(() => {
     getSpotifyData({
@@ -17,7 +22,7 @@ export default function SongsContainer({}: Props) {
     }).then((data: PopularSongsData) => {
       setItems(data.tracks.items)
     })
-  }, [])
+  }, [search])
 
   return (
     <div className="grid grid-cols-item grid-rows-item gap-y-5 gap-x-3 px-4">
