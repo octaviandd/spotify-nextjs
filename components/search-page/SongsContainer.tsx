@@ -37,6 +37,7 @@ export default function SongsContainer() {
         searchParams: { q: search, type: "track" },
         queryLink: "search",
       }).then((data: PopularSongsData) => {
+        console.log(data)
         setItems(data.tracks.items)
         setLoading(false)
       })
@@ -62,7 +63,6 @@ export default function SongsContainer() {
         searchParams: filtersObject,
         queryLink: "recommendations",
       }).then((data: PopularSongsData) => {
-        console.log(data)
         setItems(data.tracks.items)
         setLoading(false)
       })
