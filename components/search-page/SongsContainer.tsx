@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { SetStateAction, useEffect, useRef, useState } from "react"
 import { getSpotifyData } from "../utils"
 import { useSession } from "next-auth/react"
-import { PopularSongsData, Item } from "./types"
+import { DefaultItemTypeResponse, SongResponseObject, PlaylistResponseObject } from "./types"
 import { RootState } from "../../store"
 import { useSelector } from "react-redux"
 
@@ -10,7 +10,7 @@ const selectAllFilters = (state: RootState) => state.filters
 
 export default function SongsContainer() {
   const { data: session, status } = useSession()
-  const [items, setItems] = useState<Item[]>([])
+  const [items, setItems] = useState<SongResponseObject[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const { search } = useSelector(selectSearch)
   const filters = useSelector(selectAllFilters)
@@ -23,8 +23,9 @@ export default function SongsContainer() {
       token: session?.accessToken as string,
       searchParams: undefined,
       queryLink: "playlists/37i9dQZEVXbNG2KDcFcKOF",
-    }).then((data: PopularSongsData) => {
-      setItems(data.tracks.items)
+    }).then((data: PlaylistResponseObject) => {
+      console.log(data)
+      setItems(data.tracks.items as SetStateAction<SongResponseObject[]>)
       setLoading(false)
     })
   }, [])
@@ -36,9 +37,9 @@ export default function SongsContainer() {
         token: session?.accessToken as string,
         searchParams: { q: search, type: "track" },
         queryLink: "search",
-      }).then((data: PopularSongsData) => {
+      }).then((data: DefaultItemTypeResponse) => {
         console.log(data)
-        setItems(data.tracks.items)
+        setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>)
         setLoading(false)
       })
     } else {
@@ -62,8 +63,8 @@ export default function SongsContainer() {
         token: session?.accessToken as string,
         searchParams: filtersObject,
         queryLink: "recommendations",
-      }).then((data: PopularSongsData) => {
-        setItems(data.tracks.items)
+      }).then((data: DefaultItemTypeResponse) => {
+        setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>)
         setLoading(false)
       })
     } else {

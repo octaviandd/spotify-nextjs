@@ -5,10 +5,17 @@ import RangeFilter from "../components/search-page/RangeFilter"
 import SeedFilters from "../components/search-page/SeedFilters"
 import SearchInput from "../components/search-page/SearchInput"
 import SongsContainer from "../components/search-page/SongsContainer"
+import { RootState } from "../store"
+import { useSelector } from "react-redux"
+
+const getMultiSelectValues = (state: RootState) => state.filters.seeds
 
 export default function Page() {
   const { data: session, status } = useSession()
   const loading = status === "loading"
+  const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce((accumulator, currentValue) => {
+    return accumulator + currentValue[1].length
+  }, 0)
 
   if (typeof window !== "undefined" && loading) return null
 
@@ -25,9 +32,10 @@ export default function Page() {
       <div className="grid grid-cols-search grid-rows-search pt-10">
         <div className="flex flex-col items-center">
           <SearchInput></SearchInput>
-          <SeedFilters type="artists"></SeedFilters>
-          <SeedFilters type="albums"></SeedFilters>
-          <SeedFilters type="tracks"></SeedFilters>
+          <SeedFilters type="artist"></SeedFilters>
+          <SeedFilters type="genre"></SeedFilters>
+          <SeedFilters type="track"></SeedFilters>
+          {seedsLength > 5 && 'Too many selections'}
           <RangeFilter type="Acousticness"></RangeFilter>
           <RangeFilter type="Danceability"></RangeFilter>
           <RangeFilter type="Duration"></RangeFilter>

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Range } from "react-range"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../store"
-import { updateValue } from "../../store/filtersSlice"
+import { updateRangeSliders } from "../../store/filtersSlice"
 
 const selectProperty = (state: RootState) => state.filters
 
@@ -11,7 +11,7 @@ export default function RangeFilter({ type }: { type: string }) {
   const dispatch = useDispatch()
 
   const setRange = (val: number[]) => {
-    dispatch(updateValue({ values: [...val], type: type.toLocaleLowerCase() }))
+    dispatch(updateRangeSliders({ values: [...val], type: type.toLocaleLowerCase() }))
   }
 
   return (

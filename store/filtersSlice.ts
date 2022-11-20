@@ -25,9 +25,7 @@ const initialState: filtersInitialState = {
 }
 interface filtersInitialState {
   seeds: {
-    seed_artists: string[]
-    seed_genres: string[]
-    seed_tracks: string[]
+    [key: string]: object[]
   }
   filters: {
     [key: string]: number[]
@@ -38,16 +36,19 @@ export const filterSlice = createSlice({
   name: "update",
   initialState,
   reducers: {
-    updateValue: (
+    updateRangeSliders: (
       state,
       action: PayloadAction<{ values: number[]; type: string }>
     ) => {
       state.filters[action.payload.type] = action.payload.values
     },
+    updateMultiSelect: (state, action: PayloadAction<{values: object[]; type: string}>) => {
+      state.seeds[action.payload.type].push(action.payload.values)
+    }
   },
 })
 
-export const { updateValue } = filterSlice.actions
+export const { updateRangeSliders, updateMultiSelect } = filterSlice.actions
 
 export const selectProperty = (state: RootState, property: string) =>
   state.filters.filters[property]

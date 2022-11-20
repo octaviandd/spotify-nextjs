@@ -1,5 +1,5 @@
 import { useRef, useLayoutEffect, useEffect } from "react"
-import { SpotifyRequestParameters, PopularSongsData } from "./search-page/types"
+import { SpotifyRequestParameters, DefaultItemTypeResponse, PlaylistResponseObject } from "./search-page/types"
 
 export const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect
@@ -14,7 +14,7 @@ export const getSpotifyData = async ({
   token,
   searchParams,
   queryLink,
-}: SpotifyRequestParameters): Promise<PopularSongsData> => {
+}: SpotifyRequestParameters): Promise<DefaultItemTypeResponse | PlaylistResponseObject> => {
   let urlParams = new URLSearchParams()
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
@@ -33,7 +33,7 @@ export const getSpotifyData = async ({
       },
     })
 
-    let data: PopularSongsData = await res.json()
+    let data: DefaultItemTypeResponse | PlaylistResponseObject = await res.json()
     return data
   } catch (error) {
     throw error
