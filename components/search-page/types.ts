@@ -19,6 +19,7 @@ export interface paramsInterface {
   target_speechiness?: undefined | number
   target_valence?: undefined | number
   q?: undefined | string
+  offset: undefined | number
 }
 export interface SpotifyRequestParameters {
   token: string
@@ -30,10 +31,11 @@ export interface SpotifyRequestParameters {
  * Response variables
  */
 
-type ItemProperty = "artists" | "tracks" | "albums" | "genres";
+type ItemProperty = "artists" | "tracks" | "albums" | "genres"
 
-export type TraitType = {type: 'playlistObject', value: PlaylistResponseObject} | {type: 'defaultObject', value: DefaultItemTypeResponse}
-
+export type TraitType =
+  | { type: "playlistObject"; value: PlaylistResponseObject }
+  | { type: "defaultObject"; value: DefaultItemTypeResponse }
 
 export type PlaylistResponseObject = {
   collaborative: boolean
@@ -54,7 +56,7 @@ export type PlaylistResponseObject = {
 }
 
 export type DefaultItemTypeResponse = {
-  [key in ItemProperty]? : {
+  [key in ItemProperty]?: {
     href: String
     items: ObjectModel
     limit: Number
@@ -71,7 +73,7 @@ export type ArtistItemResponseObject = {
   genres: string[]
   href: string
   id: string
-  images: object[]
+  images: Array<{ url: string; height: number }>
   name: string
   popularity: number
   type: string
@@ -79,7 +81,7 @@ export type ArtistItemResponseObject = {
 }
 
 export type SongResponseObject = {
-  album: object
+  album: { images: Array<{ url: string }> }
   artists: ArtistItemResponseObject[]
   available_markets: string[]
   disc_number: number
@@ -99,7 +101,6 @@ export type SongResponseObject = {
 }
 
 type ObjectModel = ArtistItemResponseObject[] | SongResponseObject[]
-
 
 export type PopularSongsData = {
   collaborative: boolean

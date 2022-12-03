@@ -32,9 +32,9 @@ export default function Page() {
       <div className="grid grid-cols-search grid-rows-search pt-10">
         <div className="flex flex-col items-center">
           <SearchInput></SearchInput>
-          <SeedFilters type="artist"></SeedFilters>
-          <SeedFilters type="genre"></SeedFilters>
-          <SeedFilters type="track"></SeedFilters>
+          <SeedFilters type="artist" queryLink="search"></SeedFilters>
+          <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds"></SeedFilters>
+          <SeedFilters type="track" queryLink="search"></SeedFilters>
           {seedsLength > 5 && 'Too many selections'}
           <RangeFilter type="Acousticness"></RangeFilter>
           <RangeFilter type="Danceability"></RangeFilter>

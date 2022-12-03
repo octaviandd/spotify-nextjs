@@ -25,7 +25,7 @@ export const getSpotifyData = async ({
     let link = "https://api.spotify.com/v1/"
     if (queryLink) link += queryLink + "?"
     if (searchParams) link += urlParams
-    console.log(link)
+    // console.log(link)
     let res = await fetch(link, {
       headers: {
         "Content-Type": "application/json",

@@ -86,8 +86,6 @@ export default NextAuth({
       return refreshAccessToken(token)
     },
     async session({ session, token }) {
-      console.log({ session, token }, Date.now(), "date")
-      console.log(Date.now() < token.accessTokenExpires)
       session.accessToken = token.accessToken
       session.refreshToken = token.refreshToken
       session.error = token.error

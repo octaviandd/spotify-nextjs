@@ -1,7 +1,11 @@
 import React, { SetStateAction, useEffect, useRef, useState } from "react"
 import { getSpotifyData } from "../utils"
 import { useSession } from "next-auth/react"
-import { DefaultItemTypeResponse, SongResponseObject, PlaylistResponseObject } from "./types"
+import {
+  DefaultItemTypeResponse,
+  SongResponseObject,
+  PlaylistResponseObject,
+} from "./types"
 import { RootState } from "../../store"
 import { useSelector } from "react-redux"
 
@@ -14,63 +18,59 @@ export default function SongsContainer() {
   const [loading, setLoading] = useState<boolean>(false)
   const { search } = useSelector(selectSearch)
   const filters = useSelector(selectAllFilters)
-  const notInitialRender = useRef(false)
-  const notInitialRender2 = useRef(false)
 
-  useEffect(() => {
+  const getData = () => {
+
+    let filtersArrayObject = Object.entries(filters.filters).map((item) => ({
+      ["max_" + item[0]]: item[1][0],
+      ["min_" + item[0]]: item[1][1],
+    }))
+    let filtersObject = Object.assign({}, ...filtersArrayObject)
+    for (const [key, value] of Object.entries(filters.seeds)) {
+      if (!(value.length < 1)){
+        filtersObject[key] = value
+      }
+    }
+
+
     setLoading(true)
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: undefined,
-      queryLink: "playlists/37i9dQZEVXbNG2KDcFcKOF",
-    }).then((data: PlaylistResponseObject) => {
+      searchParams: search ? { q: search, type: "track" } : undefined,
+      queryLink: search ? "search" : "playlists/37i9dQZEVXbNG2KDcFcKOF",
+    }).then((data: PlaylistResponseObject | SongResponseObject) => {
       console.log(data)
-      setItems(data.tracks.items as SetStateAction<SongResponseObject[]>)
+      console.log('hit')
+
+      if (data.type === "playlist") {
+
+        let cleanArray = data.tracks.items.map(
+          (item: { track: SongResponseObject }) => item.track
+        )
+        setItems(cleanArray as SetStateAction<SongResponseObject[]>)
+      } else {
+        setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>)
+        setLoading(false)
+      }
       setLoading(false)
     })
-  }, [])
+  }
 
   useEffect(() => {
-    if (notInitialRender.current) {
-      setLoading(true)
-      getSpotifyData({
-        token: session?.accessToken as string,
-        searchParams: { q: search, type: "track" },
-        queryLink: "search",
-      }).then((data: DefaultItemTypeResponse) => {
-        console.log(data)
-        setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>)
-        setLoading(false)
-      })
-    } else {
-      notInitialRender.current = true
-    }
-  }, [search])
 
-  useEffect(() => {
-    if (notInitialRender2.current) {
-      setLoading(true)
-      let filtersArrayObject = Object.entries(filters.filters).map((item) => ({
-        ["max_" + item[0]]: item[1][0],
-        ["min_" + item[0]]: item[1][1],
-      }))
-      let filtersObject = Object.assign({}, ...filtersArrayObject)
-      for (const [key, value] of Object.entries(filters.seeds)) {
-        if (value.length < 1) return
-        filtersObject[key] = value
-      }
-      getSpotifyData({
-        token: session?.accessToken as string,
-        searchParams: filtersObject,
-        queryLink: "recommendations",
-      }).then((data: DefaultItemTypeResponse) => {
-        setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>)
-        setLoading(false)
-      })
-    } else {
-      notInitialRender2.current = true
-    }
-  }, [filters])
+    getData()
+  }, [search, filters])
+
+  // useEffect(() => {
+  //   getSpotifyData({
+  //     token: session?.accessToken as string,
+  //     searchParams: filtersObject,
+  //     queryLink: "recommendations",
+  //   }).then((data: DefaultItemTypeResponse) => {
+  //     setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>)
+  //     setLoading(false)
+  //   })
+  // }, [filters])
 
   if (loading) {
     return <div>Loading..</div>
@@ -80,11 +80,11 @@ export default function SongsContainer() {
     <div className="grid grid-cols-item grid-rows-item gap-y-5 gap-x-3 px-4">
       {items.length > 0 &&
         items.map((item) => (
-          <div key={item.track.id}>
-            <img src={item.track.album.images[1].url}></img>
+          <div key={item.id}>
+            <img src={item.album.images[1]?.url}></img>
             <div className="flex flex-col flex-start pt-2">
-              <span>{item.track.name}</span>
-              <span>{item.track.artists[0].name}</span>
+              <span>{item.name}</span>
+              <span>{item.artists[0].name}</span>
             </div>
           </div>
         ))}
