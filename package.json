@@ -9,7 +9,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "prettier-format": "prettier --config .prettierrc 'components/**/*.tsx' --write"
   },
   "license": "ISC",
   "prettier": {
@@ -34,6 +35,7 @@
     "@types/react-redux": "^7.1.24",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.17",
+    "prettier": "^2.8.0",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.3.4"
   }

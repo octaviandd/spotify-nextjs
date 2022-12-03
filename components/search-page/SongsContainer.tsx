@@ -1,65 +1,55 @@
-import React, { SetStateAction, useEffect, useRef, useState } from "react"
-import { getSpotifyData } from "../utils"
-import { useSession } from "next-auth/react"
-import {
-  DefaultItemTypeResponse,
-  SongResponseObject,
-  PlaylistResponseObject,
-} from "./types"
-import { RootState } from "../../store"
-import { useSelector } from "react-redux"
+import React, { SetStateAction, useEffect, useRef, useState } from 'react';
+import { getSpotifyData } from '../utils';
+import { useSession } from 'next-auth/react';
+import { DefaultItemTypeResponse, SongResponseObject, PlaylistResponseObject } from './types';
+import { RootState } from '../../store';
+import { useSelector } from 'react-redux';
 
-const selectSearch = (state: RootState) => state.search
-const selectAllFilters = (state: RootState) => state.filters
+const selectSearch = (state: RootState) => state.search;
+const selectAllFilters = (state: RootState) => state.filters;
 
 export default function SongsContainer() {
-  const { data: session, status } = useSession()
-  const [items, setItems] = useState<SongResponseObject[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
-  const { search } = useSelector(selectSearch)
-  const filters = useSelector(selectAllFilters)
+  const { data: session, status } = useSession();
+  const [items, setItems] = useState<SongResponseObject[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const { search } = useSelector(selectSearch);
+  const filters = useSelector(selectAllFilters);
 
   const getData = () => {
-
     let filtersArrayObject = Object.entries(filters.filters).map((item) => ({
-      ["max_" + item[0]]: item[1][0],
-      ["min_" + item[0]]: item[1][1],
-    }))
-    let filtersObject = Object.assign({}, ...filtersArrayObject)
+      ['max_' + item[0]]: item[1][0],
+      ['min_' + item[0]]: item[1][1],
+    }));
+    let filtersObject = Object.assign({}, ...filtersArrayObject);
     for (const [key, value] of Object.entries(filters.seeds)) {
-      if (!(value.length < 1)){
-        filtersObject[key] = value
+      if (!(value.length < 1)) {
+        filtersObject[key] = value;
       }
     }
 
-
-    setLoading(true)
+    setLoading(true);
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: search ? { q: search, type: "track" } : undefined,
-      queryLink: search ? "search" : "playlists/37i9dQZEVXbNG2KDcFcKOF",
+      searchParams: search ? { q: search, type: 'track' } : undefined,
+      queryLink: search ? 'search' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
     }).then((data: PlaylistResponseObject | SongResponseObject) => {
-      console.log(data)
-      console.log('hit')
+      console.log(data);
+      console.log('hit');
 
-      if (data.type === "playlist") {
-
-        let cleanArray = data.tracks.items.map(
-          (item: { track: SongResponseObject }) => item.track
-        )
-        setItems(cleanArray as SetStateAction<SongResponseObject[]>)
+      if (data.type === 'playlist') {
+        let cleanArray = data.tracks.items.map((item: { track: SongResponseObject }) => item.track);
+        setItems(cleanArray as SetStateAction<SongResponseObject[]>);
       } else {
-        setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>)
-        setLoading(false)
+        setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>);
+        setLoading(false);
       }
-      setLoading(false)
-    })
-  }
+      setLoading(false);
+    });
+  };
 
   useEffect(() => {
-
-    getData()
-  }, [search, filters])
+    getData();
+  }, [search, filters]);
 
   // useEffect(() => {
   //   getSpotifyData({
@@ -73,7 +63,7 @@ export default function SongsContainer() {
   // }, [filters])
 
   if (loading) {
-    return <div>Loading..</div>
+    return <div>Loading..</div>;
   }
 
   return (
@@ -89,5 +79,5 @@ export default function SongsContainer() {
           </div>
         ))}
     </div>
-  )
+  );
 }

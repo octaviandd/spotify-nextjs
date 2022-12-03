@@ -1,21 +1,21 @@
-import React, { useRef } from "react"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import { RootState } from "../../store"
-import { updateSearch } from "../../store/searchSlice"
+import React, { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { updateSearch } from '../../store/searchSlice';
 
-const selectSearch = (state: RootState) => state.search
+const selectSearch = (state: RootState) => state.search;
 
-type Props = {}
+type Props = {};
 
 export default function SearchInput({}: Props) {
-  const inputRef = useRef<HTMLInputElement>(null)
-  const { search, status } = useSelector(selectSearch)
-  const dispatch = useDispatch()
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { search, status } = useSelector(selectSearch);
+  const dispatch = useDispatch();
 
   const handleChange = (text: string) => {
-    dispatch(updateSearch(text))
-  }
+    dispatch(updateSearch(text));
+  };
 
   return (
     <div className="w-3/4">
@@ -58,5 +58,5 @@ export default function SearchInput({}: Props) {
         </span>
       </div>
     </div>
-  )
+  );
 }

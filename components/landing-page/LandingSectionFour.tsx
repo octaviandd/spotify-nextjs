@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react';
 
-type Props = {}
+type Props = {};
 
 export default function LandingSectionFour({}: Props) {
   return (
@@ -9,5 +9,5 @@ export default function LandingSectionFour({}: Props) {
         move it here
       </div>
     </div>
-  )
+  );
 }

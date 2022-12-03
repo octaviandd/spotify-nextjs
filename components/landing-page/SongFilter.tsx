@@ -1,9 +1,9 @@
-import React, { forwardRef } from "react"
+import React, { forwardRef } from 'react';
 
 type Props = {
-  title: string
-}
-export type Ref = HTMLDivElement
+  title: string;
+};
+export type Ref = HTMLDivElement;
 
 export const SongFilter = forwardRef<Ref, Props>((props, ref) => {
   return (
@@ -14,5 +14,5 @@ export const SongFilter = forwardRef<Ref, Props>((props, ref) => {
         <span ref={ref} className="range-slider-thumb"></span>
       </div>
     </div>
-  )
-})
+  );
+});

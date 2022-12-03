@@ -1,11 +1,11 @@
-import React from "react"
-import { signIn, signOut, useSession } from "next-auth/react"
+import React from 'react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
-type Props = {}
+type Props = {};
 
 export default function Navbar({}: Props) {
-  const { data: session, status } = useSession()
-  const loading = status === "loading"
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
 
   return (
     <nav className="bg-white w-full pt-4">
@@ -38,10 +38,10 @@ export default function Navbar({}: Props) {
                 <a
                   href={`/api/auth/signin`}
                   onClick={(e) => {
-                    e.preventDefault()
-                    signIn("spotify", {
+                    e.preventDefault();
+                    signIn('spotify', {
                       callbackUrl: `${window.location.origin}/search`,
-                    })
+                    });
                   }}
                   className="inline-block mr-2"
                 >
@@ -49,9 +49,7 @@ export default function Navbar({}: Props) {
                     type="button"
                     className="group ease-in-out transition duration-200 bg-green-500 hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
                   >
-                    <span className="hidden md:inline-block pr-1">
-                      Connect with{" "}
-                    </span>
+                    <span className="hidden md:inline-block pr-1">Connect with </span>
                     <span>Spotify</span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -60,12 +58,7 @@ export default function Navbar({}: Props) {
                       stroke="currentColor"
                       className="w-4 h-4 inline-block ml-1 group-hover:translate-x-2 ease-in-out duration-300"
                     >
-                      <path
-                        strokeLinejoin="round"
-                        strokeLinecap="round"
-                        strokeWidth="2"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
+                      <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </button>
                 </a>
@@ -80,9 +73,7 @@ export default function Navbar({}: Props) {
                   <div className="flex px-4 py-3 cursor-pointer rounded-md whitespace-nowrap hover:bg-[#00CA4E] transition duration-500 ease-in-out group mr-2">
                     <span
                       className="flex items-center"
-                      onClick={() =>
-                        signOut({ callbackUrl: `${window.location.origin}` })
-                      }
+                      onClick={() => signOut({ callbackUrl: `${window.location.origin}` })}
                     >
                       <span className="hidden md:block">LOGOUT</span>
                       <svg
@@ -108,5 +99,5 @@ export default function Navbar({}: Props) {
         </div>
       </div>
     </nav>
-  )
+  );
 }

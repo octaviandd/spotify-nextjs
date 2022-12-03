@@ -1,30 +1,30 @@
-import { useSession } from "next-auth/react"
-import AccessDenied from "../components/AccessDenied"
-import Layout from "../components/Layout"
-import RangeFilter from "../components/search-page/RangeFilter"
-import SeedFilters from "../components/search-page/SeedFilters"
-import SearchInput from "../components/search-page/SearchInput"
-import SongsContainer from "../components/search-page/SongsContainer"
-import { RootState } from "../store"
-import { useSelector } from "react-redux"
+import { useSession } from 'next-auth/react';
+import AccessDenied from '../components/AccessDenied';
+import Layout from '../components/Layout';
+import RangeFilter from '../components/search-page/RangeFilter';
+import SeedFilters from '../components/search-page/SeedFilters';
+import SearchInput from '../components/search-page/SearchInput';
+import SongsContainer from '../components/search-page/SongsContainer';
+import { RootState } from '../store';
+import { useSelector } from 'react-redux';
 
-const getMultiSelectValues = (state: RootState) => state.filters.seeds
+const getMultiSelectValues = (state: RootState) => state.filters.seeds;
 
 export default function Page() {
-  const { data: session, status } = useSession()
-  const loading = status === "loading"
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
   const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce((accumulator, currentValue) => {
-    return accumulator + currentValue[1].length
-  }, 0)
+    return accumulator + currentValue[1].length;
+  }, 0);
 
-  if (typeof window !== "undefined" && loading) return null
+  if (typeof window !== 'undefined' && loading) return null;
 
   if (!session) {
     return (
       <Layout>
         <AccessDenied />
       </Layout>
-    )
+    );
   }
 
   return (
@@ -53,5 +53,5 @@ export default function Page() {
         <SongsContainer></SongsContainer>
       </div>
     </Layout>
-  )
+  );
 }
