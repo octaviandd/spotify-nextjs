@@ -6,7 +6,7 @@ import { updateRangeSliders } from '../../store/filtersSlice';
 
 const selectProperty = (state: RootState) => state.filters;
 
-export default function RangeFilter({ type }: { type: string }) {
+export default function RangeFilter({ type, max, min }: { type: string, max: number, min:number }) {
   const filters = useSelector(selectProperty).filters;
   const dispatch = useDispatch();
 
@@ -19,8 +19,8 @@ export default function RangeFilter({ type }: { type: string }) {
       <label className="">{type}</label>
       <Range
         step={1}
-        min={0}
-        max={100}
+        min={min}
+        max={max}
         allowOverlap={false}
         values={filters[type.toLocaleLowerCase()]}
         onChange={(values) => setRange(values)}
