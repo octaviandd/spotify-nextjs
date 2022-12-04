@@ -42,8 +42,8 @@ export const filterSlice = createSlice({
     ) => {
       state.filters[action.payload.type] = action.payload.values
     },
-    updateMultiSelect: (state, action: PayloadAction<{values: object[]; type: string}>) => {
-      state.seeds[action.payload.type].push(action.payload.values)
+    updateMultiSelect: (state, action: PayloadAction<{ values: object[]; type: string }>) => {
+      state.seeds[action.payload.type] = action.payload.values;
     }
   },
 })

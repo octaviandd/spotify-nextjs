@@ -1,8 +1,8 @@
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select, { components, MenuListProps } from 'react-select';
-import { getSpotifyData } from '../utils';
-import { SongResponseObject, DefaultItemTypeResponse } from './types';
+import { getSpotifyData, debouncer } from '../utils';
+import { SongResponseObject, DefaultItemTypeResponse, ArtistItemResponseObject } from './types';
 import { useDispatch } from 'react-redux';
 import { updateMultiSelect } from '../../store/filtersSlice';
 
@@ -30,13 +30,12 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
     }).then((data: DefaultItemTypeResponse) => {
       let arr: any = [];
       if (type === 'genre') {
-        data.genres?.map((item, index) => {
+        data.genres?.map((item: any, index: number) => {
           return arr.push({ value: index, label: item, type });
         });
       } else {
         if (type === 'artist') {
-          console.log(data, 'here');
-          data.artists?.items.map((item) => {
+          data.artists?.items.map((item: ArtistItemResponseObject) => {
             return arr.push({
               value: item.id,
               label: item.name,
@@ -56,11 +55,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
     });
   };
 
-  const handleChange = (input: string) => {
-    if (input.length > 0) {
-      getData(input);
-    }
-  };
+  const debouncedHandleChange = debouncer((input) => input.length > 0 && getData(input))
 
   useEffect(() => {
     getData();
@@ -70,7 +65,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
     e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight && getData();
   };
 
-  const MenuList = (props: MenuListProps) => {
+  const MenuList = (props: MenuListProps<any, false, any>) => {
     return (
       <components.MenuList {...props} innerProps={{ ...props.innerProps, onScroll: handleScroll }}>
         {props.children}
@@ -87,7 +82,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
       <Select
         isMulti
         options={items}
-        onInputChange={handleChange}
+        onInputChange={debouncedHandleChange}
         onChange={setMultiSelectValues}
         placeholder={`Search for ${type}s...`}
         components={{

@@ -10,6 +10,14 @@ export const useArrayRef = () => {
   return [refs, (ref: HTMLElement) => ref && refs.current.push(ref)]
 }
 
+export const debouncer = function (func, timeout = 500) {
+  let timer;
+  return function (...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => func.apply(this, args), timeout)
+  }
+}
+
 export const getSpotifyData = async ({
   token,
   searchParams,
@@ -18,14 +26,19 @@ export const getSpotifyData = async ({
   let urlParams = new URLSearchParams()
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
-      urlParams.append(key, value)
+      if (typeof value === 'object') {
+        let values = value.map(item => item.value).toString()
+        urlParams.append('seed_artists', values)
+      } else {
+        urlParams.append(key, value)
+      }
     }
   }
+
   try {
     let link = "https://api.spotify.com/v1/"
     if (queryLink) link += queryLink + "?"
     if (searchParams) link += urlParams
-    // console.log(link)
     let res = await fetch(link, {
       headers: {
         "Content-Type": "application/json",

@@ -1,7 +1,7 @@
-import React, { SetStateAction, useEffect, useRef, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import { getSpotifyData } from '../utils';
 import { useSession } from 'next-auth/react';
-import { DefaultItemTypeResponse, SongResponseObject, PlaylistResponseObject } from './types';
+import { SongResponseObject, PlaylistResponseObject } from './types';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
 
@@ -16,26 +16,26 @@ export default function SongsContainer() {
   const filters = useSelector(selectAllFilters);
 
   const getData = () => {
+    let isDoable = false;
     let filtersArrayObject = Object.entries(filters.filters).map((item) => ({
       ['max_' + item[0]]: item[1][0],
       ['min_' + item[0]]: item[1][1],
     }));
     let filtersObject = Object.assign({}, ...filtersArrayObject);
     for (const [key, value] of Object.entries(filters.seeds)) {
-      if (!(value.length < 1)) {
+      if (value.length > 0) {
+        isDoable = true
         filtersObject[key] = value;
       }
     }
 
+
     setLoading(true);
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: search ? { q: search, type: 'track' } : undefined,
-      queryLink: search ? 'search' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
+      searchParams: search ? { q: search, type: 'track' } : isDoable ? filtersObject : undefined,
+      queryLink: search ? 'search' : isDoable ? 'recommendations' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
     }).then((data: PlaylistResponseObject | SongResponseObject) => {
-      console.log(data);
-      console.log('hit');
-
       if (data.type === 'playlist') {
         let cleanArray = data.tracks.items.map((item: { track: SongResponseObject }) => item.track);
         setItems(cleanArray as SetStateAction<SongResponseObject[]>);
