@@ -4,7 +4,7 @@
 
 export interface paramsInterface {
   time_range?: undefined | string
-  limit?: undefined | string
+  limit?: undefined | number
   id?: undefined | number
   ids?: undefined | []
   type?: undefined | string

@@ -10,12 +10,12 @@ export const useArrayRef = () => {
   return [refs, (ref: HTMLElement) => ref && refs.current.push(ref)]
 }
 
-export const debouncer = function (func, timeout = 500) {
-  let timer;
-  return function (...args) {
-    if (timer) clearTimeout(timer)
-    timer = setTimeout(() => func.apply(this, args), timeout)
-  }
+export function debounce<F extends (...params: any[]) => void>(fn: F, delay: number) {
+  let timeoutID: any;
+  return function(this: any, ...args: any[]) {
+    clearTimeout(timeoutID);
+    timeoutID = window.setTimeout(() => fn.apply(this, args), delay);
+  } as F;
 }
 
 export const getSpotifyData = async ({
@@ -27,8 +27,8 @@ export const getSpotifyData = async ({
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
       if (typeof value === 'object') {
-        let values = value.map(item => item.value).toString()
-        urlParams.append('seed_artists', values)
+        let values = value.map((item: any) => item.value).toString()
+        urlParams.append(key, values)
       } else {
         urlParams.append(key, value)
       }

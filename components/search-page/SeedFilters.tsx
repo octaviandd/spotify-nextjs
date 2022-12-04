@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Select, { components, MenuListProps } from 'react-select';
-import { getSpotifyData, debouncer } from '../utils';
+import { getSpotifyData, debounce } from '../utils';
 import { SongResponseObject, DefaultItemTypeResponse, ArtistItemResponseObject } from './types';
 import { useDispatch } from 'react-redux';
 import { updateMultiSelect } from '../../store/filtersSlice';
@@ -22,10 +22,10 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
     );
   };
 
-  const getData = (input?: string): void => {
+  const getData = (q: string = 'm'): void => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: type !== 'genre' ? { q: input ? input : 'm', type: type, offset, limit: 50 } : undefined,
+      searchParams: type !== 'genre' ? { q, type: type, offset, limit: 50 } : undefined,
       queryLink,
     }).then((data: DefaultItemTypeResponse) => {
       let arr: any = [];
@@ -55,14 +55,14 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
     });
   };
 
-  const debouncedHandleChange = debouncer((input) => input.length > 0 && getData(input))
+  const debouncedHandleChange = useCallback(debounce((input) => input.length > 0 && getData(input), 500), [])
 
   useEffect(() => {
     getData();
   }, []);
 
-  const handleScroll = (e) => {
-    e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight && getData();
+  const handleScroll = (e: React.UIEvent<HTMLElement>): void => {
+    (e.target as HTMLElement).scrollHeight - (e.target as HTMLElement).scrollTop === (e.target as HTMLElement).clientHeight && getData();
   };
 
   const MenuList = (props: MenuListProps<any, false, any>) => {
