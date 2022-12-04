@@ -10,7 +10,7 @@ const initialState: filtersInitialState = {
   filters: {
     acousticness: [0, 1],
     danceability: [0, 1],
-    duration: [0, 1],
+    duration_ms: [0, 600000],
     energy: [0, 1],
     instrumentalness: [0, 1],
     key: [0, 11],
@@ -44,6 +44,7 @@ export const filterSlice = createSlice({
     },
     updateMultiSelect: (state, action: PayloadAction<{ values: object[]; type: string }>) => {
       state.seeds[action.payload.type] = action.payload.values;
+      console.log(action.payload.values)
     }
   },
 })

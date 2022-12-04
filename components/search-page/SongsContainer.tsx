@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState, useCallback } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 import { getSpotifyData, debounce } from '../utils';
 import { useSession } from 'next-auth/react';
 import { SongResponseObject, PlaylistResponseObject, DefaultItemTypeResponse } from './types';
@@ -9,21 +9,21 @@ const selectSearch = (state: RootState) => state.search;
 const selectAllFilters = (state: RootState) => state.filters;
 
 export default function SongsContainer() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [items, setItems] = useState<SongResponseObject[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { search } = useSelector(selectSearch);
   const filters = useSelector(selectAllFilters);
 
-
   const getData = () => {
     let isDoable = false;
     let filtersArrayObject = Object.entries(filters.filters).map((item) => ({
-      ['max_' + item[0]]: item[1][0],
-      ['min_' + item[0]]: item[1][1],
+      ['max_' + item[0]]: item[1][1],
+      ['min_' + item[0]]: item[1][0],
     }));
     let filtersObject = Object.assign({}, ...filtersArrayObject);
     for (const [key, value] of Object.entries(filters.seeds)) {
+      console.log(value)
       if (value.length > 0) {
         isDoable = true;
         filtersObject[key] = value;
@@ -48,7 +48,7 @@ export default function SongsContainer() {
     });
   };
 
-  const debouncedGetData = useCallback(debounce(() => getData(), 500), [])
+  const debouncedGetData = debounce(() => getData(), 1000)
 
   useEffect(() => {
     debouncedGetData();

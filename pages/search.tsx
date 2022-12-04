@@ -38,7 +38,7 @@ export default function Page() {
           {seedsLength > 5 && 'Too many selections'}
           <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>
           <RangeFilter type="Danceability" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Duration" max={1} min={0}></RangeFilter>
+          <RangeFilter type="Duration_ms" max={600000} min={0}></RangeFilter>
           <RangeFilter type="Energy" max={1} min={0}></RangeFilter>
           <RangeFilter type="Instrumentalness" max={1} min={0}></RangeFilter>
           <RangeFilter type="Key" max={11} min={0}></RangeFilter>

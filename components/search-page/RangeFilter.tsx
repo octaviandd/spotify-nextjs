@@ -3,6 +3,7 @@ import { Range } from 'react-range';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { updateRangeSliders } from '../../store/filtersSlice';
+import { debounce } from '../utils';
 
 const selectProperty = (state: RootState) => state.filters;
 
@@ -16,7 +17,7 @@ export default function RangeFilter({ type, max, min }: { type: string, max: num
 
   return (
     <div className="relative w-3/4">
-      <label className="">{type}</label>
+      <label>{type}</label>
       <Range
         step={max > 1 ? 1 : 0.1}
         min={min}
