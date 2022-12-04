@@ -1,5 +1,5 @@
-import React, { SetStateAction, useEffect, useState } from 'react';
-import { getSpotifyData } from '../utils';
+import React, { SetStateAction, useEffect, useState, useCallback } from 'react';
+import { getSpotifyData, debounce } from '../utils';
 import { useSession } from 'next-auth/react';
 import { SongResponseObject, PlaylistResponseObject, DefaultItemTypeResponse } from './types';
 import { RootState } from '../../store';
@@ -48,8 +48,10 @@ export default function SongsContainer() {
     });
   };
 
+  const debouncedGetData = useCallback(debounce(() => getData(), 500), [])
+
   useEffect(() => {
-    getData();
+    debouncedGetData();
   }, [search, filters]);
 
   if (loading) {

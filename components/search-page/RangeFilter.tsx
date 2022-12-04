@@ -18,7 +18,7 @@ export default function RangeFilter({ type, max, min }: { type: string, max: num
     <div className="relative w-3/4">
       <label className="">{type}</label>
       <Range
-        step={1}
+        step={max > 1 ? 1 : 0.1}
         min={min}
         max={max}
         allowOverlap={false}
