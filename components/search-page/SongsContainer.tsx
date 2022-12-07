@@ -23,7 +23,6 @@ export default function SongsContainer() {
     }));
     let filtersObject = Object.assign({}, ...filtersArrayObject);
     for (const [key, value] of Object.entries(filters.seeds)) {
-      console.log(value)
       if (value.length > 0) {
         isDoable = true;
         filtersObject[key] = value;
@@ -33,11 +32,12 @@ export default function SongsContainer() {
     setLoading(true);
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: search ? { q: search, type: 'track' } : isDoable ? filtersObject : undefined,
+      searchParams: search ? { q: search, type: 'track', limit: 50 } : isDoable ? filtersObject : undefined,
       queryLink: search ? 'search' : isDoable ? 'recommendations' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
-    }).then((data: Data) : void => {
+    }).then((data: Data): void => {
       if (data.type === 'playlist') {
-        let cleanArray = data.tracks?.items.map((item) => item);
+        let cleanArray = data.tracks?.items.map((item) => item.track);
+        console.log(cleanArray);
         setItems(cleanArray as SetStateAction<Track[]>);
       } else {
         if (data.tracks && Object.keys(data.tracks).length > 0) {
@@ -48,7 +48,7 @@ export default function SongsContainer() {
     });
   };
 
-  const debouncedGetData = debounce(() => getData(), 1000)
+  const debouncedGetData = debounce(() => getData(), 1000);
 
   useEffect(() => {
     debouncedGetData();

@@ -6,7 +6,7 @@ import { updateRangeSliders } from '../../store/filtersSlice';
 
 const selectProperty = (state: RootState) => state.filters;
 
-export default function RangeFilter({ type, max, min }: { type: string, max: number, min:number }) {
+export default function RangeFilter({ type, max, min }: { type: string; max: number; min: number }) {
   const filters = useSelector(selectProperty).filters;
   const dispatch = useDispatch();
 

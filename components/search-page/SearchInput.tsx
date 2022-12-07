@@ -1,10 +1,14 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateSearch } from '../../store/searchSlice';
+import { RootState } from '../../store';
+
+const selectSearch = (state: RootState) => state.search;
 
 export default function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
+  const search = useSelector(selectSearch).search;
 
   const handleChange = (text: string) => {
     dispatch(updateSearch(text));
@@ -43,9 +47,11 @@ export default function SearchInput() {
             strokeLinejoin="round"
           ></circle>
         </svg>
-        <span className="ml-auto absolute pl-3 z-10 flex-none font-semibold left-[25px] top-[7px] text-sm leading-6 text-slate-400 peer-focus:hidden">
-          Search...
-        </span>
+        {!search && (
+          <span className="ml-auto absolute pl-3 z-10 flex-none font-semibold left-[25px] top-[7px] text-sm leading-6 text-slate-400 peer-focus:hidden">
+            Search...
+          </span>
+        )}
         <span className="ml-auto absolute pl-3 z-10 flex-none font-semibold right-[10px] top-[7px] text-sm leading-6 text-slate-400">
           ⌘K
         </span>
