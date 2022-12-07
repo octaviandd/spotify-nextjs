@@ -1,7 +1,7 @@
 import React, { SetStateAction, useEffect, useState } from 'react';
 import { getSpotifyData, debounce } from '../utils';
 import { useSession } from 'next-auth/react';
-import { SongResponseObject, PlaylistResponseObject, DefaultItemTypeResponse } from './types';
+import { Data, Track } from './types';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
 
@@ -10,7 +10,7 @@ const selectAllFilters = (state: RootState) => state.filters;
 
 export default function SongsContainer() {
   const { data: session } = useSession();
-  const [items, setItems] = useState<SongResponseObject[]>([]);
+  const [items, setItems] = useState<Track[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const { search } = useSelector(selectSearch);
   const filters = useSelector(selectAllFilters);
@@ -35,13 +35,13 @@ export default function SongsContainer() {
       token: session?.accessToken as string,
       searchParams: search ? { q: search, type: 'track' } : isDoable ? filtersObject : undefined,
       queryLink: search ? 'search' : isDoable ? 'recommendations' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
-    }).then((data: PlaylistResponseObject | DefaultItemTypeResponse) => {
+    }).then((data: Data) : void => {
       if (data.type === 'playlist') {
-        let cleanArray = data.tracks.items.map((item: { track: SongResponseObject }) => item.track);
-        setItems(cleanArray as SetStateAction<SongResponseObject[]>);
+        let cleanArray = data.tracks?.items.map((item) => item);
+        setItems(cleanArray as SetStateAction<Track[]>);
       } else {
-        if (data.tracks && data.tracks.length > 0) {
-          setItems(data.tracks?.items as SetStateAction<SongResponseObject[]>);
+        if (data.tracks && Object.keys(data.tracks).length > 0) {
+          setItems(data.tracks?.items as SetStateAction<Track[]>);
         }
       }
       setLoading(false);

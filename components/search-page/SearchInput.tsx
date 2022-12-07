@@ -1,16 +1,9 @@
 import React, { useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { RootState } from '../../store';
 import { updateSearch } from '../../store/searchSlice';
 
-const selectSearch = (state: RootState) => state.search;
-
-type Props = {};
-
-export default function SearchInput({}: Props) {
+export default function SearchInput() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { search, status } = useSelector(selectSearch);
   const dispatch = useDispatch();
 
   const handleChange = (text: string) => {
