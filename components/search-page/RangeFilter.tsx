@@ -1,25 +1,28 @@
-import React, { useState } from "react"
-import { Range } from "react-range"
+import React from 'react';
+import { Range } from 'react-range';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { updateRangeSliders } from '../../store/filtersSlice';
 
-type Props = {
-  type: String
-}
+const selectProperty = (state: RootState) => state.filters;
 
-export default function RangeFilter({ type }: Props) {
-  const [rangeState, setRangeState] = useState<number[]>([0, 100])
+export default function RangeFilter({ type, max, min }: { type: string; max: number; min: number }) {
+  const filters = useSelector(selectProperty).filters;
+  const dispatch = useDispatch();
 
   const setRange = (val: number[]) => {
-    setRangeState([...val])
-  }
+    dispatch(updateRangeSliders({ values: [...val], type: type.toLocaleLowerCase() }));
+  };
+
   return (
     <div className="relative w-3/4">
-      <label className="">{type}</label>
+      <label>{type === 'Duration_ms' ? 'Duration' : type}</label>
       <Range
-        step={1}
-        min={0}
-        max={100}
+        step={max > 1 ? 1 : 0.1}
+        min={min}
+        max={max}
         allowOverlap={false}
-        values={rangeState}
+        values={filters[type.toLocaleLowerCase()]}
         onChange={(values) => setRange(values)}
         renderTrack={({ props, children }) => (
           <div {...props} className="range-slider my-5">
@@ -31,22 +34,22 @@ export default function RangeFilter({ type }: Props) {
             {isDragged && (
               <div
                 style={{
-                  position: "absolute",
-                  top: "-38px",
-                  color: "#fff",
-                  fontWeight: "bold",
-                  fontSize: "14px",
-                  padding: "4px",
-                  borderRadius: "4px",
-                  backgroundColor: "#548BF4",
+                  position: 'absolute',
+                  top: '-38px',
+                  color: '#fff',
+                  fontWeight: 'bold',
+                  fontSize: '14px',
+                  padding: '4px',
+                  borderRadius: '4px',
+                  backgroundColor: '#548BF4',
                 }}
               >
-                {rangeState[index].toFixed(1)}
+                {filters[type.toLocaleLowerCase()][index].toFixed(1)}
               </div>
             )}
           </div>
         )}
       ></Range>
     </div>
-  )
+  );
 }

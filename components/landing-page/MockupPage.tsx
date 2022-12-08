@@ -1,32 +1,32 @@
-import React, { useRef } from "react"
-import { SongCard } from "./SongCard"
-import TextPlugin from "gsap/dist/TextPlugin"
-import ScrollTrigger from "gsap/dist/ScrollTrigger"
-import Flip from "gsap/dist/Flip"
-import gsap from "gsap"
-import { useIsomorphicLayoutEffect, useArrayRef } from "../utils"
+import React, { useRef } from 'react';
+import { SongCard } from './SongCard';
+import TextPlugin from 'gsap/dist/TextPlugin';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+import Flip from 'gsap/dist/Flip';
+import gsap from 'gsap';
+import { useIsomorphicLayoutEffect, useArrayRef } from '../utils';
 
 export default function MockupPage() {
-  const inputBarRef = useRef<HTMLDivElement>(null)
-  const displayPage = useRef<HTMLDivElement>(null)
-  gsap.registerPlugin(ScrollTrigger, TextPlugin, Flip)
-  const tl: any = useRef()
-  const [refs, setRefs] = useArrayRef()
+  const inputBarRef = useRef<HTMLDivElement>(null);
+  const displayPage = useRef<HTMLDivElement>(null);
+  gsap.registerPlugin(ScrollTrigger, TextPlugin, Flip);
+  const tl: any = useRef();
+  const [refs, setRefs] = useArrayRef();
 
   useIsomorphicLayoutEffect(() => {
     gsap.to(displayPage.current, {
       opacity: 1,
       stagger: 1,
       scrollTrigger: {
-        trigger: document.querySelector("#pin"),
+        trigger: document.querySelector('#pin'),
         pin: true,
-        start: "top top",
-        end: "+=1000",
+        start: 'top top',
+        end: '+=1000',
         scrub: true,
         pinSpacing: false,
       },
-    })
-  }, [])
+    });
+  }, []);
 
   useIsomorphicLayoutEffect(() => {
     if (inputBarRef.current) {
@@ -34,47 +34,47 @@ export default function MockupPage() {
         tl.current = gsap
           .timeline()
           .fromTo(
-            ".search-bar",
+            '.search-bar',
             { opacity: 0, scaleX: 0, scaleY: 0 },
             {
               opacity: 1,
               duration: 0.5,
               scaleX: 1,
               scaleY: 1,
-              transformOrigin: "center",
+              transformOrigin: 'center',
             }
           )
-          .to(".search-bar", {
+          .to('.search-bar', {
             y: -220,
             duration: 1,
             scrollTrigger: {
-              trigger: document.querySelector("#starter"),
-              start: "top top",
-              end: "+=375",
+              trigger: document.querySelector('#starter'),
+              start: 'top top',
+              end: '+=375',
               scrub: true,
             },
           })
           .fromTo(
-            ".search-bar-input",
+            '.search-bar-input',
             {
-              text: "Search for songs",
+              text: 'Search for songs',
               duration: 0,
             },
             {
-              text: "Ballads from Metallica",
+              text: 'Ballads from Metallica',
               duration: 2,
               scrollTrigger: {
-                trigger: document.querySelector(".start-now"),
-                start: "top top",
-                end: "+=175",
+                trigger: document.querySelector('.start-now'),
+                start: 'top top',
+                end: '+=175',
                 scrub: true,
               },
             }
-          )
-      }, inputBarRef)
-      return () => ctx.revert()
+          );
+      }, inputBarRef);
+      return () => ctx.revert();
     }
-  }, [])
+  }, []);
 
   useIsomorphicLayoutEffect(() => {
     gsap.fromTo(
@@ -84,32 +84,32 @@ export default function MockupPage() {
         opacity: 1,
         stagger: 1,
         scrollTrigger: {
-          trigger: document.querySelector(".start-now"),
-          start: "top top",
-          end: "+=175",
+          trigger: document.querySelector('.start-now'),
+          start: 'top top',
+          end: '+=175',
           scrub: true,
         },
       }
-    )
-  })
+    );
+  });
 
   useIsomorphicLayoutEffect(() => {
     if (refs.current) {
-      let state = Flip.getState(refs.current[3])
+      let state = Flip.getState(refs.current[3]);
       Flip.from(state, {
-        ease: "power1.inOut",
+        ease: 'power1.inOut',
         scaleX: 1.5,
         simple: true,
         scrollTrigger: {
-          trigger: document.querySelector("#song-deconstruction"),
-          start: "top top",
-          end: "+=500",
+          trigger: document.querySelector('#song-deconstruction'),
+          start: 'top top',
+          end: '+=500',
           markers: true,
           scrub: true,
         },
-      })
+      });
     }
-  }, [refs.current])
+  }, [refs.current]);
 
   return (
     <div className="pt-20 right-0" ref={displayPage} id="pin">
@@ -128,13 +128,7 @@ export default function MockupPage() {
             style={SearchBarStyle}
             className="flex items-center py-3 px-4 bg-[#ffffff] w-[400px] rounded-xl absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 search-bar"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
@@ -149,42 +143,42 @@ export default function MockupPage() {
           <SongCard
             ref={setRefs}
             item={{
-              link: "/imag1.jpg",
-              title: "Fade into Black",
-              artist: "Metallica",
+              link: '/imag1.jpg',
+              title: 'Fade into Black',
+              artist: 'Metallica',
             }}
           ></SongCard>
           <SongCard
             ref={setRefs}
             item={{
-              link: "/imag2.jpg",
-              title: "Fade into Black - Live",
-              artist: "Metallica",
+              link: '/imag2.jpg',
+              title: 'Fade into Black - Live',
+              artist: 'Metallica',
             }}
           ></SongCard>
           <SongCard
             ref={setRefs}
             item={{
-              link: "/imag3.jpg",
-              title: "One - Live",
-              artist: "Metallica",
+              link: '/imag3.jpg',
+              title: 'One - Live',
+              artist: 'Metallica',
             }}
           ></SongCard>
           <SongCard
             ref={setRefs}
             item={{
-              link: "/image4.jpg",
-              title: "One",
-              artist: "Metallica",
-              id: "test",
+              link: '/image4.jpg',
+              title: 'One',
+              artist: 'Metallica',
+              id: 'test',
             }}
           ></SongCard>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 const SearchBarStyle = {
-  boxShadow: "0 10px 15px -3px rgba(0,0,0,.1) 0 4px 6px -4px rgba(0,0,0,.1)",
-}
+  boxShadow: '0 10px 15px -3px rgba(0,0,0,.1) 0 4px 6px -4px rgba(0,0,0,.1)',
+};

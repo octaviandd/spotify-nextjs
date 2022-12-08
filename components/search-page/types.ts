@@ -1,27 +1,105 @@
-export interface paramsInterface extends URLSearchParams {
-  time_range: null | string
-  limit: null | string
-  id: null | number
-  ids: null | []
-  type: null | string
-  name: null | string
-  seed_artists: null | []
-  target_danceability: null | number
-  target_acousticness: null | number
-  target_energy: null | number
-  target_instrumentalness: null | number
-  target_liveness: null | number
-  target_loudness: null | number
-  target_speechiness: null | number
-  target_valence: null | number
+/**
+ * Request parameters
+ */
+
+export interface paramsInterface {
+  time_range?: undefined | string
+  limit?: undefined | number
+  id?: undefined | number
+  ids?: undefined | []
+  type?: undefined | string
+  name?: undefined | string
+  seed_artists?: undefined | []
+  target_danceability?: undefined | number
+  target_acousticness?: undefined | number
+  target_energy?: undefined | number
+  target_instrumentalness?: undefined | number
+  target_liveness?: undefined | number
+  target_loudness?: undefined | number
+  target_speechiness?: undefined | number
+  target_valence?: undefined | number
+  q?: undefined | string
+  offset: undefined | number
 }
 export interface SpotifyRequestParameters {
   token: string
-  searchParams: paramsInterface | null
+  searchParams: paramsInterface | undefined
   queryLink: string | null
 }
 
-export type PopularSongsData = {
+export interface Data {
+  type: 'artists' | 'tracks' | 'albums' | 'genres' | 'playlist';
+  artists?: {
+    href: String
+    items: Artist[]
+    limit: Number
+    next: String
+    offset: Number
+    previous: null
+    total: Number
+  };
+  tracks?: {
+    href: String
+    items: Track[]
+    limit: Number
+    next: String
+    offset: Number
+    previous: null
+    total: Number
+  };
+  albums?: Album;
+  genres?: string[];
+  playlist?: Playlist
+}
+
+export interface Artist {
+  external_urls: object
+  followers: object
+  genres: string[]
+  href: string
+  id: string
+  images: Array<{ url: string; height: number }>
+  name: string
+  popularity: number
+  type: string
+  uri: string
+}
+
+export interface Track {
+  album: { images: Array<{ url: string }> }
+  artists: Artist[]
+  available_markets: string[]
+  disc_number: number
+  duration_ms: number
+  explicit: boolean
+  external_ids: object
+  external_urls: object
+  href: string
+  id: string
+  is_local: boolean
+  name: string
+  popularity: number
+  preview_url: string
+  track_number: number
+  type: string
+  uri: string
+}
+
+export interface Album {
+  href: String
+  items: Track[]
+  limit: Number
+  next: String
+  offset: Number
+  previous: null
+  total: Number
+}
+
+/**
+ * Response variables
+ */
+
+export type Playlist = {
   collaborative: boolean
   description: string
   external_urls: object
@@ -31,37 +109,10 @@ export type PopularSongsData = {
   images: object[]
   name: string
   owner: object
-  primary_color: string
+  primary_color: null | string
   public: boolean
   snapshot_id: string
-  tracks: {
-    items: Item[]
-  }
-  type: string
+  tracks: Track[]
+  type: "playlist"
   uri: string
-}
-
-export interface Item {
-  track: {
-    album: {
-      album_type: string
-      images: Array<{ url: string }>
-    }
-    artists: Array<{ name: string }>
-    duration_ms: number
-    episode: boolean
-    explicit: false
-    external_ids: object
-    external_urls: object
-    href: string
-    id: string
-    is_local: boolean
-    name: string
-    popularity: number
-    preview_url: string
-    track: boolean
-    track_number: number | null
-    type: string
-    uri: string
-  }
 }

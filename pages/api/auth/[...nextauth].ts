@@ -66,7 +66,7 @@ export default NextAuth({
   },
   pages: {},
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn() {
       return true
     },
     async jwt({ token, user, account }) {
@@ -75,7 +75,7 @@ export default NextAuth({
           accessToken: account.access_token,
           accessTokenExpires: Date.now() + account.expires_at * 1000,
           refreshToken: account.refresh_token,
-          user: token.user,
+          user: user,
         }
       }
 
@@ -86,11 +86,11 @@ export default NextAuth({
       return refreshAccessToken(token)
     },
     async session({ session, token }) {
-      console.log({ session, token }, Date.now(), "date")
-      console.log(Date.now() < token.accessTokenExpires)
       session.accessToken = token.accessToken
       session.refreshToken = token.refreshToken
       session.error = token.error
+      session.user = token.user
+      console.log(session)
       return session
     },
   },

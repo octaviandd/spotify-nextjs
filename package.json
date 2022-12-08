@@ -9,27 +9,33 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "types": "tsc --noEmit"
+    "types": "tsc --noEmit",
+    "prettier-format": "prettier --config .prettierrc 'components/**/*.tsx' --write"
   },
   "license": "ISC",
   "prettier": {
     "semi": false
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.6",
     "gsap": "^3.11.2",
     "next": "^12.2.5",
     "next-auth": "^4.0.1",
     "nodemailer": "^6.6.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-range": "^1.8.14"
+    "react-range": "^1.8.14",
+    "react-redux": "^8.0.5",
+    "react-select": "^5.6.0"
   },
   "devDependencies": {
     "@types/node": "^15.12.4",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
+    "@types/react-redux": "^7.1.24",
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.17",
+    "prettier": "^2.8.0",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.3.4"
   }

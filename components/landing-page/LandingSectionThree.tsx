@@ -1,11 +1,11 @@
-import React, { useRef } from "react"
-import { SongFilter } from "./SongFilter"
-import { useIsomorphicLayoutEffect, useArrayRef } from "../utils"
-import { gsap } from "gsap"
+import React, { useRef } from 'react';
+import { SongFilter } from './SongFilter';
+import { useIsomorphicLayoutEffect, useArrayRef } from '../utils';
+import { gsap } from 'gsap';
 
 export default function LandingSectionThree() {
-  const secondTl: any = useRef()
-  const [refs, setRefs] = useArrayRef()
+  const secondTl: any = useRef();
+  const [refs, setRefs] = useArrayRef();
 
   useIsomorphicLayoutEffect(() => {
     if (refs.current) {
@@ -16,26 +16,25 @@ export default function LandingSectionThree() {
             left: 0,
           },
           {
-            left: "random(0, 400)",
+            left: 'random(0, 400)',
             duration: 2,
             scrollTrigger: {
-              trigger: document.querySelector("#trigger"),
-              start: "top top",
-              end: "+=400",
+              trigger: document.querySelector('#trigger'),
+              start: 'top top',
+              end: '+=400',
               scrub: true,
             },
           }
-        )
-      }, refs.current)
-      return () => ctx.revert()
+        );
+      }, refs.current);
+      return () => ctx.revert();
     }
-  })
+  });
 
   return (
     <div>
       <h1 className="text-[40px] leading-none mt-5 lg:pl-20">
-        The search algorithm takes precedence over the user's capability of
-        filtering.
+        The search algorithm takes precedence over the user's capability of filtering.
       </h1>
       <h1 className="text-[40px] leading-none mt-5 lg:pl-20">
         Here are some ways you can filter your music in more depth
@@ -48,5 +47,5 @@ export default function LandingSectionThree() {
         <SongFilter title="Tempo" ref={setRefs}></SongFilter>
       </div>
     </div>
-  )
+  );
 }
