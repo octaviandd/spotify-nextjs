@@ -3,41 +3,33 @@ import SpotifyProvider from "next-auth/providers/spotify"
 
 async function refreshAccessToken(token: any) {
   try {
-    const url =
-      `http://localhost:3000/refresh_token#refresh_token=${token}` +
-      new URLSearchParams({
-        clientId: process.env.SPOTIFY_ID as string,
-        clientSecret: process.env.SPOTIFY_SECRET as string,
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+      body: new URLSearchParams({
+        client_id: process.env.SPOTIFY_ID as string,
+        client_secret: process.env.SPOTIFY_SECRET as string,
         grant_type: "refresh_token",
-        refresh_token: token.refreshToken,
-      })
-
-    const response = await fetch(url, {
+        refresh_token: token.refreshToken
+      }),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       method: "POST",
     })
 
-    const refreshedTokens = await response.json()
+    const refreshToken = await response.json()
 
     if (!response.ok) {
-      throw refreshedTokens
+      throw refreshToken
     }
 
     return {
       ...token,
-      accessToken: refreshedTokens.access_token,
-      accessTokenExpires: Date.now() + refreshedTokens.expires_at * 1000,
-      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken,
+      accessToken: refreshToken.access_token,
+      accessTokenExpires: refreshToken.expires_in,
+      refreshToken: token.refreshToken,
     }
   } catch (error) {
-    console.log(error)
-
-    return {
-      ...token,
-      error: "RefreshAccessTokenError",
-    }
+    throw error
   }
 }
 
@@ -79,18 +71,17 @@ export default NextAuth({
         }
       }
 
-      if (Date.now() < token.accessTokenExpires) {
-        return token
-      }
+      // if (Date.now() < token.accessTokenExpires) {
+      //   return token
+      // }
 
       return refreshAccessToken(token)
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken
-      session.refreshToken = token.refreshToken
-      session.error = token.error
-      session.user = token.user
-      console.log(session)
+      session.accessToken = token.accessToken;
+      session.refreshToken = token.refreshToken;
+      session.error = token.error;
+      session.user = token.user;
       return session
     },
   },
