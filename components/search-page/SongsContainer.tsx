@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState, useCallback } from 'react';
 import { getSpotifyData, debounce } from '../utils';
 import { useSession } from 'next-auth/react';
 import { Data, Track } from './types';
@@ -14,6 +14,7 @@ export default function SongsContainer() {
   const [loading, setLoading] = useState<boolean>(false);
   const { search } = useSelector(selectSearch);
   const filters = useSelector(selectAllFilters);
+  const [offset, setOffset] = useState(0);
 
   const getData = () => {
     let isDoable = false;
@@ -32,11 +33,13 @@ export default function SongsContainer() {
     setLoading(true);
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: search ? { q: search, type: 'track', limit: 50 } : isDoable ? { ...filtersObject, limit: 50 } : undefined,
+      searchParams: search ? { q: search, type: 'track', limit: 50 } : isDoable ? { ...filtersObject, limit: 50, offset: offset } : undefined,
       queryLink: search ? 'search' : isDoable ? 'recommendations' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
     }).then((data: Data): void => {
       if (data.hasOwnProperty('seeds')) {
         setItems(data.tracks as SetStateAction<Track[]>);
+
+        setOffset((offset) => offset + 50);
       } else if (data.type === 'playlist') {
         let cleanArray = data.tracks?.items.map((item) => item.track);
         setItems(cleanArray as SetStateAction<Track[]>);
@@ -49,7 +52,7 @@ export default function SongsContainer() {
     });
   };
 
-  const debouncedGetData = debounce(() => getData(), 1000);
+  const debouncedGetData = useCallback(debounce(() => getData(), 1000), [])
 
   useEffect(() => {
     debouncedGetData();
@@ -66,8 +69,8 @@ export default function SongsContainer() {
           <div key={item.id}>
             <img src={item.album.images[1]?.url}></img>
             <div className="flex flex-col flex-start pt-2">
-              <span>{item.name}</span>
-              <span>{item.artists[0].name}</span>
+              <span className=''>{item.name}</span>
+              <span className='text-gray-500'>{item.artists[0].name}</span>
             </div>
           </div>
         ))}
