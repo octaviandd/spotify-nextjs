@@ -15,7 +15,7 @@ const initialState: filtersInitialState = {
     instrumentalness: [0, 1],
     key: [0, 11],
     liveness: [0, 1],
-    loudness: [0, 1],
+    loudness: [-10, 100],
     popularity: [0, 100],
     speechiness: [0, 1],
     tempo: [50, 350],

@@ -27,7 +27,6 @@ export const getSpotifyData = async ({
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
       if (typeof value === 'object') {
-        console.log(key)
         let values = value.map((item: any) => key === 'seed_genres' ? item.label : item.value).toString()
         urlParams.append(key, values)
       } else {

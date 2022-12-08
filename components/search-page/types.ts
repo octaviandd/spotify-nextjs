@@ -28,7 +28,7 @@ export interface SpotifyRequestParameters {
 }
 
 export interface Data {
-  type: 'artists' | 'tracks' | 'albums' | 'genres' | 'playlist';
+  type: 'artists' | 'tracks' | 'albums' | 'genres' | 'playlist' ;
   artists?: {
     href: String
     items: Artist[]
@@ -47,6 +47,7 @@ export interface Data {
     previous: null
     total: Number
   };
+  seeds?: object
   albums?: Album;
   genres?: string[];
   playlist?: Playlist

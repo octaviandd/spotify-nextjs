@@ -43,7 +43,7 @@ export default function Page() {
           <RangeFilter type="Instrumentalness" max={1} min={0}></RangeFilter>
           <RangeFilter type="Key" max={11} min={0}></RangeFilter>
           <RangeFilter type="Liveness" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Loudness" max={1} min={0}></RangeFilter>
+          <RangeFilter type="Loudness" max={100} min={-10}></RangeFilter>
           <RangeFilter type="Mode" max={1} min={0}></RangeFilter>
           <RangeFilter type="Popularity" max={100} min={0}></RangeFilter>
           <RangeFilter type="Speechiness" max={1} min={0}></RangeFilter>
