@@ -32,12 +32,13 @@ export default function SongsContainer() {
     setLoading(true);
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: search ? { q: search, type: 'track', limit: 50 } : isDoable ? filtersObject : undefined,
+      searchParams: search ? { q: search, type: 'track', limit: 50 } : isDoable ? { ...filtersObject, limit: 50 } : undefined,
       queryLink: search ? 'search' : isDoable ? 'recommendations' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
     }).then((data: Data): void => {
-      if (data.type === 'playlist') {
+      if (data.hasOwnProperty('seeds')) {
+        setItems(data.tracks as SetStateAction<Track[]>);
+      } else if (data.type === 'playlist') {
         let cleanArray = data.tracks?.items.map((item) => item.track);
-        console.log(cleanArray);
         setItems(cleanArray as SetStateAction<Track[]>);
       } else {
         if (data.tracks && Object.keys(data.tracks).length > 0) {
