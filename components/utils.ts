@@ -54,52 +54,6 @@ export const getSpotifyData = async ({
   }
 }
 
-// export const getRecommendedSongs = async (seedArtists: any, soundData: any) => {
-//   try {
-//     let res = await fetch(
-//       `https://api.spotify.com/v1/recommendations?` +
-//         new URLSearchParams({
-//           limit: "50",
-//           seed_artists: seedArtists,
-//           target_danceability: soundData.danceability,
-//           target_acousticness: soundData.acousticness,
-//           target_energy: soundData.energy,
-//           target_instrumentalness: soundData.instrumentalness,
-//           target_liveness: soundData.liveness,
-//           target_loudness: soundData.loudness,
-//           target_speechiness: soundData.speechiness,
-//           target_valence: soundData.valence,
-//         }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// export const getUserProfile = async (token: string) => {
-//   try {
-//     let res = await fetch("https://api.spotify.com/v1/me", {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//     })
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
 // export const getUserTopTracks = async (time_range: string) => {
 //   try {
@@ -146,28 +100,6 @@ export const getSpotifyData = async ({
 //   }
 // }
 
-// export const getRecommendedGenres = async () => {
-//   try {
-//     let res = await fetch(
-//       "https://api.spotify.com/v1/recommendations/available-genre-seeds?" +
-//         new URLSearchParams({
-//           type: "artist",
-//           limit: "25",
-//         }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
 // export const getTracksAudioFeatures = async (ids: string[]) => {
 //   try {

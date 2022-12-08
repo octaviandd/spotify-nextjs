@@ -9,7 +9,6 @@ import MockupPage from '../components/landing-page/MockupPage';
 
 export default function Page() {
   const { data: session, status } = useSession();
-  const loading = status === 'loading';
 
   useEffect(() => {
     if (status === 'authenticated') {

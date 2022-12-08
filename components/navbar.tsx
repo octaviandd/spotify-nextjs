@@ -5,7 +5,7 @@ type Props = {};
 
 export default function Navbar({}: Props) {
   const { data: session, status } = useSession();
-  const loading = status === 'loading';
+  console.log(session)
 
   return (
     <nav className="bg-white w-full pt-4">

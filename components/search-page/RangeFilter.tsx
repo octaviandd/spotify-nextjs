@@ -16,7 +16,7 @@ export default function RangeFilter({ type, max, min }: { type: string; max: num
 
   return (
     <div className="relative w-3/4">
-      <label>{type}</label>
+      <label>{type === 'Duration_ms' ? 'Duration' : type}</label>
       <Range
         step={max > 1 ? 1 : 0.1}
         min={min}
