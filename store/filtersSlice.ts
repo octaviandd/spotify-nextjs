@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import type { RootState } from "../store"
 
-const initialState: filtersInitialState = {
+const initialState: FiltersInitialState = {
   seeds: {
     seed_artists: [],
     seed_genres: [],
@@ -23,7 +23,7 @@ const initialState: filtersInitialState = {
     mode: [0, 1],
   },
 }
-interface filtersInitialState {
+export interface FiltersInitialState {
   seeds: {
     [key: string]: object[]
   }
