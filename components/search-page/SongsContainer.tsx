@@ -5,6 +5,7 @@ import { Data, Track } from './types';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
 import { FiltersInitialState } from '../../store/filtersSlice';
+import SongModal from './SongModal';
 import Image from 'next/image'
 
 const selectSearch = (state: RootState) => state.search;
