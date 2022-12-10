@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import type { RootState } from "../store"
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
 
 const initialState: FiltersInitialState = {
   seeds: {
@@ -22,37 +22,33 @@ const initialState: FiltersInitialState = {
     valence: [0, 1],
     mode: [0, 1],
   },
-}
+};
 export interface FiltersInitialState {
   seeds: {
-    [key: string]: object[]
-  }
+    [key: string]: object[];
+  };
   filters: {
-    [key: string]: number[]
-  }
+    [key: string]: number[];
+  };
 }
 
 export const filterSlice = createSlice({
-  name: "update",
+  name: 'update',
   initialState,
   reducers: {
-    updateRangeSliders: (
-      state,
-      action: PayloadAction<{ values: number[]; type: string }>
-    ) => {
-      state.filters[action.payload.type] = action.payload.values
+    updateRangeSliders: (state, action: PayloadAction<{ values: number[]; type: string }>) => {
+      state.filters[action.payload.type] = action.payload.values;
     },
     updateMultiSelect: (state, action: PayloadAction<{ values: object[]; type: string }>) => {
       state.seeds[action.payload.type] = action.payload.values;
-    }
+    },
   },
-})
+});
 
-export const { updateRangeSliders, updateMultiSelect } = filterSlice.actions
+export const { updateRangeSliders, updateMultiSelect } = filterSlice.actions;
 
-export const selectProperty = (state: RootState, property: string) =>
-  state.filters.filters[property]
+export const selectProperty = (state: RootState, property: string) => state.filters.filters[property];
 
-export const selectAllFilters = (state: RootState) => state.filters
+export const selectAllFilters = (state: RootState) => state.filters;
 
-export default filterSlice.reducer
+export default filterSlice.reducer;
