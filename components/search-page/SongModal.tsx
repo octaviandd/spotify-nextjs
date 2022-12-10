@@ -8,97 +8,10 @@ import { getSpotifyData } from '../utils';
 
 const selectSong = (state: RootState) => state.song.currentSong;
 
-type Props = {};
-
-const data = [
-  {
-    subject: 'Math',
-    A: 120,
-    B: 110,
-  },
-  {
-    subject: 'Chinese',
-    A: 98,
-    B: 130,
-  },
-  {
-    subject: 'English',
-    A: 86,
-    B: 130,
-  },
-  {
-    subject: 'Geography',
-    A: 99,
-    B: 100,
-  },
-  {
-    subject: 'Physics',
-    A: 85,
-    B: 90,
-  },
-  {
-    subject: 'History',
-    A: 65,
-    B: 85,
-  },
-];
-
-export default function SongModal({}: Props) {
+export default function SongModal() {
   const song = useSelector(selectSong);
   const [loading, setLoading] = useState(false);
-  const [songValues, setSongValues] = useState([
-    {
-      name: 'Key',
-      A: 0,
-      B: 100,
-    },
-    {
-      name: 'Duration',
-      A: 0,
-      B: 100,
-    },
-    {
-      name: 'Mode',
-      A: 0,
-      B: 100,
-    },
-    {
-      name: 'Tempo',
-      A: 0,
-      B: 100,
-    },
-    {
-      name: 'Liveness',
-      A: 0,
-      B: 100,
-    },
-    {
-      name: 'Speechiness',
-      A: 0,
-      B: 100,
-    },
-    {
-      name: 'Energy',
-      A: 0,
-      B: 100,
-    },
-    {
-      name: 'Acousticness',
-      A: 0,
-      B: 100,
-    },
-
-    {
-      name: 'Danceability',
-      A: 0,
-      B: 100,
-    },
-    {
-      name: 'Valence',
-      A: 0,
-      B: 100,
-    },
-  ]);
+  const [songValues, setSongValues] = useState<any>([]);
   const { data: session } = useSession();
   const dispatch = useDispatch();
 
@@ -130,6 +43,19 @@ export default function SongModal({}: Props) {
     );
   };
 
+  const setupMaxValues = () => {
+    switch (key) {
+      case 'tempo':
+        return 200
+        break;
+      case 'loudness':
+        return 4
+        break;
+      default:
+        break;
+    }
+  }
+
   useEffect(() => {
     console.log(song);
     if (song.id) {
@@ -137,51 +63,16 @@ export default function SongModal({}: Props) {
         token: session?.accessToken as string,
         searchParams: undefined,
         queryLink: `audio-features/${song.id}`,
-      }).then((data: any): void => {
+      }).then((data: object): void => {
         console.log(data);
-        setSongValues([
-          {
-            name: 'Key',
-            A: data.key,
-          },
-          {
-            name: 'Duration',
-            A: data.duration_ms,
-          },
-          {
-            name: 'Mode',
-            A: data.mode,
-          },
-          {
-            name: 'Tempo',
-            A: data.tempo,
-          },
-          {
-            name: 'Liveness',
-            A: data.liveness,
-          },
-          {
-            name: 'Speechiness',
-            A: data.speechiness,
-          },
-          {
-            name: 'Energy',
-            A: data.energy,
-          },
-          {
-            name: 'Acousticness',
-            A: data.acousticness,
-          },
-
-          {
-            name: 'Danceability',
-            A: data.danceability,
-          },
-          {
-            name: 'Valence',
-            A: data.valence,
-          },
-        ]);
+        let values = [];
+        for (const [key, value] of Object.entries(data)) {
+          if (typeof value === 'number' && !key.includes('_') && key != 'duration_ms' && key != 'mode' && key != 'key') {
+            values.push({name: key.charAt(0).toUpperCase() + key.slice(1), A: key == 'tempo' ? value : key == 'loudness' ? value : value * 100, B: key == 'tempo' ? 200 : key == 'loudness' ? 4 : 100})
+          }
+        }
+        console.log(values)
+        setSongValues(values)
         setLoading(false);
       });
     }
@@ -199,14 +90,14 @@ export default function SongModal({}: Props) {
             X
           </span>
         </div>
-        <ResponsiveContainer width="100%" height="100%" className="bg-white">
+        {songValues.length > 0 && <ResponsiveContainer width="100%" height="100%" className="bg-white">
           <RadarChart cx="50%" cy="50%" outerRadius="80%" data={songValues}>
             <PolarGrid />
             <PolarAngleAxis dataKey="name" />
             <PolarRadiusAxis />
             <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
           </RadarChart>
-        </ResponsiveContainer>
+        </ResponsiveContainer>}
         <div className="bg-[rgba(0,0,0,.2)] py-6 px-10 text-xl font-semibold text-white">
           Pills with the relative genres Other suggestions from the same artist
         </div>
