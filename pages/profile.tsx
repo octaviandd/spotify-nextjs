@@ -18,7 +18,10 @@ export default function Profile({ }: Props) {
 
   return (
     <Layout>
-      <div>profile</div>
+      <div className='grid grid-cols-profile'>
+        <div>sidebar</div>
+        <div>mainbar</div>
+      </div>
     </Layout>
   )
 }

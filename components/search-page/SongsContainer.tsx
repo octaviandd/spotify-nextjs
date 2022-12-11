@@ -74,7 +74,18 @@ export default function SongsContainer() {
   }, [search, filters]);
 
   if (loading) {
-    return <div>Loading..</div>;
+    return (
+      <div className='w-full relative'>
+        <div className='absolute left-1/2 top-[25%]'>
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

@@ -20,6 +20,7 @@ module.exports = {
         mockup: "1fr",
         search: "minmax(500px, 25%) 1fr",
         item: "repeat(auto-fill, minmax(170px, 1fr))",
+         profile: "auto 1fr"
       },
       keyframes: {
         loud: {
