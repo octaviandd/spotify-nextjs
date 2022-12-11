@@ -12,13 +12,13 @@ const selectSearch = (state: RootState) => state.search;
 const selectAllFilters = (state: RootState) => state.filters;
 
 export default function SongsContainer() {
-  const { data: session } = useSession();
   const [items, setItems] = useState<Track[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const { search } = useSelector(selectSearch);
   const filters = useSelector(selectAllFilters);
   const [offset, setOffset] = useState(0);
   const dispatch = useDispatch();
+  const { search } = useSelector(selectSearch);
+  const { data: session } = useSession();
 
   const setSong = (track: Track) => {
     dispatch(updateCurrentSong({ value: track }));

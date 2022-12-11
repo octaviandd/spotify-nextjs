@@ -93,26 +93,6 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
 //   }
 // }
 
-// export const getTracksAudioFeatures = async (ids: string[]) => {
-//   try {
-//     let params = ids.toString()
-//     let res = await fetch(
-//       "https://api.spotify.com/v1/audio-features?" +
-//         new URLSearchParams({ ids: params }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
 // export const getRelatedArtists = async (id: string) => {
 //   try {
@@ -184,37 +164,6 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
 //   }
 // }
 
-// export const getRecommendedSongs = async (seedArtists: any, soundData: any) => {
-//   try {
-//     let res = await fetch(
-//       `https://api.spotify.com/v1/recommendations?` +
-//         new URLSearchParams({
-//           limit: "50",
-//           seed_artists: seedArtists,
-//           target_danceability: soundData.danceability,
-//           target_acousticness: soundData.acousticness,
-//           target_energy: soundData.energy,
-//           target_instrumentalness: soundData.instrumentalness,
-//           target_liveness: soundData.liveness,
-//           target_loudness: soundData.loudness,
-//           target_speechiness: soundData.speechiness,
-//           target_valence: soundData.valence,
-//         }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
 // export const searchArtist = async (name: string) => {
 //   try {
 //     let res = await fetch(
@@ -240,25 +189,6 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
 //     let res = await fetch(
 //       `https://api.spotify.com/v1/users/${userID}/playlists?` +
 //         new URLSearchParams({ limit: "20" }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// export const getWeeklyTrendingSongsGlobally = async () => {
-//   try {
-//     let res = await fetch(
-//       `https://api.spotify.com/v1/playlists/37i9dQZEVXbNG2KDcFcKOF`,
 //       {
 //         headers: {
 //           "Content-Type": "application/json",

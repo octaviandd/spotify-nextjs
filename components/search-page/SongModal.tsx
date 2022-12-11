@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 import { RootState } from '../../store';
 import { updateCurrentSong } from '../../store/songSlice';
 import { getSpotifyData } from '../utils';
@@ -72,7 +72,7 @@ export default function SongModal() {
             <span className="ml-2">{song.name}</span>
           </div>
           <span className="cursor-pointer" onClick={setSong}>
-            X
+            &times;
           </span>
         </div>
         {songValues.length > 0 && <ResponsiveContainer width="100%" height="100%" className="bg-white">

@@ -10,7 +10,6 @@ export default function RangeFilter({ type, max, min }: { type: string; max: num
   const filters = useSelector(selectProperty).filters;
   const dispatch = useDispatch();
 
-  console.log({min})
   const setRange = (val: number[]) => {
     dispatch(updateRangeSliders({ values: [...val], type: type.toLocaleLowerCase() }));
   };
