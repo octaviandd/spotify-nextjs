@@ -43,19 +43,6 @@ export default function SongModal() {
     );
   };
 
-  const setupMaxValues = () => {
-    switch (key) {
-      case 'tempo':
-        return 200
-        break;
-      case 'loudness':
-        return 4
-        break;
-      default:
-        break;
-    }
-  }
-
   useEffect(() => {
     console.log(song);
     if (song.id) {
@@ -64,14 +51,12 @@ export default function SongModal() {
         searchParams: undefined,
         queryLink: `audio-features/${song.id}`,
       }).then((data: object): void => {
-        console.log(data);
         let values = [];
         for (const [key, value] of Object.entries(data)) {
-          if (typeof value === 'number' && !key.includes('_') && key != 'duration_ms' && key != 'mode' && key != 'key') {
-            values.push({name: key.charAt(0).toUpperCase() + key.slice(1), A: key == 'tempo' ? value : key == 'loudness' ? value : value * 100, B: key == 'tempo' ? 200 : key == 'loudness' ? 4 : 100})
+          if (typeof value === 'number' && !key.includes('_') && key != 'duration_ms' && key != 'mode' && key != 'key' && key !== 'loudness' && key !== 'tempo') {
+            values.push({name: key.charAt(0).toUpperCase() + key.slice(1), A: value, B: 1})
           }
         }
-        console.log(values)
         setSongValues(values)
         setLoading(false);
       });
@@ -94,7 +79,6 @@ export default function SongModal() {
           <RadarChart cx="50%" cy="50%" outerRadius="80%" data={songValues}>
             <PolarGrid />
             <PolarAngleAxis dataKey="name" />
-            <PolarRadiusAxis />
             <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
           </RadarChart>
         </ResponsiveContainer>}

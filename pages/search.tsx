@@ -47,7 +47,7 @@ export default function Page() {
           <RangeFilter type="Mode" max={1} min={0}></RangeFilter>
           <RangeFilter type="Popularity" max={100} min={0}></RangeFilter>
           <RangeFilter type="Speechiness" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Tempo" max={350} min={50}></RangeFilter>
+          <RangeFilter type="Tempo" max={350} min={-50}></RangeFilter>
           <RangeFilter type="Valence" max={1} min={0}></RangeFilter>
         </div>
         <SongsContainer></SongsContainer>

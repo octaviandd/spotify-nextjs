@@ -70,11 +70,6 @@ export default NextAuth({
           user: user,
         };
       }
-
-      // if (Date.now() < token.accessTokenExpires) {
-      //   return token
-      // }
-
       return refreshAccessToken(token);
     },
     async session({ session, token }) {
