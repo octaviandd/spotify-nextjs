@@ -93,7 +93,6 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
 //   }
 // }
 
-
 // export const getRelatedArtists = async (id: string) => {
 //   try {
 //     let res = await fetch(

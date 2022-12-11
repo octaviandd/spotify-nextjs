@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "types": "tsc --noEmit",
-    "prettier-format": "prettier --config .prettierrc 'pages/**/*.{js,ts,jsx,tsx}' --write"
+    "prettier-format": "prettier --config .prettierrc 'components//**/*.{js,ts,jsx,tsx}' --write"
   },
   "license": "ISC",
   "prettier": {
