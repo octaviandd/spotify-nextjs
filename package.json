@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "types": "tsc --noEmit",
-    "prettier-format": "prettier --config .prettierrc 'components/**/*.tsx' --write"
+    "prettier-format": "prettier --config .prettierrc 'components//**/*.{js,ts,jsx,tsx}' --write"
   },
   "license": "ISC",
   "prettier": {
@@ -26,7 +26,8 @@
     "react-dom": "^17.0.2",
     "react-range": "^1.8.14",
     "react-redux": "^8.0.5",
-    "react-select": "^5.6.0"
+    "react-select": "^5.6.0",
+    "recharts": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "^15.12.4",
