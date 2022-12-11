@@ -6,9 +6,7 @@ import LandingSectionTwo from './LandingSectionTwo';
 import { gsap } from 'gsap';
 import LandingSectionThree from './LandingSectionThree';
 
-type Props = {};
-
-export default function LandingSectionOne({}: Props) {
+export default function LandingSectionOne() {
   gsap.registerPlugin(ScrollTrigger, TextPlugin);
   const buttonRef = useRef<HTMLDivElement>(null);
 

@@ -1,10 +1,11 @@
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 import { RootState } from '../../store';
 import { updateCurrentSong } from '../../store/songSlice';
 import { getSpotifyData } from '../utils';
+import { gsap } from "gsap";
 
 const selectSong = (state: RootState) => state.song.currentSong;
 
@@ -14,6 +15,9 @@ export default function SongModal() {
   const [songValues, setSongValues] = useState<any>([]);
   const { data: session } = useSession();
   const dispatch = useDispatch();
+  const modalRef = useRef(null);
+  const tl: any = useRef();
+  const [isVisible, setIsVisible]  = useState(false)
 
   const setSong = () => {
     dispatch(
@@ -44,7 +48,6 @@ export default function SongModal() {
   };
 
   useEffect(() => {
-    console.log(song);
     if (song.id) {
       getSpotifyData({
         token: session?.accessToken as string,
@@ -57,21 +60,38 @@ export default function SongModal() {
             values.push({name: key.charAt(0).toUpperCase() + key.slice(1), A: value, B: 1})
           }
         }
+        setIsVisible(true);
         setSongValues(values)
         setLoading(false);
       });
     }
   }, [song]);
 
-  if (song.id) {
+  useEffect(() => {
+    if (modalRef.current) {
+      let ctx = gsap.context(() => {
+          gsap.fromTo(modalRef.current, { opacity: 0, scaleX: 0, scaleY: 0 },
+            {
+              opacity: 1,
+              duration: 0.5,
+              scaleX: 1,
+              scaleY: 1,
+              transformOrigin: 'center',
+            });
+      }, modalRef);
+      return () => ctx.revert();
+    }
+  }, [isVisible])
+
+  if (isVisible) {
     return (
-      <div className="grid grid-rows-layout fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75vw] h-[75vh] bg-[#006450] rounded-lg">
+      <div ref={modalRef} className="grid grid-rows-layout fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75vw] h-[75vh] bg-[#006450] rounded-lg">
         <div className="bg-[rgba(0,0,0,.2)] py-6 px-10 text-xl font-semibold text-white flex justify-between">
           <div>
             <span className="mr-2">{song.artists.map((artist) => artist.name)}</span>-
             <span className="ml-2">{song.name}</span>
           </div>
-          <span className="cursor-pointer" onClick={setSong}>
+          <span className="cursor-pointer" onClick={() => setIsVisible(false)}>
             &times;
           </span>
         </div>
