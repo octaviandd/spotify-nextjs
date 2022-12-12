@@ -7,7 +7,7 @@ export default function Navbar({}: Props) {
   const { data: session, status } = useSession();
 
   return (
-    <nav className="bg-white w-full pt-4">
+    <nav className="bg-white w-full pt-4 drop-shadow-md">
       <div className="px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
