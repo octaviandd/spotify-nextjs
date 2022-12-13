@@ -3,6 +3,7 @@ import AnimateInOut from './AnimateInOut';
 
 const FlyInOutLeft = ({ children }: { children: ReactNode }) => (
   <AnimateInOut
+    direction="left"
     durationIn={1.5}
     durationOut={0.25}
     delay={0.5}

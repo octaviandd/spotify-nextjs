@@ -8,22 +8,27 @@ const FadeInOut = ({ children }: { children: ReactNode }) => {
   const el = useRef<HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    gsap.to(el.current, {
+   gsap.fromTo(el.current, {opacity: 0, transform: "translateY(300px)"}, {
+      transform: "translateY(0%)",
       opacity: 1,
-      duration: 1,
-    });
+      delay: 1,
+      duration: 0.75,
+      ease: "power4.inOut",
+    })
 
     timeline.add(
       gsap.to(el.current, {
         opacity: 0,
-        duration: 2,
+        duration: 0.75,
+        transform: "translateY(300px)",
+        ease: "power4.inOut",
       }),
       0
     );
   }, []);
 
   return (
-    <div ref={el} style={{ opacity: 0 }}>
+    <div ref={el}>
       {children}
     </div>
   );

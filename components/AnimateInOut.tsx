@@ -11,11 +11,12 @@ interface AnimateProps {
   durationOut: number
   delay: number
   delayOut: number
+  direction: string
   set?: object | undefined | null
   skipOutro?: boolean
 }
 
-const AnimateInOut = ({ children, from, to, durationIn, durationOut, delay, delayOut, set, skipOutro } : AnimateProps) => {
+const AnimateInOut = ({ children, from, to, durationIn, durationOut, delay, delayOut, direction, set, skipOutro } : AnimateProps) => {
   const { timeline } = useContext(TransitionContext);
   const el = useRef<HTMLDivElement>(null);
 
@@ -23,7 +24,7 @@ const AnimateInOut = ({ children, from, to, durationIn, durationOut, delay, dela
     if (set) {
       gsap.set(el.current, { ...set });
     }
-    gsap.to(el.current, {
+    gsap.fromTo(el.current, {...from}, {
       ...to,
       delay: delay || 0,
       duration: durationIn,
@@ -42,7 +43,7 @@ const AnimateInOut = ({ children, from, to, durationIn, durationOut, delay, dela
   }, []);
 
   return (
-    <div style={{ transform: 'translate(100%, 0px)', transitionDuration: '0.25', transitionTimingFunction: 'power4.out' }} ref={el}>
+    <div ref={el}>
       {children}
     </div>
   );

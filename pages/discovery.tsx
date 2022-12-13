@@ -1,10 +1,10 @@
-import FlyInOutRight from '../components/FlyInOutRight';
+import FadeInOut from '../components/FadeInOut';
 import Layout from '../components/Layout';
 
 export default function Discovery() {
   return (
     <Layout>
-      <FlyInOutRight>
+      <FadeInOut>
         <h1>Client Side Rendering</h1>
           <p>
             This page uses the <strong>useSession()</strong> React Hook in the <strong>&lt;Header/&gt;</strong> component.
@@ -20,7 +20,7 @@ export default function Discovery() {
           <p>
             The disadvantage of <strong>useSession()</strong> is that it requires client side JavaScript.
         </p>
-      </FlyInOutRight>
+      </FadeInOut>
     </Layout>
   );
 }
