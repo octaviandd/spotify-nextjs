@@ -1,9 +1,8 @@
 import React from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
-type Props = {};
-
-export default function Navbar({}: Props) {
+export default function Navbar() {
   const { data: session, status } = useSession();
 
   return (
@@ -22,13 +21,13 @@ export default function Navbar({}: Props) {
           </div>
           <div className="flex">
             <div className="pr-3">
-              <a href="/search">Search</a>
+              <Link href="/search">Search</Link>
             </div>
             <div className="pr-3">
-              <a href="/discovery">Discovery</a>
+              <Link href="/discovery">Discovery</Link>
             </div>
             <div className="pr-3">
-              <a href="/profile">Profile</a>
+              <Link href="/profile">Profile</Link>
             </div>
           </div>
           <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
