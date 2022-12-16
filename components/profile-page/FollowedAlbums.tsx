@@ -7,10 +7,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Artist } from '../../types/components';
+import { Album } from '../search-page/types';
 
-export default function FollowedArtists() {
-  const [currentArtists, setCurrentArtists] = useState();
+export default function FollowedAlbums() {
+  const [currentAlbums, setCurrentAlbums] = useState();
   const { data: session } = useSession();
 
    useEffect(() => {
@@ -20,28 +20,29 @@ export default function FollowedArtists() {
   const getCurrentlyFollowed = () => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: {type: 'artist', limit: 50, offset: 0},
-      queryLink: `me/following`,
+      searchParams: {limit: 50, offset: 0},
+      queryLink: `me/albums`,
     }).then((data): void => {
-      data && setCurrentArtists(data.artists.items)
+      console.log(data)
+      setCurrentAlbums(data.items)
     });
   }
 
   return (
-    <div className='flex flex-col w-full mx-auto px-20'>
-      <p className='text-xl mb-6'>Followed artists</p>
+    <div className='flex flex-col w-full mx-auto px-20 mt-20'>
+      <p className='text-xl mb-6'>Followed albums</p>
       <div className='w-[80vw] flex'>
         <Swiper
           spaceBetween={25}
-          slidesPerView={5}
+          slidesPerView={4}
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
         >
-          {currentArtists && currentArtists.map((artist: Artist, index: number) => (
+          {currentAlbums && currentAlbums.map((item: Album, index: number) => (
             <SwiperSlide key={index}>
-              <img src={artist.images[1].url} className="h-[250px] object-cover object-center cursor-grab rounded-lg"/>
+              <img src={item.album.images[0].url} className="h-[250px] object-cover object-center cursor-grab rounded-lg"/>
             </SwiperSlide>
           ))}
         </Swiper>

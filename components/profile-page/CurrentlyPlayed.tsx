@@ -19,16 +19,16 @@ export default function CurrentlyPlayed() {
     });
   }
 
-   useIsomorphicLayoutEffect(() => {
-     if (animationRef.current) {
-       let selector = gsap.utils.selector('.bounce-bars')
-       console.log(selector)
-      let ctx = gsap.context(() => {
-        gsap.fromTo('.action-button', { opacity: 0, y: '100' }, { opacity: 1, duration: 1.5, y: '0' });
-      }, animationRef);
-      return () => ctx.revert();
-    }
-  });
+  //  useIsomorphicLayoutEffect(() => {
+  //    if (animationRef.current) {
+  //      let selector = gsap.utils.selector('.bounce-bars')
+  //      console.log(selector)
+  //     let ctx = gsap.context(() => {
+  //       gsap.fromTo('.action-button', { opacity: 0, y: '100' }, { opacity: 1, duration: 1.5, y: '0' });
+  //     }, animationRef);
+  //     return () => ctx.revert();
+  //   }
+  // });
 
   useEffect(() => {
     session?.accessToken && getCurrentlyPlayed();

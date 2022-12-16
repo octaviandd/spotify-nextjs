@@ -4,7 +4,9 @@ import AccessDenied from '../components/AccessDenied';
 import Layout from '../components/Layout';
 import CurrentlyPlayed from '../components/profile-page/CurrentlyPlayed';
 import CurrentProfile from '../components/profile-page/CurrentProfile';
+import FollowedAlbums from '../components/profile-page/FollowedAlbums';
 import FollowedArtists from '../components/profile-page/FollowedArtists';
+import FollowedPlaylists from '../components/profile-page/FollowedPlaylists';
 import RecentlyPlayed from '../components/profile-page/RecentlyPlayed';
 
 export default function Profile() {
@@ -28,6 +30,8 @@ export default function Profile() {
         <RecentlyPlayed></RecentlyPlayed>
       </div>
       <FollowedArtists></FollowedArtists>
+      <FollowedPlaylists></FollowedPlaylists>
+      <FollowedAlbums></FollowedAlbums>
     </Layout>
   )
 }
