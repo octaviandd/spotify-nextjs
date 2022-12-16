@@ -1,20 +1,8 @@
-import React, { useRef, useContext, ReactNode } from 'react';
+import React, { useRef, useContext } from 'react';
 import { gsap } from 'gsap';
 import { useIsomorphicLayoutEffect } from './utils';
 import { TransitionContext } from './TransitionContext';
-
-interface AnimateProps {
-  children: ReactNode;
-  from: object;
-  to: object;
-  durationIn: number;
-  durationOut: number;
-  delay: number;
-  delayOut: number;
-  direction: string;
-  set?: object | undefined | null;
-  skipOutro?: boolean;
-}
+import { AnimateProps } from '../types/components';
 
 const AnimateInOut = ({
   children,

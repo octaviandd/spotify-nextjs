@@ -8,6 +8,7 @@ import FollowedAlbums from '../components/profile-page/FollowedAlbums';
 import FollowedArtists from '../components/profile-page/FollowedArtists';
 import FollowedPlaylists from '../components/profile-page/FollowedPlaylists';
 import RecentlyPlayed from '../components/profile-page/RecentlyPlayed';
+import FavoriteTracks from '../components/profile-page/FavoriteTracks';
 
 export default function Profile() {
   const { data: session } = useSession();
@@ -32,6 +33,7 @@ export default function Profile() {
       <FollowedArtists></FollowedArtists>
       <FollowedPlaylists></FollowedPlaylists>
       <FollowedAlbums></FollowedAlbums>
+      <FavoriteTracks></FavoriteTracks>
     </Layout>
   )
 }

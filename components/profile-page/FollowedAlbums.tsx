@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Album } from '../search-page/types';
+import { Album } from '../../types/components';
 
 export default function FollowedAlbums() {
   const [currentAlbums, setCurrentAlbums] = useState();
@@ -23,7 +23,6 @@ export default function FollowedAlbums() {
       searchParams: {limit: 50, offset: 0},
       queryLink: `me/albums`,
     }).then((data): void => {
-      console.log(data)
       setCurrentAlbums(data.items)
     });
   }

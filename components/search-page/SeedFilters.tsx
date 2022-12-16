@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import React, { useEffect, useState, useCallback } from 'react';
 import Select, { components, MenuListProps, OptionProps, MultiValueGenericProps, MultiValue } from 'react-select';
 import { getSpotifyData, debounce } from '../utils';
-import { Data, Artist, Track } from './types';
+import { Data, Artist, Track } from '../../types/components';
 import { useDispatch } from 'react-redux';
 import { updateMultiSelect } from '../../store/filtersSlice';
 

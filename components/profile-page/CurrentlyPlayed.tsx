@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import React, { useState, useEffect, useRef } from 'react'
 import { getSpotifyData, useIsomorphicLayoutEffect } from '../../components/utils';
 import { gsap } from "gsap";
-import { Track } from '../search-page/types';
+import { Track } from "../../types/components";
 
 export default function CurrentlyPlayed() {
   const { data: session } = useSession();

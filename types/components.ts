@@ -2,6 +2,8 @@
  * Request parameters
  */
 
+import { ReactNode } from "react";
+
 export interface paramsInterface {
   time_range?: undefined | string;
   limit?: undefined | number;
@@ -167,5 +169,18 @@ export type User = {
 }
 
 export type DataUnion = Data | SongStats;
+
+export interface AnimateProps {
+  children: ReactNode;
+  from: object;
+  to: object;
+  durationIn: number;
+  durationOut: number;
+  delay: number;
+  delayOut: number;
+  direction: string;
+  set?: object | undefined | null;
+  skipOutro?: boolean;
+}
 
 export type SongStatsExtract = Extract<DataUnion, { type: 'audio_features' }>;
