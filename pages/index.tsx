@@ -28,13 +28,3 @@ export default function Page() {
     </Layout>
   );
 }
-
-export const getServerSideProps: GetServerSideProps<{
-  session: Session | null;
-}> = async (context) => {
-  return {
-    props: {
-      session: await getSession(context),
-    },
-  };
-};

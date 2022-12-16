@@ -1,10 +1,11 @@
 import React from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
-type Props = {};
-
-export default function Navbar({}: Props) {
+export default function Navbar() {
   const { data: session, status } = useSession();
+
+  console.log(session)
 
   return (
     <nav className="bg-white w-full pt-4 drop-shadow-md">
@@ -20,18 +21,21 @@ export default function Navbar({}: Props) {
               <div className="bg-green-400 rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
             </div>
           </div>
-          <div className="flex">
-            <div className="pr-3">
-              <a href="/search">Search</a>
-            </div>
-            <div className="pr-3">
-              <a href="/discovery">Discovery</a>
-            </div>
-            <div className="pr-3">
-              <a href="/profile">Profile</a>
-            </div>
-          </div>
           <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            {session?.user && <div className="flex">
+              <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                <Link href="/search">Search</Link>
+              </div>
+              <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                <Link href="/discovery">Discovery</Link>
+              </div>
+              <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                <Link href="/profile">Profile</Link>
+              </div>
+              <div className="pr-5 font-semibold h-[16px] w-[1px]">
+                |
+              </div>
+            </div>}
             <div className="ml-3 relative">
               {!session?.user ? (
                 <a

@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import Footer from './Footer';
-import Header from './Header';
 import SongModal from './search-page/SongModal';
 import Head from 'next/head';
 interface LayoutProps {
@@ -19,10 +17,8 @@ export default function Layout({ children }: LayoutProps) {
         <title>Spotifier</title>
         <meta property="og:title" content="My page title" key="title" />
       </Head>
-      <Header />
       <main className="">{children}</main>
       {song.id && <SongModal></SongModal>}
-      <Footer />
     </div>
   );
 }
