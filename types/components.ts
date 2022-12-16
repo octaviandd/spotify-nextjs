@@ -6,7 +6,7 @@ export interface paramsInterface {
   time_range?: undefined | string;
   limit?: undefined | number;
   id?: undefined | number;
-  ids?: undefined | [] | string;
+  ids?: undefined | [];
   type?: undefined | string;
   name?: undefined | string;
   seed_artists?: undefined | [];
@@ -19,7 +19,7 @@ export interface paramsInterface {
   target_speechiness?: undefined | number;
   target_valence?: undefined | number;
   q?: undefined | string;
-  offset?: undefined | number;
+  offset: undefined | number;
 }
 export interface SpotifyRequestParameters {
   token: string;

@@ -5,8 +5,6 @@ import Link from 'next/link';
 export default function Navbar() {
   const { data: session, status } = useSession();
 
-  console.log(session)
-
   return (
     <nav className="bg-white w-full pt-4 drop-shadow-md">
       <div className="px-2 sm:px-6 lg:px-8">
