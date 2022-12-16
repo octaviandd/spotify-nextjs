@@ -41,10 +41,11 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
       },
     });
 
+    if (res.status === 204) return false;
     let data: Data = await res.json();
     return data;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 

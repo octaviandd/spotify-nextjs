@@ -3,8 +3,10 @@ import React, {useEffect, useState, useRef} from 'react';
 import AccessDenied from '../components/AccessDenied';
 import Layout from '../components/Layout';
 import { getSpotifyData, useIsomorphicLayoutEffect } from '../components/utils';
-import { User } from '../types/components';
+import { Artist, User } from '../types/components';
 import { gsap } from "gsap";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 
 export default function Profile() {
   const { data: session } = useSession();
@@ -12,6 +14,7 @@ export default function Profile() {
   const [recentlyPlayed, setRecentlyPlayed] = useState([]);
   const [currentLimit, setCurrentLimit] = useState(20);
   const [currentlyPlaying, setCurrentlyPlaying] = useState();
+  const [currentArtists, setCurrentArtists] = useState()
   const animationRef = useRef();
 
   const getUserData = () => {
@@ -52,7 +55,18 @@ export default function Profile() {
       searchParams: undefined,
       queryLink: `me/player/currently-playing`,
     }).then((data: User): void => {
-      setCurrentlyPlaying(data.item)
+      data && setCurrentlyPlaying(data.item)
+    });
+  }
+
+  const getCurrentlyFollowed = () => {
+    getSpotifyData({
+      token: session?.accessToken as string,
+      searchParams: {type: 'artist', limit: 50, offset: 0},
+      queryLink: `me/following`,
+    }).then((data: User): void => {
+      console.log(data.artists.items)
+      data && setCurrentArtists(data.artists.items)
     });
   }
 
@@ -68,14 +82,18 @@ export default function Profile() {
     session?.accessToken && getCurrentlyPlayed();
   }, [session])
 
+  useEffect(() => {
+    session?.accessToken && getCurrentlyFollowed();
+  }, [session])
+
    useIsomorphicLayoutEffect(() => {
      if (animationRef.current) {
        let selector = gsap.utils.selector('.bounce-bars')
        console.log(selector)
-      // let ctx = gsap.context(() => {
-      //   gsap.fromTo('.action-button', { opacity: 0, y: '100' }, { opacity: 1, duration: 1.5, y: '0' });
-      // }, animationRef);
-      // return () => ctx.revert();
+      let ctx = gsap.context(() => {
+        gsap.fromTo('.action-button', { opacity: 0, y: '100' }, { opacity: 1, duration: 1.5, y: '0' });
+      }, animationRef);
+      return () => ctx.revert();
     }
   });
 
@@ -154,6 +172,20 @@ export default function Profile() {
             <button className='py-2 px-5 border-2 rounded-lg text-lg' onClick={() => setCurrentLimit((limit) => limit + 10)}> + </button>
           </div>}
         </div>
+      </div>
+      <div className='flex w-[100vw]'>
+        <Swiper
+          spaceBetween={25}
+          slidesPerView={5}
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
+          {currentArtists && currentArtists.map((artist: Artist, index: number) => (
+            <SwiperSlide key={index}>
+              <img src={artist.images[1].url} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </Layout>
   )
