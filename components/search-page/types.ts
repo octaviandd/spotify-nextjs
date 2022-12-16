@@ -140,31 +140,33 @@ export type SongStats = {
 };
 
 export type User = {
-  type: 'user'
-  country : string,
-  display_name : string,
-  email : string,
-  explicit_content : {
-    filter_enabled : boolean,
-    filter_locked : boolean
-  },
-  external_urls : {
-    spotify : string
-  },
-  followers : {
-    href : string | null,
-    total : number
-  },
-  href : string
-  id : string
-  images : [ {
-    height : null | number,
-    url : string,
-    width : null | number
-  } ],
-  product : string,
-  uri : string
-}
+  type: 'user';
+  country: string;
+  display_name: string;
+  email: string;
+  explicit_content: {
+    filter_enabled: boolean;
+    filter_locked: boolean;
+  };
+  external_urls: {
+    spotify: string;
+  };
+  followers: {
+    href: string | null;
+    total: number;
+  };
+  href: string;
+  id: string;
+  images: [
+    {
+      height: null | number;
+      url: string;
+      width: null | number;
+    }
+  ];
+  product: string;
+  uri: string;
+};
 
 export type DataUnion = Data | SongStats;
 

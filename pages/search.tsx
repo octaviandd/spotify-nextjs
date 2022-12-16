@@ -57,7 +57,7 @@ export default function Page() {
         <FadeInOut>
           <SongsContainer></SongsContainer>
         </FadeInOut>
-        </div>
-      </Layout>
+      </div>
+    </Layout>
   );
 }

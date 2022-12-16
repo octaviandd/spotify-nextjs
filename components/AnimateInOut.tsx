@@ -4,19 +4,30 @@ import { useIsomorphicLayoutEffect } from './utils';
 import { TransitionContext } from './TransitionContext';
 
 interface AnimateProps {
-  children: ReactNode,
-  from: object,
-  to: object
-  durationIn: number
-  durationOut: number
-  delay: number
-  delayOut: number
-  direction: string
-  set?: object | undefined | null
-  skipOutro?: boolean
+  children: ReactNode;
+  from: object;
+  to: object;
+  durationIn: number;
+  durationOut: number;
+  delay: number;
+  delayOut: number;
+  direction: string;
+  set?: object | undefined | null;
+  skipOutro?: boolean;
 }
 
-const AnimateInOut = ({ children, from, to, durationIn, durationOut, delay, delayOut, direction, set, skipOutro } : AnimateProps) => {
+const AnimateInOut = ({
+  children,
+  from,
+  to,
+  durationIn,
+  durationOut,
+  delay,
+  delayOut,
+  direction,
+  set,
+  skipOutro,
+}: AnimateProps) => {
   const { timeline } = useContext(TransitionContext);
   const el = useRef<HTMLDivElement>(null);
 
@@ -24,11 +35,15 @@ const AnimateInOut = ({ children, from, to, durationIn, durationOut, delay, dela
     if (set) {
       gsap.set(el.current, { ...set });
     }
-    gsap.fromTo(el.current, {...from}, {
-      ...to,
-      delay: delay || 0,
-      duration: durationIn,
-    });
+    gsap.fromTo(
+      el.current,
+      { ...from },
+      {
+        ...to,
+        delay: delay || 0,
+        duration: durationIn,
+      }
+    );
 
     if (!skipOutro) {
       timeline.add(
@@ -42,11 +57,7 @@ const AnimateInOut = ({ children, from, to, durationIn, durationOut, delay, dela
     }
   }, []);
 
-  return (
-    <div ref={el}>
-      {children}
-    </div>
-  );
+  return <div ref={el}>{children}</div>;
 };
 
 export default React.memo(AnimateInOut);

@@ -75,8 +75,8 @@ export default function SongsContainer() {
 
   if (loading) {
     return (
-      <div className='w-full relative'>
-        <div className='absolute left-1/2 top-[25%]'>
+      <div className="w-full relative">
+        <div className="absolute left-1/2 top-[25%]">
           <div className="lds-ring">
             <div></div>
             <div></div>

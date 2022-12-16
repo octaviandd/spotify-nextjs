@@ -20,20 +20,20 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {session?.user && <div className="flex">
-              <div className="pr-5 font-bold hover:text-[#00CA4E]">
-                <Link href="/search">Search</Link>
+            {session?.user && (
+              <div className="flex">
+                <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                  <Link href="/search">Search</Link>
+                </div>
+                <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                  <Link href="/discovery">Discovery</Link>
+                </div>
+                <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                  <Link href="/profile">Profile</Link>
+                </div>
+                <div className="pr-5 font-semibold h-[16px] w-[1px]">|</div>
               </div>
-              <div className="pr-5 font-bold hover:text-[#00CA4E]">
-                <Link href="/discovery">Discovery</Link>
-              </div>
-              <div className="pr-5 font-bold hover:text-[#00CA4E]">
-                <Link href="/profile">Profile</Link>
-              </div>
-              <div className="pr-5 font-semibold h-[16px] w-[1px]">
-                |
-              </div>
-            </div>}
+            )}
             <div className="ml-3 relative">
               {!session?.user ? (
                 <a
