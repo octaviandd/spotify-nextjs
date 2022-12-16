@@ -1,14 +1,12 @@
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect, useRef } from 'react'
 import { getSpotifyData, useIsomorphicLayoutEffect } from '../../components/utils';
-import { User } from '../../types/components';
 import { gsap } from "gsap";
-
-
+import { Track } from '../search-page/types';
 
 export default function CurrentlyPlayed() {
   const { data: session } = useSession();
-  const [currentlyPlaying, setCurrentlyPlaying] = useState()
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<Track>()
   const animationRef = useRef<HTMLDivElement>(null);
 
   const getCurrentlyPlayed = () => {

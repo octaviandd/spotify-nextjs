@@ -29,10 +29,12 @@ export default function FollowedArtists() {
   }
 
   return (
-    <div className='flex w-[50vw] mx-auto'>
+    <div className='flex flex-col w-full mx-auto px-20'>
+      <p className='text-xl mb-6'>Followed artists</p>
+      <div className='w-[80vw] flex'>
         <Swiper
           spaceBetween={25}
-          slidesPerView={4}
+          slidesPerView={5}
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           navigation
           pagination={{ clickable: true }}
@@ -40,10 +42,11 @@ export default function FollowedArtists() {
         >
           {currentArtists && currentArtists.map((artist: Artist, index: number) => (
             <SwiperSlide key={index}>
-              <img src={artist.images[1].url} className="h-[250px] object-cover object-center cursor-grab"/>
+              <img src={artist.images[1].url} className="h-[250px] object-cover object-center cursor-grab rounded-lg"/>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
+    </div>
   )
 }

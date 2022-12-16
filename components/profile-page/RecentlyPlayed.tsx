@@ -1,10 +1,11 @@
 import { useSession } from 'next-auth/react';
 import React, {useState, useEffect} from 'react'
+import { Track } from '../search-page/types';
 import { getSpotifyData } from '../utils';
 
 export default function RecentlyPlayed() {
   const { data: session } = useSession();
-  const [recentlyPlayed, setRecentlyPlayed] = useState([]);
+  const [recentlyPlayed, setRecentlyPlayed] = useState<Track[]>([]);
   const [currentLimit, setCurrentLimit] = useState(20);
 
   const getUserRecentlyPlayed = () => {
