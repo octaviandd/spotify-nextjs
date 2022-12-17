@@ -23,7 +23,7 @@ export default function Profile() {
 
   return (
     <Layout>
-      <div className='grid grid-cols-profile p-10'>
+      <div className='grid grid-cols-profile px-10'>
         <div className='w-full pt-10'>
           <CurrentProfile></CurrentProfile>
           <CurrentlyPlayed></CurrentlyPlayed>
