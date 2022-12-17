@@ -1,12 +1,12 @@
 import { useSession } from 'next-auth/react';
-import React, { useState, useEffect, useRef } from 'react'
-import { getSpotifyData, useIsomorphicLayoutEffect } from '../../components/utils';
-import { gsap } from "gsap";
+import React, { useState, useEffect, useRef, SetStateAction } from 'react'
+import { getSpotifyData } from '../../components/utils';
 import { Track } from "../../types/components";
 
 export default function CurrentlyPlayed() {
   const { data: session } = useSession();
   const [currentlyPlaying, setCurrentlyPlaying] = useState<Track>()
+  const [currentRecommended, setCurrentRecommended] = useState<Track[]>([])
   const animationRef = useRef<HTMLDivElement>(null);
 
   const getCurrentlyPlayed = () => {
@@ -16,26 +16,29 @@ export default function CurrentlyPlayed() {
       queryLink: `me/player/currently-playing`,
     }).then((data): void => {
       data && setCurrentlyPlaying(data.item)
+      getRecommendedSongs(data.item.id);
     });
   }
 
-  //  useIsomorphicLayoutEffect(() => {
-  //    if (animationRef.current) {
-  //      let selector = gsap.utils.selector('.bounce-bars')
-  //      console.log(selector)
-  //     let ctx = gsap.context(() => {
-  //       gsap.fromTo('.action-button', { opacity: 0, y: '100' }, { opacity: 1, duration: 1.5, y: '0' });
-  //     }, animationRef);
-  //     return () => ctx.revert();
-  //   }
-  // });
+  const getRecommendedSongs = (id: string) => {
+    getSpotifyData({
+      token: session?.accessToken as string,
+      searchParams: { seed_tracks: id, type: 'track', limit: 3 },
+      queryLink: 'recommendations',
+    }).then((data: Data): void => {
+      if (data.tracks && Object.keys(data.tracks).length > 0) {
+        setCurrentRecommended(data.tracks as SetStateAction<Track[]>);
+      }
+    });
+  }
 
   useEffect(() => {
     session?.accessToken && getCurrentlyPlayed();
-  }, [session])
+  }, [session.accessToken])
 
   return (
-    <div className='flex justify-center w-full mt-10'>
+    <div className='flex justify-center flex-col w-full mt-10'>
+      <p className='text-xl mb-6'>Currently playing</p>
       {currentlyPlaying && <div className='border rounded-md px-2 py-1 flex items-center justify-between w-full'>
         <div>
           <div className='mb-1 font-semibold'>{currentlyPlaying.artists[0].name}</div>
@@ -56,6 +59,22 @@ export default function CurrentlyPlayed() {
           </div>
         </div>
       </div>}
+      <p className='text-xl mb-6 mt-4'>Recommended tracks:</p>
+      {currentRecommended && currentRecommended.map((track, index) => (
+        <div className='border rounded-md px-2 py-1 flex items-center justify-between gap-y-3' key={index}>
+          <div>
+            <div className='mb-1 font-semibold'>{track.artists[0].name}</div>
+            <div className='flex items-center'>
+              <div className="w-[20px] h-[20px] mr-2">
+                <img src={track.album?.images[2].url} className="w-[20px] h-[20px]"/>
+              </div>
+              <div className='text-slate-500'>
+                {track.name}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
