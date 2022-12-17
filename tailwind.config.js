@@ -5,6 +5,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'artists': ['HKGroteskWeb', 'sans-serif']
+    },
     extend: {
       gridTemplateRows: {
         layout: "auto 1fr auto",

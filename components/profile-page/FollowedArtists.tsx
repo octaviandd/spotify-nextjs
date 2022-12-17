@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Mousewheel } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -8,10 +8,12 @@ import 'swiper/css/scrollbar';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
 import { Artist } from '../../types/components';
+import { Swiper as SwiperCore } from 'swiper/types';
 
 export default function FollowedArtists() {
   const [currentArtists, setCurrentArtists] = useState();
   const { data: session } = useSession();
+  const swiperRef = useRef<SwiperCore>();
 
    useEffect(() => {
     session?.accessToken && getCurrentlyFollowed();
@@ -29,19 +31,33 @@ export default function FollowedArtists() {
 
   return (
     <div className='flex flex-col w-full mx-auto px-20'>
-      <p className='text-xl mb-6'>Followed artists</p>
-      <div className='w-[80vw] flex'>
+      <div className='flex justify-between items-center'>
+        <p className='text-xl mb-6'>Followed artists</p>
+        <div className=''>
+          <button onClick={() => swiperRef.current?.slidePrev()} className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]">
+            <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32"><path d="M32 15H3.41l8.29-8.29-1.41-1.42-10 10a1 1 0 0 0 0 1.41l10 10 1.41-1.41L3.41 17H32z" data-name="4-Arrow Left"/></svg>
+          </button>
+          <button onClick={() => swiperRef.current?.slideNext()} className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]">
+            <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32"><path d="m31.71 15.29-10-10-1.42 1.42 8.3 8.29H0v2h28.59l-8.29 8.29 1.41 1.41 10-10a1 1 0 0 0 0-1.41z" data-name="3-Arrow Right"/></svg>
+          </button>
+        </div>
+      </div>
+      <div className='w-[80vw] flex relative'>
         <Swiper
-          spaceBetween={25}
           slidesPerView={5}
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          navigation
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
+          spaceBetween={25}
+          slidesPerGroup={3}
+          modules={[Mousewheel]}
+          onBeforeInit={(swiper) => {
+            swiperRef.current = swiper;
+          }}
         >
           {currentArtists && currentArtists.map((artist: Artist, index: number) => (
             <SwiperSlide key={index}>
-              <img src={artist.images[1].url} className="h-[250px] object-cover object-center cursor-grab rounded-lg"/>
+              <div className='flex flex-col'>
+                <img src={artist.images[1].url} className="h-[250px] object-cover object-center cursor-grab rounded-lg"/>
+                <span className='font-artists text-xl mt-4 leading-5 text-[#010101] font-medium tracking-[-0.2px]'>{artist.name}</span>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
