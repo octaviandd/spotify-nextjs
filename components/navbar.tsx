@@ -5,10 +5,8 @@ import Link from 'next/link';
 export default function Navbar() {
   const { data: session, status } = useSession();
 
-  console.log(session)
-
   return (
-    <nav className="bg-white w-full py-4 drop-shadow-md">
+    <nav className="bg-white w-full pt-4 drop-shadow-md">
       <div className="px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -22,20 +20,20 @@ export default function Navbar() {
             </div>
           </div>
           <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {session?.user && <div className="flex">
-              <div className="pr-5 font-bold hover:text-[#00CA4E]">
-                <Link href="/search">Search</Link>
+            {session?.user && (
+              <div className="flex">
+                <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                  <Link href="/search">Search</Link>
+                </div>
+                <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                  <Link href="/discovery">Discovery</Link>
+                </div>
+                <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                  <Link href="/profile">Profile</Link>
+                </div>
+                <div className="pr-5 font-semibold h-[16px] w-[1px]">|</div>
               </div>
-              <div className="pr-5 font-bold hover:text-[#00CA4E]">
-                <Link href="/discovery">Discovery</Link>
-              </div>
-              <div className="pr-5 font-bold hover:text-[#00CA4E]">
-                <Link href="/profile">Profile</Link>
-              </div>
-              <div className="pr-5 font-semibold h-[16px] w-[1px]">
-                |
-              </div>
-            </div>}
+            )}
             <div className="ml-3 relative">
               {!session?.user ? (
                 <a

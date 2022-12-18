@@ -1,5 +1,5 @@
 import { useRef, useLayoutEffect, useEffect } from 'react';
-import { SpotifyRequestParameters, Data } from './search-page/types';
+import { SpotifyRequestParameters, Data, SongStats } from '../types/components';
 
 export const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -21,7 +21,7 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
   let urlParams = new URLSearchParams();
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
-      if (typeof value === 'object') {
+      if (typeof value === 'object' && key !== 'ids') {
         let values = value.map((item: any) => (key === 'seed_genres' ? item.label : item.value)).toString();
         urlParams.append(key, values);
       } else {
@@ -41,164 +41,56 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
       },
     });
 
+    if (res.status === 204) return false;
     let data: Data = await res.json();
     return data;
   } catch (error) {
-    throw error;
+    console.log(error);
   }
 };
 
-// export const getUserTopTracks = async (time_range: string) => {
-//   try {
-//     let res = await fetch(
-//       "https://api.spotify.com/v1/me/top/tracks?" +
-//         new URLSearchParams({
-//           time_range: time_range,
-//           limit: "50",
-//         }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+export const tracksReducer = (data: SongStats) => {
+  const initialValue = {
+    danceability: 0,
+    energy: 0,
+    speechiness: 0,
+    acousticness: 0,
+    instrumentalness: 0,
+    liveness: 0,
+    valence: 0,
+  };
 
-// export const getFollowedArtists = async () => {
-//   try {
-//     let res = await fetch(
-//       "https://api.spotify.com/v1/me/following?" +
-//         new URLSearchParams({
-//           type: "artist",
-//           limit: "50",
-//         }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
+  let aggregates = data.reduce((acc, { danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo }) => {
+    acc.danceability += danceability;
+    acc.energy += energy;
+    acc.speechiness += speechiness;
+    acc.acousticness += acousticness;
+    acc.instrumentalness += instrumentalness;
+    acc.liveness += liveness;
+    acc.valence += valence;
 
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+    return acc;
+  }
+    , initialValue)
 
-// export const getRelatedArtists = async (id: string) => {
-//   try {
-//     let res = await fetch(
-//       `https://api.spotify.com/v1/artists/${id}/related-artists`,
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
+  for (const key in aggregates) {
+    aggregates[key] = aggregates[key] / Object.keys(aggregates).length;
+  }
 
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+  let arrayOfObjects = [];
+  for (const [key, value] of Object.entries(aggregates)){
+    if (
+      typeof value === 'number' &&
+      !key.includes('_') &&
+      key != 'duration_ms' &&
+      key != 'mode' &&
+      key != 'key' &&
+      key !== 'loudness' &&
+      key !== 'tempo'
+    ) {
+      arrayOfObjects.push({ name: key.charAt(0).toUpperCase() + key.slice(1), A: value.toFixed(3), B: 1 });
+    }
+  }
 
-// export const getFeaturedPlaylists = async () => {
-//   try {
-//     let res = await fetch(
-//       `https://api.spotify.com/v1/browse/featured-playlists`,
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// export const getPlaylist = async (id: string) => {
-//   try {
-//     let res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${getLocalAccessToken()}`,
-//       },
-//     })
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// export const getArtist = async (id: string) => {
-//   try {
-//     let res = await fetch(`https://api.spotify.com/v1/artists/${id}`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${getLocalAccessToken()}`,
-//       },
-//     })
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// export const searchArtist = async (name: string) => {
-//   try {
-//     let res = await fetch(
-//       `https://api.spotify.com/v1/search?` +
-//         new URLSearchParams({ q: name, type: "artist", limit: "20" }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// export const getUserPlaylists = async (userID: string) => {
-//   try {
-//     let res = await fetch(
-//       `https://api.spotify.com/v1/users/${userID}/playlists?` +
-//         new URLSearchParams({ limit: "20" }),
-//       {
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${getLocalAccessToken()}`,
-//         },
-//       }
-//     )
-
-//     let data = await res.json()
-//     return data
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+  return arrayOfObjects
+}

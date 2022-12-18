@@ -7,8 +7,6 @@ import SearchInput from '../components/search-page/SearchInput';
 import SongsContainer from '../components/search-page/SongsContainer';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
-import FadeInUp from '../components/FadeInUp';
-import FlyInOutLeft from '../components/FlyInOutLeft';
 import FlyInOutRight from '../components/FlyInOutRight';
 import FadeInOut from '../components/FadeInOut';
 
@@ -59,7 +57,7 @@ export default function Page() {
         <FadeInOut>
           <SongsContainer></SongsContainer>
         </FadeInOut>
-        </div>
-      </Layout>
+      </div>
+    </Layout>
   );
 }

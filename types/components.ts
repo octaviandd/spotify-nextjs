@@ -2,14 +2,17 @@
  * Request parameters
  */
 
+import { ReactNode } from "react";
+
 export interface paramsInterface {
   time_range?: undefined | string;
   limit?: undefined | number;
   id?: undefined | number;
-  ids?: undefined | [];
+  ids?: undefined | string[];
   type?: undefined | string;
   name?: undefined | string;
-  seed_artists?: undefined | [];
+  seed_artists?: undefined | string[] | string;
+  seed_tracks?: undefined | string[] | string;
   target_danceability?: undefined | number;
   target_acousticness?: undefined | number;
   target_energy?: undefined | number;
@@ -28,7 +31,7 @@ export interface SpotifyRequestParameters {
 }
 
 export interface Data {
-  type: 'artists' | 'tracks' | 'albums' | 'genres' | 'playlist';
+  type: 'artists' | 'tracks' | 'albums' | 'genres' | 'playlist' | 'user';
   artists?: {
     href: String;
     items: Artist[];
@@ -51,6 +54,9 @@ export interface Data {
   albums?: Album;
   genres?: string[];
   playlist?: Playlist;
+  items?: Track[]
+  item?: Track
+  audio_features?: SongStats
 }
 
 export interface Artist {
@@ -107,7 +113,7 @@ export type Playlist = {
   followers: object;
   href: string;
   id: string;
-  images: object[];
+  images: Array<{ url: string }>;
   name: string;
   owner: object;
   primary_color: null | string;
@@ -139,6 +145,46 @@ export type SongStats = {
   valence: number;
 };
 
+export type User = {
+  type: 'user'
+  country : string,
+  display_name : string,
+  email : string,
+  explicit_content : {
+    filter_enabled : boolean,
+    filter_locked : boolean
+  },
+  external_urls : {
+    spotify : string
+  },
+  followers : {
+    href : string | null,
+    total : number
+  },
+  href : string
+  id : string
+  images : [ {
+    height : null | number,
+    url : string,
+    width : null | number
+  } ],
+  product : string,
+  uri : string
+}
+
 export type DataUnion = Data | SongStats;
+
+export interface AnimateProps {
+  children: ReactNode;
+  from: object;
+  to: object;
+  durationIn: number;
+  durationOut: number;
+  delay: number;
+  delayOut: number;
+  direction: string;
+  set?: object | undefined | null;
+  skipOutro?: boolean;
+}
 
 export type SongStatsExtract = Extract<DataUnion, { type: 'audio_features' }>;

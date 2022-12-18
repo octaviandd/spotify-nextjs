@@ -1,7 +1,7 @@
 import React, { SetStateAction, useEffect, useState, useCallback } from 'react';
 import { getSpotifyData, debounce } from '../utils';
 import { useSession } from 'next-auth/react';
-import { Data, Track } from './types';
+import { Data, Track } from "../../types/components";
 import { RootState } from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiltersInitialState } from '../../store/filtersSlice';
@@ -74,7 +74,18 @@ export default function SongsContainer() {
   }, [search, filters]);
 
   if (loading) {
-    return <div>Loading..</div>;
+    return (
+      <div className="w-full relative">
+        <div className="absolute left-1/2 top-[25%]">
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
