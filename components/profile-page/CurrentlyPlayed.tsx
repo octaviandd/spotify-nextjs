@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect, useRef, SetStateAction } from 'react'
 import { getSpotifyData } from '../../components/utils';
-import { Track } from "../../types/components";
+import { Data, Track } from "../../types/components";
 
 export default function CurrentlyPlayed() {
   const { data: session } = useSession();
@@ -34,7 +34,7 @@ export default function CurrentlyPlayed() {
 
   useEffect(() => {
     session?.accessToken && getCurrentlyPlayed();
-  }, [session.accessToken])
+  }, [session?.accessToken])
 
   return (
     <div className='flex justify-center flex-col w-full mt-10'>

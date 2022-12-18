@@ -53,6 +53,7 @@ export interface Data {
   albums?: Album;
   genres?: string[];
   playlist?: Playlist;
+  items?: Track[]
 }
 
 export interface Artist {
@@ -109,7 +110,7 @@ export type Playlist = {
   followers: object;
   href: string;
   id: string;
-  images: object[];
+  images: Array<{ url: string }>;
   name: string;
   owner: object;
   primary_color: null | string;

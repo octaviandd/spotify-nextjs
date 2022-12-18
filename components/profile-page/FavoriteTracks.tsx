@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Track } from '../../types/components';
+import { Data, Track } from '../../types/components';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData, tracksReducer } from '../utils';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
@@ -16,10 +16,10 @@ export default function FavoriteTracks() {
       token: session?.accessToken as string,
       searchParams: {limit: currentLimit, offset: currentOffset},
       queryLink: `me/top/tracks`,
-    }).then((data): void => {
+    }).then((data : Data): void => {
       data && setCurrentTracks(data.items)
-      let ids = data.items.map(item => item.id)
-      getSongsValues(ids);
+      let ids = data?.items?.map(item => item.id)
+      getSongsValues(ids as string[]);
     });
   }
 

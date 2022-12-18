@@ -1,10 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Mousewheel } from 'swiper';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
 import { Playlist } from '../../types/components';
@@ -12,11 +8,11 @@ import { Swiper as SwiperCore } from 'swiper/types';
 
 
 export default function FollowedArtists() {
-  const [currentPlaylists, setCurrentPlaylists] = useState();
+  const [currentPlaylists, setCurrentPlaylists] = useState<Playlist[]>();
   const { data: session } = useSession();
-    const swiperRef = useRef<SwiperCore>();
-    const prevButtonRef = useRef<HTMLButtonElement>(null);
-    const nextButtonRef = useRef<HTMLButtonElement>(null)
+  const swiperRef = useRef<SwiperCore>();
+  const prevButtonRef = useRef<HTMLButtonElement>(null);
+  const nextButtonRef = useRef<HTMLButtonElement>(null)
 
    useEffect(() => {
     session?.accessToken && getCurrentlyFollowed();

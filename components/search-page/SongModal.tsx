@@ -5,6 +5,7 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } fro
 import { RootState } from '../../store';
 import { getSpotifyData } from '../utils';
 import { gsap } from 'gsap';
+import { Artist } from '../../types/components';
 
 const selectSong = (state: RootState) => state.song.currentSong;
 
@@ -69,7 +70,7 @@ export default function SongModal() {
       >
         <div className="bg-[rgba(0,0,0,.2)] py-6 px-10 text-xl font-semibold text-white flex justify-between">
           <div>
-            <span className="mr-2">{song.artists.map((artist) => artist.name)}</span>-
+            <span className="mr-2">{song.artists.map((artist: Artist) => artist.name)}</span>-
             <span className="ml-2">{song.name}</span>
           </div>
           <span className="cursor-pointer" onClick={() => setIsVisible(false)}>
