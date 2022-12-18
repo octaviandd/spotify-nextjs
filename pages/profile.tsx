@@ -23,17 +23,19 @@ export default function Profile() {
 
   return (
     <Layout>
-      <div className='grid grid-cols-profile px-10'>
-        <div className='w-full pt-10'>
-          <CurrentProfile></CurrentProfile>
-          <CurrentlyPlayed></CurrentlyPlayed>
+      <div className='py-10'>
+        <div className='grid grid-cols-profile px-10'>
+          <div className='w-full pt-10'>
+            <CurrentProfile></CurrentProfile>
+            <CurrentlyPlayed></CurrentlyPlayed>
+          </div>
+          <RecentlyPlayed></RecentlyPlayed>
         </div>
-        <RecentlyPlayed></RecentlyPlayed>
+        <FollowedArtists></FollowedArtists>
+        <FollowedPlaylists></FollowedPlaylists>
+        <FollowedAlbums></FollowedAlbums>
+        <FavoriteTracks></FavoriteTracks>
       </div>
-      <FollowedArtists></FollowedArtists>
-      <FollowedPlaylists></FollowedPlaylists>
-      <FollowedAlbums></FollowedAlbums>
-      <FavoriteTracks></FavoriteTracks>
     </Layout>
   )
 }

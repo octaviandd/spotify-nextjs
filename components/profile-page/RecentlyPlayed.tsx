@@ -37,7 +37,7 @@ export default function RecentlyPlayed() {
   return (
     <div className='px-10 pl-20'>
       <p className='text-xl mb-6'>Recently played</p>
-      <div className='grid grid-cols-2 grid-rows-auto gap-x-4 gap-y-2'>
+      <div className='grid grid-cols-2 grid-rows-auto gap-x-3 gap-y-1'>
         {recentlyPlayed.length > 0 && recentlyPlayed.map((item, index) => (
           <div className='border rounded-md px-2 py-1 flex items-center justify-between' key={index}>
             <div>

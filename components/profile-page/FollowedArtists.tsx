@@ -33,7 +33,7 @@ export default function FollowedArtists() {
   }
 
   return (
-    <div className='flex flex-col w-full mx-auto'>
+    <div className='flex flex-col w-full mx-auto mt-5'>
       <div className='flex justify-between items-center mb-5 px-20'>
         <p className='text-xl mb-6'>Followed artists</p>
         <div className=''>
