@@ -48,6 +48,7 @@ export default function FollowedAlbums() {
         <Swiper
           spaceBetween={25}
           slidesPerView={4.5}
+          slidesPerGroup={3}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}

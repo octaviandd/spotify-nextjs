@@ -21,7 +21,7 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
   let urlParams = new URLSearchParams();
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
-      if (typeof value === 'object') {
+      if (typeof value === 'object' && key !== 'ids') {
         let values = value.map((item: any) => (key === 'seed_genres' ? item.label : item.value)).toString();
         urlParams.append(key, values);
       } else {
@@ -48,3 +48,46 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
     console.log(error);
   }
 };
+
+export const tracksReducer = (data) => {
+  const initialValue = {
+    danceability: 0,
+    energy: 0,
+    key: 0,
+    loudness: 0,
+    mode: 0,
+    speechiness: 0,
+    acousticness: 0,
+    instrumentalness: 0,
+    liveness: 0,
+    valence: 0,
+    tempo: 0,
+    count: 0,
+  };
+
+  let aggregates = data.audio_features.reduce((acc, { danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo }) => {
+    acc.danceability += danceability;
+    acc.energy += energy;
+    acc.key += key;
+    acc.loudness += loudness;
+    acc.mode += mode;
+    acc.speechiness += speechiness;
+    acc.acousticness += acousticness;
+    acc.instrumentalness += instrumentalness;
+    acc.liveness += liveness;
+    acc.valence += valence;
+    acc.tempo += tempo;
+    acc.count++;
+
+    return acc;
+  }
+    , initialValue)
+
+  for (const key in aggregates) {
+    if (key !== 'count') {
+      aggregates[key] = aggregates[key] / aggregates.count;
+    }
+  }
+
+  return aggregates
+}

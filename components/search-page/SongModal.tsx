@@ -17,7 +17,6 @@ export default function SongModal() {
 
   useEffect(() => {
     if (song.id) {
-      console.log(song);
       getSpotifyData({
         token: session?.accessToken as string,
         searchParams: undefined,
