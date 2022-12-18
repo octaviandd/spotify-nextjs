@@ -17,7 +17,7 @@ export default function Layout({ children }: LayoutProps) {
         <title>Spotifier</title>
         <meta property="og:title" content="My page title" key="title" />
       </Head>
-      <main className="py-10">{children}</main>
+      <main>{children}</main>
       {song.id && <SongModal></SongModal>}
     </div>
   );

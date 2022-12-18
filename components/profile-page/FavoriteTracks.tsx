@@ -39,7 +39,6 @@ export default function FavoriteTracks() {
       queryLink: `audio-features/`,
     }).then((data: Data): void => {
       data.audio_features && setCurrentTracksValues(tracksReducer(data.audio_features));
-      console.log(currentTracksValues)
     });
   }
 
