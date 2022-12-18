@@ -43,7 +43,7 @@ export default function FavoriteTracks() {
   }
 
   return (
-    <div className='px-20'>
+    <div className='px-20 mt-4'>
       <div className='flex text-xl'>
         <p className='mb-6 text-xl'>Favorite Songs</p>
         <div className='ml-3'>
@@ -76,7 +76,7 @@ export default function FavoriteTracks() {
           </div>
         ))}
       </div>
-      <div className='w-full h-[50vh]'>
+      <div className='w-full h-[50vh] mt-5'>
         {currentTracksValues && (
           <ResponsiveContainer width="100%" height="100%" className="bg-white">
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={currentTracksValues}>
