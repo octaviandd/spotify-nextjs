@@ -8,10 +8,11 @@ export interface paramsInterface {
   time_range?: undefined | string;
   limit?: undefined | number;
   id?: undefined | number;
-  ids?: undefined | [];
+  ids?: undefined | string[];
   type?: undefined | string;
   name?: undefined | string;
-  seed_artists?: undefined | [];
+  seed_artists?: undefined | string[] | string;
+  seed_tracks?: undefined | string[] | string;
   target_danceability?: undefined | number;
   target_acousticness?: undefined | number;
   target_energy?: undefined | number;
@@ -54,6 +55,8 @@ export interface Data {
   genres?: string[];
   playlist?: Playlist;
   items?: Track[]
+  item?: Track
+  audio_features?: SongStats
 }
 
 export interface Artist {

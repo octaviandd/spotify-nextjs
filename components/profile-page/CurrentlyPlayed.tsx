@@ -16,14 +16,14 @@ export default function CurrentlyPlayed() {
       queryLink: `me/player/currently-playing`,
     }).then((data): void => {
       data && setCurrentlyPlaying(data.item)
-      data && getRecommendedSongs(data.item.id);
+      data.item.id && getRecommendedSongs(data.item.id);
     });
   }
 
   const getRecommendedSongs = (id: string) => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: { seed_tracks: id, type: 'track', limit: 3 },
+      searchParams: { seed_tracks: id, type: 'track', limit: 3, offset: 0 },
       queryLink: 'recommendations',
     }).then((data: Data): void => {
       if (data.tracks && Object.keys(data.tracks).length > 0) {

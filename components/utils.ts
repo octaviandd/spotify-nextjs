@@ -1,5 +1,5 @@
 import { useRef, useLayoutEffect, useEffect } from 'react';
-import { SpotifyRequestParameters, Data } from './search-page/types';
+import { SpotifyRequestParameters, Data, SongStats } from '../types/components';
 
 export const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -49,45 +49,48 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
   }
 };
 
-export const tracksReducer = (data) => {
+export const tracksReducer = (data: SongStats) => {
   const initialValue = {
     danceability: 0,
     energy: 0,
-    key: 0,
-    loudness: 0,
-    mode: 0,
     speechiness: 0,
     acousticness: 0,
     instrumentalness: 0,
     liveness: 0,
     valence: 0,
-    tempo: 0,
-    count: 0,
   };
 
-  let aggregates = data.audio_features.reduce((acc, { danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo }) => {
+  let aggregates = data.reduce((acc, { danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo }) => {
     acc.danceability += danceability;
     acc.energy += energy;
-    acc.key += key;
-    acc.loudness += loudness;
-    acc.mode += mode;
     acc.speechiness += speechiness;
     acc.acousticness += acousticness;
     acc.instrumentalness += instrumentalness;
     acc.liveness += liveness;
     acc.valence += valence;
-    acc.tempo += tempo;
-    acc.count++;
 
     return acc;
   }
     , initialValue)
 
   for (const key in aggregates) {
-    if (key !== 'count') {
-      aggregates[key] = aggregates[key] / aggregates.count;
+    aggregates[key] = aggregates[key] / Object.keys(aggregates).length;
+  }
+
+  let arrayOfObjects = [];
+  for (const [key, value] of Object.entries(aggregates)){
+    if (
+      typeof value === 'number' &&
+      !key.includes('_') &&
+      key != 'duration_ms' &&
+      key != 'mode' &&
+      key != 'key' &&
+      key !== 'loudness' &&
+      key !== 'tempo'
+    ) {
+      arrayOfObjects.push({ name: key.charAt(0).toUpperCase() + key.slice(1), A: value.toFixed(3), B: 1 });
     }
   }
 
-  return aggregates
+  return arrayOfObjects
 }

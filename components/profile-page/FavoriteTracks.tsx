@@ -9,7 +9,7 @@ export default function FavoriteTracks() {
   const [currentTracks, setCurrentTracks] = useState<Track[]>();
   const [currentLimit, setCurrentLimit] = useState(10)
   const [currentOffset, setCurrentOffset] = useState(0);
-  const [currentTracksValues, setCurrentTracksValues] = useState()
+  const [currentTracksValues, setCurrentTracksValues] = useState<any>();
 
   const getCurrentTracks = () => {
     getSpotifyData({
@@ -35,13 +35,11 @@ export default function FavoriteTracks() {
   const getSongsValues = (ids : string[]) => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: {ids},
+      searchParams: {ids, offset: 0},
       queryLink: `audio-features/`,
-    }).then((data: object): void => {
-      let cleanData = tracksReducer(data);
-      console.log(cleanData)
-      // console.log(values)
-      // setCurrentTracksValues(values);
+    }).then((data: Data): void => {
+      data.audio_features && setCurrentTracksValues(tracksReducer(data.audio_features));
+      console.log(currentTracksValues)
     });
   }
 
@@ -79,7 +77,7 @@ export default function FavoriteTracks() {
           </div>
         ))}
       </div>
-      <div>
+      <div className='w-full h-[50vh]'>
         {currentTracksValues && (
           <ResponsiveContainer width="100%" height="100%" className="bg-white">
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={currentTracksValues}>
