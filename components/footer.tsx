@@ -6,16 +6,16 @@ export default function Footer() {
         <a href="https://developer.spotify.com/">Spotify Developer</a>
         <a href="https://developer.spotify.com/documentation/web-api/">Spotify API</a>
       </div>
-      <div className="flex flex-col">
-        <p>This is an open source project, if you would like to get involved, please check the repo on <a className="underline" href="https://github.com/octaviandd/spotify-nextjs">Github</a>.</p>
+      <div className="flex flex-col text-center">
+        <p>This is an open source project, if you would like to get involved, <br /> please check the repo on <a className="underline" href="https://github.com/octaviandd/spotify-nextjs">Github</a>.</p>
       </div>
       <div className="flex flex-col">
         <div className="mr-3">
-          <span className="text-lg mr-3">Made by <a className="underline" href="https://github.com/octaviandd">Octavian</a></span>
+          <span className="mr-3">Made by <a className="underline" href="https://github.com/octaviandd">Octavian</a> <span className="text-[18px]">&#128513;</span></span>
         </div>
-          <div className="flex ml-3">
+          <div className="flex">
             <a className="flex items-center" href="https://www.buymeacoffee.com/octaviandd">
-              <span className="mr-3 text-lg">Coffee ?</span>
+              <span className="mr-3">Buy me a coffee</span>
               <svg xmlns="http://www.w3.org/2000/svg" overflow="visible" width="38" height="38" viewBox="0 0 532.268 595.532" version="1.1" enableBackground="new 0 0 532.268 595.532">
               <defs id="defs99">
                 <linearGradient id="linearGradient3185" y2="227" gradientUnits="userSpaceOnUse" x2="283.92" y1="226.3" x1="127.27">
