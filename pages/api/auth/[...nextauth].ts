@@ -41,7 +41,7 @@ export default NextAuth({
       authorization: {
         params: {
           scope:
-            'user-read-private user-read-email user-read-playback-state user-top-read user-read-recently-played user-follow-read user-library-read',
+            'user-read-private user-read-email user-read-playback-state user-top-read user-read-recently-played user-follow-read user-library-read user-library-modify app-remote-control streaming',
         },
       },
     }),
