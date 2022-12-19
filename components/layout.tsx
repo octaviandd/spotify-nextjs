@@ -18,7 +18,7 @@ export default function Layout({ children }: LayoutProps) {
         <meta property="og:title" content="My page title" key="title" />
       </Head>
       <main>{children}</main>
-      {song.id && <SongModal></SongModal>}
+      {(song.id && window.location.href.includes('search')) && <SongModal></SongModal>}
     </div>
   );
 }
