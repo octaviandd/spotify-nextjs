@@ -45,9 +45,20 @@ export default function RecentlyPlayed() {
   }, [session, currentLimit])
 
   return (
-    <div className='px-10 pl-20'>
+    <div className='px-5 pl-20'>
       <div className='flex items-center mb-5 justify-between'>
-        <p className='text-xl mb-6'>Recently played</p>
+        <div className='mb-6 flex'>
+          <p className='text-xl'>Recently played</p>
+          <div className='ml-3'>
+            <span onClick={() => setCurrentLimit(10)}  className='border px-3 py-2 rounded-md cursor-pointer'>10</span>
+          </div>
+          <div className='ml-3'>
+            <span onClick={() => setCurrentLimit(25)} className='border px-3 py-2 rounded-md cursor-pointer'>25</span>
+          </div>
+          <div className='ml-3'>
+            <span onClick={() => setCurrentLimit(50)} className='border px-3 py-2 rounded-md cursor-pointer'>50</span>
+          </div>
+        </div>
         <div className=''>
           <button onClick={() => swiperRef.current?.slidePrev()} ref={prevButtonRef} className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]">
             <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32"><path d="M32 15H3.41l8.29-8.29-1.41-1.42-10 10a1 1 0 0 0 0 1.41l10 10 1.41-1.41L3.41 17H32z" data-name="4-Arrow Left"/></svg>

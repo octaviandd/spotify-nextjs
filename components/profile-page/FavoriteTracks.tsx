@@ -76,8 +76,8 @@ export default function FavoriteTracks() {
           </div>
         ))}
       </div>
-      <div className='w-full h-[50vh] mt-5'>
-        {/* {currentTracksValues && (
+      <div className='h-[50vh] w-full mt-5'>
+        {currentTracksValues && (
           <ResponsiveContainer width="100%" height="100%" className="bg-white">
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={currentTracksValues}>
               <PolarGrid />
@@ -85,7 +85,7 @@ export default function FavoriteTracks() {
               <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
             </RadarChart>
           </ResponsiveContainer>
-        )} */}
+        )}
       </div>
     </div>
   )

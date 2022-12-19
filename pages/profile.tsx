@@ -25,7 +25,7 @@ export default function Profile() {
     <Layout>
       <div className='py-10'>
         <div className='grid grid-cols-profile px-10'>
-          <div className='w-full pt-10'>
+          <div className='w-full'>
             <CurrentProfile></CurrentProfile>
             <CurrentlyPlayed></CurrentlyPlayed>
           </div>
