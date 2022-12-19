@@ -61,7 +61,7 @@ export default function RecentlyPlayed() {
           </button>
         </div>
       </div>
-      <div className='max-w-[900px]'>
+      <div className='max-w-[900px] h-full'>
          <Swiper
           slidesPerView={1}
           spaceBetween={25}
