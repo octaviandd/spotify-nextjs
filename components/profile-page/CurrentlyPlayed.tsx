@@ -75,11 +75,11 @@ export default function CurrentlyPlayed() {
             </div>
             <div className='ml-auto pr-2'>
               <div className='cursor-pointer'>
-                <div className="bounce-bars" ref={animationRef}>
+                {currentlyPlaying.isPlaying && <div className="bounce-bars" ref={animationRef}>
                   <span />
                   <span />
                   <span />
-                </div>
+                </div>}
               </div>
             </div>
           </div>
