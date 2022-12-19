@@ -46,7 +46,7 @@ export default function RecentlyPlayed() {
 
   return (
     <div className='px-10 pl-20'>
-      <div className='flex items-center justify-between'>
+      <div className='flex items-center mb-5 justify-between'>
         <p className='text-xl mb-6'>Recently played</p>
         <div className=''>
           <button onClick={() => swiperRef.current?.slidePrev()} ref={prevButtonRef} className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]">
@@ -57,11 +57,11 @@ export default function RecentlyPlayed() {
           </button>
         </div>
       </div>
-      <div className='w-[800px]'>
+      <div className='max-w-[900px]'>
          <Swiper
           slidesPerView={1}
           spaceBetween={25}
-          width={800}
+          width={900}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
