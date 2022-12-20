@@ -1,26 +1,91 @@
+import React, { useEffect, useState } from 'react';
 import FadeInOut from '../components/FadeInOut';
 import Layout from '../components/Layout';
+import { getSpotifyData } from '../components/utils';
+import { useSession } from 'next-auth/react';
+import Select, { components, MenuListProps, OptionProps, MultiValueGenericProps } from 'react-select';
 
 export default function Discovery() {
+  const { data: session } = useSession();
+  const [items, setItems] = useState([]);
+  const [currentCountry, setCurrentCountry] = useState()
+
+  useEffect(() => {
+    session?.accessToken && getCurrentMarkets();
+  }, [session?.accessToken])
+
+  const getCurrentMarkets = () => {
+    getSpotifyData({
+      token: session?.accessToken as string,
+      searchParams: undefined,
+      queryLink: 'markets',
+    }).then((data: any): void => {
+      let cleanData = []
+      data.markets.map((item) => {
+        cleanData.push({value: item, label: item})
+      })
+      setItems(cleanData)
+    });
+  }
+
+  const MenuList = (props: MenuListProps<any, true, any>) => {
+    return (
+      <components.MenuList {...props} innerProps={{ ...props.innerProps }}>
+        {props.children}
+      </components.MenuList>
+    );
+  };
+
+  const Option = (props: OptionProps<any>) => {
+    const { data } = props;
+    return (
+      <components.Option {...props}>
+        <div className="flex items-center">
+          {data.thumb && <img src={data.thumb} className="mr-2 w-full h-full max-w-[30px] max-h-[30px]"></img>}
+          {data.label}
+        </div>
+      </components.Option>
+    );
+  };
+
+  const MultiValueLabel = (props: MultiValueGenericProps<any, true, any>) => {
+    const { data } = props;
+    return (
+      <components.MultiValueLabel {...props}>
+        <div className="flex items-center">
+          {data.thumb && (
+            <img src={data.thumb} width="30" height="30" className="mr-2 w-full h-full max-w-[30px] max-h-[30px]"></img>
+          )}
+          {data.label}
+        </div>
+      </components.MultiValueLabel>
+    );
+  };
+
   return (
     <Layout>
-      <FadeInOut>
-        <h1>Client Side Rendering</h1>
-        <p>
-          This page uses the <strong>useSession()</strong> React Hook in the <strong>&lt;Header/&gt;</strong> component.
-        </p>
-        <p>
-          The <strong>useSession()</strong> React Hook is easy to use and allows pages to render very quickly.
-        </p>
-        <p>
-          The advantage of this approach is that session state is shared between pages by using the{' '}
-          <strong>Provider</strong> in <strong>_app.js</strong> so that navigation between pages using{' '}
-          <strong>useSession()</strong> is very fast.
-        </p>
-        <p>
-          The disadvantage of <strong>useSession()</strong> is that it requires client side JavaScript.
-        </p>
-      </FadeInOut>
+      <div>
+        <Select
+          options={items}
+          onChange={(e) => setCurrentCountry(e)}
+          placeholder={`Search for countries...`}
+          styles={{
+            container: (base) => ({
+              ...base,
+              backgroundColor: '#eee',
+              border: '1px solid black',
+              borderRadius: '3px',
+            }),
+          }}
+          components={{
+            MenuList,
+            MultiValueLabel,
+            Option,
+          }}
+      />
+      </div>
+      {/* <FadeInOut>
+      </FadeInOut> */}
     </Layout>
   );
 }
