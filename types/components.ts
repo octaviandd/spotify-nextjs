@@ -23,6 +23,7 @@ export interface paramsInterface {
   target_valence?: undefined | number;
   q?: undefined | string;
   offset?: undefined | number;
+  country?: undefined | string;
 }
 export interface SpotifyRequestParameters {
   token: string;

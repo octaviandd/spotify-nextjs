@@ -4,14 +4,19 @@ import Layout from '../components/Layout';
 import { getSpotifyData } from '../components/utils';
 import { useSession } from 'next-auth/react';
 import Select, { components, MenuListProps, OptionProps, MultiValueGenericProps } from 'react-select';
+import LimitSetter from '../components/profile-page/LimitSetter';
+import FeaturedPlaylists from '../components/discovery-page/FeaturedPlaylists';
 
 export default function Discovery() {
   const { data: session } = useSession();
   const [items, setItems] = useState([]);
   const [currentCountry, setCurrentCountry] = useState()
+  const [currentLimit, setCurrentLimit] = useState(10)
+  const [currentPlaylists, setCurrentPlaylists] = useState()
 
   useEffect(() => {
     session?.accessToken && getCurrentMarkets();
+    session?.accessToken && getFeaturedPlaylists();
   }, [session?.accessToken])
 
   const getCurrentMarkets = () => {
@@ -21,10 +26,20 @@ export default function Discovery() {
       queryLink: 'markets',
     }).then((data: any): void => {
       let cleanData = []
-      data.markets.map((item) => {
-        cleanData.push({value: item, label: item})
+      data.markets.map((item, index) => {
+        cleanData.push({ id: index, value: item, label: item})
       })
       setItems(cleanData)
+    });
+  }
+
+  const getFeaturedPlaylists = () => {
+    getSpotifyData({
+      token: session?.accessToken as string,
+      searchParams: currentCountry ? {country : currentCountry} : undefined,
+      queryLink: 'browse/featured-playlists',
+    }).then((data: any): void => {
+      setCurrentPlaylists(data.playlists.items)
     });
   }
 
@@ -84,6 +99,8 @@ export default function Discovery() {
           }}
       />
       </div>
+      <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+      <FeaturedPlaylists></FeaturedPlaylists>
       {/* <FadeInOut>
       </FadeInOut> */}
     </Layout>
