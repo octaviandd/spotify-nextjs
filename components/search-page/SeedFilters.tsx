@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState, useCallback } from 'react';
-import Select, { components, MenuListProps, MultiValue } from 'react-select';
+import Select, { components, MultiValue } from 'react-select';
 import { getSpotifyData, debounce } from '../utils';
 import { Data, Artist, Track } from '../../types/components';
 import { useDispatch } from 'react-redux';
@@ -47,6 +47,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
             });
           });
         } else {
+          console.log('hereere')
           data.tracks?.items.map((item: Track) => {
             return arr.push({ value: item.id, label: item.name, thumb: item.album.images[2]?.url ?? '' });
           });
@@ -72,13 +73,10 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
       (e.target as HTMLElement).clientHeight && getData();
   };
 
-  const MenuList = (props: MenuListProps<any, true, any>) => {
-    return (
-      <components.MenuList {...props} innerProps={{ ...props.innerProps, onScroll: handleScroll }}>
-        {props.children}
-      </components.MenuList>
-    );
-  };
+  const customSelectMenuList = (props: any) => {
+    let newProps = {...props, infiniteScroll: true, handleScroll: handleScroll}
+    return <SelectMenuList {...newProps}></SelectMenuList>
+  }
 
   if (isLoading) {
     return <div>"Loading..."</div>;
@@ -101,7 +99,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
           }),
         }}
         components={{
-          MenuList,
+          MenuList: customSelectMenuList,
           MultiValueLabel: SelectMultiValueLabel,
           Option: SelectMenuOption,
         }}
