@@ -18,13 +18,13 @@ export default function FeaturedPlaylists() {
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
   const [currentCountry, setCurrentCountry] = useState()
-  const [currentMarkets, setCurrentMarkets] = useState([]);
+  const [currentMarkets, setCurrentMarkets] = useState<{}[]>();
   const [currentLimit, setCurrentLimit] = useState(10);
 
    useEffect(() => {
      session?.accessToken && getFeaturedPlaylists();
      session?.accessToken && getCurrentMarkets();
-   }, [session])
+   }, [session, currentLimit])
 
   const getFeaturedPlaylists = () => {
     getSpotifyData({
@@ -42,8 +42,8 @@ export default function FeaturedPlaylists() {
       searchParams: undefined,
       queryLink: 'markets',
     }).then((data: any): void => {
-      let cleanData = [];
-      data.markets.map((item, index) => {
+      let cleanData : {}[] = [];
+      data.markets.map((item: string, index: number) => {
         cleanData.push({ id: index, value: item, label: item });
       });
       setCurrentMarkets(cleanData);

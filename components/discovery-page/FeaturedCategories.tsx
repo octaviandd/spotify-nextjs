@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Playlist } from '../../types/components';
+import { Category, Data, Playlist } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
@@ -12,13 +12,13 @@ import 'swiper/css';
 import LimitSetter from '../profile-page/LimitSetter';
 
 export default function FeaturedCategories() {
-  const [currentCategories, setCurrentCategories] = useState<Playlist[]>();
+  const [currentCategories, setCurrentCategories] = useState<Category[]>();
   const { data: session } = useSession();
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
   const [currentCountry, setCurrentCountry] = useState()
-  const [currentMarkets, setCurrentMarkets] = useState([]);
+  const [currentMarkets, setCurrentMarkets] = useState<{}[]>();
   const [currentLimit, setCurrentLimit] = useState(10);
 
    useEffect(() => {
@@ -30,8 +30,8 @@ export default function FeaturedCategories() {
       token: session?.accessToken as string,
       searchParams: undefined,
       queryLink: 'browse/categories',
-    }).then((data: any): void => {
-      setCurrentCategories(data.categories.items)
+    }).then((data: Data): void => {
+      setCurrentCategories(data?.categories?.items)
     });
   }
   const getCurrentMarkets = () => {
@@ -40,8 +40,8 @@ export default function FeaturedCategories() {
       searchParams: undefined,
       queryLink: 'markets',
     }).then((data: any): void => {
-      let cleanData = [];
-      data.markets.map((item, index) => {
+      let cleanData: {}[] = [];
+      data.markets.map((item: string, index: number) => {
         cleanData.push({ id: index, value: item, label: item });
       });
       setCurrentMarkets(cleanData);
@@ -91,7 +91,7 @@ export default function FeaturedCategories() {
             swiperRef.current = swiper;
           }}
         >
-          {currentCategories && currentCategories.map((item: Playlist, index: number) => (
+          {currentCategories && currentCategories.map((item: Category, index: number) => (
             <SwiperSlide key={index}>
               <div className='flex flex-col'>
                 <img src={item.icons[0].url} className="h-[250px] object-cover object-center cursor-grab rounded-lg"/>

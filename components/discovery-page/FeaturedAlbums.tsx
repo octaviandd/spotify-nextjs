@@ -2,23 +2,23 @@ import React, {useState, useEffect, useRef} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Playlist } from '../../types/components';
+import { Album } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
 import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
-import Select from 'react-select';
-import 'swiper/css';
+import Select, { MultiValue } from 'react-select';
 import LimitSetter from '../profile-page/LimitSetter';
+import 'swiper/css';
 
 export default function FeaturedAlbums() {
-  const [currentAlbums, setCurrentAlbums] = useState<Playlist[]>();
+  const [currentAlbums, setCurrentAlbums] = useState<Album[]>();
   const { data: session } = useSession();
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
-  const [currentCountry, setCurrentCountry] = useState()
-  const [currentMarkets, setCurrentMarkets] = useState([]);
+  const [currentCountry, setCurrentCountry] = useState<MultiValue<any>>()
+  const [currentMarkets, setCurrentMarkets] = useState<{}[]>();
   const [currentLimit, setCurrentLimit] = useState(10);
 
    useEffect(() => {
@@ -29,7 +29,7 @@ export default function FeaturedAlbums() {
   const getFeaturedAlbums = () => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: currentCountry ? {country : currentCountry} : undefined,
+      searchParams: currentCountry ? {country : currentCountry.label} : undefined,
       queryLink: 'browse/new-releases',
     }).then((data: any): void => {
       setCurrentAlbums(data.albums.items)
@@ -42,8 +42,8 @@ export default function FeaturedAlbums() {
       searchParams: undefined,
       queryLink: 'markets',
     }).then((data: any): void => {
-      let cleanData = [];
-      data.markets.map((item, index) => {
+      let cleanData: {}[] = [];
+      data.markets.map((item: string, index: number) => {
         cleanData.push({ id: index, value: item, label: item });
       });
       setCurrentMarkets(cleanData);
@@ -93,7 +93,7 @@ export default function FeaturedAlbums() {
             swiperRef.current = swiper;
           }}
         >
-          {currentAlbums && currentAlbums.map((item: Playlist, index: number) => (
+          {currentAlbums && currentAlbums.map((item: Album, index: number) => (
             <SwiperSlide key={index}>
               <div className='flex flex-col'>
                 <img src={item.images[0].url} className="h-[250px] object-cover object-center cursor-grab rounded-lg"/>
