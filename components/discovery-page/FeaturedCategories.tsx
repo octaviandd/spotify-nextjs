@@ -55,13 +55,14 @@ export default function FeaturedCategories() {
           <Select
             options={currentMarkets}
             onChange={(e) => setCurrentCountry(e)}
-            placeholder={`Search for countries...`}
+            placeholder={`Search for a region...`}
             styles={{
               container: (base) => ({
                 ...base,
                 backgroundColor: '#eee',
                 border: '1px solid black',
                 borderRadius: '3px',
+                zIndex: '50',
               }),
             }}
             components={{
