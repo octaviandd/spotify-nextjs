@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState, useCallback } from 'react';
-import Select, { components, MultiValue } from 'react-select';
+import Select, { MultiValue } from 'react-select';
 import { getSpotifyData, debounce } from '../utils';
 import { Data, Artist, Track } from '../../types/components';
 import { useDispatch } from 'react-redux';
@@ -47,7 +47,6 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
             });
           });
         } else {
-          console.log('hereere')
           data.tracks?.items.map((item: Track) => {
             return arr.push({ value: item.id, label: item.name, thumb: item.album.images[2]?.url ?? '' });
           });

@@ -4,7 +4,12 @@ import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
 import { Playlist } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
+import { SelectMenuList } from '../global/SelectMenuList';
+import { SelectMenuOption } from '../global/SelectMenuOption';
+import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
+import Select from 'react-select';
 import 'swiper/css';
+import LimitSetter from '../profile-page/LimitSetter';
 
 export default function FeaturedPlaylists() {
   const [currentPlaylists, setCurrentPlaylists] = useState<Playlist[]>();
@@ -13,9 +18,12 @@ export default function FeaturedPlaylists() {
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
   const [currentCountry, setCurrentCountry] = useState()
+  const [currentMarkets, setCurrentMarkets] = useState([]);
+  const [currentLimit, setCurrentLimit] = useState(10);
 
    useEffect(() => {
-    session?.accessToken && getFeaturedPlaylists();
+     session?.accessToken && getFeaturedPlaylists();
+     session?.accessToken && getCurrentMarkets();
    }, [session])
 
   const getFeaturedPlaylists = () => {
@@ -28,10 +36,45 @@ export default function FeaturedPlaylists() {
     });
   }
 
+  const getCurrentMarkets = () => {
+    getSpotifyData({
+      token: session?.accessToken as string,
+      searchParams: undefined,
+      queryLink: 'markets',
+    }).then((data: any): void => {
+      let cleanData = [];
+      data.markets.map((item, index) => {
+        cleanData.push({ id: index, value: item, label: item });
+      });
+      setCurrentMarkets(cleanData);
+    });
+  };
+
   return (
     <div className='flex flex-col w-full mx-auto mt-20'>
       <div className='flex items-center mb-5 justify-between px-20'>
         <p className='text-xl mb-6'>Featured playlists</p>
+         <div>
+          <Select
+            options={currentMarkets}
+            onChange={(e) => setCurrentCountry(e)}
+            placeholder={`Search for countries...`}
+            styles={{
+              container: (base) => ({
+                ...base,
+                backgroundColor: '#eee',
+                border: '1px solid black',
+                borderRadius: '3px',
+              }),
+            }}
+            components={{
+              MenuList: SelectMenuList,
+              MultiValueLabel: SelectMultiValueLabel,
+              Option: SelectMenuOption,
+            }}
+          />
+        </div>
+        <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
         <div className=''>
           <button onClick={() => swiperRef.current?.slidePrev()} ref={prevButtonRef} className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]">
             <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32"><path d="M32 15H3.41l8.29-8.29-1.41-1.42-10 10a1 1 0 0 0 0 1.41l10 10 1.41-1.41L3.41 17H32z" data-name="4-Arrow Left"/></svg>
