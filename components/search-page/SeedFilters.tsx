@@ -1,10 +1,14 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState, useCallback } from 'react';
-import Select, { components, MenuListProps, OptionProps, MultiValueGenericProps, MultiValue } from 'react-select';
+import Select, { MultiValue } from 'react-select';
 import { getSpotifyData, debounce } from '../utils';
 import { Data, Artist, Track } from '../../types/components';
 import { useDispatch } from 'react-redux';
 import { updateMultiSelect } from '../../store/filtersSlice';
+import {SelectMenuList} from "../global/SelectMenuList"
+import {SelectMenuOption} from "../global/SelectMenuOption"
+import {SelectMultiValueLabel} from "../global/SelectMultiValueLabel"
+
 
 export default function SeedFilters({ type, queryLink }: { type: string; queryLink: string }) {
   const { data: session } = useSession();
@@ -68,39 +72,10 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
       (e.target as HTMLElement).clientHeight && getData();
   };
 
-  const MenuList = (props: MenuListProps<any, true, any>) => {
-    return (
-      <components.MenuList {...props} innerProps={{ ...props.innerProps, onScroll: handleScroll }}>
-        {props.children}
-      </components.MenuList>
-    );
-  };
-
-  const Option = (props: OptionProps<any>) => {
-    const { data } = props;
-    return (
-      <components.Option {...props}>
-        <div className="flex items-center">
-          {data.thumb && <img src={data.thumb} className="mr-2 w-full h-full max-w-[30px] max-h-[30px]"></img>}
-          {data.label}
-        </div>
-      </components.Option>
-    );
-  };
-
-  const MultiValueLabel = (props: MultiValueGenericProps<any, true, any>) => {
-    const { data } = props;
-    return (
-      <components.MultiValueLabel {...props}>
-        <div className="flex items-center">
-          {data.thumb && (
-            <img src={data.thumb} width="30" height="30" className="mr-2 w-full h-full max-w-[30px] max-h-[30px]"></img>
-          )}
-          {data.label}
-        </div>
-      </components.MultiValueLabel>
-    );
-  };
+  const customSelectMenuList = (props: any) => {
+    let newProps = {...props, infiniteScroll: true, handleScroll: handleScroll}
+    return <SelectMenuList {...newProps}></SelectMenuList>
+  }
 
   if (isLoading) {
     return <div>"Loading..."</div>;
@@ -123,9 +98,9 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
           }),
         }}
         components={{
-          MenuList,
-          MultiValueLabel,
-          Option,
+          MenuList: customSelectMenuList,
+          MultiValueLabel: SelectMultiValueLabel,
+          Option: SelectMenuOption,
         }}
       />
     </div>

@@ -1,4 +1,4 @@
-import { useSession , getSession, GetSessionParams} from 'next-auth/react';
+import { useSession, getSession, GetSessionParams } from 'next-auth/react';
 import { useEffect } from 'react';
 import LandingSectionFour from '../components/landing-page/LandingSectionFour';
 import LandingSectionOne from '../components/landing-page/LandingSectionOne';
@@ -9,7 +9,7 @@ export default function Page() {
   const { status } = useSession();
 
   useEffect(() => {
-    console.log(status)
+    console.log(status);
     if (status === 'authenticated') {
       window.location.href = '/search';
     }

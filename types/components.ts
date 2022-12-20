@@ -23,6 +23,7 @@ export interface paramsInterface {
   target_valence?: undefined | number;
   q?: undefined | string;
   offset?: undefined | number;
+  country?: undefined | string;
 }
 export interface SpotifyRequestParameters {
   token: string;
@@ -57,6 +58,7 @@ export interface Data {
   items?: Track[]
   item?: Track
   audio_features?: SongStats
+  categories?: Category
 }
 
 export interface Artist {
@@ -96,9 +98,11 @@ export interface Album {
   href: String;
   items: Track[];
   limit: Number;
+  images: Array<{ url: string; height: number }>;
   next: String;
   offset: Number;
   previous: null;
+  name: string;
   total: Number;
 }
 
@@ -113,7 +117,7 @@ export type Playlist = {
   followers: object;
   href: string;
   id: string;
-  images: Array<{ url: string }>;
+  images: Array<{ url: string; height: number }>;
   name: string;
   owner: object;
   primary_color: null | string;
@@ -122,6 +126,13 @@ export type Playlist = {
   tracks: Track[];
   type: 'playlist';
   uri: string;
+};
+
+export type Category = {
+  href: string
+  icons: Array<{ url: string }>;
+  id: string
+  name: string
 };
 
 export type SongStats = {
