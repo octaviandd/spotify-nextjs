@@ -1,5 +1,5 @@
 import { useRef, useLayoutEffect, useEffect } from 'react';
-import { SpotifyRequestParameters, Data, SongStats } from '../types/components';
+import { SpotifyRequestParameters, Data, AggregateValues } from '../types/components';
 
 export const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -79,7 +79,7 @@ export const playPauseTrack = async ({ token, type }: { token: string; type: str
   }
 };
 
-export const tracksReducer = (data: SongStats) => {
+export const tracksReducer = (data: any) => {
   const initialValue = {
     danceability: 0,
     energy: 0,
@@ -91,21 +91,16 @@ export const tracksReducer = (data: SongStats) => {
   };
 
   let aggregates = data.reduce(
-    (
-      acc,
+    (acc: AggregateValues,
       {
         danceability,
         energy,
-        key,
-        loudness,
-        mode,
         speechiness,
         acousticness,
         instrumentalness,
         liveness,
         valence,
-        tempo,
-      }
+      } : AggregateValues
     ) => {
       acc.danceability += danceability;
       acc.energy += energy;
@@ -145,5 +140,5 @@ export const tracksReducer = (data: SongStats) => {
 export const millisToMinutesAndSeconds = (millis: number) => {
   let minutes = Math.floor(millis / 60000);
   let seconds = ((millis % 60000) / 1000).toFixed(0);
-  return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+  return minutes + ':' + (Number(seconds) < 10 ? '0' : '') + seconds;
 };

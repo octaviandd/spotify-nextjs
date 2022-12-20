@@ -49,7 +49,7 @@ export default function SongsContainer() {
       queryLink: search ? 'search' : isDoable ? 'recommendations' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
     }).then((data: Data): void => {
       if (data.hasOwnProperty('seeds')) {
-        setItems(data.tracks as SetStateAction<Track[]>);
+        setItems(data.tracks as Track[]);
 
         setOffset((offset) => offset + 50);
       } else if (data.type === 'playlist') {

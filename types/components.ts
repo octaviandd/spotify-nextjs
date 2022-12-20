@@ -83,7 +83,18 @@ export interface Artist {
   uri: string;
 }
 
+export interface AggregateValues {
+  danceability: number;
+  energy: number;
+  speechiness: number;
+  acousticness: number;
+  instrumentalness: number;
+  liveness: number;
+  valence: number;
+}
+
 export interface Track {
+  [x: string]: any;
   album: { images: Array<{ url: string }> };
   artists: Artist[];
   available_markets: string[];
