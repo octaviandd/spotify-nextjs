@@ -30,35 +30,38 @@ export interface SpotifyRequestParameters {
   searchParams: paramsInterface | undefined;
   queryLink: string | null;
 }
+interface CommonResponseProperties {
+  href: String;
+  items: any[];
+  limit: Number;
+  next: String;
+  offset: Number;
+  previous: null;
+  total: Number;
+}
 
 export interface Data {
   type: 'artists' | 'tracks' | 'albums' | 'genres' | 'playlist' | 'user';
-  artists?: {
-    href: String;
+  artists?: CommonResponseProperties & {
     items: Artist[];
-    limit: Number;
-    next: String;
-    offset: Number;
-    previous: null;
-    total: Number;
   };
-  tracks?: {
-    href: String;
+  tracks?: CommonResponseProperties & {
     items: Track[];
-    limit: Number;
-    next: String;
-    offset: Number;
-    previous: null;
-    total: Number;
   };
   seeds?: object;
-  albums?: Album;
+  albums?: CommonResponseProperties & {
+    items: Album[];
+  };
   genres?: string[];
-  playlist?: Playlist;
-  items?: Track[]
-  item?: Track
-  audio_features?: SongStats
-  categories?: Category
+  playlist?: CommonResponseProperties & {
+    items: Playlist[];
+  };
+  categories?: CommonResponseProperties & {
+    items: Category[];
+  };
+  items?: Track[];
+  item?: Track;
+  audio_features?: SongStats;
 }
 
 export interface Artist {
@@ -182,9 +185,6 @@ export type User = {
   product : string,
   uri : string
 }
-
-export type DataUnion = Data | SongStats;
-
 export interface AnimateProps {
   children: ReactNode;
   from: object;
@@ -197,5 +197,3 @@ export interface AnimateProps {
   set?: object | undefined | null;
   skipOutro?: boolean;
 }
-
-export type SongStatsExtract = Extract<DataUnion, { type: 'audio_features' }>;

@@ -7,7 +7,7 @@ import { Swiper as SwiperCore } from 'swiper/types';
 import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
 import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
-import Select, { MultiValue } from 'react-select';
+import Select from 'react-select';
 import LimitSetter from '../profile-page/LimitSetter';
 import 'swiper/css';
 
@@ -17,7 +17,7 @@ export default function FeaturedAlbums() {
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
-  const [currentCountry, setCurrentCountry] = useState<MultiValue<any>>()
+  const [currentCountry, setCurrentCountry] = useState <{label: string, name: string, id: string}>()
   const [currentMarkets, setCurrentMarkets] = useState<{}[]>();
   const [currentLimit, setCurrentLimit] = useState(10);
 
@@ -32,7 +32,7 @@ export default function FeaturedAlbums() {
       searchParams: currentCountry ? {country : currentCountry.label, limit: currentLimit} : {limit: currentLimit},
       queryLink: 'browse/new-releases',
     }).then((data: Data): void => {
-      setCurrentAlbums(data?.albums.items)
+      setCurrentAlbums(data?.albums?.items)
     });
   }
 
