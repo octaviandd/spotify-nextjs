@@ -9,15 +9,17 @@ import { RootState } from '../store';
 import { useSelector } from 'react-redux';
 import FlyInOutRight from '../components/FlyInOutRight';
 import FadeInOut from '../components/FadeInOut';
+import SongModal from '../components/search-page/SongModal';
+
+const selectSong = (state: RootState) => state.song.currentSong;
 
 const getMultiSelectValues = (state: RootState) => state.filters.seeds;
 
 export default function Page() {
   const { data: session, status } = useSession();
   const loading = status === 'loading';
-  const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce((accumulator, currentValue) => {
-    return accumulator + currentValue[1].length;
-  }, 0);
+  const song = useSelector(selectSong);
+  const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce((accumulator, currentValue) => accumulator + currentValue[1].length, 0);
 
   if (typeof window !== 'undefined' && loading) return null;
 
@@ -58,6 +60,7 @@ export default function Page() {
           <SongsContainer></SongsContainer>
         </FadeInOut>
       </div>
+      {(song.id && window.location.href.includes('search')) && <SongModal></SongModal>}
     </Layout>
   );
 }

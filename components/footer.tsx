@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <div className="border-t-2 flex justify-between items-center py-6 px-20 w-full bg-black text-white mt-5">
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <a href="https://www.spotify.com">Spotify</a>
         <a href="https://developer.spotify.com/">Spotify Developer</a>
         <a href="https://developer.spotify.com/documentation/web-api/">Spotify API</a>
@@ -13,10 +13,10 @@ export default function Footer() {
         <div className="mr-3">
           <span className="mr-3">Made by <a className="underline" href="https://github.com/octaviandd">Octavian</a> <span className="text-[18px]">&#128513;</span></span>
         </div>
-          <div className="flex">
-            <a className="flex items-center" href="https://www.buymeacoffee.com/octaviandd">
-              <span className="mr-3">Buy me a coffee</span>
-              <svg xmlns="http://www.w3.org/2000/svg" overflow="visible" width="38" height="38" viewBox="0 0 532.268 595.532" version="1.1" enableBackground="new 0 0 532.268 595.532">
+        <div className="flex">
+          <a className="flex items-center" href="https://www.buymeacoffee.com/octaviandd">
+            <span className="mr-3">Buy me a coffee</span>
+            <svg xmlns="http://www.w3.org/2000/svg" overflow="visible" width="38" height="38" viewBox="0 0 532.268 595.532" version="1.1" enableBackground="new 0 0 532.268 595.532">
               <defs id="defs99">
                 <linearGradient id="linearGradient3185" y2="227" gradientUnits="userSpaceOnUse" x2="283.92" y1="226.3" x1="127.27">
                   <stop id="stop3181" stopColor="#803300" offset="0" />
@@ -73,9 +73,9 @@ export default function Footer() {
               <path id="path3208" d="m370.25 328.95a102.19 134.03 0 1 1 -204.38 0 102.19 134.03 0 1 1 204.38 0z" transform="translate(-.0018904)" fill="none" />
               <path id="path3206-7" fill="#c87137" d="m266.21 58.951c-147.02 0-266.22 120.36-266.22 268.81 0 148.46 119.2 268.81 266.22 268.81s266.22-120.36 266.22-268.81c0-75.564-31.621-145.33-81.335-194.17-6.9888 7.6875-17.833 15.375-26.796 23.063 44.089 42.936 75.943 104.55 75.943 171.11 0 130.46-105.28 236.22-235.13 236.22-129.83 0-235.24-105.75-235.11-236.22 0.13-130.33 108.01-233.48 235.13-236.22 22.566-0.4853 37.736 2.4504 58.398 8.4158 13.499-5.1732 26.319-11.703 37.848-20.817-18.25-10.185-62.94-20.188-95.16-20.188z" />
             </svg>
-            </a>
-          </div>
-      </div>
+          </a>
+        </div>
+      </div> */}
     </div>
   )
 }

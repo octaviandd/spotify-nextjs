@@ -8,14 +8,15 @@ import Layout from '../components/Layout';
 import MockupPage from '../components/landing-page/MockupPage';
 
 export default function Page() {
-  const { data: session, status } = useSession();
+  const { data: session, status, loading } = useSession();
 
   useEffect(() => {
+    console.log(status)
     if (status === 'authenticated') {
       window.location.href = '/search';
     }
     window.scrollTo(0, 0);
-  }, []);
+  }, [status]);
 
   return (
     <Layout>
