@@ -23,9 +23,9 @@ export default function Profile() {
 
   return (
     <Layout>
-      <div className='py-10'>
-        <div className='grid grid-cols-profile px-10'>
-          <div className='w-full'>
+      <div className="py-10">
+        <div className="grid grid-cols-profile px-10">
+          <div className="w-full">
             <CurrentProfile></CurrentProfile>
             <CurrentlyPlayed></CurrentlyPlayed>
           </div>
@@ -37,5 +37,5 @@ export default function Profile() {
         <FavoriteTracks></FavoriteTracks>
       </div>
     </Layout>
-  )
+  );
 }

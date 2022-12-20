@@ -19,7 +19,10 @@ export default function Page() {
   const { data: session, status } = useSession();
   const loading = status === 'loading';
   const song = useSelector(selectSong);
-  const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce((accumulator, currentValue) => accumulator + currentValue[1].length, 0);
+  const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce(
+    (accumulator, currentValue) => accumulator + currentValue[1].length,
+    0
+  );
 
   if (typeof window !== 'undefined' && loading) return null;
 
@@ -60,7 +63,7 @@ export default function Page() {
           <SongsContainer></SongsContainer>
         </FadeInOut>
       </div>
-      {(song.id && window.location.href.includes('search')) && <SongModal></SongModal>}
+      {song.id && window.location.href.includes('search') && <SongModal></SongModal>}
     </Layout>
   );
 }

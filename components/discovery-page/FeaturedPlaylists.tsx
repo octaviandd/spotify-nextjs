@@ -28,7 +28,6 @@ export default function FeaturedPlaylists() {
     });
   }
 
-
   return (
     <div className='flex flex-col w-full mx-auto mt-20'>
       <div className='flex items-center mb-5 justify-between px-20'>
