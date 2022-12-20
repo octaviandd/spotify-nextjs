@@ -23,7 +23,7 @@ export default function Navbar() {
             {session?.user && (
               <div className="flex items-center">
                 <div className="pr-5 font-bold  flex items-start">
-                  <span className='bg-[#00CA4E] text-xs text-black rounded-sm font-semibold px-2 py-1 mr-2'>
+                  <span className='bg-[#00CA4E] text-[8px] text-black rounded-sm font-semibold px-2 py-1 mr-2'>
                     NEW FEATURE
                   </span>
                   <div className='border-2 rounded-md border-[#00CA4E] px-4 py-2 hover:text-[#00CA4E]'>

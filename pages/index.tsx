@@ -1,6 +1,4 @@
-import { GetServerSideProps } from 'next';
-import type { Session } from 'next-auth';
-import { useSession, getSession } from 'next-auth/react';
+import { useSession , getSession, GetSessionParams} from 'next-auth/react';
 import { useEffect } from 'react';
 import LandingSectionFour from '../components/landing-page/LandingSectionFour';
 import LandingSectionOne from '../components/landing-page/LandingSectionOne';
@@ -8,7 +6,7 @@ import Layout from '../components/Layout';
 import MockupPage from '../components/landing-page/MockupPage';
 
 export default function Page() {
-  const { data: session, status, loading } = useSession();
+  const { status } = useSession();
 
   useEffect(() => {
     console.log(status)
@@ -28,4 +26,12 @@ export default function Page() {
       <div className="grid grid-cols-hero2 grid-rows-hero2 relative"></div>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context: GetSessionParams | undefined) {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  };
 }
