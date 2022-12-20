@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Playlist } from '../../types/components';
+import { Data, Playlist } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
+import 'swiper/css';
 
 export default function FollowedArtists() {
   const [currentPlaylists, setCurrentPlaylists] = useState<Playlist[]>();
@@ -22,7 +22,7 @@ export default function FollowedArtists() {
       token: session?.accessToken as string,
       searchParams: { limit: 50, offset: 0 },
       queryLink: `me/playlists`,
-    }).then((data): void => {
+    }).then((data: Data): void => {
       setCurrentPlaylists(data.items);
     });
   };

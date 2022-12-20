@@ -40,6 +40,11 @@ interface CommonResponseProperties {
   total: Number;
 }
 
+interface test {
+  seeds: any;
+  tracks: any
+}
+
 export interface Data {
   type: 'artists' | 'tracks' | 'albums' | 'genres' | 'playlist' | 'user';
   artists?: CommonResponseProperties & {
@@ -59,9 +64,10 @@ export interface Data {
   categories?: CommonResponseProperties & {
     items: Category[];
   };
-  items?: CombinedAlbum[];
+  items?: CombinedAlbum[] & Playlist[] & Track[];
   item?: Track;
   audio_features?: SongStats;
+  is_playing?: boolean
 }
 
 export interface Artist {

@@ -139,7 +139,7 @@ export default function MockupPage() {
             <span className="pl-4 text-[0.875rem] text-[#9ca3af] search-bar-input"></span>
           </div>
         </div>
-        <div className="grid grid-cols-1 grid-rows-5 max-w-[550px] w-full row-start-2 w-full songs-grid gap-2 px-10 absolute top-[200px] left-0 right-0 mx-auto">
+        <div className="grid grid-cols-1 grid-rows-5 max-w-[550px] row-start-2 w-full songs-grid gap-2 px-10 absolute top-[200px] left-0 right-0 mx-auto">
           <SongCard
             ref={setRefs}
             item={{

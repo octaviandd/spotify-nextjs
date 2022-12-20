@@ -9,7 +9,7 @@ import 'swiper/css';
 
 export default function RecentlyPlayed() {
   const { data: session } = useSession();
-  const [recentlyPlayed, setRecentlyPlayed] = useState<any>();
+  const [recentlyPlayed, setRecentlyPlayed] = useState<Track[]>();
   const [currentLimit, setCurrentLimit] = useState(25);
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
@@ -21,7 +21,7 @@ export default function RecentlyPlayed() {
       searchParams: { limit: currentLimit, offset: 0 },
       queryLink: 'me/player/recently-played',
     }).then((data: Data) => {
-      let currentData = data.items;
+      let currentData : Track[] = data.items as Track[];
       let ids = data?.items?.map((item) => item.track.id).toString();
       getSpotifyData({
         token: session?.accessToken as string,
@@ -29,7 +29,7 @@ export default function RecentlyPlayed() {
         queryLink: 'me/tracks/contains',
       }).then((data) => {
         setRecentlyPlayed(() => {
-          let newState = currentData.map((item: any, index: number) => ({ ...item, liked: data[index] }));
+          let newState = currentData.map((item: Track, index: number) => ({ ...item, liked: data[index] }));
           let chunksArray = [];
           for (let i = 0; i < newState.length; i += 10) {
             const chunk = newState.slice(i, i + 10);
@@ -92,7 +92,7 @@ export default function RecentlyPlayed() {
             recentlyPlayed.map((tracks, index) => (
               <SwiperSlide key={index}>
                 <div className="flex flex-col gap-y-1">
-                  {tracks.map((item, i) => (
+                  {tracks.map((item: any, i: number) => (
                     <div className="border rounded-md px-2 py-1 flex items-center justify-between" key={i}>
                       <div>
                         <div className="mb-1 font-normal"> {item.track.name}</div>

@@ -14,8 +14,8 @@ export default function CurrentlyPlayed() {
       token: session?.accessToken as string,
       searchParams: undefined,
       queryLink: `me/player/currently-playing`,
-    }).then((data): void => {
-      data?.item && setCurrentlyPlaying({ ...data.item, isPlaying: data.is_playing });
+    }).then((data: Data): void => {
+      data?.item && setCurrentlyPlaying({ ...data.item, isPlaying: data.is_playing as boolean });
       data?.item && getRecommendedSongs(data?.item?.id as string);
     });
   };
@@ -27,7 +27,7 @@ export default function CurrentlyPlayed() {
       queryLink: 'recommendations',
     }).then((data: Data): void => {
       if (data.tracks && Object.keys(data.tracks).length > 0) {
-        setCurrentRecommended(data.tracks as SetStateAction<Track[]>);
+        setCurrentRecommended(data.tracks as unknown as Track[]);
       }
     });
   };

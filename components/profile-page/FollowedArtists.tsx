@@ -7,12 +7,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Artist } from '../../types/components';
+import { Artist, Data } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import 'swiper/css/effect-fade';
 
 export default function FollowedArtists() {
-  const [currentArtists, setCurrentArtists] = useState();
+  const [currentArtists, setCurrentArtists] = useState<Artist[]>();
   const { data: session } = useSession();
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
@@ -27,8 +27,8 @@ export default function FollowedArtists() {
       token: session?.accessToken as string,
       searchParams: { type: 'artist', limit: 50, offset: 0 },
       queryLink: `me/following`,
-    }).then((data): void => {
-      data && setCurrentArtists(data.artists.items);
+    }).then((data: Data): void => {
+      data && setCurrentArtists(data?.artists?.items);
     });
   };
 
