@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Category, Data, Playlist } from '../../types/components';
+import { Category, Data } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
@@ -22,13 +22,14 @@ export default function FeaturedCategories() {
   const [currentLimit, setCurrentLimit] = useState(10);
 
    useEffect(() => {
-    session?.accessToken && getCategories()
-  }, [session?.accessToken])
+     session?.accessToken && getCategories();
+     session?.accessToken && getCurrentMarkets();
+  }, [session?.accessToken, currentLimit])
 
   const getCategories = () => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: undefined,
+      searchParams: currentCountry ? {country : currentCountry, limit: currentLimit} : {limit: currentLimit},
       queryLink: 'browse/categories',
     }).then((data: Data): void => {
       setCurrentCategories(data?.categories?.items)
@@ -41,9 +42,7 @@ export default function FeaturedCategories() {
       queryLink: 'markets',
     }).then((data: any): void => {
       let cleanData: {}[] = [];
-      data.markets.map((item: string, index: number) => {
-        cleanData.push({ id: index, value: item, label: item });
-      });
+      data.markets.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
       setCurrentMarkets(cleanData);
     });
   };

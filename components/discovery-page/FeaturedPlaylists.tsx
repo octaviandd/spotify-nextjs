@@ -29,7 +29,7 @@ export default function FeaturedPlaylists() {
   const getFeaturedPlaylists = () => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: currentCountry ? {country : currentCountry} : undefined,
+      searchParams: currentCountry ? {country : currentCountry, limit: currentLimit} : {limit: currentLimit},
       queryLink: 'browse/featured-playlists',
     }).then((data: any): void => {
       setCurrentPlaylists(data.playlists.items)

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Album } from '../../types/components';
+import { Album, Data } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
@@ -24,15 +24,15 @@ export default function FeaturedAlbums() {
    useEffect(() => {
      session?.accessToken && getFeaturedAlbums();
      session?.accessToken && getCurrentMarkets();
-   }, [session])
+   }, [session, currentLimit])
 
   const getFeaturedAlbums = () => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: currentCountry ? {country : currentCountry.label} : undefined,
+      searchParams: currentCountry ? {country : currentCountry.label, limit: currentLimit} : {limit: currentLimit},
       queryLink: 'browse/new-releases',
-    }).then((data: any): void => {
-      setCurrentAlbums(data.albums.items)
+    }).then((data: Data): void => {
+      setCurrentAlbums(data?.albums.items)
     });
   }
 
@@ -53,7 +53,7 @@ export default function FeaturedAlbums() {
   return (
     <div className='flex flex-col w-full mx-auto mt-20'>
       <div className='flex items-center mb-5 justify-between px-20'>
-        <p className='text-xl mb-6'>Featured playlists</p>
+        <p className='text-xl mb-6'>Featured albums</p>
          <div>
           <Select
             options={currentMarkets}
