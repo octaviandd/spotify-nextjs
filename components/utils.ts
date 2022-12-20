@@ -1,5 +1,5 @@
 import { useRef, useLayoutEffect, useEffect } from 'react';
-import { SpotifyRequestParameters, Data, SongStats } from '../types/components';
+import { SpotifyRequestParameters, Data, AggregateValues } from '../types/components';
 
 export const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -41,7 +41,7 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
       },
     });
 
-    if (res.status === 204) return false;
+    if (res.status === 204) return false
     let data: Data = await res.json();
     return data;
   } catch (error) {
@@ -49,31 +49,37 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
   }
 };
 
-export const changeTrack = async({token, type} : {token: string, type: string}) => {
+export const changeTrack = async ({ token, type }: { token: string; type: string }) => {
   try {
-    let res = await fetch('https://api.spotify.com/v1/me/player/' + type, { method: 'post', headers: {
+    let res = await fetch('https://api.spotify.com/v1/me/player/' + type, {
+      method: 'post',
+      headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-      }, });
-    return res.status === 200 ? true : false
+      },
+    });
+    return res.status === 200 ? true : false;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const playPauseTrack = async({token, type} : {token: string, type: string}) => {
+export const playPauseTrack = async ({ token, type }: { token: string; type: string }) => {
   try {
-    let res = await fetch('https://api.spotify.com/v1/me/player/' + type, { method: 'put', headers: {
+    let res = await fetch('https://api.spotify.com/v1/me/player/' + type, {
+      method: 'put',
+      headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-      }, });
-    return res.status === 200 ? true : false
+      },
+    });
+    return res.status === 200 ? true : false;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const tracksReducer = (data: SongStats) => {
+export const tracksReducer = (data: any) => {
   const initialValue = {
     danceability: 0,
     energy: 0,
@@ -84,25 +90,37 @@ export const tracksReducer = (data: SongStats) => {
     valence: 0,
   };
 
-  let aggregates = data.reduce((acc, { danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo }) => {
-    acc.danceability += danceability;
-    acc.energy += energy;
-    acc.speechiness += speechiness;
-    acc.acousticness += acousticness;
-    acc.instrumentalness += instrumentalness;
-    acc.liveness += liveness;
-    acc.valence += valence;
+  let aggregates = data.reduce(
+    (acc: AggregateValues,
+      {
+        danceability,
+        energy,
+        speechiness,
+        acousticness,
+        instrumentalness,
+        liveness,
+        valence,
+      } : AggregateValues
+    ) => {
+      acc.danceability += danceability;
+      acc.energy += energy;
+      acc.speechiness += speechiness;
+      acc.acousticness += acousticness;
+      acc.instrumentalness += instrumentalness;
+      acc.liveness += liveness;
+      acc.valence += valence;
 
-    return acc;
-  }
-    , initialValue)
+      return acc;
+    },
+    initialValue
+  );
 
   for (const key in aggregates) {
     aggregates[key] = aggregates[key] / Object.keys(aggregates).length;
   }
 
   let arrayOfObjects = [];
-  for (const [key, value] of Object.entries(aggregates)){
+  for (const [key, value] of Object.entries(aggregates)) {
     if (
       typeof value === 'number' &&
       !key.includes('_') &&
@@ -116,11 +134,11 @@ export const tracksReducer = (data: SongStats) => {
     }
   }
 
-  return arrayOfObjects
-}
+  return arrayOfObjects;
+};
 
 export const millisToMinutesAndSeconds = (millis: number) => {
   let minutes = Math.floor(millis / 60000);
   let seconds = ((millis % 60000) / 1000).toFixed(0);
-  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-}
+  return minutes + ':' + (Number(seconds) < 10 ? '0' : '') + seconds;
+};

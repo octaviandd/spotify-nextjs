@@ -9,7 +9,6 @@ export default function Page() {
   const { status } = useSession();
 
   useEffect(() => {
-    console.log(status);
     if (status === 'authenticated') {
       window.location.href = '/search';
     }

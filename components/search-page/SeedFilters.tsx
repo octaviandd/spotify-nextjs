@@ -5,10 +5,9 @@ import { getSpotifyData, debounce } from '../utils';
 import { Data, Artist, Track } from '../../types/components';
 import { useDispatch } from 'react-redux';
 import { updateMultiSelect } from '../../store/filtersSlice';
-import {SelectMenuList} from "../global/SelectMenuList"
-import {SelectMenuOption} from "../global/SelectMenuOption"
-import {SelectMultiValueLabel} from "../global/SelectMultiValueLabel"
-
+import { SelectMenuList } from '../global/SelectMenuList';
+import { SelectMenuOption } from '../global/SelectMenuOption';
+import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
 
 export default function SeedFilters({ type, queryLink }: { type: string; queryLink: string }) {
   const { data: session } = useSession();
@@ -73,9 +72,9 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
   };
 
   const customSelectMenuList = (props: any) => {
-    let newProps = {...props, infiniteScroll: true, handleScroll: handleScroll}
-    return <SelectMenuList {...newProps}></SelectMenuList>
-  }
+    let newProps = { ...props, infiniteScroll: true, handleScroll: handleScroll };
+    return <SelectMenuList {...newProps}></SelectMenuList>;
+  };
 
   if (isLoading) {
     return <div>"Loading..."</div>;

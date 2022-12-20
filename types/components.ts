@@ -30,35 +30,44 @@ export interface SpotifyRequestParameters {
   searchParams: paramsInterface | undefined;
   queryLink: string | null;
 }
+interface CommonResponseProperties {
+  href: String;
+  items: any[];
+  limit: Number;
+  next: String;
+  offset: Number;
+  previous: null;
+  total: Number;
+}
+
+interface test {
+  seeds: any;
+  tracks: any
+}
 
 export interface Data {
   type: 'artists' | 'tracks' | 'albums' | 'genres' | 'playlist' | 'user';
-  artists?: {
-    href: String;
+  artists?: CommonResponseProperties & {
     items: Artist[];
-    limit: Number;
-    next: String;
-    offset: Number;
-    previous: null;
-    total: Number;
   };
-  tracks?: {
-    href: String;
+  tracks?: CommonResponseProperties & {
     items: Track[];
-    limit: Number;
-    next: String;
-    offset: Number;
-    previous: null;
-    total: Number;
   };
   seeds?: object;
-  albums?: Album;
+  albums?: CommonResponseProperties & {
+    items: Album[];
+  };
   genres?: string[];
-  playlist?: Playlist;
-  items?: Track[]
-  item?: Track
-  audio_features?: SongStats
-  categories?: Category
+  playlists?: CommonResponseProperties & {
+    items: Playlist[];
+  };
+  categories?: CommonResponseProperties & {
+    items: Category[];
+  };
+  items?: CombinedAlbum[] & Playlist[] & Track[];
+  item?: Track;
+  audio_features?: SongStats;
+  is_playing?: boolean
 }
 
 export interface Artist {
@@ -74,7 +83,18 @@ export interface Artist {
   uri: string;
 }
 
+export interface AggregateValues {
+  danceability: number;
+  energy: number;
+  speechiness: number;
+  acousticness: number;
+  instrumentalness: number;
+  liveness: number;
+  valence: number;
+}
+
 export interface Track {
+  [x: string]: any;
   album: { images: Array<{ url: string }> };
   artists: Artist[];
   available_markets: string[];
@@ -95,17 +115,45 @@ export interface Track {
 }
 
 export interface Album {
-  href: String;
-  items: Track[];
-  limit: Number;
+  album_type: String;
+  artists: Artist[];
+  available_markets: string[];
+  copyrights: {}[];
+  external_ids: {};
+  external_urls: {};
+  genres: [];
+  id: string;
+  href: string;
   images: Array<{ url: string; height: number }>;
-  next: String;
-  offset: Number;
-  previous: null;
+  label: string;
   name: string;
-  total: Number;
+  popularity: number
+  release_date: string
+  release_date_precision: string;
+  tracks: CommonResponseProperties & {
+    items: Track[];
+  };
+  total_tracks: number
+  type: string;
+  uri: string
+}
+export interface FollowedAlbum {
+  added_at: string,
+  album: {
+    href: String;
+    items: Album[];
+    limit: Number;
+    images: Array<{ url: string; height: number }>;
+    next: String;
+    offset: Number;
+    previous: null;
+    name: string;
+    total: Number;
+  }
 }
 
+export interface CombinedAlbum extends Album, FollowedAlbum {
+}
 /**
  * Response variables
  */
@@ -183,8 +231,6 @@ export type User = {
   uri : string
 }
 
-export type DataUnion = Data | SongStats;
-
 export interface AnimateProps {
   children: ReactNode;
   from: object;
@@ -197,5 +243,3 @@ export interface AnimateProps {
   set?: object | undefined | null;
   skipOutro?: boolean;
 }
-
-export type SongStatsExtract = Extract<DataUnion, { type: 'audio_features' }>;

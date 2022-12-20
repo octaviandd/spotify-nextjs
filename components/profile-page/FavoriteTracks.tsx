@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Data, Track } from '../../types/components';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData, tracksReducer } from '../utils';
@@ -8,59 +8,58 @@ import LimitSetter from './LimitSetter';
 export default function FavoriteTracks() {
   const { data: session } = useSession();
   const [currentTracks, setCurrentTracks] = useState<Track[]>();
-  const [currentLimit, setCurrentLimit] = useState(10)
+  const [currentLimit, setCurrentLimit] = useState(10);
   const [currentTracksValues, setCurrentTracksValues] = useState<any>();
 
   const getCurrentTracks = () => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: {limit: currentLimit, offset: 0},
+      searchParams: { limit: currentLimit, offset: 0 },
       queryLink: `me/top/tracks`,
-    }).then((data : Data): void => {
-      data && setCurrentTracks(data.items)
-      let ids = data?.items?.map(item => item.id)
+    }).then((data: Data): void => {
+      data && setCurrentTracks(data.items);
+      let ids = data?.items?.map((item) => item.id);
       getSongsValues(ids as string[]);
     });
-  }
+  };
 
   useEffect(() => {
     session?.accessToken && getCurrentTracks();
-  }, [session, currentLimit])
+  }, [session, currentLimit]);
 
-  const getSongsValues = (ids : string[]) => {
+  const getSongsValues = (ids: string[]) => {
     getSpotifyData({
       token: session?.accessToken as string,
-      searchParams: {ids, offset: 0},
+      searchParams: { ids, offset: 0 },
       queryLink: `audio-features/`,
     }).then((data: Data): void => {
       data.audio_features && setCurrentTracksValues(tracksReducer(data.audio_features));
     });
-  }
+  };
 
   return (
-    <div className='px-20 mt-4'>
-      <div className='flex text-xl'>
-        <p className='mb-6 text-xl'>Favorite Songs</p>
+    <div className="px-20 mt-4">
+      <div className="flex text-xl">
+        <p className="mb-6 text-xl">Favorite Songs</p>
         <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
       </div>
-      <div className='grid-cols-2 grid grid-rows-auto gap-y-1 gap-x-3'>
-        {currentTracks && currentTracks.map((track, index) => (
-          <div className='border rounded-md px-2 py-1 flex items-center justify-between' key={index}>
-            <div>
-              <div className='mb-1 font-normal'>{track.name}</div>
-              <div className='flex items-center'>
-                <div className="w-[20px] h-[20px] mr-2">
-                  <img src={track.album?.images[2].url} className="w-[20px] h-[20px]"/>
-                </div>
-                <div className='text-[#6a6a6a]'>
-                  {track.artists[0].name}
+      <div className="grid-cols-2 grid grid-rows-auto gap-y-1 gap-x-3">
+        {currentTracks &&
+          currentTracks.map((track, index) => (
+            <div className="border rounded-md px-2 py-1 flex items-center justify-between" key={index}>
+              <div>
+                <div className="mb-1 font-normal">{track.name}</div>
+                <div className="flex items-center">
+                  <div className="w-[20px] h-[20px] mr-2">
+                    <img src={track.album?.images[2].url} className="w-[20px] h-[20px]" />
+                  </div>
+                  <div className="text-[#6a6a6a]">{track.artists[0].name}</div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
-      <div className='h-[50vh] w-full mt-5'>
+      <div className="h-[50vh] w-full mt-5">
         {currentTracksValues && (
           <ResponsiveContainer width="100%" height="100%" className="bg-white">
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={currentTracksValues}>
@@ -72,5 +71,5 @@ export default function FavoriteTracks() {
         )}
       </div>
     </div>
-  )
+  );
 }

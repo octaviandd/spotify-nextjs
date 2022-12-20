@@ -1,7 +1,7 @@
 import React, { SetStateAction, useEffect, useState, useCallback } from 'react';
 import { getSpotifyData, debounce } from '../utils';
 import { useSession } from 'next-auth/react';
-import { Data, Track } from "../../types/components";
+import { Data, Track } from '../../types/components';
 import { RootState } from '../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiltersInitialState } from '../../store/filtersSlice';
@@ -49,7 +49,7 @@ export default function SongsContainer() {
       queryLink: search ? 'search' : isDoable ? 'recommendations' : 'playlists/37i9dQZEVXbNG2KDcFcKOF',
     }).then((data: Data): void => {
       if (data.hasOwnProperty('seeds')) {
-        setItems(data.tracks as SetStateAction<Track[]>);
+        setItems(data.tracks as Track[]);
 
         setOffset((offset) => offset + 50);
       } else if (data.type === 'playlist') {
