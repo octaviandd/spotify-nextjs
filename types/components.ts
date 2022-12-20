@@ -53,13 +53,13 @@ export interface Data {
     items: Album[];
   };
   genres?: string[];
-  playlist?: CommonResponseProperties & {
+  playlists?: CommonResponseProperties & {
     items: Playlist[];
   };
   categories?: CommonResponseProperties & {
     items: Category[];
   };
-  items?: Track[];
+  items?: CombinedAlbum[];
   item?: Track;
   audio_features?: SongStats;
 }
@@ -98,17 +98,45 @@ export interface Track {
 }
 
 export interface Album {
-  href: String;
-  items: Track[];
-  limit: Number;
+  album_type: String;
+  artists: Artist[];
+  available_markets: string[];
+  copyrights: {}[];
+  external_ids: {};
+  external_urls: {};
+  genres: [];
+  id: string;
+  href: string;
   images: Array<{ url: string; height: number }>;
-  next: String;
-  offset: Number;
-  previous: null;
+  label: string;
   name: string;
-  total: Number;
+  popularity: number
+  release_date: string
+  release_date_precision: string;
+  tracks: CommonResponseProperties & {
+    items: Track[];
+  };
+  total_tracks: number
+  type: string;
+  uri: string
+}
+export interface FollowedAlbum {
+  added_at: string,
+  album: {
+    href: String;
+    items: Album[];
+    limit: Number;
+    images: Array<{ url: string; height: number }>;
+    next: String;
+    offset: Number;
+    previous: null;
+    name: string;
+    total: Number;
+  }
 }
 
+export interface CombinedAlbum extends Album, FollowedAlbum {
+}
 /**
  * Response variables
  */
@@ -185,6 +213,7 @@ export type User = {
   product : string,
   uri : string
 }
+
 export interface AnimateProps {
   children: ReactNode;
   from: object;

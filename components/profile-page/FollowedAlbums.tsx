@@ -2,28 +2,29 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Album } from '../../types/components';
+import { CombinedAlbum, Data} from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import 'swiper/css';
 
 export default function FollowedAlbums() {
-  const [currentAlbums, setCurrentAlbums] = useState();
+  const [currentAlbums, setCurrentAlbums] = useState<CombinedAlbum[]>();
   const { data: session } = useSession();
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    session?.accessToken && getCurrentlyFollowed();
+    session?.accessToken && getCurrentAlbums();
   }, [session]);
 
-  const getCurrentlyFollowed = () => {
+  const getCurrentAlbums = () => {
     getSpotifyData({
       token: session?.accessToken as string,
       searchParams: { limit: 50, offset: 0 },
       queryLink: `me/albums`,
-    }).then((data): void => {
-      setCurrentAlbums(data.items);
+    }).then((data: Data): void => {
+      console.log(data)
+      setCurrentAlbums(data?.items);
     });
   };
 
@@ -68,7 +69,7 @@ export default function FollowedAlbums() {
           }}
         >
           {currentAlbums &&
-            currentAlbums.map((item: Album, index: number) => (
+            currentAlbums.map((item: CombinedAlbum, index: number) => (
               <SwiperSlide key={index}>
                 <div className="flex flex-col">
                   <img

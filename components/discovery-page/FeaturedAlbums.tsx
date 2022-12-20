@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Album, Data } from '../../types/components';
+import { Album, CombinedAlbum, Data } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
@@ -12,7 +12,7 @@ import LimitSetter from '../profile-page/LimitSetter';
 import 'swiper/css';
 
 export default function FeaturedAlbums() {
-  const [currentAlbums, setCurrentAlbums] = useState<Album[]>();
+  const [currentAlbums, setCurrentAlbums] = useState<CombinedAlbum[]>();
   const { data: session } = useSession();
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
@@ -113,7 +113,7 @@ export default function FeaturedAlbums() {
           }}
         >
           {currentAlbums &&
-            currentAlbums.map((item: Album, index: number) => (
+            currentAlbums.map((item: CombinedAlbum, index: number) => (
               <SwiperSlide key={index}>
                 <div className="flex flex-col">
                   <img

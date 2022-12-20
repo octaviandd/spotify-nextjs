@@ -15,9 +15,8 @@ export default function CurrentlyPlayed() {
       searchParams: undefined,
       queryLink: `me/player/currently-playing`,
     }).then((data): void => {
-      console.log(data);
-      data && setCurrentlyPlaying({ ...data.item, isPlaying: data.is_playing });
-      data && getRecommendedSongs(data?.item?.id as string);
+      data?.item && setCurrentlyPlaying({ ...data.item, isPlaying: data.is_playing });
+      data?.item && getRecommendedSongs(data?.item?.id as string);
     });
   };
 

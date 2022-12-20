@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';
 import { getSpotifyData } from '../../components/utils';
-import { User } from '../../types/components';
+import { Data, User } from '../../types/components';
 
 export default function CurrentProfile() {
   const { data: session } = useSession();
@@ -12,7 +12,7 @@ export default function CurrentProfile() {
       token: session?.accessToken as string,
       searchParams: undefined,
       queryLink: `me`,
-    }).then((data): void => {
+    }).then((data: Data): void => {
       data && setUser(data);
     });
   };

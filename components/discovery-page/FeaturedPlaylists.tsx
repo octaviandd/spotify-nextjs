@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { Playlist } from '../../types/components';
-import { Swiper as SwiperCore } from 'swiper/types';
 import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
 import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
+import { Data, Playlist } from '../../types/components';
 import Select from 'react-select';
-import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperCore } from 'swiper/types';
 import LimitSetter from '../profile-page/LimitSetter';
+import 'swiper/css';
 
 export default function FeaturedPlaylists() {
   const [currentPlaylists, setCurrentPlaylists] = useState<Playlist[]>();
@@ -31,8 +31,8 @@ export default function FeaturedPlaylists() {
       token: session?.accessToken as string,
       searchParams: currentCountry ? { country: currentCountry, limit: currentLimit } : { limit: currentLimit },
       queryLink: 'browse/featured-playlists',
-    }).then((data: any): void => {
-      setCurrentPlaylists(data.playlists.items);
+    }).then((data: Data): void => {
+      setCurrentPlaylists(data?.playlists?.items);
     });
   };
 
