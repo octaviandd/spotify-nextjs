@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Data, Track } from '../../types/components';
-import Select from 'react-select';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import LimitSetter from '../global/LimitSetter';
-import { SelectMenuList } from '../global/SelectMenuList';
-import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
-import { SelectMenuOption } from '../global/SelectMenuOption';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SwiperButtons } from './SwiperButtons';
+import { ReactSelect } from "../global/ReactSelect"
+import LimitSetter from '../global/LimitSetter';
 
 const timeRangeValues = [
   { id: 0, label: 'One month', value: 'short_term' },
@@ -35,7 +32,6 @@ export default function FavoriteTracks() {
   };
 
   useEffect(() => {
-    console.log('hit');
     session?.accessToken && getCurrentArtists();
   }, [session, currentLimit, currentTimeFrame]);
 
@@ -45,29 +41,7 @@ export default function FavoriteTracks() {
         <div className="flex items-center">
           <p className="text-xl">Your top Artists</p>
           <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
-          <Select
-            options={timeRangeValues}
-            onChange={(e) => setCurrentTimeFrame(e.value)}
-            defaultValue={{ id: 0, label: 'One month', value: 'short_term' }}
-            placeholder="Timeline"
-            styles={{
-              container: (base) => ({
-                ...base,
-                backgroundColor: '#eee',
-                border: '1px solid black',
-                borderRadius: '3px',
-                marginLeft: '10px',
-                zIndex: '50',
-                width: '200px',
-                fontSize: '12px',
-              }),
-            }}
-            components={{
-              MenuList: SelectMenuList,
-              MultiValueLabel: SelectMultiValueLabel,
-              Option: SelectMenuOption,
-            }}
-          />
+          <ReactSelect options={timeRangeValues} setValues={setCurrentTimeFrame} defaultValues={{ id: 0, label: 'One month', value: 'short_term' }} placeholder="Timeline"></ReactSelect>
         </div>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
