@@ -41,7 +41,7 @@ export const getSpotifyData = async ({ token, searchParams, queryLink }: Spotify
       },
     });
 
-    if (res.status === 204) return false
+    if (res.status === 204) return false;
     let data: Data = await res.json();
     return data;
   } catch (error) {
@@ -91,16 +91,9 @@ export const tracksReducer = (data: any) => {
   };
 
   let aggregates = data.reduce(
-    (acc: AggregateValues,
-      {
-        danceability,
-        energy,
-        speechiness,
-        acousticness,
-        instrumentalness,
-        liveness,
-        valence,
-      } : AggregateValues
+    (
+      acc: AggregateValues,
+      { danceability, energy, speechiness, acousticness, instrumentalness, liveness, valence }: AggregateValues
     ) => {
       acc.danceability += danceability;
       acc.energy += energy;

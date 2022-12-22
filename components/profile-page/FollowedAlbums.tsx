@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { CombinedAlbum, Data} from '../../types/components';
+import { CombinedAlbum, Data } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import 'swiper/css';
 
