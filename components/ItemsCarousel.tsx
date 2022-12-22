@@ -36,7 +36,13 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
       searchParams: currentCountry ? { country: currentCountry, limit: currentLimit } : { limit: currentLimit },
       queryLink: endpoint,
     }).then((data: Data): void => {
-      setData(data?.playlists?.items);
+      if (title === 'Featured Categories') {
+        setData(data?.categories?.items);
+      } else if (title === 'Featured Albums') {
+         setData(data?.albums?.items);
+      } else {
+        setData(data?.playlists?.items);
+      }
     });
   };
 
@@ -92,7 +98,7 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
               <SwiperSlide key={index}>
                 <div className="flex flex-col">
                   <img
-                    src={item.images[0].url}
+                    src={item.images ? item?.images[0]?.url : item?.icons[0]?.url}
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
                   <span className="font-artists text-xl mt-4 leading-5 text-[#010101] font-medium tracking-[-0.2px]">
