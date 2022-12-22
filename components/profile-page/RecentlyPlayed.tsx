@@ -21,7 +21,7 @@ export default function RecentlyPlayed() {
       searchParams: { limit: currentLimit, offset: 0 },
       queryLink: 'me/player/recently-played',
     }).then((data: Data) => {
-      let currentData : Track[] = data.items as Track[];
+      let currentData: Track[] = data.items as Track[];
       let ids = data?.items?.map((item) => item.track.id).toString();
       getSpotifyData({
         token: session?.accessToken as string,

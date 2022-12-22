@@ -16,9 +16,9 @@ import 'swiper/css';
 const getMarkets = (state: RootState) => state.markets;
 
 type Props = {
-  endpoint: string,
-  title: string
-}
+  endpoint: string;
+  title: string;
+};
 
 export default function ItemsCarousel({ endpoint, title }: Props) {
   const [data, setData] = useState<any[]>();
@@ -39,7 +39,7 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
       if (title === 'Featured Categories') {
         setData(data?.categories?.items);
       } else if (title === 'Featured Albums') {
-         setData(data?.albums?.items);
+        setData(data?.albums?.items);
       } else {
         setData(data?.playlists?.items);
       }
@@ -48,15 +48,15 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
 
   useEffect(() => {
     session?.accessToken && getData();
-  }, [session?.accessToken, currentLimit, currentCountry])
+  }, [session?.accessToken, currentLimit, currentCountry]);
 
   return (
     <div className="flex flex-col w-full mx-auto mt-20">
       <div className="flex items-center mb-5 justify-between px-20">
-       <div className="flex text-xl">
-        <p className="mb-6 text-xl">{title}</p>
-        <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
-      </div>
+        <div className="flex text-xl">
+          <p className="mb-6 text-xl">{title}</p>
+          <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+        </div>
         <div>
           <button
             onClick={() => swiperRef.current?.slidePrev()}
@@ -109,7 +109,7 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
             ))}
         </Swiper>
       </div>
-      <div className='px-20 flex justify-end mt-5'>
+      <div className="px-20 flex justify-end mt-5">
         <Select
           options={markets}
           onChange={(e) => setCurrentCountry(e)}
@@ -121,7 +121,7 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
               border: '1px solid black',
               borderRadius: '3px',
               zIndex: '50',
-              width: "200px"
+              width: '200px',
             }),
           }}
           components={{

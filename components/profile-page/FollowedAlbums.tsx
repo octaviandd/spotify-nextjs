@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
-import { CombinedAlbum, Data} from '../../types/components';
+import { CombinedAlbum, Data } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import 'swiper/css';
 
@@ -34,7 +34,6 @@ export default function FollowedAlbums() {
         <div className="">
           <button
             onClick={() => swiperRef.current?.slidePrev()}
-            ref={prevButtonRef}
             className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
           >
             <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
@@ -46,7 +45,6 @@ export default function FollowedAlbums() {
           </button>
           <button
             onClick={() => swiperRef.current?.slideNext()}
-            ref={nextButtonRef}
             className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
           >
             <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
