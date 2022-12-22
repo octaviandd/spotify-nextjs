@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Select from 'react-select';
+import LimitSetter from '../components/profile-page/LimitSetter';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperCore } from 'swiper/types';
-import LimitSetter from '../components/profile-page/LimitSetter';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from './utils';
 import { Data } from '../types/components';
@@ -17,19 +17,18 @@ const getMarkets = (state: RootState) => state.markets;
 
 type Props = {
   endpoint: string,
+  title: string
 }
 
-export default function ItemsCarousel({ endpoint }: Props) {
+export default function ItemsCarousel({ endpoint, title }: Props) {
   const [data, setData] = useState<any[]>();
+  const { data: session } = useSession();
   const [currentCountry, setCurrentCountry] = useState();
   const [currentLimit, setCurrentLimit] = useState(10);
-  const { data: session } = useSession();
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
-  const markets = useSelector(getMarkets);
-
-  console.log(markets)
+  const markets = useSelector(getMarkets).markets;
 
   const getData = () => {
     getSpotifyData({
@@ -43,35 +42,16 @@ export default function ItemsCarousel({ endpoint }: Props) {
 
   useEffect(() => {
     session?.accessToken && getData();
-  }, [session?.accessToken, currentLimit])
+  }, [session?.accessToken, currentLimit, currentCountry])
 
   return (
     <div className="flex flex-col w-full mx-auto mt-20">
       <div className="flex items-center mb-5 justify-between px-20">
-        <p className="text-xl mb-6">Featured playlists</p>
-        <div>
-          <Select
-            options={markets}
-            onChange={(e) => setCurrentCountry(e)}
-            placeholder={`Select a region`}
-            styles={{
-              container: (base) => ({
-                ...base,
-                backgroundColor: '#eee',
-                border: '1px solid black',
-                borderRadius: '3px',
-                zIndex: '50',
-              }),
-            }}
-            components={{
-              MenuList: SelectMenuList,
-              MultiValueLabel: SelectMultiValueLabel,
-              Option: SelectMenuOption,
-            }}
-          />
-        </div>
+       <div className="flex text-xl">
+        <p className="mb-6 text-xl">{title}</p>
         <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
-        <div className="">
+      </div>
+        <div>
           <button
             onClick={() => swiperRef.current?.slidePrev()}
             ref={prevButtonRef}
@@ -122,6 +102,28 @@ export default function ItemsCarousel({ endpoint }: Props) {
               </SwiperSlide>
             ))}
         </Swiper>
+      </div>
+      <div className='px-20 flex justify-end mt-5'>
+        <Select
+          options={markets}
+          onChange={(e) => setCurrentCountry(e)}
+          placeholder={`Select a region`}
+          styles={{
+            container: (base) => ({
+              ...base,
+              backgroundColor: '#eee',
+              border: '1px solid black',
+              borderRadius: '3px',
+              zIndex: '50',
+              width: "200px"
+            }),
+          }}
+          components={{
+            MenuList: SelectMenuList,
+            MultiValueLabel: SelectMultiValueLabel,
+            Option: SelectMenuOption,
+          }}
+        />
       </div>
     </div>
   );

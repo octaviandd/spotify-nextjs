@@ -38,8 +38,8 @@ export default function Discovery() {
       <FeaturedPlaylists></FeaturedPlaylists>
       <FeaturedAlbums></FeaturedAlbums>
       <FeaturedCategories></FeaturedCategories>
-      <ItemsCarousel endpoint='browse/categories/toplists/playlists'></ItemsCarousel>
-      <ItemsCarousel endpoint='browse/categories/0JQ5DAqbMKFQIL0AXnG5AK/playlists'></ItemsCarousel>
+      <ItemsCarousel endpoint='browse/categories/toplists/playlists' title="Top Playlists"></ItemsCarousel>
+      <ItemsCarousel endpoint='browse/categories/0JQ5DAqbMKFQIL0AXnG5AK/playlists' title="Trending Playlists"></ItemsCarousel>
     </Layout>
   );
 }
