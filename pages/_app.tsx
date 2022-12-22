@@ -1,12 +1,12 @@
 import { SessionProvider } from 'next-auth/react';
-import type { AppProps } from 'next/app';
 import { Provider } from 'react-redux';
+import { TransitionProvider } from '../components/animations/TransitionContext';
+import TransitionLayout from '../components/animations/TransitionLayout';
 import store from '../store';
-import './styles.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { TransitionProvider } from '../components/TransitionContext';
-import TransitionLayout from '../components/TransitionLayout';
+import type { AppProps } from 'next/app';
+import './styles.css';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
