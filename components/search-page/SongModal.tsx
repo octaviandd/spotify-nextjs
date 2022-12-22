@@ -9,12 +9,14 @@ import { Artist } from '../../types/components';
 
 const selectSong = (state: RootState) => state.song.currentSong;
 
-export default function SongModal() {
+export default function SongModal({updateBackground} : {updateBackground : Function}) {
   const song = useSelector(selectSong);
   const [songValues, setSongValues] = useState<any>([]);
   const { data: session } = useSession();
   const modalRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  console.log(song);
 
   useEffect(() => {
     if (song.id) {
@@ -34,10 +36,11 @@ export default function SongModal() {
             key !== 'loudness' &&
             key !== 'tempo'
           ) {
-            values.push({ name: key.charAt(0).toUpperCase() + key.slice(1), A: value, B: 1 });
+            values.push({ name: key.charAt(0).toUpperCase() + key.slice(1) + ` (${(value * 100).toFixed(1)})`, A: value, B: 1 });
           }
         }
         setIsVisible(true);
+        updateBackground(true);
         setSongValues(values);
       });
     }
@@ -66,14 +69,14 @@ export default function SongModal() {
     return (
       <div
         ref={modalRef}
-        className="grid grid-rows-layout fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75vw] h-[75vh] bg-[#006450] rounded-lg drop-shadow-md"
+        className="grid grid-rows-layout fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75vw] h-[75vh] bg-[black] rounded-lg drop-shadow-md"
       >
         <div className="bg-[rgba(0,0,0,.2)] py-6 px-10 text-xl font-semibold text-white flex justify-between">
           <div>
             <span className="mr-2">{song.artists.map((artist: Artist) => artist.name)}</span>-
             <span className="ml-2">{song.name}</span>
           </div>
-          <span className="cursor-pointer" onClick={() => setIsVisible(false)}>
+          <span className="cursor-pointer" onClick={() => { setIsVisible(false); updateBackground(false) }}>
             &times;
           </span>
         </div>
@@ -82,7 +85,7 @@ export default function SongModal() {
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={songValues}>
               <PolarGrid />
               <PolarAngleAxis dataKey="name" />
-              <Radar name="Mike" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+              <Radar dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
             </RadarChart>
           </ResponsiveContainer>
         )}

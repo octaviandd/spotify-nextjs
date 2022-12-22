@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import FlyInOutRight from '../components/animations/FlyInOutRight';
 import FadeInOut from '../components/animations/FadeInOut';
 import SongModal from '../components/search-page/SongModal';
+import { useState } from 'react';
 
 const selectSong = (state: RootState) => state.song.currentSong;
 
@@ -17,14 +18,14 @@ const getMultiSelectValues = (state: RootState) => state.filters.seeds;
 
 export default function Page() {
   const { data: session, status } = useSession();
-  const loading = status === 'loading';
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const song = useSelector(selectSong);
   const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce(
     (accumulator, currentValue) => accumulator + currentValue[1].length,
     0
   );
 
-  if (typeof window !== 'undefined' && loading) return null;
+  if (typeof window !== 'undefined' && status === 'loading') return null;
 
   if (!session) {
     return (
@@ -36,7 +37,7 @@ export default function Page() {
 
   return (
     <Layout>
-      <div className="grid grid-cols-search grid-rows-search pt-10">
+      <div className={isModalOpen ? "grid grid-cols-search grid-rows-search pt-10 opacity-10 pointer-events-none" : 'grid grid-cols-search grid-rows-search pt-10'}>
         <FlyInOutRight>
           <div className="flex flex-col items-center">
             <SearchInput></SearchInput>
@@ -63,7 +64,7 @@ export default function Page() {
           <SongsContainer></SongsContainer>
         </FadeInOut>
       </div>
-      {song.id && window.location.href.includes('search') && <SongModal></SongModal>}
+      {song.id && window.location.href.includes('search') && <SongModal updateBackground={(value : boolean) =>  setIsModalOpen(value)}></SongModal>}
     </Layout>
   );
 }
