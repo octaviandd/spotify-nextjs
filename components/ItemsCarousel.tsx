@@ -1,62 +1,59 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { useSession } from 'next-auth/react';
-import { getSpotifyData } from '../utils';
-import { Category, Data } from '../../types/components';
-import { Swiper as SwiperCore } from 'swiper/types';
-import { SelectMenuList } from '../global/SelectMenuList';
-import { SelectMenuOption } from '../global/SelectMenuOption';
-import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
 import Select from 'react-select';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper as SwiperCore } from 'swiper/types';
+import LimitSetter from '../components/profile-page/LimitSetter';
+import { useSession } from 'next-auth/react';
+import { getSpotifyData } from './utils';
+import { Data } from '../types/components';
+import { useSelector } from 'react-redux';
+import { SelectMenuList } from '../components/global/SelectMenuList';
+import { SelectMenuOption } from '../components/global/SelectMenuOption';
+import { SelectMultiValueLabel } from '../components/global/SelectMultiValueLabel';
+import { RootState } from '../store';
 import 'swiper/css';
-import LimitSetter from '../profile-page/LimitSetter';
 
-export default function FeaturedCategories() {
-  const [currentCategories, setCurrentCategories] = useState<Category[]>();
+const getMarkets = (state: RootState) => state.markets;
+
+type Props = {
+  endpoint: string,
+}
+
+export default function ItemsCarousel({ endpoint }: Props) {
+  const [data, setData] = useState<any[]>();
+  const [currentCountry, setCurrentCountry] = useState();
+  const [currentLimit, setCurrentLimit] = useState(10);
   const { data: session } = useSession();
   const swiperRef = useRef<SwiperCore>();
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
-  const [currentCountry, setCurrentCountry] = useState();
-  const [currentMarkets, setCurrentMarkets] = useState<{}[]>();
-  const [currentLimit, setCurrentLimit] = useState(10);
+  const markets = useSelector(getMarkets);
 
-  useEffect(() => {
-    session?.accessToken && getCategories();
-    session?.accessToken && getCurrentMarkets();
-  }, [session?.accessToken, currentLimit]);
+  console.log(markets)
 
-  const getCategories = () => {
+  const getData = () => {
     getSpotifyData({
       token: session?.accessToken as string,
       searchParams: currentCountry ? { country: currentCountry, limit: currentLimit } : { limit: currentLimit },
-      queryLink: 'browse/categories',
+      queryLink: endpoint,
     }).then((data: Data): void => {
-      setCurrentCategories(data?.categories?.items);
+      setData(data?.playlists?.items);
     });
   };
 
-  const getCurrentMarkets = () => {
-    getSpotifyData({
-      token: session?.accessToken as string,
-      searchParams: undefined,
-      queryLink: 'markets',
-    }).then((data: any): void => {
-      let cleanData: {}[] = [];
-      data.markets.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
-      setCurrentMarkets(cleanData);
-    });
-  };
+  useEffect(() => {
+    session?.accessToken && getData();
+  }, [session?.accessToken, currentLimit])
 
   return (
     <div className="flex flex-col w-full mx-auto mt-20">
       <div className="flex items-center mb-5 justify-between px-20">
-        <p className="text-xl mb-6">Featured categories</p>
+        <p className="text-xl mb-6">Featured playlists</p>
         <div>
           <Select
-            options={currentMarkets}
+            options={markets}
             onChange={(e) => setCurrentCountry(e)}
-            placeholder={`Search for a region...`}
+            placeholder={`Select a region`}
             styles={{
               container: (base) => ({
                 ...base,
@@ -110,12 +107,12 @@ export default function FeaturedCategories() {
             swiperRef.current = swiper;
           }}
         >
-          {currentCategories &&
-            currentCategories.map((item: Category, index: number) => (
+          {data &&
+            data.map((item: any, index: number) => (
               <SwiperSlide key={index}>
                 <div className="flex flex-col">
                   <img
-                    src={item.icons[0].url}
+                    src={item.images[0].url}
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
                   <span className="font-artists text-xl mt-4 leading-5 text-[#010101] font-medium tracking-[-0.2px]">

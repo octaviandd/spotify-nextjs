@@ -23,7 +23,6 @@ export default function FollowedAlbums() {
       searchParams: { limit: 50, offset: 0 },
       queryLink: `me/albums`,
     }).then((data: Data): void => {
-      console.log(data)
       setCurrentAlbums(data?.items);
     });
   };
