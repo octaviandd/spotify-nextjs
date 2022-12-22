@@ -9,6 +9,7 @@ import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
 import { SelectMenuOption } from '../global/SelectMenuOption';
 import { Swiper as SwiperCore } from 'swiper/types';
+import { SwiperButtons } from './SwiperButtons';
 
 const timeRangeValues = [
   { id: 0, label: 'One month', value: 'short_term' },
@@ -22,8 +23,6 @@ export default function FavoriteTracks() {
   const [currentLimit, setCurrentLimit] = useState(10);
   const [currentTimeFrame, setCurrentTimeFrame] = useState('short_term');
   const swiperRef = useRef<SwiperCore>();
-  const prevButtonRef = useRef<HTMLButtonElement>(null);
-  const nextButtonRef = useRef<HTMLButtonElement>(null);
 
   const getCurrentArtists = () => {
     getSpotifyData({
@@ -70,32 +69,7 @@ export default function FavoriteTracks() {
             }}
           />
         </div>
-        <div>
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            ref={prevButtonRef}
-            className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
-              <path
-                d="M32 15H3.41l8.29-8.29-1.41-1.42-10 10a1 1 0 0 0 0 1.41l10 10 1.41-1.41L3.41 17H32z"
-                data-name="4-Arrow Left"
-              />
-            </svg>
-          </button>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            ref={nextButtonRef}
-            className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
-              <path
-                d="m31.71 15.29-10-10-1.42 1.42 8.3 8.29H0v2h28.59l-8.29 8.29 1.41 1.41 10-10a1 1 0 0 0 0-1.41z"
-                data-name="3-Arrow Right"
-              />
-            </svg>
-          </button>
-        </div>
+        <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
       <div className="w-[100vw] flex px-20">
         <Swiper

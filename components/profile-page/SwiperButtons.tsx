@@ -1,16 +1,11 @@
-import React, { forwardRef } from 'react';
+import React, { MutableRefObject } from 'react';
+import { Swiper } from 'swiper/types';
 
-type Props = {
-  swiperRef: any;
-};
-type Ref = HTMLDivElement;
-
-export const SwiperButtons = forwardRef<Ref, Props>((props, ref) => {
+export const SwiperButtons = ({swiperRef} : {swiperRef: MutableRefObject<Swiper | undefined>}) => {
   return (
     <div>
       <button
-        onClick={() => props.swiperRef.current?.slidePrev()}
-        ref={prevButtonRef}
+        onClick={() => swiperRef.current?.slidePrev()}
         className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
       >
         <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
@@ -21,8 +16,7 @@ export const SwiperButtons = forwardRef<Ref, Props>((props, ref) => {
         </svg>
       </button>
       <button
-        onClick={() => props.swiperRef.current?.slideNext()}
-        ref={nextButtonRef}
+        onClick={() => swiperRef.current?.slideNext()}
         className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
       >
         <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
@@ -34,4 +28,4 @@ export const SwiperButtons = forwardRef<Ref, Props>((props, ref) => {
       </button>
     </div>
   );
-});
+};
