@@ -27,6 +27,7 @@ export default function FavoriteTracks() {
       searchParams: { limit: currentLimit, offset: 0, time_range: currentTimeFrame },
       queryLink: `me/top/artists`,
     }).then((data: Data): void => {
+      console.log(data)
       data && setCurrentArtists(data.items);
     });
   };
@@ -62,9 +63,15 @@ export default function FavoriteTracks() {
                     src={item.images ? item?.images[0]?.url : item?.icons[0]?.url}
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
-                  <span className="font-artists text-xl mt-4 leading-5 text-[#010101] font-medium tracking-[-0.2px]">
-                    {item.name}
-                  </span>
+                  <div className='flex justify-between items-center font-artists text-xl mt-4 leading-5 text-[#010101] font-medium tracking-[-0.2px]'>
+                    <span>
+                      {item.name}
+                    </span>
+                    <div>
+                      <span className='text-md'>{item.popularity}</span>
+                      <sup className='ml-1 text-[8px]'>Popularity</sup>
+                    </div>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
