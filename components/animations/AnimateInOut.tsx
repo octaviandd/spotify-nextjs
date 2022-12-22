@@ -1,8 +1,8 @@
 import React, { useRef, useContext } from 'react';
 import { gsap } from 'gsap';
-import { useIsomorphicLayoutEffect } from './utils';
+import { useIsomorphicLayoutEffect } from '../utils';
 import { TransitionContext } from './TransitionContext';
-import { AnimateProps } from '../types/components';
+import { AnimateProps } from '../../types/components';
 
 const AnimateInOut = ({
   children,

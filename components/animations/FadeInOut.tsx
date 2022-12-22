@@ -1,6 +1,6 @@
 import { useRef, useContext, ReactNode } from 'react';
 import { gsap } from 'gsap';
-import { useIsomorphicLayoutEffect } from './utils';
+import { useIsomorphicLayoutEffect } from '../utils';
 import { TransitionContext } from './TransitionContext';
 
 const FadeInOut = ({ children }: { children: ReactNode }) => {

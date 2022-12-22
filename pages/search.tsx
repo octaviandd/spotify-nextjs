@@ -7,8 +7,8 @@ import SearchInput from '../components/search-page/SearchInput';
 import SongsContainer from '../components/search-page/SongsContainer';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
-import FlyInOutRight from '../components/FlyInOutRight';
-import FadeInOut from '../components/FadeInOut';
+import FlyInOutRight from '../components/animations/FlyInOutRight';
+import FadeInOut from '../components/animations/FadeInOut';
 import SongModal from '../components/search-page/SongModal';
 
 const selectSong = (state: RootState) => state.song.currentSong;

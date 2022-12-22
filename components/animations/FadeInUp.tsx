@@ -1,6 +1,6 @@
 import React, { ReactNode, useRef } from 'react';
 import { gsap } from 'gsap';
-import { useIsomorphicLayoutEffect } from './utils';
+import { useIsomorphicLayoutEffect } from '../utils';
 
 const FadeInUp = ({ children }: { children: ReactNode }) => {
   const el = useRef<HTMLDivElement>(null);
