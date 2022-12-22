@@ -3,7 +3,7 @@ import { Data, Track } from '../../types/components';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData, tracksReducer } from '../utils';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
-import LimitSetter from './LimitSetter';
+import LimitSetter from '../global/LimitSetter';
 
 export default function FavoriteTracks() {
   const { data: session } = useSession();

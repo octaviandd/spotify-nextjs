@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Select from 'react-select';
-import LimitSetter from '../components/profile-page/LimitSetter';
+import LimitSetter from './global/LimitSetter';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { useSession } from 'next-auth/react';

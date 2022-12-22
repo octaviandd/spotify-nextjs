@@ -4,7 +4,7 @@ import { Data, Track } from '../../types/components';
 import { getSpotifyData, millisToMinutesAndSeconds } from '../utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperCore } from 'swiper/types';
-import LimitSetter from './LimitSetter';
+import LimitSetter from '../global/LimitSetter';
 import 'swiper/css';
 
 export default function RecentlyPlayed() {
