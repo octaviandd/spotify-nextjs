@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../components/utils';
 import { useDispatch } from 'react-redux';
 import { updateMarkets } from '../store/marketsSlice';
-import ItemsCarousel from '../components/ItemsCarousel';
+import ItemsCarousel from '../components/global/ItemsCarousel';
 
 export default function Discovery() {
   const { data: session } = useSession();

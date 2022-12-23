@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Select from 'react-select';
-import LimitSetter from './global/LimitSetter';
+import LimitSetter from './LimitSetter';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { useSession } from 'next-auth/react';
-import { getSpotifyData } from './utils';
-import { Data } from '../types/components';
+import { getSpotifyData } from '../utils';
+import { Data } from '../../types/components';
 import { useSelector } from 'react-redux';
-import { SelectMenuList } from '../components/global/SelectMenuList';
-import { SelectMenuOption } from '../components/global/SelectMenuOption';
-import { SelectMultiValueLabel } from '../components/global/SelectMultiValueLabel';
-import { RootState } from '../store';
+import { RootState } from '../../store';
+import { SwiperButtons } from './SwiperButtons';
+import { ReactSelect } from "./ReactSelect"
 import 'swiper/css';
 
 const getMarkets = (state: RootState) => state.markets;
@@ -26,8 +24,6 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
   const [currentCountry, setCurrentCountry] = useState();
   const [currentLimit, setCurrentLimit] = useState(10);
   const swiperRef = useRef<SwiperCore>();
-  const prevButtonRef = useRef<HTMLButtonElement>(null);
-  const nextButtonRef = useRef<HTMLButtonElement>(null);
   const markets = useSelector(getMarkets).markets;
 
   const getData = () => {
@@ -57,32 +53,7 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
           <p className="mb-6 text-xl">{title}</p>
           <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
         </div>
-        <div>
-          <button
-            onClick={() => swiperRef.current?.slidePrev()}
-            ref={prevButtonRef}
-            className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
-              <path
-                d="M32 15H3.41l8.29-8.29-1.41-1.42-10 10a1 1 0 0 0 0 1.41l10 10 1.41-1.41L3.41 17H32z"
-                data-name="4-Arrow Left"
-              />
-            </svg>
-          </button>
-          <button
-            onClick={() => swiperRef.current?.slideNext()}
-            ref={nextButtonRef}
-            className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
-              <path
-                d="m31.71 15.29-10-10-1.42 1.42 8.3 8.29H0v2h28.59l-8.29 8.29 1.41 1.41 10-10a1 1 0 0 0 0-1.41z"
-                data-name="3-Arrow Right"
-              />
-            </svg>
-          </button>
-        </div>
+        <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
       <div className="w-[100vw] flex px-20">
         <Swiper
@@ -110,26 +81,7 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
         </Swiper>
       </div>
       <div className="px-20 flex justify-end mt-5">
-        <Select
-          options={markets}
-          onChange={(e) => setCurrentCountry(e)}
-          placeholder={`Select a region`}
-          styles={{
-            container: (base) => ({
-              ...base,
-              backgroundColor: '#eee',
-              border: '1px solid black',
-              borderRadius: '3px',
-              zIndex: '50',
-              width: '200px',
-            }),
-          }}
-          components={{
-            MenuList: SelectMenuList,
-            MultiValueLabel: SelectMultiValueLabel,
-            Option: SelectMenuOption,
-          }}
-        />
+        <ReactSelect options={markets} placeholder="Select a region" setValues={setCurrentCountry} defaultValues={undefined}></ReactSelect>
       </div>
     </div>
   );
