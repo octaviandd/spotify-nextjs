@@ -56,7 +56,6 @@ export default function RecentlyPlayed() {
       <div className="max-w-[900px] h-full">
         <Swiper
           slidesPerView={1}
-          spaceBetween={25}
           width={900}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
@@ -65,16 +64,18 @@ export default function RecentlyPlayed() {
           {recentlyPlayed &&
             recentlyPlayed.map((tracks, index) => (
               <SwiperSlide key={index}>
-                <div className="flex flex-col gap-y-1">
+                <div className="flex flex-col gap-y-1 bg-[#121212] px-3 py-3 rounded-md">
                   {tracks.map((item: any, i: number) => (
-                    <div className="border rounded-md px-2 py-1 flex items-center justify-between" key={i}>
+                    <div className="rounded-md px-2 py-1 flex items-center justify-between " key={i}>
                       <div>
-                        <div className="mb-1 font-normal"> {item.track.name}</div>
                         <div className="flex items-center">
-                          <div className="w-[20px] h-[20px] mr-2">
-                            <img src={item.track.album?.images[2].url} className="w-[20px] h-[20px]" />
+                          <div className="w-[40px] h-[40px] mr-2">
+                            <img src={item.track.album?.images[2].url} className="w-[40px] h-[40px]" />
                           </div>
-                          <div className="text-[#6a6a6a]">{item.track.artists[0].name}</div>
+                          <div className='flex flex-col px-2 pt-[0.3px] pb-[0.3px]'>
+                            <div className="mb-1 font-normal text-white">{item.track.name}</div>
+                            <div className="text-[#6a6a6a]">{item.track.artists[0].name}</div>
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center">

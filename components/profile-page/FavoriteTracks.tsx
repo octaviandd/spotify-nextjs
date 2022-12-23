@@ -43,17 +43,19 @@ export default function FavoriteTracks() {
         <p className="mb-6 text-xl">Favorite Songs</p>
         <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
       </div>
-      <div className="grid-cols-2 grid grid-rows-auto gap-y-1 gap-x-3">
+      <div className="grid-cols-2 grid grid-rows-auto gap-y-1 gap-x-3 px-3 py-3 rounded-md bg-[#121212]">
         {currentTracks &&
           currentTracks.map((track, index) => (
-            <div className="border rounded-md px-2 py-1 flex items-center justify-between" key={index}>
+            <div className="px-2 py-1 flex items-center justify-between" key={index}>
               <div>
-                <div className="mb-1 font-normal">{track.name}</div>
                 <div className="flex items-center">
-                  <div className="w-[20px] h-[20px] mr-2">
-                    <img src={track.album?.images[2].url} className="w-[20px] h-[20px]" />
+                  <div className="w-[40px] h-[40px] mr-2">
+                    <img src={track.album?.images[2].url} className="w-[40px] h-[40px]" />
                   </div>
-                  <div className="text-[#6a6a6a]">{track.artists[0].name}</div>
+                  <div className='flex flex-col px-2 pt-[0.3px] pb-[0.3px]'>
+                    <div className="mb-1 font-normal text-white">{track.name}</div>
+                    <div className="text-[#6a6a6a]">{track.artists[0].name}</div>
+                  </div>
                 </div>
               </div>
             </div>

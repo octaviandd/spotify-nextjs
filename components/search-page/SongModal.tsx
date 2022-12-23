@@ -1,12 +1,13 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { getSpotifyData } from '../utils';
 import { gsap } from 'gsap';
 import { Artist, Data, Track } from '../../types/components';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { updateCurrentSong } from '../../store/songSlice';
 import 'swiper/css';
 
 const selectSong = (state: RootState) => state.song.currentSong;
@@ -16,12 +17,11 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
   const [songValues, setSongValues] = useState<any>([]);
   const { data: session } = useSession();
   const modalRef = useRef(null);
+  const dispatch = useDispatch();
   const [isVisible, setIsVisible] = useState(false);
   const [currentArtist, setCurrentArtist] = useState<Artist>();
   const [currentArtistTopTracks, setCurrentArtistsTopTracks] = useState<Track[]>()
   const [similarArtists, setSimilarArtists] = useState<Artist[]>()
-
-  console.log(song)
 
   useEffect(() => {
     if (song.id) {
@@ -115,7 +115,7 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
             <span className="mr-2">{song.artists.map((artist: Artist) => artist.name)}</span>-
             <span className="ml-2">{song.name}</span>
           </div>
-          <span className="cursor-pointer" onClick={() => { setIsVisible(false); updateBackground(false) }}>
+          <span className="cursor-pointer" onClick={() => { setIsVisible(false); updateBackground(false); dispatch(updateCurrentSong({}))}}>
             &times;
           </span>
         </div>

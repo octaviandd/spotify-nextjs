@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { Track } from '../components/search-page/types';
+import { Track } from '../types/components';
 
 const initialState: SongInitialState = {
   currentSong: {

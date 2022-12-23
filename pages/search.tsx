@@ -64,7 +64,7 @@ export default function Page() {
           <SongsContainer></SongsContainer>
         </FadeInOut>
       </div>
-      {song.id && window.location.href.includes('search') && <SongModal updateBackground={(value : boolean) =>  setIsModalOpen(value)}></SongModal>}
+      {song?.id && window.location.href.includes('search') && <SongModal updateBackground={(value : boolean) =>  setIsModalOpen(value)}></SongModal>}
     </Layout>
   );
 }
