@@ -27,7 +27,7 @@ export default function Navbar() {
                     NEW FEATURE
                   </span>
                   <div className="border-2 rounded-md border-[#00CA4E] px-4 py-2 hover:text-[#00CA4E]">
-                    <Link href="/search" className="border px-3">
+                    <Link href="/search" className="border-2 rounded-md border-[#00CA4E] px-4 py-2 hover:text-[#00CA4E]">
                       Search
                     </Link>
                   </div>

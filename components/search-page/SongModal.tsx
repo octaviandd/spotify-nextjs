@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { getSpotifyData } from '../utils';
 import { gsap } from 'gsap';
-import { Artist } from '../../types/components';
+import { Artist, Data, Track } from '../../types/components';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Swiper as SwiperCore } from 'swiper/types';
 import 'swiper/css';
 
 const selectSong = (state: RootState) => state.song.currentSong;
@@ -18,9 +17,9 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
   const { data: session } = useSession();
   const modalRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [currentArtist, setCurrentArtist] = useState();
-  const [currentArtistTopTracks, setCurrentArtistsTopTracks] = useState()
-  const [similarArtists, setSimilarArtists] = useState()
+  const [currentArtist, setCurrentArtist] = useState<Artist>();
+  const [currentArtistTopTracks, setCurrentArtistsTopTracks] = useState<Track[]>()
+  const [similarArtists, setSimilarArtists] = useState<Artist[]>()
 
   console.log(song)
 
@@ -73,7 +72,7 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
       token: session?.accessToken as string,
       searchParams: undefined,
       queryLink: `artists/${id}`,
-    }).then((data: object): void => {
+    }).then((data: Data): void => {
       setCurrentArtist(data)
     })
   }
@@ -83,7 +82,7 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
       token: session?.accessToken as string,
       searchParams: {country: 'US'},
       queryLink: `artists/${id}/top-tracks`,
-    }).then((data: object): void => {
+    }).then((data: Data): void => {
       console.log(data)
       setCurrentArtistsTopTracks(data.tracks)
     })
@@ -94,7 +93,7 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
       token: session?.accessToken as string,
       searchParams: {country: 'US'},
       queryLink: `artists/${id}/related-artists`,
-    }).then((data: object): void => {
+    }).then((data: Data): void => {
       setSimilarArtists(data.artists)
     })
   }
@@ -130,10 +129,7 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
                   <div className='flex flex-col'>
                     <span className='bottom-[20px] right-[5px] font-semibold text-white text-sm flex items-center'><span className='mr-1'>{currentArtist.followers.total}</span><Image src="/followers.png"  width={24} height={24}/></span>
                     <span className='bottom-[40px] right-[5px] font-semibold text-white text-sm flex items-center'>{currentArtist.popularity} / 100
-                      <svg width="24px" height="24px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" className='ml-2'>
-                        <polyline points="352 144 464 144 464 256" fill="none" stroke="#00CA4E" strokeLinecap='round' strokeLinejoin='round' strokeWidth="32px" />
-                        <path d="M48,368,169.37,246.63a32,32,0,0,1,45.26,0l50.74,50.74a32,32,0,0,0,45.26,0L448,160" fill="none" stroke="#00CA4E" strokeLinecap='round' strokeLinejoin='round' strokeWidth="32px" />
-                      </svg>
+                      <Image src="/trending.svg" width={24} height={24} />
                     </span>
                   </div>
                 </div>
