@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperCore } from 'swiper/types';
-import { SwiperButtons } from './SwiperButtons';
+import { SwiperButtons } from '../global/SwiperButtons';
 import { ReactSelect } from "../global/ReactSelect"
 import LimitSetter from '../global/LimitSetter';
 

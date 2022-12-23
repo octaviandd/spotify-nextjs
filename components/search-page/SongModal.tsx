@@ -38,7 +38,7 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
             !key.includes('_') &&
             key !== 'mode'
           ) {
-            values.push({ name: key.charAt(0).toUpperCase() + key.slice(1), A: value, B: 1 });
+            values.push({ name: key.charAt(0).toUpperCase() + key.slice(1), A: value.toFixed(2) });
           }
         }
         setIsVisible(true);

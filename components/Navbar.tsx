@@ -12,11 +12,11 @@ export default function Navbar() {
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-col items-center"></div>
             <div className="flex justify-between gap-1 w-12 h-10 ml-4">
-              <div className="bg-green-400 rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
-              <div className="bg-green-400 rounded-md scale-y-50 h-100 w-4 animate-bounce-slow"></div>
-              <div className="bg-green-400 rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
-              <div className="bg-green-400 rounded-md scale-y-50 h-100 w-4 animate-bounce-loud"></div>
-              <div className="bg-green-400 rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
+              <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
+              <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-slow"></div>
+              <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
+              <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-loud"></div>
+              <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
             </div>
           </div>
           <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
