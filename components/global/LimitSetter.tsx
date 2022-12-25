@@ -13,8 +13,8 @@ export default function LimitSetter({ currentLimit, setCurrentLimit }: Props) {
           onClick={() => setCurrentLimit(10)}
           className={
             currentLimit == 10
-              ? 'bg-black text-white border px-3 py-2 rounded-md cursor-pointer'
-              : 'border px-3 py-2 rounded-md cursor-pointer'
+              ? ' text-black px-3 bg-[#f6f4f4] py-2 rounded-lg cursor-pointer transition-all ease-in-out duration-500'
+              : ' text-white px-3 py-2 hover:bg-[#cdcbcb18] rounded-md cursor-pointer'
           }
         >
           10
@@ -25,8 +25,8 @@ export default function LimitSetter({ currentLimit, setCurrentLimit }: Props) {
           onClick={() => setCurrentLimit(25)}
           className={
             currentLimit == 25
-              ? 'bg-black text-white border px-3 py-2 rounded-md cursor-pointer'
-              : 'border px-3 py-2 rounded-md cursor-pointer'
+              ? ' text-black px-3  bg-[#f6f4f4] py-2 rounded-lg cursor-pointer transition-all ease-in-out duration-500'
+              : 'text-white px-3 hover:bg-[#cdcbcb18] py-2 rounded-xl cursor-pointer'
           }
         >
           25
@@ -37,8 +37,8 @@ export default function LimitSetter({ currentLimit, setCurrentLimit }: Props) {
           onClick={() => setCurrentLimit(50)}
           className={
             currentLimit == 50
-              ? 'bg-black text-white border px-3 py-2 rounded-md cursor-pointer'
-              : 'border px-3 py-2 rounded-md cursor-pointer'
+              ? ' text-black bg-[#f6f4f4] px-3 py-2 rounded-lg cursor-pointer transition-all ease-in-out duration-500'
+              : 'text-white px-3 py-2 hover:bg-[#cdcbcb18] rounded-xl cursor-pointer'
           }
         >
           50

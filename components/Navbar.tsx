@@ -6,7 +6,7 @@ export default function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="bg-white w-full pt-4 drop-shadow-md">
+    <nav className="bg-[#16181c] w-full py-4 drop-shadow-md font-artists">
       <div className="px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -19,26 +19,20 @@ export default function Navbar() {
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
             </div>
           </div>
-          <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="flex items-center pr-2 mx-auto sm:pr-0">
             {session?.user && (
-              <div className="flex items-center">
-                <div className="pr-5 font-bold  flex items-start">
-                  <span className="bg-[#00CA4E] text-[8px] text-black rounded-sm font-semibold px-2 py-1 mr-2">
-                    NEW FEATURE
-                  </span>
-                  <div className="border-2 rounded-md border-[#00CA4E] px-4 py-2 hover:text-[#00CA4E]">
-                    <Link href="/search" className="border-2 rounded-md border-[#00CA4E] px-4 py-2 hover:text-[#00CA4E]">
-                      Search
-                    </Link>
-                  </div>
+              <div className="flex items-center tracking-wid text-xl">
+                <div className="px-5 font-semibold text-white hover:bg-[#cdcbcb18] py-2 rounded-xl transition-all ease-in-out duration-250">
+                  <Link href="/search" className="border-2 rounded-md">
+                    Search
+                  </Link>
                 </div>
-                <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
                   <Link href="/discovery">Discovery</Link>
                 </div>
-                <div className="pr-5 font-bold hover:text-[#00CA4E]">
+                <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
                   <Link href="/profile">Profile</Link>
                 </div>
-                <div className="pr-5 font-semibold h-[20px] w-[1px]">|</div>
               </div>
             )}
             <div className="ml-3 relative">
@@ -72,13 +66,13 @@ export default function Navbar() {
                 </a>
               ) : (
                 <div className="flex items-center">
-                  <img
+                  {/* <img
                     src={session.user.image as string | undefined}
                     width="50"
                     height="50"
                     className="rounded-full object-top object-cover w-[50px] h-[50px] mr-6"
-                  />
-                  <div className="flex px-4 py-3 cursor-pointer rounded-md whitespace-nowrap hover:bg-[#00CA4E] transition duration-500 ease-in-out group mr-2">
+                  /> */}
+                  {/* <div className="flex px-4 py-3 cursor-pointer rounded-md whitespace-nowrap hover:bg-[#00CA4E] transition duration-500 ease-in-out group mr-2">
                     <span
                       className="flex items-center"
                       onClick={() => signOut({ callbackUrl: `${window.location.origin}` })}
@@ -99,7 +93,7 @@ export default function Navbar() {
                         />
                       </svg>
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               )}
             </div>

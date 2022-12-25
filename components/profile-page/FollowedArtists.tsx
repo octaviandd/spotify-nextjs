@@ -29,7 +29,7 @@ export default function FollowedArtists() {
   return (
     <div className="flex flex-col w-full mx-auto mt-5">
       <div className="flex justify-between items-center mb-5 px-20">
-        <p className="text-xl mb-6">Followed artists</p>
+        <p className="text-2xl mb-6 text-white">Followed artists</p>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
       <div className="w-[100vw] flex relative px-20">
@@ -44,14 +44,20 @@ export default function FollowedArtists() {
           {currentArtists &&
             currentArtists.map((artist: Artist, index: number) => (
               <SwiperSlide key={index}>
-                <div className="flex flex-col">
+                <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
                   <img
-                    src={artist.images[1].url}
+                    src={artist?.images[0]?.url}
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
-                  <span className="font-artists text-xl mt-4 leading-5 text-[#010101] font-medium tracking-[-0.2px]">
-                    {artist.name}
-                  </span>
+                  <div className="flex justify-between font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]">
+                    <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
+                      {index + 1}. {artist.name}
+                    </span>
+                    <div>
+                      <span className="text-md">{artist.popularity}</span>
+                      <sup className="ml-1 text-[8px]">Popularity</sup>
+                    </div>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}

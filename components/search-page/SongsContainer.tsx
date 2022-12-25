@@ -103,15 +103,25 @@ export default function SongsContainer() {
                 />
                 <div
                   onClick={() => setSong(item)}
-                  className="hidden z-10 absolute cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:block transition ease-in-out delay-150"
+                  className="hidden z-10 absolute cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:block transition-all ease-in-out duration-500"
                 >
-                  <Image src="/Spotify_Icon_RGB_Black.png" width="52" height="52" />
+                  {/* <button className='bg-[#00CA4E] rounded-full p-3 transition-all ease-in-out duration-500'>
+                    <span>
+                      <span aria-hidden="true">
+                        <svg role="img" height="30" width="30" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon">
+                          <path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z">
+                          </path>
+                        </svg>
+                      </span>
+                    </span>
+                  </button> */}
+                  <Image src="/Spotify_Icon_RGB_Green.png" width="52" height="52" />
                 </div>
               </a>
             </div>
             <div className="flex flex-col flex-start pt-2">
-              <span className="">{item.name}</span>
-              <span className="text-gray-500">{item.artists[0].name}</span>
+              <span className="text-white">{item.name}</span>
+              <span className="text-[#6a6a6a]">{item.artists[0].name}</span>
             </div>
           </div>
         ))}

@@ -5,7 +5,7 @@ import { getSpotifyData } from '../utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SwiperButtons } from '../global/SwiperButtons';
-import { ReactSelect } from "../global/ReactSelect"
+import { ReactSelect } from '../global/ReactSelect';
 import LimitSetter from '../global/LimitSetter';
 
 const timeRangeValues = [
@@ -27,7 +27,6 @@ export default function FavoriteTracks() {
       searchParams: { limit: currentLimit, offset: 0, time_range: currentTimeFrame },
       queryLink: `me/top/artists`,
     }).then((data: Data): void => {
-      console.log(data)
       data && setCurrentArtists(data.items);
     });
   };
@@ -37,12 +36,17 @@ export default function FavoriteTracks() {
   }, [session, currentLimit, currentTimeFrame]);
 
   return (
-    <div className="mt-4">
+    <div className="my-10">
       <div className="flex text-xl items-center mb-6 justify-between px-20">
         <div className="flex items-center">
-          <p className="text-xl">Your top Artists</p>
+          <p className="text-2xl text-white">Your top Artists</p>
           <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
-          <ReactSelect options={timeRangeValues} setValues={setCurrentTimeFrame} defaultValues={{ id: 0, label: 'One month', value: 'short_term' }} placeholder="Timeline"></ReactSelect>
+          <ReactSelect
+            options={timeRangeValues}
+            setValues={setCurrentTimeFrame}
+            defaultValues={{ id: 0, label: 'One month', value: 'short_term' }}
+            placeholder="Timeline"
+          ></ReactSelect>
         </div>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
@@ -58,18 +62,18 @@ export default function FavoriteTracks() {
           {currentArtists &&
             currentArtists.map((item: any, index: number) => (
               <SwiperSlide key={index}>
-                <div className="flex flex-col">
+                <div className="flex flex-col bg-[#181818] px-3 pb-4 pt-2 rounded-lg">
                   <img
-                    src={item.images ? item?.images[0]?.url : item?.icons[0]?.url}
+                    src={item?.images[0]?.url}
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
-                  <div className='flex justify-between items-center font-artists text-xl mt-4 leading-5 text-[#010101] font-medium tracking-[-0.2px]'>
-                    <span>
-                      {item.name}
+                  <div className="flex justify-between items-center font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]">
+                    <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
+                      {index + 1}. {item.name}
                     </span>
                     <div>
-                      <span className='text-md'>{item.popularity}</span>
-                      <sup className='ml-1 text-[8px]'>Popularity</sup>
+                      <span className="text-md">{item.popularity}</span>
+                      <sup className="ml-1 text-[8px]">Popularity</sup>
                     </div>
                   </div>
                 </div>

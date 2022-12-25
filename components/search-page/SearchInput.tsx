@@ -16,7 +16,7 @@ export default function SearchInput() {
 
   return (
     <div className="w-3/4">
-      <div className="bg-white dark:bg-slate-900 relative pointer-events-auto h-[40px] my-5">
+      <div className=" dark:bg-slate-900 relative pointer-events-auto h-[40px] my-5">
         <input
           type="text"
           onChange={(e) => handleChange(e.target.value)}

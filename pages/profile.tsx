@@ -33,11 +33,11 @@ export default function Profile() {
           </div>
           <RecentlyPlayed></RecentlyPlayed>
         </div>
+        <FavoriteArtists></FavoriteArtists>
+        <FavoriteTracks></FavoriteTracks>
         <FollowedArtists></FollowedArtists>
         <FollowedPlaylists></FollowedPlaylists>
         <FollowedAlbums></FollowedAlbums>
-        <FavoriteTracks></FavoriteTracks>
-        <FavoriteArtists></FavoriteArtists>
       </div>
     </Layout>
   );

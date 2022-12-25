@@ -31,14 +31,8 @@ export default function CurrentProfile() {
       />
       {user && (
         <div className="flex flex-col w-full mt-5 gap-y-3">
-          <div className="border rounded-md px-2 py-1 flex items-center justify-between w-full">
-            Username: <span>{user.display_name}</span>
-          </div>
-          <div className="border rounded-md px-2 py-1 flex items-center justify-between w-full">
-            Email: <span>{user.email}</span>
-          </div>
-          <div className="border rounded-md px-2 py-1 flex items-center justify-between w-full">
-            Followers: <span>{user.followers.total} </span>
+          <div className="rounded-md px-2 py-1 w-full text-center font-semibold text-3xl text-white">
+            <span>{user.display_name}</span>
           </div>
         </div>
       )}

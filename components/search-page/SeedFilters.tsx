@@ -93,7 +93,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
             ...base,
             backgroundColor: '#eee',
             border: '1px solid black',
-            borderRadius: '3px',
+            borderRadius: '15px',
           }),
         }}
         components={{

@@ -1,19 +1,19 @@
-import React from 'react'
+import React from 'react';
 import Select from 'react-select';
 import { SelectMenuList } from './SelectMenuList';
 import { SelectMenuOption } from './SelectMenuOption';
 import { SelectMultiValueLabel } from './SelectMultiValueLabel';
 
 type Props = {
-  options: object[],
-  setValues: Function,
-  defaultValues: any | undefined,
-  placeholder: string
-}
+  options: object[];
+  setValues: Function;
+  defaultValues: any | undefined;
+  placeholder: string;
+};
 
 export const ReactSelect = ({ options, setValues, defaultValues, placeholder }: Props) => {
   return (
-   <Select
+    <Select
       options={options}
       onChange={(e) => setValues(e.value)}
       defaultValue={defaultValues && { id: 0, label: 'One month', value: 'short_term' }}
@@ -36,5 +36,5 @@ export const ReactSelect = ({ options, setValues, defaultValues, placeholder }: 
         Option: SelectMenuOption,
       }}
     />
-  )
-}
+  );
+};

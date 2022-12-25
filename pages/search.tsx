@@ -37,7 +37,7 @@ export default function Page() {
 
   return (
     <Layout>
-      <div className={isModalOpen ? "grid grid-cols-search grid-rows-search pt-10 opacity-10 pointer-events-none" : 'grid grid-cols-search grid-rows-search pt-10'}>
+      <div className={isModalOpen ? "bg-[#121212] grid grid-cols-search grid-rows-search pt-10 opacity-50 pointer-events-none" : 'bg-[#121212] grid grid-cols-search grid-rows-search pt-10'}>
         <FlyInOutRight>
           <div className="flex flex-col items-center">
             <SearchInput></SearchInput>
