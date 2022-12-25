@@ -177,7 +177,7 @@ export default function SongModal({ updateBackground }: { updateBackground: Func
                               src={item.album.images[0].url}
                               className="h-[100px] w-[100px] object-cover object-center cursor-grab rounded-lg"
                             />
-                            <span className="font-artists text-sm mt-4 text-[#010101] font-semibold tracking-[-0.2px]">
+                            <span className="font-artists text-sm mt-4 text-[#010101] font-semibold tracking-[-0.2px] text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px]">
                               {item.name}
                             </span>
                           </div>
@@ -198,7 +198,7 @@ export default function SongModal({ updateBackground }: { updateBackground: Func
                               src={item.images[0].url}
                               className="h-[100px] w-[100px] object-cover object-center cursor-grab rounded-lg"
                             />
-                            <span className="font-artists text-sm mt-4 text-[#010101] font-semibold tracking-[-0.2px]">
+                            <span className="font-artists text-sm mt-4 text-[#010101] font-semibold tracking-[-0.2px] text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px]">
                               {item.name}
                             </span>
                           </div>
