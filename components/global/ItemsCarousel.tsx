@@ -8,7 +8,7 @@ import { Data } from '../../types/components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { SwiperButtons } from './SwiperButtons';
-import { ReactSelect } from "./ReactSelect"
+import { ReactSelect } from './ReactSelect';
 import 'swiper/css';
 
 const getMarkets = (state: RootState) => state.markets;
@@ -81,7 +81,12 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
         </Swiper>
       </div>
       <div className="px-20 flex justify-end mt-5">
-        <ReactSelect options={markets} placeholder="Select a region" setValues={setCurrentCountry} defaultValues={undefined}></ReactSelect>
+        <ReactSelect
+          options={markets}
+          placeholder="Select a region"
+          setValues={setCurrentCountry}
+          defaultValues={undefined}
+        ></ReactSelect>
       </div>
     </div>
   );

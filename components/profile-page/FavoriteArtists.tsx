@@ -5,7 +5,7 @@ import { getSpotifyData } from '../utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SwiperButtons } from '../global/SwiperButtons';
-import { ReactSelect } from "../global/ReactSelect"
+import { ReactSelect } from '../global/ReactSelect';
 import LimitSetter from '../global/LimitSetter';
 
 const timeRangeValues = [
@@ -41,7 +41,12 @@ export default function FavoriteTracks() {
         <div className="flex items-center">
           <p className="text-2xl text-white">Your top Artists</p>
           <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
-          <ReactSelect options={timeRangeValues} setValues={setCurrentTimeFrame} defaultValues={{ id: 0, label: 'One month', value: 'short_term' }} placeholder="Timeline"></ReactSelect>
+          <ReactSelect
+            options={timeRangeValues}
+            setValues={setCurrentTimeFrame}
+            defaultValues={{ id: 0, label: 'One month', value: 'short_term' }}
+            placeholder="Timeline"
+          ></ReactSelect>
         </div>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
@@ -62,13 +67,13 @@ export default function FavoriteTracks() {
                     src={item?.images[0]?.url}
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
-                  <div className='flex justify-between items-center font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]'>
-                    <span className='text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]'>
+                  <div className="flex justify-between items-center font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]">
+                    <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
                       {index + 1}. {item.name}
                     </span>
                     <div>
-                      <span className='text-md'>{item.popularity}</span>
-                      <sup className='ml-1 text-[8px]'>Popularity</sup>
+                      <span className="text-md">{item.popularity}</span>
+                      <sup className="ml-1 text-[8px]">Popularity</sup>
                     </div>
                   </div>
                 </div>

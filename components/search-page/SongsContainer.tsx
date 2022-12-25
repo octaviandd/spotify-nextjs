@@ -105,7 +105,7 @@ export default function SongsContainer() {
                   onClick={() => setSong(item)}
                   className="hidden z-10 absolute cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:block transition-all ease-in-out duration-500"
                 >
-                  <button className='bg-[#00CA4E] rounded-full p-3 transition-all ease-in-out duration-500'>
+                  {/* <button className='bg-[#00CA4E] rounded-full p-3 transition-all ease-in-out duration-500'>
                     <span>
                       <span aria-hidden="true">
                         <svg role="img" height="30" width="30" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon">
@@ -114,8 +114,8 @@ export default function SongsContainer() {
                         </svg>
                       </span>
                     </span>
-                  </button>
-                  {/* <Image src="/Spotify_Icon_RGB_Green.png" width="52" height="52" /> */}
+                  </button> */}
+                  <Image src="/Spotify_Icon_RGB_Green.png" width="52" height="52" />
                 </div>
               </a>
             </div>

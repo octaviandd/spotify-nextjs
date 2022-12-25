@@ -49,13 +49,13 @@ export default function FollowedAlbums() {
                     src={item.album.images[0].url}
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
-                  <div className='flex justify-between items-center font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]'>
-                    <span className='text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]'>
-                      { index + 1}. {item.album.name}
+                  <div className="flex justify-between items-center font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]">
+                    <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
+                      {index + 1}. {item.album.name}
                     </span>
                     <div>
-                      <span className='text-md'>{item.album.popularity}</span>
-                      <sup className='ml-1 text-[8px]'>Popularity</sup>
+                      <span className="text-md">{item.album.popularity}</span>
+                      <sup className="ml-1 text-[8px]">Popularity</sup>
                     </div>
                   </div>
                 </div>

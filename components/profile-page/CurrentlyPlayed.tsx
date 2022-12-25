@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import React, { useState, useEffect, useRef, SetStateAction } from 'react';
 import { getSpotifyData, changeTrack, playPauseTrack } from '../../components/utils';
 import { Data, Track } from '../../types/components';
-import Image from "next/image"
+import Image from 'next/image';
 
 export default function CurrentlyPlayed() {
   const { data: session } = useSession();
@@ -66,7 +66,7 @@ export default function CurrentlyPlayed() {
               <img src={currentlyPlaying.album?.images[2].url} className="rounded-md w-[42px] h-[42px]" />
             </div>
             <div>
-              <div className='text-ellipsis overflow-hidden whitespace-nowrap max-w-[225px]'>
+              <div className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[225px]">
                 <span className="text-white mb-1">{currentlyPlaying.name}</span>
               </div>
               <div>
@@ -90,12 +90,8 @@ export default function CurrentlyPlayed() {
               <Image src="/skip-previous.svg" width={40} height={40} onClick={skipToPreviousTrack} />
             </div>
             <div className="mx-5 cursor-pointer">
-              {!currentlyPlaying.isPlaying && (
-                <Image src="/play.svg" width={40} height={40} onClick={resumeTrack} />
-              )}
-              {currentlyPlaying.isPlaying && (
-                <Image src="/pause.svg" width={40} height={40} onClick={pauseTrack} />
-              )}
+              {!currentlyPlaying.isPlaying && <Image src="/play.svg" width={40} height={40} onClick={resumeTrack} />}
+              {currentlyPlaying.isPlaying && <Image src="/pause.svg" width={40} height={40} onClick={pauseTrack} />}
             </div>
             <div className="cursor-pointer">
               <Image src="/skip-next.svg" width={40} height={40} onClick={skipToNextTrack} />
@@ -103,22 +99,24 @@ export default function CurrentlyPlayed() {
           </div>
         </div>
       )}
-      <div className='h-[0.5px] w-full bg-white my-5'></div>
+      <div className="h-[0.5px] w-full bg-white my-5"></div>
       {currentRecommended && (
-        <div className='px-3 py-3 rounded-br-md rounded-bl-md'>
+        <div className="px-3 py-3 rounded-br-md rounded-bl-md">
           <div className="flex flex-col gap-y-1">
             {currentRecommended.map((track, index) => (
               <div className="px-2 py-1 flex items-center justify-between gap-y-3" key={index}>
                 <div>
                   <div className="flex items-center">
-                    <div className='text-[#6a6a6a] mr-4'>
+                    <div className="text-[#6a6a6a] mr-4">
                       <span>{index + 1}</span>
                     </div>
                     <div className="w-[40px] h-[40px] mr-2">
                       <img src={track.album?.images[2].url} className="w-[40px] h-[40px]" />
                     </div>
-                    <div className='flex flex-col px-2 pt-[0.3px] pb-[0.3px]'>
-                      <div className="mb-1 font-normal text-white text-ellipsis overflow-hidden whitespace-nowrap max-w-[175px]">{track.name}</div>
+                    <div className="flex flex-col px-2 pt-[0.3px] pb-[0.3px]">
+                      <div className="mb-1 font-normal text-white text-ellipsis overflow-hidden whitespace-nowrap max-w-[175px]">
+                        {track.name}
+                      </div>
                       <div className="text-[#6a6a6a]">{track.artists[0].name}</div>
                     </div>
                   </div>

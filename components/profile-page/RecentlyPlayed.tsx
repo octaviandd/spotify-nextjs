@@ -70,13 +70,11 @@ export default function RecentlyPlayed() {
                     <div className="rounded-md px-2 py-1 flex items-center justify-between " key={i}>
                       <div>
                         <div className="flex items-center">
-                          <div className='text-[#6a6a6a] mr-4'>
-                            {/* <span>{(i + 1) * index} </span> */}
-                          </div>
+                          <div className="text-[#6a6a6a] mr-4">{/* <span>{(i + 1) * index} </span> */}</div>
                           <div className="w-[40px] h-[40px] mr-2">
                             <img src={item.track.album?.images[2].url} className="w-[40px] h-[40px]" />
                           </div>
-                          <div className='flex flex-col px-2 pt-[0.3px] pb-[0.3px]'>
+                          <div className="flex flex-col px-2 pt-[0.3px] pb-[0.3px]">
                             <div className="mb-1 font-normal text-white">{item.track.name}</div>
                             <div className="text-[#6a6a6a]">{item.track.artists[0].name}</div>
                           </div>

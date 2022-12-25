@@ -1,9 +1,9 @@
 import React, { MutableRefObject } from 'react';
 import { Swiper } from 'swiper/types';
 
-export const SwiperButtons = ({swiperRef} : {swiperRef: MutableRefObject<Swiper | undefined>}) => {
+export const SwiperButtons = ({ swiperRef }: { swiperRef: MutableRefObject<Swiper | undefined> }) => {
   return (
-    <div className='flex'>
+    <div className="flex">
       <button
         onClick={() => swiperRef.current?.slidePrev()}
         className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[48px] h-[48px] flex justify-center items-center"
