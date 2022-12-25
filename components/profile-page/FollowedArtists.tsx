@@ -29,7 +29,7 @@ export default function FollowedArtists() {
   return (
     <div className="flex flex-col w-full mx-auto mt-5">
       <div className="flex justify-between items-center mb-5 px-20">
-        <p className="text-xl mb-6">Followed artists</p>
+        <p className="text-2xl mb-6 text-white">Followed artists</p>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
       <div className="w-[100vw] flex relative px-20">
@@ -50,7 +50,7 @@ export default function FollowedArtists() {
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
                   <span className="font-artists text-xl mt-4 leading-5 text-[#010101] font-medium tracking-[-0.2px]">
-                    {artist.name}
+                    {index}.{artist.name}
                   </span>
                 </div>
               </SwiperSlide>

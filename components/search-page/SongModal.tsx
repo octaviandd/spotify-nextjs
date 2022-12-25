@@ -83,7 +83,6 @@ export default function SongModal({updateBackground} : {updateBackground : Funct
       searchParams: {country: 'US'},
       queryLink: `artists/${id}/top-tracks`,
     }).then((data: Data): void => {
-      console.log(data)
       setCurrentArtistsTopTracks(data.tracks)
     })
   }

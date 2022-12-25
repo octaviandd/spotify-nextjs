@@ -29,7 +29,7 @@ export default function FollowedAlbums() {
   return (
     <div className="flex flex-col w-full mx-auto mt-20">
       <div className="flex items-center mb-5 justify-between px-20">
-        <p className="text-xl mb-6">Followed albums</p>
+        <p className="text-2xl mb-6 text-white">Followed albums</p>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
       <div className="w-[100vw] flex px-20">
