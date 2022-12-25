@@ -94,10 +94,10 @@ export default function SongsContainer() {
         items.map((item) => (
           <div key={item.id} className="relative group">
             <div className="relative">
-              <a className=" w-full h-full">
+              <a className="w-full h-full">
                 <img
                   src={item.album.images[1]?.url}
-                  className="group-hover:opacity-40 transition ease-in-out"
+                  className="group-hover:opacity-40 rounded-lg transition ease-in-out"
                   width="100%"
                   height="100%"
                 />

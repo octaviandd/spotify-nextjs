@@ -89,11 +89,29 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
         onChange={setMultiSelectValues}
         placeholder={`Search for ${type}s...`}
         styles={{
+          multiValueRemove: (base) => ({
+            ...base,
+            ":hover": {
+              backgroundColor: "inherit"
+            }
+          }),
+          multiValue: (base) => ({
+            ...base,
+            backgroundColor: 'white',
+          }),
+          control: (base) => ({
+            ...base,
+            backgroundColor: '#1e293b',
+            border: 'none',
+            paddingTop: '5px',
+            paddingBottom: '5px'
+          }),
           container: (base) => ({
             ...base,
-            backgroundColor: '#eee',
-            border: '1px solid black',
             borderRadius: '15px',
+            ":focus": {
+              backgroundColor: "#1e293b"
+            }
           }),
         }}
         components={{
