@@ -172,12 +172,12 @@ export default function SongModal({ updateBackground }: { updateBackground: Func
                     {currentArtistTopTracks &&
                       currentArtistTopTracks.map((item: any, index: number) => (
                         <SwiperSlide key={index}>
-                          <div className="flex flex-col">
+                          <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
                             <img
                               src={item.album.images[0].url}
                               className="h-[100px] w-[100px] object-cover object-center cursor-grab rounded-lg"
                             />
-                            <span className="font-artists text-sm mt-4 text-[#010101] font-semibold tracking-[-0.2px] text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px]">
+                            <span className="font-artists text-sm mt-4 text-white tracking-[-0.2px] text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px]">
                               {item.name}
                             </span>
                           </div>
@@ -193,12 +193,12 @@ export default function SongModal({ updateBackground }: { updateBackground: Func
                     {similarArtists &&
                       similarArtists.map((item: any, index: number) => (
                         <SwiperSlide key={index}>
-                          <div className="flex flex-col">
+                          <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
                             <img
                               src={item.images[0].url}
                               className="h-[100px] w-[100px] object-cover object-center cursor-grab rounded-lg"
                             />
-                            <span className="font-artists text-sm mt-4 text-[#010101] font-semibold tracking-[-0.2px] text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px]">
+                            <span className="font-artists text-sm mt-4 text-white tracking-[-0.2px] text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px]">
                               {item.name}
                             </span>
                           </div>
