@@ -88,12 +88,13 @@ export const tracksReducer = (data: any) => {
     instrumentalness: 0,
     liveness: 0,
     valence: 0,
+    tempo: 0
   };
 
   let aggregates = data.reduce(
     (
       acc: AggregateValues,
-      { danceability, energy, speechiness, acousticness, instrumentalness, liveness, valence }: AggregateValues
+      { danceability, energy, speechiness, acousticness, instrumentalness, liveness, valence, tempo }: AggregateValues
     ) => {
       acc.danceability += danceability;
       acc.energy += energy;
@@ -102,6 +103,7 @@ export const tracksReducer = (data: any) => {
       acc.instrumentalness += instrumentalness;
       acc.liveness += liveness;
       acc.valence += valence;
+      acc.tempo += tempo;
 
       return acc;
     },
@@ -120,8 +122,7 @@ export const tracksReducer = (data: any) => {
       key != 'duration_ms' &&
       key != 'mode' &&
       key != 'key' &&
-      key !== 'loudness' &&
-      key !== 'tempo'
+      key !== 'loudness'
     ) {
       arrayOfObjects.push({ name: key.charAt(0).toUpperCase() + key.slice(1), A: value.toFixed(3), B: 1 });
     }
