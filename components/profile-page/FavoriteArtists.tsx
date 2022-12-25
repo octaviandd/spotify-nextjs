@@ -57,13 +57,13 @@ export default function FavoriteTracks() {
           {currentArtists &&
             currentArtists.map((item: any, index: number) => (
               <SwiperSlide key={index}>
-                <div className="flex flex-col">
+                <div className="flex flex-col bg-[#181818] px-3 pb-4 pt-2 rounded-lg">
                   <img
-                    src={item.images ? item?.images[0]?.url : item?.icons[0]?.url}
+                    src={item?.images[0]?.url}
                     className="h-[250px] object-cover object-center cursor-grab rounded-lg"
                   />
                   <div className='flex justify-between items-center font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]'>
-                    <span>
+                    <span className='text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]'>
                       {index + 1}. {item.name}
                     </span>
                     <div>

@@ -47,9 +47,9 @@ export default function RecentlyPlayed() {
 
   return (
     <div className="px-5 pl-20">
-      <div className="flex items-center mb-5 justify-between">
-        <div className="mb-6 flex">
-          <p className="text-2xl text-white">Recently played</p>
+      <div className="flex items-center mb-5 justify-between max-w-[900px]">
+        <div className="mb-6 text-2xl flex items-center">
+          <p className="text-white">Recently played</p>
           <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
         </div>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>

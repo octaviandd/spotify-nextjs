@@ -3,10 +3,10 @@ import { Swiper } from 'swiper/types';
 
 export const SwiperButtons = ({swiperRef} : {swiperRef: MutableRefObject<Swiper | undefined>}) => {
   return (
-    <div>
+    <div className='flex'>
       <button
         onClick={() => swiperRef.current?.slidePrev()}
-        className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
+        className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[48px] h-[48px] flex justify-center items-center"
       >
         <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
           <path
@@ -17,7 +17,7 @@ export const SwiperButtons = ({swiperRef} : {swiperRef: MutableRefObject<Swiper 
       </button>
       <button
         onClick={() => swiperRef.current?.slideNext()}
-        className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[60px] h-[60px]"
+        className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[48px] h-[48px] flex justify-center items-center"
       >
         <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
           <path

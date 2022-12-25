@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <div className="border-t-2 flex justify-between items-center py-6 px-20 w-full bg-black text-white mt-5">
+    <div className="border-t flex justify-between items-center py-6 px-20 w-full bg-[#cdcbcb18] text-white">
       <div className="flex flex-col">
         <a href="https://www.spotify.com">Spotify</a>
         <a href="https://developer.spotify.com/">Spotify Developer</a>

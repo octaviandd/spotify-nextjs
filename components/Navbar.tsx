@@ -22,15 +22,15 @@ export default function Navbar() {
           <div className="flex items-center pr-2 mx-auto sm:pr-0">
             {session?.user && (
               <div className="flex items-center tracking-wid text-xl">
-                <div className="px-5 font-semibold text-white hover:bg-[#cdcbcb18] py-2 rounded-lg transition-all ease-in-out duration-250">
+                <div className="px-5 font-semibold text-white hover:bg-[#cdcbcb18] py-2 rounded-xl transition-all ease-in-out duration-250">
                   <Link href="/search" className="border-2 rounded-md">
                     Search
                   </Link>
                 </div>
-                <div className="px-5 font-semibold text-white py-2 rounded-lg hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
+                <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
                   <Link href="/discovery">Discovery</Link>
                 </div>
-                <div className="px-5 font-semibold text-white py-2 rounded-lg hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
+                <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
                   <Link href="/profile">Profile</Link>
                 </div>
               </div>

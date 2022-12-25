@@ -16,7 +16,7 @@ export default function RangeFilter({ type, max, min }: { type: string; max: num
 
   return (
     <div className="relative w-3/4">
-      <label>{type === 'Duration_ms' ? 'Duration' : type}</label>
+      <label className='text-white'>{type === 'Duration_ms' ? 'Duration' : type}</label>
       <Range
         step={max > 1 ? 1 : 0.1}
         min={min < 0 ? min : 0}
@@ -25,7 +25,7 @@ export default function RangeFilter({ type, max, min }: { type: string; max: num
         values={filters[type.toLocaleLowerCase()]}
         onChange={(values) => setRange(values)}
         renderTrack={({ props, children }) => (
-          <div {...props} className="range-slider my-5">
+          <div {...props} className="range-slider my-5 rounded-lg">
             {children}
           </div>
         )}
