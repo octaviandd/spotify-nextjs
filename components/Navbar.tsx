@@ -1,9 +1,14 @@
 import React from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Image from "next/image";
 
 export default function Navbar() {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  console.log(router.pathname === '/discovery')
 
   return (
     <nav className="bg-[#16181c] w-full py-4 drop-shadow-md font-artists">
@@ -23,20 +28,30 @@ export default function Navbar() {
             {session?.user && (
               <div className="flex items-center tracking-wid text-xl">
                 <div className="px-5 font-semibold text-white hover:bg-[#cdcbcb18] py-2 rounded-xl transition-all ease-in-out duration-250">
-                  <Link href="/search" className="border-2 rounded-md">
-                    Search
-                  </Link>
+                  <span className={router.pathname === '/search' ? "pointer-events-none" : ""}>
+                     <Link href="/search">
+                      Search
+                    </Link>
+                  </span>
                 </div>
                 <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                  <Link href="/discovery">Discovery</Link>
+                  <span className={router.pathname === '/discovery' ? "pointer-events-none" : ""}>
+                    <Link href="/discovery">
+                      Discovery
+                    </Link>
+                  </span>
                 </div>
                 <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                  <Link href="/profile">Profile</Link>
+                  <span className={router.pathname === '/profile' ? "pointer-events-none" : ""}>
+                    <Link href="/profile">
+                      Profile
+                    </Link>
+                  </span>
                 </div>
               </div>
             )}
             <div className="ml-3 relative">
-              {!session?.user ? (
+              {!session?.user &&
                 <a
                   href={`/api/auth/signin`}
                   onClick={(e) => {
@@ -53,49 +68,10 @@ export default function Navbar() {
                   >
                     <span className="hidden md:inline-block pr-1">Connect with </span>
                     <span>Spotify</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="w-4 h-4 inline-block ml-1 group-hover:translate-x-2 ease-in-out duration-300"
-                    >
-                      <path strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                    <Image src="/chevron-right.svg" width={24} height={24} />
                   </button>
                 </a>
-              ) : (
-                <div className="flex items-center">
-                  {/* <img
-                    src={session.user.image as string | undefined}
-                    width="50"
-                    height="50"
-                    className="rounded-full object-top object-cover w-[50px] h-[50px] mr-6"
-                  /> */}
-                  {/* <div className="flex px-4 py-3 cursor-pointer rounded-md whitespace-nowrap hover:bg-[#00CA4E] transition duration-500 ease-in-out group mr-2">
-                    <span
-                      className="flex items-center"
-                      onClick={() => signOut({ callbackUrl: `${window.location.origin}` })}
-                    >
-                      <span className="hidden md:block">LOGOUT</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 pl-0 md:pl-2"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="black"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                        />
-                      </svg>
-                    </span>
-                  </div> */}
-                </div>
-              )}
+              }
             </div>
           </div>
         </div>
