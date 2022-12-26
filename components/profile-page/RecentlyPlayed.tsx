@@ -25,7 +25,6 @@ export default function RecentlyPlayed() {
       }).then((data) => {
         setRecentlyPlayed(() => {
           let newState = currentData.map((item: Track, index: number) => ({ ...item, liked: data[index] }));
-          console.log(newState);
           return newState;
         });
       });
