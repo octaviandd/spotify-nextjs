@@ -164,7 +164,7 @@ export default function SongModal({ updateBackground }: { updateBackground: Func
                 ))}
               </div>
             </div>
-            <div className='flex gap-x-10'>
+            <div className="flex gap-x-10">
               <div className="flex flex-col">
                 <p className="text-lg mb-3">Artist's top tracks:</p>
                 <div className="w-[500px]">

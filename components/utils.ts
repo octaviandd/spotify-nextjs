@@ -88,7 +88,7 @@ export const tracksReducer = (data: any) => {
     instrumentalness: 0,
     liveness: 0,
     valence: 0,
-    tempo: 0
+    tempo: 0,
   };
 
   let aggregates = data.reduce(
