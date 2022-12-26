@@ -44,7 +44,7 @@ export default function Page() {
             <SeedFilters type="artist" queryLink="search"></SeedFilters>
             <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds"></SeedFilters>
             <SeedFilters type="track" queryLink="search"></SeedFilters>
-            {seedsLength > 5 && 'Too many selections'}
+            {seedsLength > 5 && <span className='text-white'>Too many selections</span>}
             <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>
             <RangeFilter type="Danceability" max={1} min={0}></RangeFilter>
             <RangeFilter type="Duration_ms" max={600000} min={0}></RangeFilter>
