@@ -1,14 +1,12 @@
 import React from 'react';
-import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import Image from "next/image";
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 export default function Navbar() {
   const { data: session } = useSession();
-  const router = useRouter();
-
-  console.log(router.pathname === '/discovery')
+  const pathname = useRouter().pathname;
 
   return (
     <nav className="bg-[#16181c] w-full py-4 drop-shadow-md font-artists">
@@ -28,21 +26,21 @@ export default function Navbar() {
             {session?.user && (
               <div className="flex items-center tracking-wid text-xl">
                 <div className="px-5 font-semibold text-white hover:bg-[#cdcbcb18] py-2 rounded-xl transition-all ease-in-out duration-250">
-                  <span className={router.pathname === '/search' ? "pointer-events-none" : ""}>
+                  <span className={pathname === '/search' ? "pointer-events-none" : ""}>
                      <Link href="/search">
                       Search
                     </Link>
                   </span>
                 </div>
                 <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                  <span className={router.pathname === '/discovery' ? "pointer-events-none" : ""}>
+                  <span className={pathname === '/discovery' ? "pointer-events-none" : ""}>
                     <Link href="/discovery">
                       Discovery
                     </Link>
                   </span>
                 </div>
                 <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                  <span className={router.pathname === '/profile' ? "pointer-events-none" : ""}>
+                  <span className={pathname === '/profile' ? "pointer-events-none" : ""}>
                     <Link href="/profile">
                       Profile
                     </Link>

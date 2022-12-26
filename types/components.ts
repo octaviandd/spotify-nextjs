@@ -149,6 +149,7 @@ export interface FollowedAlbum {
     previous: null;
     name: string;
     total: Number;
+    popularity: number
   }
 }
 
