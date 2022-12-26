@@ -23,7 +23,8 @@ module.exports = {
         mockup: "1fr",
         search: "minmax(500px, 25%) 1fr",
         item: "repeat(auto-fill, minmax(170px, 1fr))",
-        profile: "minmax(350px, 17.5%) 1fr"
+        profile: "minmax(350px, 17.5%) 1fr",
+        recentlyPlayed: "27.5px 60px auto 50px 50px"
       },
       keyframes: {
         loud: {

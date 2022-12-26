@@ -91,9 +91,9 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
         styles={{
           multiValueRemove: (base) => ({
             ...base,
-            ":hover": {
-              backgroundColor: "inherit"
-            }
+            ':hover': {
+              backgroundColor: 'inherit',
+            },
           }),
           multiValue: (base) => ({
             ...base,
@@ -104,14 +104,14 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
             backgroundColor: '#1e293b',
             border: 'none',
             paddingTop: '5px',
-            paddingBottom: '5px'
+            paddingBottom: '5px',
           }),
           container: (base) => ({
             ...base,
             borderRadius: '15px',
-            ":focus": {
-              backgroundColor: "#1e293b"
-            }
+            ':focus': {
+              backgroundColor: '#1e293b',
+            },
           }),
         }}
         components={{
