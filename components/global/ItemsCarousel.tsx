@@ -10,15 +10,17 @@ import { RootState } from '../../store';
 import { SwiperButtons } from './SwiperButtons';
 import { ReactSelect } from './ReactSelect';
 import 'swiper/css';
+import Link from 'next/link';
 
 const getMarkets = (state: RootState) => state.markets;
 
 type Props = {
   endpoint: string;
   title: string;
+  redirect: string;
 };
 
-export default function ItemsCarousel({ endpoint, title }: Props) {
+export default function ItemsCarousel({ endpoint, title, redirect }: Props) {
   const [data, setData] = useState<any[]>();
   const { data: session } = useSession();
   const [currentCountry, setCurrentCountry] = useState();
@@ -49,9 +51,11 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
   return (
     <div className="flex flex-col w-full mx-auto mt-20">
       <div className="flex items-center mb-5 justify-between px-20">
-        <div className="flex text-xl">
-          <p className="mb-6 text-xl text-white">{title}</p>
-          <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+        <div className="flex">
+          <p className="mb-6 text-2xl text-white">{title}</p>
+          {title !== 'Featured Playlists' && (
+            <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+          )}
         </div>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
@@ -68,10 +72,12 @@ export default function ItemsCarousel({ endpoint, title }: Props) {
             data.map((item: any, index: number) => (
               <SwiperSlide key={index}>
                 <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
-                  <img
-                    src={item.images ? item?.images[0]?.url : item?.icons[0]?.url}
-                    className="h-[250px] object-cover object-center cursor-grab rounded-lg"
-                  />
+                  <Link href={{ pathname: `/${redirect}/${item.id}` }}>
+                    <img
+                      src={item.images ? item?.images[0]?.url : item?.icons[0]?.url}
+                      className="h-[250px] object-cover object-center cursor-pointer rounded-lg"
+                    />
+                  </Link>
                   <span className="font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px] text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
                     {item.name}
                   </span>

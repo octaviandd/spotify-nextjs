@@ -22,7 +22,6 @@ export default function FollowedArtists() {
       searchParams: { limit: 50, offset: 0 },
       queryLink: `me/playlists`,
     }).then((data: Data): void => {
-      console.log(data);
       setCurrentPlaylists(data.items);
     });
   };
