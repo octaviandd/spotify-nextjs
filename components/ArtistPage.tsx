@@ -1,12 +1,12 @@
-import React from 'react'
-import FlyInOutBottom from './animations/FlyInOutBottom'
+import React from 'react';
+import FlyInOutBottom from './animations/FlyInOutBottom';
 
-type Props = {}
+type Props = {};
 
 export default function ArtistPage({}: Props) {
   return (
     <FlyInOutBottom>
       <div>ArtistPage</div>
     </FlyInOutBottom>
-  )
+  );
 }

@@ -11,7 +11,6 @@ import RecentlyPlayed from '../components/profile-page/RecentlyPlayed';
 import FavoriteTracks from '../components/profile-page/FavoriteTracks';
 import FavoriteArtists from '../components/profile-page/FavoriteArtists';
 
-
 export default function Profile() {
   const { data: session } = useSession();
 

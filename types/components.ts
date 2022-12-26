@@ -167,11 +167,21 @@ export type Playlist = {
   id: string;
   images: Array<{ url: string; height: number }>;
   name: string;
-  owner: object;
+  owner: {
+    display_name: string
+  };
   primary_color: null | string;
   public: boolean;
   snapshot_id: string;
-  tracks: Track[];
+  tracks: {
+    href: String;
+    items: Track[];
+    limit: Number;
+    next: String | null;
+    offset: Number;
+    previous: null;
+    total: Number;
+  }
   type: 'playlist';
   uri: string;
 };

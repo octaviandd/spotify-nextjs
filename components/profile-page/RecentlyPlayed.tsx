@@ -22,7 +22,7 @@ export default function RecentlyPlayed() {
         token: session?.accessToken as string,
         searchParams: { ids, offset: 0 },
         queryLink: 'me/tracks/contains',
-      }).then((data) => {
+      }).then((data: any) => {
         setRecentlyPlayed(() => {
           let newState = currentData.map((item: Track, index: number) => ({ ...item, liked: data[index] }));
           return newState;

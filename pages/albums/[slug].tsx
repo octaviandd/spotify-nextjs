@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import FlyInOutBottom from '../../components/animations/FlyInOutBottom';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { getSpotifyData, millisToMinutesAndSeconds } from '../../components/utils';
 import { useSession } from 'next-auth/react';
 import { Album, Data, Track } from '../../types/components';
-import Image from "next/image"
+import Image from 'next/image';
 
-type Props = {}
-
-export default function AlbumPage({ }: Props) {
+export default function AlbumPage() {
   const query = useRouter().query;
   const { data: session } = useSession();
-  const [albumTracks, setAlbumTracks] = useState<Album[]>();
-  const [album, setAlbum] = useState<Album>()
+  const [albumTracks, setAlbumTracks] = useState<Track[]>();
+  const [album, setAlbum] = useState<Album>();
+  const [loading, setLoading] = useState(true);
 
   const getPlaylistTracks = () => {
     getSpotifyData({
@@ -20,18 +19,19 @@ export default function AlbumPage({ }: Props) {
       searchParams: { offset: 0 },
       queryLink: `albums/${query.slug}`,
     }).then((data: Data) => {
-      setAlbum(data)
-      let currentData: Track[] = data.tracks.items as Track[];
-      let ids = currentData.slice(0,50).map((track) => track.id).toString();
+      setAlbum(data as any);
+      let currentData: Track[] = data?.tracks?.items as Track[];
+      let ids = currentData
+        .slice(0, 50)
+        .map((track) => track.id)
+        .toString();
       getSpotifyData({
         token: session?.accessToken as string,
         searchParams: { ids, offset: 0 },
         queryLink: 'me/tracks/contains',
-      }).then((data) => {
-        setAlbumTracks(() => {
-          let newState = currentData.map((item: Track, index: number) => ({ ...item, liked: data[index] }));
-          return newState;
-        });
+      }).then((data: any) => {
+        setAlbumTracks(() => currentData.map((item: Track, index: number) => ({ ...item, liked: data[index] })));
+        setLoading(false);
       });
     });
   };
@@ -40,27 +40,31 @@ export default function AlbumPage({ }: Props) {
     session?.accessToken && getPlaylistTracks();
   }, [session?.accessToken]);
 
+  if (loading) {
+    return <div className="h-[100vh] w-full bg-black"></div>;
+  }
+
   return (
     <FlyInOutBottom>
       <div className="px-5 pl-20 mt-10">
         <div className="flex items-center mb-5 justify-between">
-          {album && <div className="mb-6 text-2xl flex items-center">
-            <div>
-              <img src={album.images[0].url} className="w-[300px]"/>
-            </div>
-            <div className='px-6 flex flex-col justify-between h-full'>
-              <p className='text-white'>Album</p>
-              <span className='text-7xl text-white my-5'>{album.name}</span>
-              <div className='text-white flex items-center'>
-                {console.log(album)}
-                <p>{album.artists[0].name}</p>
-                <span className='mx-2'>•</span>
-                <p>{album.total_tracks} tracks</p>
+          {album && (
+            <div className="mb-6 text-2xl flex items-center">
+              <div>
+                <img src={album.images[0].url} className="w-[300px]" />
               </div>
-              <p>{album.popularity} popularity</p>
+              <div className="px-6 flex flex-col justify-between h-full">
+                <p className="text-white">Album</p>
+                <span className="text-7xl text-white my-5">{album.name}</span>
+                <div className="text-white flex items-center">
+                  <p>{album.artists[0].name}</p>
+                  <span className="mx-2">•</span>
+                  <p>{album.total_tracks} tracks</p>
+                </div>
+                <p>{album.popularity} popularity</p>
+              </div>
             </div>
-          </div>
-          }
+          )}
         </div>
         <div className="w-full flex flex-col gap-y-1 bg-[#16181c] px-3 py-3 rounded-md">
           <div className="grid grid-cols-recentlyPlayed items-center border-b border-b-white/5 tracking-wider mb-5 pb-3 text-[#b3b3b3] text-xs">
@@ -102,5 +106,5 @@ export default function AlbumPage({ }: Props) {
         </div>
       </div>
     </FlyInOutBottom>
-  )
+  );
 }

@@ -22,23 +22,35 @@ export default function Discovery() {
       queryLink: 'markets',
     }).then((data: any): void => {
       let cleanData: {}[] = [];
-      data.markets.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }))
+      data.markets.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
       handleChange(cleanData);
     });
   };
 
   useEffect(() => {
-    session?.accessToken && getCurrentMarkets()
-  }, [session])
+    session?.accessToken && getCurrentMarkets();
+  }, [session]);
 
   return (
     <FlyInOutBottom>
       <Layout>
-        <ItemsCarousel endpoint='browse/featured-playlists' title="Featured Playlists" redirect='playlists'></ItemsCarousel>
-        <ItemsCarousel endpoint='browse/new-releases' title="Featured Albums" redirect='albums'></ItemsCarousel>
-        <ItemsCarousel endpoint='browse/categories' title="Featured Categories" redirect='categories'></ItemsCarousel>
-        <ItemsCarousel endpoint='browse/categories/toplists/playlists' title="Top Playlists" redirect='playlists'></ItemsCarousel>
-        <ItemsCarousel endpoint='browse/categories/0JQ5DAqbMKFQIL0AXnG5AK/playlists' title="Trending Playlists" redirect='playlists'></ItemsCarousel>
+        <ItemsCarousel
+          endpoint="browse/featured-playlists"
+          title="Featured Playlists"
+          redirect="playlists"
+        ></ItemsCarousel>
+        <ItemsCarousel endpoint="browse/new-releases" title="Featured Albums" redirect="albums"></ItemsCarousel>
+        <ItemsCarousel endpoint="browse/categories" title="Featured Categories" redirect="categories"></ItemsCarousel>
+        <ItemsCarousel
+          endpoint="browse/categories/toplists/playlists"
+          title="Top Playlists"
+          redirect="playlists"
+        ></ItemsCarousel>
+        <ItemsCarousel
+          endpoint="browse/categories/0JQ5DAqbMKFQIL0AXnG5AK/playlists"
+          title="Trending Playlists"
+          redirect="playlists"
+        ></ItemsCarousel>
       </Layout>
     </FlyInOutBottom>
   );
