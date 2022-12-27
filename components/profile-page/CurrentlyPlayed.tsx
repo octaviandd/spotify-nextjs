@@ -58,7 +58,7 @@ export default function CurrentlyPlayed() {
   }, [session?.accessToken]);
 
   return (
-    <div className="flex justify-center rounded-lg flex-col w-full mt-10 bg-[#16181c]">
+    <div className="flex justify-center rounded-lg flex-col w-full mt-10 bg-[#16181c] drop-shadow-md-white">
       {currentlyPlaying && (
         <div className="rounded-tr-lg rounded-tl-lg px-3 py-3">
           <div className="flex items-center pr-1">

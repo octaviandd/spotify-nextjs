@@ -7,14 +7,14 @@ type Props = {
 
 export default function LimitSetter({ currentLimit, setCurrentLimit }: Props) {
   return (
-    <>
+    <div className='mx-5 flex'>
       <div className="ml-3">
         <span
           onClick={() => setCurrentLimit(10)}
           className={
             currentLimit == 10
               ? ' text-black px-3 bg-[#f6f4f4] py-2 rounded-lg cursor-pointer transition-all ease-in-out duration-500'
-              : ' text-white px-3 py-2 hover:bg-[#cdcbcb18] rounded-md cursor-pointer'
+              : ' text-white px-3 py-2 hover:bg-[#cdcbcb18] shadow-md shadow-[#dadddde1] rounded-md cursor-pointer'
           }
         >
           10
@@ -26,7 +26,7 @@ export default function LimitSetter({ currentLimit, setCurrentLimit }: Props) {
           className={
             currentLimit == 25
               ? ' text-black px-3  bg-[#f6f4f4] py-2 rounded-lg cursor-pointer transition-all ease-in-out duration-500'
-              : 'text-white px-3 hover:bg-[#cdcbcb18] py-2 rounded-xl cursor-pointer'
+              : 'text-white px-3 hover:bg-[#cdcbcb18] shadow-[#dadddde1] shadow-md py-2 rounded-md cursor-pointer'
           }
         >
           25
@@ -38,12 +38,12 @@ export default function LimitSetter({ currentLimit, setCurrentLimit }: Props) {
           className={
             currentLimit == 50
               ? ' text-black bg-[#f6f4f4] px-3 py-2 rounded-lg cursor-pointer transition-all ease-in-out duration-500'
-              : 'text-white px-3 py-2 hover:bg-[#cdcbcb18] rounded-xl cursor-pointer'
+              : 'text-white px-3 py-2 hover:bg-[#cdcbcb18] shadow-[#dadddde1] shadow-md rounded-md cursor-pointer'
           }
         >
           50
         </span>
       </div>
-    </>
+    </div>
   );
 }

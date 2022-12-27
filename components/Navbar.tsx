@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signIn, useSession } from 'next-auth/react';
@@ -9,7 +9,7 @@ export default function Navbar() {
   const pathname = useRouter().pathname;
 
   return (
-    <nav className="bg-[#16181c] w-full py-4 drop-shadow-md font-artists">
+    <nav className="bg-[#16181c] w-full py-1 font-artists">
       <div className="px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -25,21 +25,23 @@ export default function Navbar() {
           <div className="flex items-center pr-2 mx-auto sm:pr-0">
             {session?.user && (
               <div className="flex items-center tracking-wid text-xl">
-                <div className="px-5 font-semibold text-white hover:bg-[#cdcbcb18] py-2 rounded-xl transition-all ease-in-out duration-250">
-                  <span className={pathname === '/search' ? 'pointer-events-none' : ''}>
-                    <Link href="/search">Search</Link>
-                  </span>
-                </div>
-                <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                  <span className={pathname === '/discovery' ? 'pointer-events-none' : ''}>
-                    <Link href="/discovery">Discovery</Link>
-                  </span>
-                </div>
-                <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                  <span className={pathname === '/profile' ? 'pointer-events-none' : ''}>
-                    <Link href="/profile">Profile</Link>
-                  </span>
-                </div>
+                <Link href="/search">
+                  <div className='px-5 font-semibold text-white hover:bg-[#cdcbcb18] cursor-pointer py-2 rounded-xl transition-all ease-in-out duration-250'>
+                    <span className={pathname === '/search' ? 'pointer-events-none' : ''}>Search</span>
+                  </div>
+                </Link>
+                <Link href="/discovery">
+                  <div className="px-5 font-semibold text-white py-2 rounded-xl cursor-pointer hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
+                    <span className={pathname === '/discovery' ? 'pointer-events-none' : ''}>Discovery</span>
+                  </div>
+                </Link>
+                <Link href="/profile">
+                  <div className="px-5 font-semibold text-white py-2 rounded-xl cursor-pointer hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
+                    <span className={pathname === '/profile' ? 'pointer-events-none' : ''}>
+                      Profile
+                    </span>
+                  </div>
+                </Link>
               </div>
             )}
             <div className="ml-3 relative">
