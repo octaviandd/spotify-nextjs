@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react';
-import React, { useState, useEffect, useRef, SetStateAction } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getSpotifyData, changeTrack, playPauseTrack } from '../../components/utils';
 import { Data, Track } from '../../types/components';
 import Image from 'next/image';

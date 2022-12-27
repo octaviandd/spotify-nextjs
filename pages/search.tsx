@@ -11,6 +11,7 @@ import FlyInOutRight from '../components/animations/FlyInOutRight';
 import FadeInOut from '../components/animations/FadeInOut';
 import SongModal from '../components/search-page/SongModal';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const selectSong = (state: RootState) => state.song.currentSong;
 

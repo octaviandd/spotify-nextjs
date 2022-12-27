@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { updateMarkets } from '../store/marketsSlice';
 import ItemsCarousel from '../components/global/ItemsCarousel';
 import FlyInOutBottom from '../components/animations/FlyInOutBottom';
+import Link from 'next/link';
 
 export default function Discovery() {
   const { data: session } = useSession();
@@ -32,8 +33,8 @@ export default function Discovery() {
   }, [session]);
 
   return (
-    <FlyInOutBottom>
-      <Layout>
+    <Layout>
+      <FlyInOutBottom>
         <ItemsCarousel
           endpoint="browse/featured-playlists"
           title="Featured Playlists"
@@ -51,7 +52,7 @@ export default function Discovery() {
           title="Trending Playlists"
           redirect="playlists"
         ></ItemsCarousel>
-      </Layout>
-    </FlyInOutBottom>
+      </FlyInOutBottom>
+    </Layout>
   );
 }

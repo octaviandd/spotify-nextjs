@@ -82,7 +82,7 @@ export default function FavoriteTracks() {
         <div className="ml-10 flex justify-center">
           <div className="grid grid-rows-4 grid-cols-2 gap-x-10 gap-y-2 mt-10 text-xl w-3/4">
             {currentTracksValues &&
-              currentTracksValues.map((value: {name: string, A: number}) => (
+              currentTracksValues.map((value: { name: string; A: number }) => (
                 <div className="flex justify-between rounded-md px-3 py-1 ">
                   <span className="pr-10 text-white">{value.name}</span>
                   <span className="pl-10 text-white font-semibold">{value.A}</span>

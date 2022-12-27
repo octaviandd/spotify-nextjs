@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from "next/image";
+import Image from 'next/image';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
@@ -26,30 +26,24 @@ export default function Navbar() {
             {session?.user && (
               <div className="flex items-center tracking-wid text-xl">
                 <div className="px-5 font-semibold text-white hover:bg-[#cdcbcb18] py-2 rounded-xl transition-all ease-in-out duration-250">
-                  <span className={pathname === '/search' ? "pointer-events-none" : ""}>
-                     <Link href="/search">
-                      Search
-                    </Link>
+                  <span className={pathname === '/search' ? 'pointer-events-none' : ''}>
+                    <Link href="/search">Search</Link>
                   </span>
                 </div>
                 <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                  <span className={pathname === '/discovery' ? "pointer-events-none" : ""}>
-                    <Link href="/discovery">
-                      Discovery
-                    </Link>
+                  <span className={pathname === '/discovery' ? 'pointer-events-none' : ''}>
+                    <Link href="/discovery">Discovery</Link>
                   </span>
                 </div>
                 <div className="px-5 font-semibold text-white py-2 rounded-xl hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                  <span className={pathname === '/profile' ? "pointer-events-none" : ""}>
-                    <Link href="/profile">
-                      Profile
-                    </Link>
+                  <span className={pathname === '/profile' ? 'pointer-events-none' : ''}>
+                    <Link href="/profile">Profile</Link>
                   </span>
                 </div>
               </div>
             )}
             <div className="ml-3 relative">
-              {!session?.user &&
+              {!session?.user && (
                 <a
                   href={`/api/auth/signin`}
                   onClick={(e) => {
@@ -69,7 +63,7 @@ export default function Navbar() {
                     <Image src="/chevron-right.svg" width={24} height={24} />
                   </button>
                 </a>
-              }
+              )}
             </div>
           </div>
         </div>

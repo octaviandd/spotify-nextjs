@@ -1,4 +1,4 @@
-import React, { useState, createContext, useCallback } from 'react';
+import React, { useState, createContext } from 'react';
 import gsap from 'gsap';
 
 type AppContextInterface = {
@@ -17,7 +17,6 @@ const TransitionContext = createContext<AppContextInterface | null>({
 
 const TransitionProvider = ({ children }: { children: any }) => {
   const [timeline, setTimeline] = useState(() => gsap.timeline({ paused: true }));
-
   const [background, setBackground] = useState('white');
 
   return (
