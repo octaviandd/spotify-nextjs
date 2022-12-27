@@ -29,7 +29,7 @@ export default function FollowedArtists() {
   return (
     <div className="flex flex-col w-full mx-auto mt-20">
       <div className="flex items-center justify-between mb-5 px-20">
-        <p className="text-xl text-white mb-6">Followed playlists</p>
+        <p className="text-2xl text-white mb-6">Followed playlists</p>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
       <div className="w-[100vw] flex px-20">

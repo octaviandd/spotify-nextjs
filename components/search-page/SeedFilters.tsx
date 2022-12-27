@@ -101,7 +101,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
           }),
           control: (base) => ({
             ...base,
-            backgroundColor: '#1e293b',
+            backgroundColor: '#16181c',
             border: 'none',
             paddingTop: '5px',
             paddingBottom: '5px',

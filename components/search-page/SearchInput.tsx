@@ -21,7 +21,7 @@ export default function SearchInput() {
           type="text"
           onChange={(e) => handleChange(e.target.value)}
           ref={inputRef}
-          className="peer absolute w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-[35px] pr-3 hover:ring-slate-300 dark:bg-slate-800 dark:highlight-white/5 dark:hover:bg-slate-700"
+          className="peer absolute w-full lg:flex items-center text-sm leading-6 text-slate-400 rounded-md ring-1 ring-slate-900/10 shadow-sm py-1.5 pl-[35px] pr-3 hover:ring-slate-300 dark:bg-[#16181c] dark:highlight-white/5 dark:hover:bg-slate-700"
         ></input>
         <svg
           width="24"

@@ -42,7 +42,7 @@ export default function AlbumPage() {
   }, [session?.accessToken]);
 
   if (loading) {
-    return <div className="h-[100vh] w-full bg-black"></div>;
+    return <Layout><div className="h-[100vh] w-full bg-black"></div>;</Layout>
   }
 
   return (
