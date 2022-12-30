@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FlyInOutBottom from '../../components/animations/FlyInOutBottom';
 import Layout from '../../components/Layout';
+import AccessDenied from '../../components/AccessDenied';
+import { unstable_getServerSession } from 'next-auth';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSpotifyData } from '../../components/utils';
 
-type Props = {};
+type Props = {
+  accessToken: string
+};
 
-export default function ArtistPage({}: Props) {
-  const [loading, setLoading] = useState(true);
-
-  if (loading) {
+export default function ArtistPage({accessToken}: Props) {
+  if (!accessToken) {
     return (
       <Layout>
-        <div className="h-[100vh] w-full bg-black"></div>;
+        <AccessDenied />
       </Layout>
     );
   }
@@ -23,3 +27,31 @@ export default function ArtistPage({}: Props) {
     </Layout>
   );
 }
+
+export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  // const data = await getSpotifyData({
+  //   token: session?.accessToken as string,
+  //   searchParams: undefined,
+  //   queryLink: 'markets',
+  // });
+
+  // let cleanData: {}[] = [];
+  // data.markets?.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
+
+  if (session) {
+    return {
+      props: {
+        accessToken: session?.accessToken,
+      },
+    };
+  } else {
+    return {
+      props: {
+        accessToken: null,
+      },
+    };
+  }
+}
+
