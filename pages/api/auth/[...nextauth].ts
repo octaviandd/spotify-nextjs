@@ -82,7 +82,6 @@ export const authOptions = {
   },
   events: {},
   debug: false,
-}
+};
 
-
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);
