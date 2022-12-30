@@ -1,30 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useSession } from 'next-auth/react';
-import { getSpotifyData } from '../utils';
-import { CombinedAlbum, Data } from '../../types/components';
+import { Album } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SwiperButtons } from '../global/SwiperButtons';
 import 'swiper/css';
 
-export default function FollowedAlbums() {
-  const [currentAlbums, setCurrentAlbums] = useState<CombinedAlbum[]>();
-  const { data: session } = useSession();
+export default function FollowedAlbums({albums} : {albums: Album[]}) {
   const swiperRef = useRef<SwiperCore>();
-
-  useEffect(() => {
-    session?.accessToken && getCurrentAlbums();
-  }, [session]);
-
-  const getCurrentAlbums = () => {
-    getSpotifyData({
-      token: session?.accessToken as string,
-      searchParams: { limit: 50, offset: 0 },
-      queryLink: `me/albums`,
-    }).then((data: Data): void => {
-      setCurrentAlbums(data?.items);
-    });
-  };
 
   return (
     <div className="flex flex-col w-full mx-auto mt-20">
@@ -41,8 +23,8 @@ export default function FollowedAlbums() {
             swiperRef.current = swiper;
           }}
         >
-          {currentAlbums &&
-            currentAlbums.map((item: CombinedAlbum, index: number) => (
+          {albums &&
+            albums.map((item: any, index: number) => (
               <SwiperSlide key={index}>
                 <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
                   <img

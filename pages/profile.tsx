@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react';
 import React from 'react';
 import AccessDenied from '../components/AccessDenied';
 import Layout from '../components/Layout';
@@ -10,14 +9,23 @@ import FollowedPlaylists from '../components/profile-page/FollowedPlaylists';
 import RecentlyPlayed from '../components/profile-page/RecentlyPlayed';
 import FavoriteTracks from '../components/profile-page/FavoriteTracks';
 import FavoriteArtists from '../components/profile-page/FavoriteArtists';
+import { unstable_getServerSession } from "next-auth/next"
+import { authOptions } from "./api/auth/[...nextauth]"
+import { getSpotifyData } from '../components/utils';
+import { Album, Artist, User } from '../types/components';
 
-export default function Profile() {
-  const { data: session } = useSession();
+type Props = {
+  profile: User,
+  albums: Album[],
+  artists: Artist[],
+  accessToken: String
+}
 
-  if (!session) {
+export default function Profile({profile, albums, artists, accessToken} : Props) {
+  if (!accessToken) {
     return (
       <Layout>
-        <AccessDenied />
+      <AccessDenied />
       </Layout>
     );
   }
@@ -27,17 +35,49 @@ export default function Profile() {
       <div className="py-10">
         <div className="grid grid-cols-profile px-10">
           <div className="w-full">
-            <CurrentProfile></CurrentProfile>
+            <CurrentProfile profile={profile}></CurrentProfile>
             <CurrentlyPlayed></CurrentlyPlayed>
           </div>
           <RecentlyPlayed></RecentlyPlayed>
         </div>
         <FavoriteArtists></FavoriteArtists>
         <FavoriteTracks></FavoriteTracks>
-        <FollowedArtists></FollowedArtists>
+        <FollowedArtists artists={artists}></FollowedArtists>
         <FollowedPlaylists></FollowedPlaylists>
-        <FollowedAlbums></FollowedAlbums>
+        <FollowedAlbums albums={albums}></FollowedAlbums>
       </div>
     </Layout>
   );
 }
+
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
+  const profileData = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: undefined,
+    queryLink: `me`,
+  })
+
+  const featuredAlbums = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: { limit: 50, offset: 0 },
+    queryLink: `me/albums`,
+  })
+
+  const followedArtists = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: { type: 'artist', limit: 50, offset: 0 },
+    queryLink: `me/following`,
+  })
+
+  return {
+    props: {
+      accessToken: session.accessToken,
+      profile: profileData,
+      albums: featuredAlbums.items,
+      artists: followedArtists.artists.items
+    },
+  }
+}
+

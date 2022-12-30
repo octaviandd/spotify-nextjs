@@ -1,36 +1,19 @@
 import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
-import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../components/utils';
 import { useDispatch } from 'react-redux';
 import { updateMarkets } from '../store/marketsSlice';
 import ItemsCarousel from '../components/global/ItemsCarousel';
 import FlyInOutBottom from '../components/animations/FlyInOutBottom';
-import Link from 'next/link';
+import { unstable_getServerSession } from "next-auth/next"
+import { authOptions } from "./api/auth/[...nextauth]"
 
-export default function Discovery() {
-  const { data: session } = useSession();
+export default function Discovery({markets} : {markets: string[]}) {
   const dispatch = useDispatch();
 
-  const handleChange = (markets: {}[]) => {
-    dispatch(updateMarkets(markets));
-  };
-
-  const getCurrentMarkets = () => {
-    getSpotifyData({
-      token: session?.accessToken as string,
-      searchParams: undefined,
-      queryLink: 'markets',
-    }).then((data: any): void => {
-      let cleanData: {}[] = [];
-      data.markets.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
-      handleChange(cleanData);
-    });
-  };
-
   useEffect(() => {
-    session?.accessToken && getCurrentMarkets();
-  }, [session]);
+    dispatch(updateMarkets(markets));
+  }, []);
 
   return (
     <Layout>
@@ -55,4 +38,24 @@ export default function Discovery() {
       </FlyInOutBottom>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(context.req, context.res, authOptions)
+
+  const data = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: undefined,
+    queryLink: 'markets',
+  })
+
+  let cleanData: {}[] = [];
+  data.markets.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }))
+
+  return {
+    props: {
+      accessToken: session.accessToken,
+      markets: cleanData
+    },
+  }
 }

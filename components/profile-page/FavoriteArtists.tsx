@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Data, Track } from '../../types/components';
+import { Artist, Data, Track } from '../../types/components';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
 import { Swiper, SwiperSlide } from 'swiper/react';

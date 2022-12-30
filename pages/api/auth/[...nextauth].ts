@@ -33,7 +33,7 @@ async function refreshAccessToken(token: any) {
   }
 }
 
-export default NextAuth({
+export const authOptions = {
   providers: [
     SpotifyProvider({
       clientId: process.env.SPOTIFY_ID as string,
@@ -82,4 +82,7 @@ export default NextAuth({
   },
   events: {},
   debug: false,
-});
+}
+
+
+export default NextAuth(authOptions)
