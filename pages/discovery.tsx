@@ -7,6 +7,7 @@ import ItemsCarousel from '../components/global/ItemsCarousel';
 import FlyInOutBottom from '../components/animations/FlyInOutBottom';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default function Discovery({ markets }: { markets: string[] }) {
   const dispatch = useDispatch();
@@ -40,8 +41,8 @@ export default function Discovery({ markets }: { markets: string[] }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions);
+export async function getServerSideProps({req, res} : {req: NextApiRequest, res: NextApiResponse}) {
+  const session = await unstable_getServerSession(req, res, authOptions);
 
   const data = await getSpotifyData({
     token: session?.accessToken as string,
@@ -50,11 +51,11 @@ export async function getServerSideProps(context) {
   });
 
   let cleanData: {}[] = [];
-  data.markets.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
+  data.markets?.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
 
   return {
     props: {
-      accessToken: session.accessToken,
+      accessToken: session?.accessToken,
       markets: cleanData,
     },
   };

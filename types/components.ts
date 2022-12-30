@@ -66,6 +66,7 @@ export interface Data {
   };
   items?: CombinedAlbum[] & Playlist[] & Track[];
   item?: Track;
+  markets?: string[],
   audio_features?: SongStats;
   is_playing?: boolean
 }
