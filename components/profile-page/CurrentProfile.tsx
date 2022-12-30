@@ -20,23 +20,23 @@ export default function CurrentProfile({ profile }: { profile: User }) {
         <div className="rounded-md px-2 py-1 w-full text-center font-semibold text-3xl text-white">
           <span>{profile.display_name}</span>
         </div>
-          <a
-            href={`/api/auth/signout`}
-            onClick={(e) => {
-              e.preventDefault();
-              signOut({
-                callbackUrl: `${window.location.origin}/`
-              });
-            }}
-            className="inline-block mr-2"
+        <a
+          href={`/api/auth/signout`}
+          onClick={(e) => {
+            e.preventDefault();
+            signOut({
+              callbackUrl: `${window.location.origin}/`
+            });
+          }}
+          className="inline-block mr-2"
+        >
+          <button
+            type="button"
+            className="group ease-in-out transition duration-200 bg-green-500 hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
           >
-            <button
-              type="button"
-              className="group ease-in-out transition duration-200 bg-green-500 hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-            >
-              <span className="hidden md:inline-block pr-1">Logout</span>
-            </button>
-          </a>
+            <span className="hidden md:inline-block pr-1">Logout</span>
+          </button>
+        </a>
       </div>
     </div>
   );
