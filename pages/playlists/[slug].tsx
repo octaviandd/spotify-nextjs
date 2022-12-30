@@ -1,50 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import FlyInOutBottom from '../../components/animations/FlyInOutBottom';
-import { useRouter } from 'next/router';
 import { getSpotifyData, millisToMinutesAndSeconds } from '../../components/utils';
-import { useSession } from 'next-auth/react';
-import { Data, Playlist, Track } from '../../types/components';
+import { Playlist, Track } from '../../types/components';
 import Image from 'next/image';
 import Layout from '../../components/Layout';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]';
+import { NextApiRequest, NextApiResponse } from 'next';
+import AccessDenied from '../../components/AccessDenied';
 
-export default function ArtistPage() {
-  const query = useRouter().query;
-  const { data: session } = useSession();
-  const [playlistTracks, setPlaylistTracks] = useState<Track[]>();
-  const [playlist, setPlaylist] = useState<Playlist>();
-  const [loading, setLoading] = useState(true);
+type Props = {
+  accessToken: String;
+  tracks: Track[];
+  playlist: Playlist;
+};
 
-  const getPlaylistTracks = () => {
-    getSpotifyData({
-      token: session?.accessToken as string,
-      searchParams: { offset: 0 },
-      queryLink: `playlists/${query.slug}`,
-    }).then((data: Data) => {
-      setPlaylist(data as any);
-      let currentData: Track[] = data?.tracks?.items as Track[];
-      let ids = data?.tracks?.items
-        .slice(0, 50)
-        .map((item) => item.track.id)
-        .toString();
-      getSpotifyData({
-        token: session?.accessToken as string,
-        searchParams: { ids, offset: 0 },
-        queryLink: 'me/tracks/contains',
-      }).then((data: any) => {
-        setPlaylistTracks(() => currentData.map((item: Track, index: number) => ({ ...item, liked: data[index] })));
-        setLoading(false);
-      });
-    });
-  };
-
-  useEffect(() => {
-    session?.accessToken && getPlaylistTracks();
-  }, [session?.accessToken]);
-
-  if (loading) {
-    return <Layout>
-      <div className="h-[100vh] w-full bg-black"></div>;
-    </Layout>
+export default function ArtistPage({ tracks, playlist, accessToken }: Props) {
+  if (!accessToken) {
+    return (
+      <Layout>
+        <AccessDenied />
+      </Layout>
+    );
   }
 
   return (
@@ -79,8 +56,8 @@ export default function ArtistPage() {
                 <Image src="/time.svg" width={16} height={16} />
               </span>
             </div>
-            {playlistTracks &&
-              playlistTracks.map((item, index) => (
+            {tracks &&
+              tracks.map((item, index) => (
                 <div className="grid grid-cols-recentlyPlayed items-center" key={index}>
                   <div className="text-[#6a6a6a] col-start-1 col-end-2">
                     <span>{index + 1}</span>
@@ -111,4 +88,50 @@ export default function ArtistPage() {
       </FlyInOutBottom>
     </Layout>
   );
+}
+
+export async function getServerSideProps({
+  res,
+  req,
+  params,
+}: {
+  res: NextApiResponse;
+  req: NextApiRequest;
+  params: { slug: string };
+}) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  const playlist = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: { offset: 0, limit: 50 },
+    queryLink: `playlists/${params.slug}`,
+  });
+
+  let ids = playlist?.tracks?.items
+    .slice(0, 50)
+    .map((item) => item.track.id)
+    .toString();
+
+  let validIds: any = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: { ids, offset: 0 },
+    queryLink: 'me/tracks/contains',
+  });
+
+  let cleanPlaylists = playlist?.tracks?.items.slice(0, 50).map((item: Track, index: number) => {
+    return {
+      ...item,
+      liked: validIds[index],
+    };
+  });
+
+  return session
+    ? {
+        props: {
+          accessToken: session?.accessToken,
+          tracks: cleanPlaylists,
+          playlist,
+        },
+      }
+    : { props: { accessToken: null } };
 }

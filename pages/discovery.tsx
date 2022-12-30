@@ -1,36 +1,29 @@
 import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
-import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../components/utils';
 import { useDispatch } from 'react-redux';
 import { updateMarkets } from '../store/marketsSlice';
 import ItemsCarousel from '../components/global/ItemsCarousel';
 import FlyInOutBottom from '../components/animations/FlyInOutBottom';
-import Link from 'next/link';
+import { unstable_getServerSession } from 'next-auth/next';
+import { authOptions } from './api/auth/[...nextauth]';
+import { NextApiRequest, NextApiResponse } from 'next';
+import AccessDenied from '../components/AccessDenied';
 
-export default function Discovery() {
-  const { data: session } = useSession();
+export default function Discovery({ markets, accessToken }: { markets: string[]; accessToken: string }) {
   const dispatch = useDispatch();
 
-  const handleChange = (markets: {}[]) => {
-    dispatch(updateMarkets(markets));
-  };
-
-  const getCurrentMarkets = () => {
-    getSpotifyData({
-      token: session?.accessToken as string,
-      searchParams: undefined,
-      queryLink: 'markets',
-    }).then((data: any): void => {
-      let cleanData: {}[] = [];
-      data.markets.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
-      handleChange(cleanData);
-    });
-  };
-
   useEffect(() => {
-    session?.accessToken && getCurrentMarkets();
-  }, [session]);
+    dispatch(updateMarkets(markets));
+  }, []);
+
+  if (!accessToken) {
+    return (
+      <Layout>
+        <AccessDenied />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -55,4 +48,32 @@ export default function Discovery() {
       </FlyInOutBottom>
     </Layout>
   );
+}
+
+export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  const data = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: undefined,
+    queryLink: 'markets',
+  });
+
+  let cleanData: {}[] = [];
+  data.markets?.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
+
+  if (session) {
+    return {
+      props: {
+        accessToken: session?.accessToken,
+        markets: cleanData,
+      },
+    };
+  } else {
+    return {
+      props: {
+        accessToken: null,
+      },
+    };
+  }
 }

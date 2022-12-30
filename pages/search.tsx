@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react';
 import AccessDenied from '../components/AccessDenied';
 import Layout from '../components/Layout';
 import RangeFilter from '../components/search-page/RangeFilter';
@@ -11,14 +10,15 @@ import FlyInOutRight from '../components/animations/FlyInOutRight';
 import FadeInOut from '../components/animations/FadeInOut';
 import SongModal from '../components/search-page/SongModal';
 import { useState } from 'react';
-import Link from 'next/link';
+import { unstable_getServerSession } from 'next-auth';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { authOptions } from './api/auth/[...nextauth]';
 
 const selectSong = (state: RootState) => state.song.currentSong;
 
 const getMultiSelectValues = (state: RootState) => state.filters.seeds;
 
-export default function Page() {
-  const { data: session, status } = useSession();
+export default function Page({ accessToken }: { accessToken: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const song = useSelector(selectSong);
   const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce(
@@ -28,7 +28,7 @@ export default function Page() {
 
   if (typeof window !== 'undefined' && status === 'loading') return null;
 
-  if (!session) {
+  if (!accessToken) {
     return (
       <Layout>
         <AccessDenied />
@@ -77,3 +77,15 @@ export default function Page() {
     </Layout>
   );
 }
+
+export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+  return session
+    ? {
+        props: {
+          accessToken: session?.accessToken,
+        },
+      }
+    : { props: { accessToken: null } };
+}
+

@@ -1,30 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useSession } from 'next-auth/react';
-import { getSpotifyData } from '../utils';
-import { Artist, Data } from '../../types/components';
+import { Artist } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
 import { SwiperButtons } from '../global/SwiperButtons';
 import 'swiper/css';
 
-export default function FollowedArtists() {
-  const [currentArtists, setCurrentArtists] = useState<Artist[]>();
-  const { data: session } = useSession();
+export default function FollowedArtists({artists} : {artists: Artist[]}) {
   const swiperRef = useRef<SwiperCore>();
-
-  useEffect(() => {
-    session?.accessToken && getCurrentlyFollowed();
-  }, [session]);
-
-  const getCurrentlyFollowed = () => {
-    getSpotifyData({
-      token: session?.accessToken as string,
-      searchParams: { type: 'artist', limit: 50, offset: 0 },
-      queryLink: `me/following`,
-    }).then((data: Data): void => {
-      data && setCurrentArtists(data?.artists?.items);
-    });
-  };
 
   return (
     <div className="flex flex-col w-full mx-auto mt-5">
@@ -41,8 +23,8 @@ export default function FollowedArtists() {
             swiperRef.current = swiper;
           }}
         >
-          {currentArtists &&
-            currentArtists.map((artist: Artist, index: number) => (
+          {artists &&
+            artists.map((artist: Artist, index: number) => (
               <SwiperSlide key={index}>
                 <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
                   <img
