@@ -1,54 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import FlyInOutBottom from '../../components/animations/FlyInOutBottom';
-import { useRouter } from 'next/router';
 import { getSpotifyData, millisToMinutesAndSeconds } from '../../components/utils';
-import { useSession } from 'next-auth/react';
-import { Album, Data, Track } from '../../types/components';
+import { Album, Track } from '../../types/components';
 import Image from 'next/image';
 import Layout from '../../components/Layout';
+import { unstable_getServerSession } from 'next-auth';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { authOptions } from '../api/auth/[...nextauth]';
 
-export default function AlbumPage() {
-  const query = useRouter().query;
-  const { data: session } = useSession();
-  const [albumTracks, setAlbumTracks] = useState<Track[]>();
-  const [album, setAlbum] = useState<Album>();
-  const [loading, setLoading] = useState(true);
+type Props = {
+  accessToken: String;
+  tracks: Track[];
+  album: Album;
+};
 
-  const getPlaylistTracks = () => {
-    getSpotifyData({
-      token: session?.accessToken as string,
-      searchParams: { offset: 0 },
-      queryLink: `albums/${query.slug}`,
-    }).then((data: Data) => {
-      setAlbum(data as any);
-      let currentData: Track[] = data?.tracks?.items as Track[];
-      let ids = currentData
-        .slice(0, 50)
-        .map((track) => track.id)
-        .toString();
-      getSpotifyData({
-        token: session?.accessToken as string,
-        searchParams: { ids, offset: 0 },
-        queryLink: 'me/tracks/contains',
-      }).then((data: any) => {
-        setAlbumTracks(() => currentData.map((item: Track, index: number) => ({ ...item, liked: data[index] })));
-        setLoading(false);
-      });
-    });
-  };
-
-  useEffect(() => {
-    session?.accessToken && getPlaylistTracks();
-  }, [session?.accessToken]);
-
-  if (loading) {
-    return (
-      <Layout>
-        <div className="h-[100vh] w-full bg-black"></div>;
-      </Layout>
-    );
-  }
-
+export default function AlbumPage({ album, tracks }: Props) {
   return (
     <Layout>
       <FlyInOutBottom>
@@ -82,8 +48,8 @@ export default function AlbumPage() {
                 <Image src="/time.svg" width={16} height={16} />
               </span>
             </div>
-            {albumTracks &&
-              albumTracks.map((item, index) => (
+            {tracks &&
+              tracks.map((item, index) => (
                 <div className="grid grid-cols-recentlyPlayed items-center" key={index}>
                   <div className="text-[#6a6a6a] col-start-1 col-end-2">
                     <span>{index + 1}</span>
@@ -114,4 +80,45 @@ export default function AlbumPage() {
       </FlyInOutBottom>
     </Layout>
   );
+}
+
+export async function getServerSideProps({
+  req,
+  res,
+  params,
+}: {
+  req: NextApiRequest;
+  res: NextApiResponse;
+  params: { slug: string };
+}) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  const album = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: { offset: 0 },
+    queryLink: `albums/${params.slug}`,
+  });
+
+  let ids = album?.tracks?.items.map((item) => item.id).toString();
+
+  let validIds = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: { ids, offset: 0 },
+    queryLink: 'me/tracks/contains',
+  });
+
+  let albumTracks = album?.tracks?.items.map((item: Track, index: number) => {
+    return {
+      ...item,
+      liked: validIds[index],
+    };
+  });
+
+  return {
+    props: {
+      accessToken: session?.accessToken,
+      album,
+      tracks: albumTracks,
+    },
+  };
 }

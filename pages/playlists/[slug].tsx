@@ -10,11 +10,10 @@ import { authOptions } from '../api/auth/[...nextauth]';
 type Props = {
   accessToken: String;
   tracks: Track[];
-  playlist: Playlist
+  playlist: Playlist;
 };
 
 export default function ArtistPage({ accessToken, tracks, playlist }: Props) {
-
   return (
     <Layout>
       <FlyInOutBottom>
@@ -101,18 +100,18 @@ export async function getServerSideProps(context) {
     queryLink: 'me/tracks/contains',
   });
 
-  let cleanPlaylists = playlist?.tracks?.items.slice(0,50).map((item: Track, index: number) => {
+  let cleanPlaylists = playlist?.tracks?.items.slice(0, 50).map((item: Track, index: number) => {
     return {
       ...item,
-    liked: validIds[index],
-    }
-  })
+      liked: validIds[index],
+    };
+  });
 
   return {
     props: {
       accessToken: session.accessToken,
       tracks: cleanPlaylists,
-      playlist
+      playlist,
     },
   };
 }

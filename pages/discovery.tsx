@@ -41,7 +41,7 @@ export default function Discovery({ markets }: { markets: string[] }) {
   );
 }
 
-export async function getServerSideProps({req, res} : {req: NextApiRequest, res: NextApiResponse}) {
+export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
   const session = await unstable_getServerSession(req, res, authOptions);
 
   const data = await getSpotifyData({
