@@ -7,6 +7,7 @@ import Layout from '../../components/Layout';
 import { unstable_getServerSession } from 'next-auth';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '../api/auth/[...nextauth]';
+import AccessDenied from '../../components/AccessDenied';
 
 type Props = {
   accessToken: String;
@@ -14,7 +15,15 @@ type Props = {
   album: Album;
 };
 
-export default function AlbumPage({ album, tracks }: Props) {
+export default function AlbumPage({ album, tracks, accessToken }: Props) {
+  if (!accessToken) {
+    return (
+      <Layout>
+        <AccessDenied />
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <FlyInOutBottom>
@@ -101,7 +110,7 @@ export async function getServerSideProps({
 
   let ids = album?.tracks?.items.map((item) => item.id).toString();
 
-  let validIds = await getSpotifyData({
+  let validIds: any = await getSpotifyData({
     token: session?.accessToken as string,
     searchParams: { ids, offset: 0 },
     queryLink: 'me/tracks/contains',
@@ -114,11 +123,13 @@ export async function getServerSideProps({
     };
   });
 
-  return {
-    props: {
-      accessToken: session?.accessToken,
-      album,
-      tracks: albumTracks,
-    },
-  };
+  return session
+    ? {
+        props: {
+          accessToken: session?.accessToken,
+          album,
+          tracks: albumTracks,
+        },
+      }
+    : { props: { accessToken: null } };
 }

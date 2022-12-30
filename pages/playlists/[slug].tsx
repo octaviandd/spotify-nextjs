@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Layout from '../../components/Layout';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
+import { NextApiRequest, NextApiResponse } from 'next';
+import AccessDenied from '../../components/AccessDenied';
 
 type Props = {
   accessToken: String;
@@ -13,7 +15,15 @@ type Props = {
   playlist: Playlist;
 };
 
-export default function ArtistPage({ accessToken, tracks, playlist }: Props) {
+export default function ArtistPage({ tracks, playlist, accessToken }: Props) {
+  if (!accessToken) {
+    return (
+      <Layout>
+        <AccessDenied />
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <FlyInOutBottom>
@@ -80,13 +90,21 @@ export default function ArtistPage({ accessToken, tracks, playlist }: Props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions);
+export async function getServerSideProps({
+  res,
+  req,
+  params,
+}: {
+  res: NextApiResponse;
+  req: NextApiRequest;
+  params: { slug: string };
+}) {
+  const session = await unstable_getServerSession(req, res, authOptions);
 
   const playlist = await getSpotifyData({
-    token: session.accessToken as string,
+    token: session?.accessToken as string,
     searchParams: { offset: 0, limit: 50 },
-    queryLink: `playlists/${context.params.slug}`,
+    queryLink: `playlists/${params.slug}`,
   });
 
   let ids = playlist?.tracks?.items
@@ -94,8 +112,8 @@ export async function getServerSideProps(context) {
     .map((item) => item.track.id)
     .toString();
 
-  let validIds = await getSpotifyData({
-    token: session.accessToken as string,
+  let validIds: any = await getSpotifyData({
+    token: session?.accessToken as string,
     searchParams: { ids, offset: 0 },
     queryLink: 'me/tracks/contains',
   });
@@ -107,11 +125,13 @@ export async function getServerSideProps(context) {
     };
   });
 
-  return {
-    props: {
-      accessToken: session.accessToken,
-      tracks: cleanPlaylists,
-      playlist,
-    },
-  };
+  return session
+    ? {
+        props: {
+          accessToken: session?.accessToken,
+          tracks: cleanPlaylists,
+          playlist,
+        },
+      }
+    : { props: { accessToken: null } };
 }

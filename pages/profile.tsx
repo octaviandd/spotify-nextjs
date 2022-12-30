@@ -19,7 +19,7 @@ type Props = {
   profile: User;
   albums: Album[];
   artists: Artist[];
-  accessToken: String;
+  accessToken: String | null;
 };
 
 export default function Profile({ profile, albums, artists, accessToken }: Props) {
@@ -72,12 +72,14 @@ export async function getServerSideProps({ req, res }: { req: NextApiRequest; re
     queryLink: `me/following`,
   });
 
-  return {
-    props: {
-      accessToken: session?.accessToken,
-      profile: profileData,
-      albums: featuredAlbums.items,
-      artists: followedArtists?.artists?.items,
-    },
-  };
+  return session
+    ? {
+        props: {
+          accessToken: session?.accessToken,
+          profile: profileData,
+          albums: featuredAlbums.items,
+          artists: followedArtists?.artists?.items,
+        },
+      }
+    : { props: { accessToken: null } };
 }

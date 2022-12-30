@@ -8,13 +8,22 @@ import FlyInOutBottom from '../components/animations/FlyInOutBottom';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
 import { NextApiRequest, NextApiResponse } from 'next';
+import AccessDenied from '../components/AccessDenied';
 
-export default function Discovery({ markets }: { markets: string[] }) {
+export default function Discovery({ markets, accessToken }: { markets: string[]; accessToken: string }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(updateMarkets(markets));
   }, []);
+
+  if (!accessToken) {
+    return (
+      <Layout>
+        <AccessDenied />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -53,10 +62,18 @@ export async function getServerSideProps({ req, res }: { req: NextApiRequest; re
   let cleanData: {}[] = [];
   data.markets?.map((item: string, index: number) => cleanData.push({ id: index, value: item, label: item }));
 
-  return {
-    props: {
-      accessToken: session?.accessToken,
-      markets: cleanData,
-    },
-  };
+  if (session) {
+    return {
+      props: {
+        accessToken: session?.accessToken,
+        markets: cleanData,
+      },
+    };
+  } else {
+    return {
+      props: {
+        accessToken: null,
+      },
+    };
+  }
 }
