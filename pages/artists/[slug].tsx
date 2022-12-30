@@ -7,10 +7,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSpotifyData } from '../../components/utils';
 
 type Props = {
-  accessToken: string
+  accessToken: string;
 };
 
-export default function ArtistPage({accessToken}: Props) {
+export default function ArtistPage({ accessToken }: Props) {
   if (!accessToken) {
     return (
       <Layout>
@@ -54,4 +54,3 @@ export async function getServerSideProps({ req, res }: { req: NextApiRequest; re
     };
   }
 }
-

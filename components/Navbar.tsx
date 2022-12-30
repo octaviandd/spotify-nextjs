@@ -26,7 +26,7 @@ export default function Navbar() {
             {session?.user && (
               <div className="flex items-center tracking-wid text-xl">
                 <Link href="/search">
-                  <div className='px-5 font-semibold text-white hover:bg-[#cdcbcb18] cursor-pointer py-2 rounded-xl transition-all ease-in-out duration-250'>
+                  <div className="px-5 font-semibold text-white hover:bg-[#cdcbcb18] cursor-pointer py-2 rounded-xl transition-all ease-in-out duration-250">
                     <span className={pathname === '/search' ? 'pointer-events-none' : ''}>Search</span>
                   </div>
                 </Link>
@@ -37,16 +37,14 @@ export default function Navbar() {
                 </Link>
                 <Link href="/profile">
                   <div className="px-5 font-semibold text-white py-2 rounded-xl cursor-pointer hover:bg-[#cdcbcb18] transition-all ease-in-out duration-250">
-                    <span className={pathname === '/profile' ? 'pointer-events-none' : ''}>
-                      Profile
-                    </span>
+                    <span className={pathname === '/profile' ? 'pointer-events-none' : ''}>Profile</span>
                   </div>
                 </Link>
               </div>
             )}
           </div>
-          <div className="ml-auto relative">
-            {!session?.user && (
+          {!session?.user && (
+            <div className="ml-auto relative">
               <a
                 href={`/api/auth/signin`}
                 onClick={(e) => {
@@ -62,12 +60,12 @@ export default function Navbar() {
                   className="flex items-center group ease-in-out transition duration-200 bg-green-500 hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center"
                 >
                   <span className="hidden md:inline-block pr-1">Connect with </span>
-                  <span className='mr-3'>Spotify</span>
+                  <span className="mr-3">Spotify</span>
                   <Image src="/chevron-right.svg" width={24} height={24} />
                 </button>
               </a>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </nav>

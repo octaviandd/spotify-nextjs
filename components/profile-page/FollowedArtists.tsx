@@ -5,7 +5,7 @@ import { Swiper as SwiperCore } from 'swiper/types';
 import { SwiperButtons } from '../global/SwiperButtons';
 import 'swiper/css';
 
-export default function FollowedArtists({artists} : {artists: Artist[]}) {
+export default function FollowedArtists({ artists }: { artists: Artist[] }) {
   const swiperRef = useRef<SwiperCore>();
 
   return (

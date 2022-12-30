@@ -88,4 +88,3 @@ export async function getServerSideProps({ req, res }: { req: NextApiRequest; re
       }
     : { props: { accessToken: null } };
 }
-

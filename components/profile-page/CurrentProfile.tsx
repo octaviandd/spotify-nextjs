@@ -3,9 +3,8 @@ import { User } from '../../types/components';
 import { signOut } from 'next-auth/react';
 
 export default function CurrentProfile({ profile }: { profile: User }) {
-
   if (!profile) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
@@ -25,7 +24,7 @@ export default function CurrentProfile({ profile }: { profile: User }) {
           onClick={(e) => {
             e.preventDefault();
             signOut({
-              callbackUrl: `${window.location.origin}/`
+              callbackUrl: `${window.location.origin}/`,
             });
           }}
           className="inline-block mr-2"

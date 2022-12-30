@@ -2,9 +2,9 @@ import { signIn } from 'next-auth/react';
 
 export default function AccessDenied() {
   return (
-    <div className='relative flex justify-center items-center h-[70vh]'>
-      <div className='flex flex-col'>
-        <h1 className='text-3xl text-white'>Oopss, you are not logged in...</h1>
+    <div className="relative flex justify-center items-center h-[70vh]">
+      <div className="flex flex-col">
+        <h1 className="text-3xl text-white">Oopss, you are not logged in...</h1>
         <a
           href={`/api/auth/signin`}
           onClick={(e) => {

@@ -5,7 +5,7 @@ import { Swiper as SwiperCore } from 'swiper/types';
 import { SwiperButtons } from '../global/SwiperButtons';
 import 'swiper/css';
 
-export default function FollowedAlbums({albums} : {albums: Album[]}) {
+export default function FollowedAlbums({ albums }: { albums: Album[] }) {
   const swiperRef = useRef<SwiperCore>();
 
   return (

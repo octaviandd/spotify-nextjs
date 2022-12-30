@@ -7,7 +7,7 @@ type Props = {
 
 export default function LimitSetter({ currentLimit, setCurrentLimit }: Props) {
   return (
-    <div className='mx-5 flex'>
+    <div className="mx-5 flex">
       <div className="ml-3">
         <span
           onClick={() => setCurrentLimit(10)}
