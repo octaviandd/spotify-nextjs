@@ -44,29 +44,29 @@ export default function Navbar() {
                 </Link>
               </div>
             )}
-            <div className="ml-3 relative">
-              {!session?.user && (
-                <a
-                  href={`/api/auth/signin`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signIn('spotify', {
-                      callbackUrl: `${window.location.origin}/search`,
-                    });
-                  }}
-                  className="inline-block mr-2"
+          </div>
+          <div className="ml-auto relative">
+            {!session?.user && (
+              <a
+                href={`/api/auth/signin`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  signIn('spotify', {
+                    callbackUrl: `${window.location.origin}/search`,
+                  });
+                }}
+                className="inline-block mr-2"
+              >
+                <button
+                  type="button"
+                  className="flex items-center group ease-in-out transition duration-200 bg-green-500 hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center"
                 >
-                  <button
-                    type="button"
-                    className="group ease-in-out transition duration-200 bg-green-500 hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
-                  >
-                    <span className="hidden md:inline-block pr-1">Connect with </span>
-                    <span>Spotify</span>
-                    <Image src="/chevron-right.svg" width={24} height={24} />
-                  </button>
-                </a>
-              )}
-            </div>
+                  <span className="hidden md:inline-block pr-1">Connect with </span>
+                  <span className='mr-3'>Spotify</span>
+                  <Image src="/chevron-right.svg" width={24} height={24} />
+                </button>
+              </a>
+            )}
           </div>
         </div>
       </div>
