@@ -36,8 +36,8 @@ export const ReactSelect = ({ options, setValues, defaultValues, placeholder }: 
           borderRadius: '50px',
           marginLeft: '10px',
           zIndex: '50',
-          width: '200px',
-          fontSize: '12px',
+          width: '100px',
+          fontSize: '8px',
         }),
       }}
       components={{

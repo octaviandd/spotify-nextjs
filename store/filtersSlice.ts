@@ -45,6 +45,7 @@ export const filterSlice = createSlice({
   },
 });
 
+
 export const { updateRangeSliders, updateMultiSelect } = filterSlice.actions;
 
 export const selectProperty = (state: RootState, property: string) => state.filters.filters[property];

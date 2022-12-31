@@ -49,21 +49,45 @@ export default function ItemsCarousel({ endpoint, title, redirect }: Props) {
   }, [session?.accessToken, currentLimit, currentCountry]);
 
   return (
-    <div className="flex flex-col w-full mx-auto mt-20">
-      <div className="flex items-center mb-5 justify-between px-20">
+    <div className="flex flex-col mt-20">
+      <div className="flex mb-5 justify-between px-5 md:px-10 lg:px-20">
         <div className="flex">
           <p className="mb-6 text-2xl text-white">{title}</p>
-          {title !== 'Featured Playlists' && (
-            <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
-          )}
+          <div className="hidden lg:block">
+            {title !== 'Featured Playlists' && (
+              <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+            )}
+          </div>
         </div>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
-      <div className="w-[100vw] flex px-20">
+      <div className="w-[100vw] flex px-5 md:px-10 lg:px-20 justify-center">
         <Swiper
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+            },
+            768: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+            },
+            920: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+            },
+            1024: {
+              slidesPerView: 3.5,
+              slidesPerGroup: 3,
+            },
+            1280: {
+              slidesPerView: 4.5,
+              slidesPerGroup: 3,
+            },
+          }}
           spaceBetween={25}
-          slidesPerView={4.5}
-          slidesPerGroup={3}
+          slidesPerView={1}
+          slidesPerGroup={1}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
@@ -86,13 +110,18 @@ export default function ItemsCarousel({ endpoint, title, redirect }: Props) {
             ))}
         </Swiper>
       </div>
-      <div className="px-20 flex justify-end mt-5">
+      <div className="px-5 md:px-10 lg:px-20 flex justify-start items-center lg:justify-end mt-5">
         <ReactSelect
           options={markets}
           placeholder="Select a region"
           setValues={setCurrentCountry}
           defaultValues={undefined}
         ></ReactSelect>
+        <div className="block lg:hidden">
+          {title !== 'Featured Playlists' && (
+            <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+          )}
+        </div>
       </div>
     </div>
   );

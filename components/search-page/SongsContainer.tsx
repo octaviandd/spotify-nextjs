@@ -11,7 +11,7 @@ import { updateCurrentSong } from '../../store/songSlice';
 const selectSearch = (state: RootState) => state.search;
 const selectAllFilters = (state: RootState) => state.filters;
 
-export default function SongsContainer() {
+export default function SongsContainer({ accessToken }: { accessToken: string }) {
   const [items, setItems] = useState<Track[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const filters = useSelector(selectAllFilters);
@@ -40,7 +40,7 @@ export default function SongsContainer() {
 
     setLoading(true);
     getSpotifyData({
-      token: session?.accessToken as string,
+      token: accessToken as string,
       searchParams: search
         ? { q: search, type: 'track', limit: 50 }
         : isDoable
@@ -70,7 +70,7 @@ export default function SongsContainer() {
   );
 
   useEffect(() => {
-    debouncedGetData(filters);
+    accessToken && debouncedGetData(filters);
   }, [search, filters]);
 
   if (loading) {
@@ -105,16 +105,6 @@ export default function SongsContainer() {
                   onClick={() => setSong(item)}
                   className="hidden z-10 absolute cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:block transition-all ease-in-out duration-500"
                 >
-                  {/* <button className='bg-[#00CA4E] rounded-full p-3 transition-all ease-in-out duration-500'>
-                    <span>
-                      <span aria-hidden="true">
-                        <svg role="img" height="30" width="30" aria-hidden="true" viewBox="0 0 24 24" data-encore-id="icon">
-                          <path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z">
-                          </path>
-                        </svg>
-                      </span>
-                    </span>
-                  </button> */}
                   <Image src="/Spotify_Icon_RGB_Green.png" width="52" height="52" />
                 </div>
               </a>

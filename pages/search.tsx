@@ -26,8 +26,6 @@ export default function Page({ accessToken }: { accessToken: string }) {
     0
   );
 
-  if (typeof window !== 'undefined' && status === 'loading') return null;
-
   if (!accessToken) {
     return (
       <Layout>
@@ -68,7 +66,7 @@ export default function Page({ accessToken }: { accessToken: string }) {
           </div>
         </FlyInOutRight>
         <FadeInOut>
-          <SongsContainer></SongsContainer>
+          <SongsContainer accessToken={accessToken}></SongsContainer>
         </FadeInOut>
       </div>
       {song?.id && window.location.href.includes('search') && (
