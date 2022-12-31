@@ -51,6 +51,7 @@ export default function Discovery({ markets, accessToken }: { markets: string[];
 }
 
 export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
+  //@ts-ignore
   const session = await unstable_getServerSession(req, res, authOptions);
 
   const data = await getSpotifyData({

@@ -1,8 +1,9 @@
+
+import TransitionLayout from '../components/animations/TransitionLayout';
+import store from '../store';
 import { SessionProvider } from 'next-auth/react';
 import { Provider } from 'react-redux';
 import { TransitionProvider } from '../components/animations/TransitionContext';
-import TransitionLayout from '../components/animations/TransitionLayout';
-import store from '../store';
 import type { AppProps } from 'next/app';
 import './styles.css';
 

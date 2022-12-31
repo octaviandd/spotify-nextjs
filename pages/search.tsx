@@ -4,8 +4,6 @@ import RangeFilter from '../components/search-page/RangeFilter';
 import SeedFilters from '../components/search-page/SeedFilters';
 import SearchInput from '../components/search-page/SearchInput';
 import SongsContainer from '../components/search-page/SongsContainer';
-import { RootState } from '../store';
-import { useSelector } from 'react-redux';
 import FlyInOutRight from '../components/animations/FlyInOutRight';
 import FadeInOut from '../components/animations/FadeInOut';
 import SongModal from '../components/search-page/SongModal';
@@ -13,6 +11,8 @@ import { useState } from 'react';
 import { unstable_getServerSession } from 'next-auth';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from './api/auth/[...nextauth]';
+import { RootState } from '../store';
+import { useSelector } from 'react-redux';
 
 const selectSong = (state: RootState) => state.song.currentSong;
 
@@ -77,6 +77,7 @@ export default function Page({ accessToken }: { accessToken: string }) {
 }
 
 export async function getServerSideProps({ req, res }: { req: NextApiRequest; res: NextApiResponse }) {
+  //@ts-ignore
   const session = await unstable_getServerSession(req, res, authOptions);
   return session
     ? {
