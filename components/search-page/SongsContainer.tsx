@@ -89,10 +89,10 @@ export default function SongsContainer({ accessToken }: { accessToken: string })
   }
 
   return (
-    <div className="grid grid-cols-item grid-rows-item gap-y-5 gap-x-3 px-4">
+    <div className="flex flex-wrap justify-center gap-y-5 gap-x-3 px-1 lg:px-4">
       {items.length > 0 &&
         items.map((item) => (
-          <div key={item.id} className="relative group">
+          <div key={item.id} className="relative group max-w-[85px] lg:max-w-[150px]">
             <div className="relative">
               <a className="w-full h-full">
                 <img
@@ -110,8 +110,8 @@ export default function SongsContainer({ accessToken }: { accessToken: string })
               </a>
             </div>
             <div className="flex flex-col flex-start pt-2">
-              <span className="text-white">{item.name}</span>
-              <span className="text-[#6a6a6a]">{item.artists[0].name}</span>
+              <span className="text-white text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">{item.name}</span>
+              <span className="text-[#6a6a6a] text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">{item.artists[0].name}</span>
             </div>
           </div>
         ))}

@@ -52,7 +52,7 @@ export default function FollowedArtists() {
               slidesPerGroup: 3,
             },
             1280: {
-              slidesPerView: 4.5,
+              slidesPerView: currentPlaylists && currentPlaylists.length > 4 ? 4.5 : 4,
               slidesPerGroup: 3,
             },
           }}

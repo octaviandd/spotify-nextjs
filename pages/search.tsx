@@ -39,12 +39,12 @@ export default function Page({ accessToken }: { accessToken: string }) {
       <div
         className={
           isModalOpen
-            ? 'bg-[#000000] grid grid-cols-search grid-rows-search pt-10 opacity-50 pointer-events-none'
-            : 'bg-[#000000] grid grid-cols-search grid-rows-search pt-10'
+            ? 'bg-[#000000] flex lg:grid grid-cols-search grid-rows-search pt-10 opacity-50 pointer-events-none'
+            : 'bg-[#000000] flex lg:grid grid-cols-search grid-rows-search pt-10'
         }
       >
         <FlyInOutRight>
-          <div className="flex flex-col items-center">
+          <div className="lg:flex flex-col items-center hidden">
             <SearchInput></SearchInput>
             <SeedFilters type="artist" queryLink="search"></SeedFilters>
             <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds"></SeedFilters>
