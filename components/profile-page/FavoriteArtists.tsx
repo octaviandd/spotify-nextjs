@@ -37,24 +37,39 @@ export default function FavoriteTracks() {
 
   return (
     <div className="my-10">
-      <div className="flex text-xl items-center mb-6 justify-between px-20">
+      <div className="flex text-xl items-center mb-6 justify-between px-5 lg:px-20">
         <div className="flex items-center">
           <p className="text-2xl text-white">Your top Artists</p>
-          <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
-          <ReactSelect
-            options={timeRangeValues}
-            setValues={setCurrentTimeFrame}
-            defaultValues={{ id: 0, label: 'One month', value: 'short_term' }}
-            placeholder="Timeline"
-          ></ReactSelect>
         </div>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
-      <div className="w-[100vw] flex px-20">
+      <div className="w-[100vw] flex px-5 lg:px-20">
         <Swiper
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+            },
+            768: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+            },
+            920: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+            },
+            1024: {
+              slidesPerView: 3.5,
+              slidesPerGroup: 3,
+            },
+            1280: {
+              slidesPerView: 4.5,
+              slidesPerGroup: 3,
+            },
+          }}
           spaceBetween={25}
-          slidesPerView={4.5}
-          slidesPerGroup={3}
+          slidesPerView={1}
+          slidesPerGroup={1}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
@@ -80,6 +95,17 @@ export default function FavoriteTracks() {
               </SwiperSlide>
             ))}
         </Swiper>
+      </div>
+      <div className="px-5 md:px-10 lg:px-20 flex justify-start items-center lg:justify-end mt-5">
+        <ReactSelect
+          options={timeRangeValues}
+          setValues={setCurrentTimeFrame}
+          defaultValues={{ id: 0, label: 'One month', value: 'short_term' }}
+          placeholder="Timeline"
+        ></ReactSelect>
+        <div className="block lg:hidden">
+          <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+        </div>
       </div>
     </div>
   );

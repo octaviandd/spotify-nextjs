@@ -34,12 +34,12 @@ export default function Profile({ profile, albums, artists, accessToken }: Props
   return (
     <Layout>
       <div className="py-10">
-        <div className="grid grid-cols-profile px-10">
-          <div className="w-full">
+        <div className="flex flex-col lg:grid grid-cols-profile px-10">
+          <div className="w-full mb-5 lg:mb-0">
             <CurrentProfile profile={profile}></CurrentProfile>
             <CurrentlyPlayed></CurrentlyPlayed>
           </div>
-          <RecentlyPlayed></RecentlyPlayed>
+          {/* <RecentlyPlayed></RecentlyPlayed> */}
         </div>
         <FavoriteArtists></FavoriteArtists>
         <FavoriteTracks></FavoriteTracks>

@@ -10,15 +10,37 @@ export default function FollowedArtists({ artists }: { artists: Artist[] }) {
 
   return (
     <div className="flex flex-col w-full mx-auto mt-5">
-      <div className="flex justify-between items-center mb-5 px-20">
+      <div className="flex justify-between items-center mb-5 px-5 lg:px-20">
         <p className="text-2xl mb-6 text-white">Followed artists</p>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
-      <div className="w-[100vw] flex relative px-20">
+      <div className="w-[100vw] flex relative px-5 lg:px-20">
         <Swiper
-          slidesPerView={4.5}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+            },
+            768: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+            },
+            920: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+            },
+            1024: {
+              slidesPerView: 3.5,
+              slidesPerGroup: 3,
+            },
+            1280: {
+              slidesPerView: 4.5,
+              slidesPerGroup: 3,
+            },
+          }}
+          slidesPerView={1}
           spaceBetween={25}
-          slidesPerGroup={3}
+          slidesPerGroup={1}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}

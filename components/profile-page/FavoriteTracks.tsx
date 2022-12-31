@@ -45,20 +45,13 @@ export default function FavoriteTracks() {
   };
 
   return (
-    <div className="my-10 px-20">
+    <div className="my-10 px-5 lg:px-20">
       <div className="flex text-xl items-center mb-6 justify-between">
         <div className="flex items-center">
           <p className="text-2xl text-white">Your top Tracks</p>
-          <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
-          <ReactSelect
-            options={timeRangeValues}
-            setValues={setCurrentTimeFrame}
-            defaultValues={{ id: 0, label: 'One month', value: 'short_term' }}
-            placeholder="Timeline"
-          ></ReactSelect>
         </div>
       </div>
-      <div className="grid-cols-2 grid grid-rows-auto gap-y-1 gap-x-3 py-3 rounded-md bg-[#16181c] px-3">
+      <div className="flex flex-col lg:grid grid-rows-auto grid-cols-2 gap-y-1 gap-x-3 py-3 rounded-md bg-[#16181c] px-3">
         {currentTracks &&
           currentTracks.map((track, index) => (
             <div className="px-2 py-1 flex items-center justify-between" key={index}>
@@ -77,10 +70,21 @@ export default function FavoriteTracks() {
             </div>
           ))}
       </div>
-      <div className="w-full mt-10 py-10">
-        <p className="text-[#00CA4E] text-7xl text-center font-bold">Average track</p>
-        <div className="ml-10 flex justify-center">
-          <div className="grid grid-rows-4 grid-cols-2 gap-x-10 gap-y-2 mt-10 text-xl w-3/4">
+      <div className="px-5 md:px-10 lg:px-20 flex justify-start items-center lg:justify-end mt-5">
+        <ReactSelect
+          options={timeRangeValues}
+          setValues={setCurrentTimeFrame}
+          defaultValues={{ id: 0, label: 'One month', value: 'short_term' }}
+          placeholder="Timeline"
+        ></ReactSelect>
+        <div className="block lg:hidden">
+          <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+        </div>
+      </div>
+      {/* <div className="w-full mt-10 py-10">
+        <p className="text-[#00CA4E] text-2xl lg:text-7xl text-center font-bold">Average track</p>
+        <div className="lg:ml-10 flex justify-center">
+          <div className="grid grid-rows-4 grid-cols-2 gap-x-10 gap-y-2 mt-10 text-md lg:text-xl w-3/4">
             {currentTracksValues &&
               currentTracksValues.map((value: { name: string; A: number }) => (
                 <div className="flex justify-between rounded-md px-3 py-1 ">
@@ -90,7 +94,7 @@ export default function FavoriteTracks() {
               ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

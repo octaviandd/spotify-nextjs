@@ -36,7 +36,7 @@ export default function RecentlyPlayed() {
   }, [session, currentLimit]);
 
   return (
-    <div className="px-5 pl-20 drop-shadow-md-white">
+    <div className="lg:px-5 lg:pl-20 drop-shadow-md-white">
       <div className="flex items-center mb-5 justify-between max-w-[900px]">
         <div className="mb-6 flex items-center">
           <p className="text-white text-2xl">Recently played</p>
