@@ -1,7 +1,7 @@
 import React from 'react';
 import { Range } from 'react-range';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '../../store/reduxStore';
 import { updateRangeSliders } from '../../store/filtersSlice';
 
 const selectProperty = (state: RootState) => state.filters;

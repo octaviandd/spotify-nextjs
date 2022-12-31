@@ -11,7 +11,7 @@ import { useState } from 'react';
 import { unstable_getServerSession } from 'next-auth';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from './api/auth/[...nextauth]';
-import { RootState } from '../store';
+import { RootState } from '../store/reduxStore';
 import { useSelector } from 'react-redux';
 
 const selectSong = (state: RootState) => state.song.currentSong;

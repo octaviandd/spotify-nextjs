@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateSearch } from '../../store/searchSlice';
-import { RootState } from '../../store';
+import { RootState } from '../../store/reduxStore';
 
 const selectSearch = (state: RootState) => state.search;
 

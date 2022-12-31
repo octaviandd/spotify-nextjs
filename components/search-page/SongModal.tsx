@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '../../store/reduxStore';
 import { getSpotifyData } from '../utils';
 import { gsap } from 'gsap';
 import { Artist, Data, Track } from '../../types/components';

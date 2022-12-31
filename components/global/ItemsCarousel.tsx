@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 import { getSpotifyData } from '../utils';
 import { Data } from '../../types/components';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '../../store/reduxStore';
 import { SwiperButtons } from './SwiperButtons';
 import { ReactSelect } from './ReactSelect';
 import 'swiper/css';

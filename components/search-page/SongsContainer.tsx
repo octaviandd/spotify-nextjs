@@ -2,7 +2,7 @@ import React, { SetStateAction, useEffect, useState, useCallback } from 'react';
 import { getSpotifyData, debounce } from '../utils';
 import { useSession } from 'next-auth/react';
 import { Data, Track } from '../../types/components';
-import { RootState } from '../../store';
+import { RootState } from '../../store/reduxStore';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiltersInitialState } from '../../store/filtersSlice';
 import Image from 'next/image';
