@@ -81,10 +81,10 @@ export default function FavoriteTracks() {
           <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
         </div>
       </div>
-      {/* <div className="w-full mt-10 py-10">
-        <p className="text-[#00CA4E] text-2xl lg:text-7xl text-center font-bold">Average track</p>
+      <div className="w-full mt-10 py-10">
+        <p className="text-[#00CA4E] text-4xl lg:text-7xl text-center font-bold">Average track</p>
         <div className="lg:ml-10 flex justify-center">
-          <div className="grid grid-rows-4 grid-cols-2 gap-x-10 gap-y-2 mt-10 text-md lg:text-xl w-3/4">
+          <div className="flex flex-col md:grid grid-rows-4 grid-cols-2 gap-x-10 gap-y-2 mt-10 text-md lg:text-xl w-3/4">
             {currentTracksValues &&
               currentTracksValues.map((value: { name: string; A: number }) => (
                 <div className="flex justify-between rounded-md px-3 py-1 ">
@@ -94,7 +94,7 @@ export default function FavoriteTracks() {
               ))}
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

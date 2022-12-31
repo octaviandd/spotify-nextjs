@@ -39,7 +39,7 @@ export default function Profile({ profile, albums, artists, accessToken }: Props
             <CurrentProfile profile={profile}></CurrentProfile>
             <CurrentlyPlayed></CurrentlyPlayed>
           </div>
-          {/* <RecentlyPlayed></RecentlyPlayed> */}
+          <RecentlyPlayed></RecentlyPlayed>
         </div>
         <FavoriteArtists></FavoriteArtists>
         <FavoriteTracks></FavoriteTracks>

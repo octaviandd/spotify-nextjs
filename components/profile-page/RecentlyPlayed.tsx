@@ -63,7 +63,7 @@ export default function RecentlyPlayed() {
                 <img src={item.track.album?.images[2].url} className="w-[40px] h-[40px]" />
               </div>
               <div className="flex flex-col justify-center pt-[0.3px] pb-[0.3px]">
-                <span className="mb-1 font-normal text-white text-ellipsis overflow-hidden whitespace-nowrap max-w-[200px]">
+                <span className="mb-1 font-normal text-white text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px] lg:max-w-[200px]">
                   {item.track.name}
                 </span>
                 <span className="text-[#6a6a6a]">{item.track.artists[0].name}</span>
