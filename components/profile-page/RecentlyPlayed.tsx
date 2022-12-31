@@ -1,9 +1,9 @@
 import { useSession } from 'next-auth/react';
 import React, { useState, useEffect } from 'react';
-import { Data, Track } from '../../types/components';
-import { getSpotifyData, millisToMinutesAndSeconds } from '../utils';
 import LimitSetter from '../global/LimitSetter';
 import Image from 'next/image';
+import { Data, Track } from '../../types/components';
+import { getSpotifyData, millisToMinutesAndSeconds } from '../utils';
 
 export default function RecentlyPlayed() {
   const { data: session } = useSession();
@@ -55,7 +55,7 @@ export default function RecentlyPlayed() {
         </div>
         {recentlyPlayed &&
           recentlyPlayed.map((item, index) => (
-            <div className="grid grid-cols-recentlyPlayed items-center">
+            <div key={index} className="grid grid-cols-recentlyPlayed items-center">
               <div className="text-[#6a6a6a] col-start-1 col-end-2">
                 <span>{index + 1}</span>
               </div>

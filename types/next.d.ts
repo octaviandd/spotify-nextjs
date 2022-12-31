@@ -9,7 +9,6 @@ declare module "next/app" {
     __N_SSG?: boolean
     __N_SSP?: boolean
     pageProps: P & {
-      /** Initial session passed in from `getServerSideProps` or `getInitialProps` */
       session?: Session
     }
   }

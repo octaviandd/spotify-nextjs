@@ -1,4 +1,4 @@
-import NextAuth from 'next-auth';
+import NextAuth, { Session } from 'next-auth';
 import SpotifyProvider from 'next-auth/providers/spotify';
 
 async function refreshAccessToken(token: any) {
@@ -61,7 +61,7 @@ export const authOptions = {
     async signIn() {
       return true;
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account } : {token: any, user: any, account: any}) {
       if (account && user) {
         return {
           accessToken: account.access_token,
@@ -72,7 +72,7 @@ export const authOptions = {
       }
       return refreshAccessToken(token);
     },
-    async session({ session, token }) {
+    async session({ session, token } : {session: Session, token: any}) {
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;
       session.error = token.error;
@@ -84,4 +84,5 @@ export const authOptions = {
   debug: false,
 };
 
+//@ts-ignore
 export default NextAuth(authOptions);

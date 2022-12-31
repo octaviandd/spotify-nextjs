@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import LimitSetter from '../global/LimitSetter';
+import { ReactSelect } from '../global/ReactSelect';
 import { Data, Track } from '../../types/components';
 import { useSession } from 'next-auth/react';
 import { getSpotifyData, tracksReducer } from '../utils';
-import LimitSetter from '../global/LimitSetter';
-import { ReactSelect } from '../global/ReactSelect';
 
 const timeRangeValues = [
   { id: 0, label: 'One month', value: 'short_term' },
@@ -86,8 +86,8 @@ export default function FavoriteTracks() {
         <div className="lg:ml-10 flex justify-center">
           <div className="flex flex-col md:grid grid-rows-4 grid-cols-2 gap-x-10 gap-y-2 mt-10 text-md lg:text-xl w-3/4">
             {currentTracksValues &&
-              currentTracksValues.map((value: { name: string; A: number }) => (
-                <div className="flex justify-between rounded-md px-3 py-1 ">
+              currentTracksValues.map((value: { name: string; A: number }, index : number) => (
+                <div className="flex justify-between rounded-md px-3 py-1" key={index}>
                   <span className="pr-10 text-white">{value.name}</span>
                   <span className="pl-10 text-white font-semibold">{value.A}</span>
                 </div>
