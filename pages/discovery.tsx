@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
+import ItemsCarousel from '../components/global/ItemsCarousel';
+import FlyInOutBottom from '../components/animations/FlyInOutBottom';
+import AccessDenied from '../components/AccessDenied';
 import { getSpotifyData } from '../components/utils';
 import { useDispatch } from 'react-redux';
 import { updateMarkets } from '../store/marketsSlice';
-import ItemsCarousel from '../components/global/ItemsCarousel';
-import FlyInOutBottom from '../components/animations/FlyInOutBottom';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
 import { NextApiRequest, NextApiResponse } from 'next';
-import AccessDenied from '../components/AccessDenied';
 
 export default function Discovery({ markets, accessToken }: { markets: string[]; accessToken: string }) {
   const dispatch = useDispatch();
