@@ -34,7 +34,7 @@ export default function Page({ accessToken }: { accessToken: string }) {
             : 'bg-[#000000] flex lg:grid grid-cols-search grid-rows-search pt-10 relative'
         }
       >
-        <Search />
+        <Search accessToken={accessToken}/>
         <FadeInOut>
           <SongsContainer accessToken={accessToken}></SongsContainer>
         </FadeInOut>

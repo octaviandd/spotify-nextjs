@@ -9,8 +9,7 @@ import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
 import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
 
-export default function SeedFilters({ type, queryLink }: { type: string; queryLink: string }) {
-  const { data: session } = useSession();
+export default function SeedFilters({ type, queryLink, accessToken }: { type: string; queryLink: string, accessToken: string }) {
   const [isLoading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
   const dispatch = useDispatch();
@@ -27,7 +26,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
 
   const getData = (q: string = 'm'): void => {
     getSpotifyData({
-      token: session?.accessToken as string,
+      token: accessToken,
       searchParams: type !== 'genre' ? { q, type: type, offset, limit: 50 } : undefined,
       queryLink,
     }).then((data: Data) => {

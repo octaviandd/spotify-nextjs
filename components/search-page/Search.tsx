@@ -8,12 +8,16 @@ import { RootState } from '../../store/reduxStore';
 import MobileSearch from './MobileSearch';
 import { useWindowSize } from './useWindowSize';
 import { gsap } from 'gsap';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-type Props = {};
+
+type Props = {
+  accessToken: string
+};
 
 const getMultiSelectValues = (state: RootState) => state.filters.seeds;
 
-export default function Search({}: Props) {
+export default function Search({accessToken}: Props) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce(
@@ -41,9 +45,9 @@ export default function Search({}: Props) {
           <SearchInput isOpen={isOpen} handleOpen={handleOpen} hidden={false}></SearchInput>
         </div>
         <div className="bg-black px-5 py-4">
-          <SeedFilters type="artist" queryLink="search"></SeedFilters>
-          <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds"></SeedFilters>
-          <SeedFilters type="track" queryLink="search"></SeedFilters>
+          <SeedFilters type="artist" queryLink="search" accessToken={accessToken}></SeedFilters>
+          <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds" accessToken={accessToken}></SeedFilters>
+          <SeedFilters type="track" queryLink="search" accessToken={accessToken}></SeedFilters>
           {seedsLength > 5 && <span className="text-white">Too many selections</span>}
           <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>
           <RangeFilter type="Danceability" max={1} min={0}></RangeFilter>
@@ -66,9 +70,9 @@ export default function Search({}: Props) {
       <FlyInOutRight>
         <div className="lg:flex flex-col items-center hidden">
           <SearchInput isOpen={isOpen} handleOpen={setIsOpen} hidden={true}></SearchInput>
-          <SeedFilters type="artist" queryLink="search"></SeedFilters>
-          <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds"></SeedFilters>
-          <SeedFilters type="track" queryLink="search"></SeedFilters>
+          <SeedFilters type="artist" queryLink="search" accessToken={accessToken}></SeedFilters>
+          <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds" accessToken={accessToken}></SeedFilters>
+          <SeedFilters type="track" queryLink="search" accessToken={accessToken}></SeedFilters>
           {seedsLength > 5 && <span className="text-white">Too many selections</span>}
           <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>
           <RangeFilter type="Danceability" max={1} min={0}></RangeFilter>
