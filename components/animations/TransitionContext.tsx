@@ -8,7 +8,7 @@ type AppContextInterface = {
   setBackground: Function | undefined;
 };
 
-const TransitionContext = createContext<AppContextInterface | null>({
+const TransitionContext = createContext<AppContextInterface>({
   timeline: undefined,
   setTimeline: undefined,
   background: undefined,
