@@ -23,9 +23,7 @@ export default function AlbumPage({ album, tracks, accessToken }: Props) {
     );
   }
 
-  return (
-    <ItemPage item={album} tracks={tracks} accessToken={accessToken} title="Album"></ItemPage>
-  )
+  return <ItemPage item={album} tracks={tracks} accessToken={accessToken} title="Album"></ItemPage>;
 }
 
 export async function getServerSideProps({
@@ -36,7 +34,7 @@ export async function getServerSideProps({
   req: NextApiRequest;
   res: NextApiResponse;
   params: { slug: string };
-  }) {
+}) {
   //@ts-ignore
   const session = await unstable_getServerSession(req, res, authOptions);
 

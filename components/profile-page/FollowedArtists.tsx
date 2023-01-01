@@ -18,23 +18,23 @@ export default function FollowedArtists({ artists }: { artists: Artist[] }) {
         <Swiper
           breakpoints={{
             640: {
-              slidesPerView: 2,
+              slidesPerView: artists.length > 2 ? 1.5 : 1,
               slidesPerGroup: 2,
             },
             768: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
+              slidesPerView: artists.length > 2 ? 2.5 : 2,
+              slidesPerGroup: 2,
             },
             920: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
+              slidesPerView: artists.length > 2 ? 2.5 : 2,
+              slidesPerGroup: 2,
             },
             1024: {
-              slidesPerView: 3.5,
+              slidesPerView: artists.length > 3 ? 3.5 : 3,
               slidesPerGroup: 3,
             },
             1280: {
-              slidesPerView: 4.5,
+              slidesPerView: artists.length > 4 ? 4.5 : 4,
               slidesPerGroup: 3,
             },
           }}
@@ -45,26 +45,25 @@ export default function FollowedArtists({ artists }: { artists: Artist[] }) {
             swiperRef.current = swiper;
           }}
         >
-          {artists &&
-            artists.map((artist: Artist, index: number) => (
-              <SwiperSlide key={index}>
-                <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
-                  <img
-                    src={artist?.images[0]?.url}
-                    className="h-[250px] object-cover object-center cursor-grab rounded-lg"
-                  />
-                  <div className="flex justify-between font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]">
-                    <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
-                      {index + 1}. {artist.name}
-                    </span>
-                    <div>
-                      <span className="text-md">{artist.popularity}</span>
-                      <sup className="ml-1 text-[8px]">Popularity</sup>
-                    </div>
+          {artists.map((artist: Artist, index: number) => (
+            <SwiperSlide key={index}>
+              <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
+                <img
+                  src={artist?.images[0]?.url}
+                  className="h-[250px] object-cover object-center cursor-grab rounded-lg"
+                />
+                <div className="flex justify-between font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]">
+                  <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
+                    {index + 1}. {artist.name}
+                  </span>
+                  <div>
+                    <span className="text-md">{artist.popularity}</span>
+                    <sup className="ml-1 text-[8px]">Popularity</sup>
                   </div>
                 </div>
-              </SwiperSlide>
-            ))}
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

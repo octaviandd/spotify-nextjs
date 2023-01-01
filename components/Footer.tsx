@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className="flex justify-center items-center py-6 px-20 w-full text-white">
       <div className="flex flex-col text-center items-center">
-        <p className=''>
+        <p className="">
           This is an open source project, if you would like to get involved, <br /> please check the repo on{' '}
           <a className="underline" href="https://github.com/octaviandd/spotify-nextjs">
             Github

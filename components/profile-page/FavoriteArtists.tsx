@@ -14,7 +14,7 @@ const timeRangeValues = [
   { id: 2, label: 'All time', value: 'long_term' },
 ];
 
-export default function FavoriteTracks() {
+export default function FavoriteArtists() {
   const { data: session } = useSession();
   const [currentArtists, setCurrentArtists] = useState<Track[]>();
   const [currentLimit, setCurrentLimit] = useState(10);
@@ -40,42 +40,45 @@ export default function FavoriteTracks() {
       <div className="flex text-xl items-center mb-6 justify-between px-5 lg:px-20">
         <div className="flex items-center">
           <p className="text-2xl text-white">Your top Artists</p>
+          <div className="block">
+            <LimitSetter currentLimit={currentLimit} setCurrentLimit={setCurrentLimit}></LimitSetter>
+          </div>
         </div>
         <SwiperButtons swiperRef={swiperRef}></SwiperButtons>
       </div>
       <div className="w-[100vw] flex px-5 lg:px-20">
-        <Swiper
-          breakpoints={{
-            640: {
-              slidesPerView: 2,
-              slidesPerGroup: 2,
-            },
-            768: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
-            },
-            920: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
-            },
-            1024: {
-              slidesPerView: 3.5,
-              slidesPerGroup: 3,
-            },
-            1280: {
-              slidesPerView: 4.5,
-              slidesPerGroup: 3,
-            },
-          }}
-          spaceBetween={25}
-          slidesPerView={1}
-          slidesPerGroup={1}
-          onBeforeInit={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-        >
-          {currentArtists &&
-            currentArtists.map((item: any, index: number) => (
+        {currentArtists && (
+          <Swiper
+            breakpoints={{
+              640: {
+                slidesPerView: currentArtists.length > 2 ? 1.5 : 1,
+                slidesPerGroup: 2,
+              },
+              768: {
+                slidesPerView: currentArtists.length > 2 ? 2.5 : 2,
+                slidesPerGroup: 2,
+              },
+              920: {
+                slidesPerView: currentArtists.length > 2 ? 2.5 : 2,
+                slidesPerGroup: 2,
+              },
+              1024: {
+                slidesPerView: currentArtists.length > 3 ? 3.5 : 3,
+                slidesPerGroup: 3,
+              },
+              1280: {
+                slidesPerView: currentArtists.length > 4 ? 4.5 : 4,
+                slidesPerGroup: 3,
+              },
+            }}
+            spaceBetween={25}
+            slidesPerView={1}
+            slidesPerGroup={1}
+            onBeforeInit={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+          >
+            {currentArtists.map((item: any, index: number) => (
               <SwiperSlide key={index}>
                 <div className="flex flex-col bg-[#181818] px-3 pb-4 pt-2 rounded-lg">
                   <img
@@ -94,7 +97,8 @@ export default function FavoriteTracks() {
                 </div>
               </SwiperSlide>
             ))}
-        </Swiper>
+          </Swiper>
+        )}
       </div>
       <div className="px-5 md:px-10 lg:px-20 flex justify-start items-center lg:justify-end mt-5">
         <ReactSelect

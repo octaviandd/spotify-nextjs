@@ -1,4 +1,3 @@
-
 import TransitionLayout from '../components/animations/TransitionLayout';
 import store from '../store/reduxStore';
 import { SessionProvider } from 'next-auth/react';

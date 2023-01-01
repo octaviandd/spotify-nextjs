@@ -23,9 +23,7 @@ export default function PlaylistPage({ tracks, playlist, accessToken }: Props) {
     );
   }
 
-  return (
-    <ItemPage item={playlist} tracks={tracks} accessToken={accessToken} title="Playlist"></ItemPage>
-  )
+  return <ItemPage item={playlist} tracks={tracks} accessToken={accessToken} title="Playlist"></ItemPage>;
 }
 
 export async function getServerSideProps({
@@ -36,7 +34,7 @@ export async function getServerSideProps({
   res: NextApiResponse;
   req: NextApiRequest;
   params: { slug: string };
-  }) {
+}) {
   //@ts-ignore
   const session = await unstable_getServerSession(req, res, authOptions);
 

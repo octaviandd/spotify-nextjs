@@ -57,48 +57,50 @@ export default function CurrentlyPlayed() {
     session?.accessToken && getCurrentlyPlayed();
   }, [session?.accessToken]);
 
+  if (!currentlyPlaying) {
+    return <div>Not playing any song..</div>;
+  }
+
   return (
     <div className="flex justify-center rounded-lg flex-col w-full mt-10 bg-[#16181c] drop-shadow-md-white">
-      {currentlyPlaying && (
-        <div className="rounded-tr-lg rounded-tl-lg px-3 py-3">
-          <div className="flex items-center pr-1">
-            <div className="mr-2">
-              <img src={currentlyPlaying.album?.images[2].url} className="rounded-md w-[42px] h-[42px]" />
+      <div className="rounded-tr-lg rounded-tl-lg px-3 py-3">
+        <div className="flex items-center pr-1">
+          <div className="mr-2">
+            <img src={currentlyPlaying.album?.images[2].url} className="rounded-md w-[42px] h-[42px]" />
+          </div>
+          <div>
+            <div className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[225px]">
+              <span className="text-white mb-1">{currentlyPlaying.name}</span>
             </div>
             <div>
-              <div className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[225px]">
-                <span className="text-white mb-1">{currentlyPlaying.name}</span>
-              </div>
-              <div>
-                <span className="font-light text-[#6a6a6a]">{currentlyPlaying.artists[0].name}</span>
-              </div>
-            </div>
-            <div className="ml-auto pr-2">
-              <div className="cursor-pointer">
-                {currentlyPlaying.isPlaying && (
-                  <div className="bounce-bars" ref={animationRef}>
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                )}
-              </div>
+              <span className="font-light text-[#6a6a6a]">{currentlyPlaying.artists[0].name}</span>
             </div>
           </div>
-          <div className="flex justify-center relative mt-5">
+          <div className="ml-auto pr-2">
             <div className="cursor-pointer">
-              <Image src="/skip-previous.svg" width={40} height={40} onClick={skipToPreviousTrack} />
-            </div>
-            <div className="mx-5 cursor-pointer">
-              {!currentlyPlaying.isPlaying && <Image src="/play.svg" width={40} height={40} onClick={resumeTrack} />}
-              {currentlyPlaying.isPlaying && <Image src="/pause.svg" width={40} height={40} onClick={pauseTrack} />}
-            </div>
-            <div className="cursor-pointer">
-              <Image src="/skip-next.svg" width={40} height={40} onClick={skipToNextTrack} />
+              {currentlyPlaying.isPlaying && (
+                <div className="bounce-bars" ref={animationRef}>
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              )}
             </div>
           </div>
         </div>
-      )}
+        <div className="flex justify-center relative mt-5">
+          <div className="cursor-pointer">
+            <Image src="/skip-previous.svg" width={40} height={40} onClick={skipToPreviousTrack} />
+          </div>
+          <div className="mx-5 cursor-pointer">
+            {!currentlyPlaying.isPlaying && <Image src="/play.svg" width={40} height={40} onClick={resumeTrack} />}
+            {currentlyPlaying.isPlaying && <Image src="/pause.svg" width={40} height={40} onClick={pauseTrack} />}
+          </div>
+          <div className="cursor-pointer">
+            <Image src="/skip-next.svg" width={40} height={40} onClick={skipToNextTrack} />
+          </div>
+        </div>
+      </div>
       <div className="h-[0.5px] w-full bg-white my-5"></div>
       {currentRecommended && (
         <div className="px-3 py-3 rounded-br-md rounded-bl-md">

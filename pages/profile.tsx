@@ -12,17 +12,18 @@ import FavoriteArtists from '../components/profile-page/FavoriteArtists';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
 import { getSpotifyData } from '../components/utils';
-import { Album, Artist, User } from '../types/components';
+import { Album, Artist, Playlist, User } from '../types/components';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type Props = {
   profile: User;
   albums: Album[];
   artists: Artist[];
+  playlists: Playlist[];
   accessToken: String | null;
 };
 
-export default function Profile({ profile, albums, artists, accessToken }: Props) {
+export default function Profile({ profile, albums, artists, playlists, accessToken }: Props) {
   if (!accessToken) {
     return (
       <Layout>
@@ -44,7 +45,7 @@ export default function Profile({ profile, albums, artists, accessToken }: Props
         <FavoriteArtists></FavoriteArtists>
         <FavoriteTracks></FavoriteTracks>
         <FollowedArtists artists={artists}></FollowedArtists>
-        <FollowedPlaylists></FollowedPlaylists>
+        <FollowedPlaylists playlists={playlists}></FollowedPlaylists>
         <FollowedAlbums albums={albums}></FollowedAlbums>
       </div>
     </Layout>
@@ -73,6 +74,12 @@ export async function getServerSideProps({ req, res }: { req: NextApiRequest; re
     queryLink: `me/following`,
   });
 
+  const followedPlaylists = await getSpotifyData({
+    token: session?.accessToken as string,
+    searchParams: { limit: 50, offset: 0 },
+    queryLink: `me/playlists`,
+  });
+
   return session
     ? {
         props: {
@@ -80,6 +87,7 @@ export async function getServerSideProps({ req, res }: { req: NextApiRequest; re
           profile: profileData,
           albums: featuredAlbums.items,
           artists: followedArtists?.artists?.items,
+          playlists: followedPlaylists.items,
         },
       }
     : { props: { accessToken: null } };

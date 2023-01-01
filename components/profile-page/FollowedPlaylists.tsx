@@ -1,30 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useSession } from 'next-auth/react';
-import { getSpotifyData } from '../utils';
-import { Data, Playlist } from '../../types/components';
+import { Playlist } from '../../types/components';
 import { Swiper as SwiperCore } from 'swiper/types';
-import 'swiper/css';
 import { SwiperButtons } from '../global/SwiperButtons';
+import 'swiper/css';
 
-export default function FollowedArtists() {
-  const [currentPlaylists, setCurrentPlaylists] = useState<Playlist[]>();
-  const { data: session } = useSession();
+type Props = {
+  playlists: Playlist[];
+};
+
+export default function FollowedArtists({ playlists }: Props) {
   const swiperRef = useRef<SwiperCore>();
-
-  useEffect(() => {
-    session?.accessToken && getCurrentlyFollowed();
-  }, [session]);
-
-  const getCurrentlyFollowed = () => {
-    getSpotifyData({
-      token: session?.accessToken as string,
-      searchParams: { limit: 50, offset: 0 },
-      queryLink: `me/playlists`,
-    }).then((data: Data): void => {
-      setCurrentPlaylists(data.items);
-    });
-  };
 
   return (
     <div className="flex flex-col w-full mx-auto mt-20">
@@ -36,23 +22,23 @@ export default function FollowedArtists() {
         <Swiper
           breakpoints={{
             640: {
-              slidesPerView: 2,
+              slidesPerView: playlists.length > 2 ? 1.5 : 1,
               slidesPerGroup: 2,
             },
             768: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
+              slidesPerView: playlists.length > 2 ? 2.5 : 2,
+              slidesPerGroup: 2,
             },
             920: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
+              slidesPerView: playlists.length > 2 ? 2.5 : 2,
+              slidesPerGroup: 2,
             },
             1024: {
-              slidesPerView: 3.5,
+              slidesPerView: playlists.length > 3 ? 3.5 : 3,
               slidesPerGroup: 3,
             },
             1280: {
-              slidesPerView: currentPlaylists && currentPlaylists.length > 4 ? 4.5 : 4,
+              slidesPerView: playlists.length > 4 ? 4.5 : 4,
               slidesPerGroup: 3,
             },
           }}
@@ -63,26 +49,25 @@ export default function FollowedArtists() {
             swiperRef.current = swiper;
           }}
         >
-          {currentPlaylists &&
-            currentPlaylists.map((playlist: Playlist, index: number) => (
-              <SwiperSlide key={index}>
-                <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
-                  <img
-                    src={playlist?.images[0]?.url}
-                    className="h-[250px] object-cover object-center cursor-grab rounded-lg"
-                  />
-                  <div className="flex justify-between font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]">
-                    <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
-                      {index + 1}. {playlist.name}
-                    </span>
-                    <div>
-                      <span className="text-md">{playlist.tracks.total}</span>
-                      <sup className="ml-1 text-[8px]">Tracks</sup>
-                    </div>
+          {playlists.map((playlist: Playlist, index: number) => (
+            <SwiperSlide key={index}>
+              <div className="flex flex-col bg-[#181818] px-3 pb-5 pt-3 rounded-lg">
+                <img
+                  src={playlist?.images[0]?.url}
+                  className="h-[250px] object-cover object-center cursor-grab rounded-lg"
+                />
+                <div className="flex justify-between font-artists text-xl mt-4 leading-5 text-white font-medium tracking-[-0.2px]">
+                  <span className="text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px]">
+                    {index + 1}. {playlist.name}
+                  </span>
+                  <div>
+                    <span className="text-md">{playlist.tracks.total}</span>
+                    <sup className="ml-1 text-[8px]">Tracks</sup>
                   </div>
                 </div>
-              </SwiperSlide>
-            ))}
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>

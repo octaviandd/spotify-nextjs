@@ -61,7 +61,7 @@ export const authOptions = {
     async signIn() {
       return true;
     },
-    async jwt({ token, user, account } : {token: any, user: any, account: any}) {
+    async jwt({ token, user, account }: { token: any; user: any; account: any }) {
       if (account && user) {
         return {
           accessToken: account.access_token,
@@ -72,7 +72,7 @@ export const authOptions = {
       }
       return refreshAccessToken(token);
     },
-    async session({ session, token } : {session: Session, token: any}) {
+    async session({ session, token }: { session: Session; token: any }) {
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;
       session.error = token.error;

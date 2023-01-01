@@ -1,4 +1,5 @@
 import React, { MutableRefObject } from 'react';
+import Image from 'next/image';
 import { Swiper } from 'swiper/types';
 
 export const SwiperButtons = ({ swiperRef }: { swiperRef: MutableRefObject<Swiper | undefined> }) => {
@@ -8,23 +9,13 @@ export const SwiperButtons = ({ swiperRef }: { swiperRef: MutableRefObject<Swipe
         onClick={() => swiperRef.current?.slidePrev()}
         className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[48px] h-[48px] flex justify-center items-center"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
-          <path
-            d="M32 15H3.41l8.29-8.29-1.41-1.42-10 10a1 1 0 0 0 0 1.41l10 10 1.41-1.41L3.41 17H32z"
-            data-name="4-Arrow Left"
-          />
-        </svg>
+        <Image src="/button-left.svg" width={32} height={32} />
       </button>
       <button
         onClick={() => swiperRef.current?.slideNext()}
         className="text-lg px-3 py-3 bg-[#F6F4F4] text-white w-[48px] h-[48px] flex justify-center items-center"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" height="32" width="32" viewBox="0 0 32 32">
-          <path
-            d="m31.71 15.29-10-10-1.42 1.42 8.3 8.29H0v2h28.59l-8.29 8.29 1.41 1.41 10-10a1 1 0 0 0 0-1.41z"
-            data-name="3-Arrow Right"
-          />
-        </svg>
+        <Image src="/button-right.svg" width={32} height={32} />
       </button>
     </div>
   );

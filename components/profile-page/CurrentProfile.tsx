@@ -3,10 +3,6 @@ import { User } from '../../types/components';
 import { signOut } from 'next-auth/react';
 
 export default function CurrentProfile({ profile }: { profile: User }) {
-  if (!profile) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="flex items-center flex-col w-full">
       <img

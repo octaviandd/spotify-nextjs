@@ -110,8 +110,12 @@ export default function SongsContainer({ accessToken }: { accessToken: string })
               </a>
             </div>
             <div className="flex flex-col flex-start pt-2">
-              <span className="text-white text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">{item.name}</span>
-              <span className="text-[#6a6a6a] text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">{item.artists[0].name}</span>
+              <span className="text-white text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">
+                {item.name}
+              </span>
+              <span className="text-[#6a6a6a] text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">
+                {item.artists[0].name}
+              </span>
             </div>
           </div>
         ))}

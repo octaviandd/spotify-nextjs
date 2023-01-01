@@ -10,7 +10,7 @@ type Props = {
   accessToken: String;
   tracks: Track[];
   item: Playlist | Album | Artist;
-  title: string
+  title: string;
 };
 
 export default function ItemPage({ tracks, item, accessToken, title }: Props) {
@@ -61,13 +61,18 @@ export default function ItemPage({ tracks, item, accessToken, title }: Props) {
                     <span>{index + 1}</span>
                   </div>
                   <div className="w-[40px] h-[40px]">
-                    <img src={item.track ? item.track.album?.images[2].url : item.album?.images[2].url} className="w-[40px] h-[40px]" />
+                    <img
+                      src={item.track ? item.track.album?.images[2].url : item.album?.images[2].url}
+                      className="w-[40px] h-[40px]"
+                    />
                   </div>
                   <div className="flex flex-col justify-center pt-[0.3px] pb-[0.3px]">
                     <span className="mb-1 font-normal text-white text-ellipsis overflow-hidden whitespace-nowrap max-w-[100px] lg:max-w-[200px]">
                       {item.track ? item.track.name : item.name}
                     </span>
-                    <span className="text-[#6a6a6a]">{item.track ? item.track.artists[0].name : item.artists[0].name}</span>
+                    <span className="text-[#6a6a6a]">
+                      {item.track ? item.track.artists[0].name : item.artists[0].name}
+                    </span>
                   </div>
                   <div className="cursor-pointer">
                     {item.liked ? (
