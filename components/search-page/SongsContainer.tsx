@@ -18,7 +18,6 @@ export default function SongsContainer({ accessToken }: { accessToken: string })
   const [offset, setOffset] = useState(0);
   const dispatch = useDispatch();
   const { search } = useSelector(selectSearch);
-  const { data: session } = useSession();
 
   const setSong = (track: Track) => {
     dispatch(updateCurrentSong({ value: track }));
