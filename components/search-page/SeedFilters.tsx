@@ -81,7 +81,7 @@ export default function SeedFilters({ type, queryLink }: { type: string; queryLi
   }
 
   return (
-    <div className="w-3/4 my-4">
+    <div className="w-full my-1">
       <Select
         isMulti={true}
         options={items}
