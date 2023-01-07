@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 export default function Page({ accessToken }: { accessToken: string }) {
   useEffect(() => {
-    if (accessToken) window.location.href = '/search';
+    // if (accessToken) window.location.href = '/search';
     window.scrollTo(0, 0);
   }, []);
 

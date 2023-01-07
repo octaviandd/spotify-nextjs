@@ -23,8 +23,8 @@ export default function LandingSectionOne() {
     <div className="row-start-1 row-end-2 col-start-1 mb-20">
       <div className="flex flex-row flex-wrap pt-20 pb-20 lg:pl-20 ">
         <div className="pb-6 text-[30px] text-slate-400">Looking for new music?</div>
-        <div className="text-[60px] leading-none">
-          Spotifier will help you find music based on similarity or lexical discovery
+        <div className="text-[60px] text-white leading-none">
+          Spotifier extends the Spotify search so you can find the perfect song.
         </div>
         <div className="pt-6 cursor-pointer group ease-in-out transition duration-200" ref={buttonRef}>
           <a className="text-[20px] bg-green-600 px-4 py-2 text-white flex items-center rounded action-button">

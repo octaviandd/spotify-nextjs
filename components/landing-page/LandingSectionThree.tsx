@@ -32,19 +32,26 @@ export default function LandingSectionThree() {
   });
 
   return (
-    <div>
-      <h1 className="text-[40px] leading-none mt-5 lg:pl-20">
-        The search algorithm takes precedence over the user's capability of filtering.
-      </h1>
-      <h1 className="text-[40px] leading-none mt-5 lg:pl-20">
-        Here are some ways you can filter your music in more depth
-      </h1>
-      <div className="mt-16">
+    <div className='lg:pl-20'>
+      <div className="pl-4 flex items-center justify-center w-full mb-6 bg-[#00CA4E] py-4 rounded-md">
+        <span className="text-white text-4xl">Refine composition</span>
+      </div>
+      <div className="py-16 bg-[#16181c]">
         <SongFilter title="Acousticness" ref={setRefs}></SongFilter>
         <SongFilter title="Danceability" ref={setRefs}></SongFilter>
         <SongFilter title="Liveness" ref={setRefs}></SongFilter>
         <SongFilter title="Speechiness" ref={setRefs}></SongFilter>
         <SongFilter title="Tempo" ref={setRefs}></SongFilter>
+        <div className='flex justify-center mt-6'>
+          <button className='w-[200px] bg-white px-4 py-2 flex justify-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <circle cx="5" cy="12" r="1" />
+              <circle cx="12" cy="12" r="1" />
+              <circle cx="19" cy="12" r="1" />
+            </svg>
+           </button>
+        </div>
       </div>
     </div>
   );
