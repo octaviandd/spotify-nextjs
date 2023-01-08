@@ -26,7 +26,7 @@ export default function MockupPage() {
         trigger: document.querySelector('#pin'),
         pin: true,
         start: 'top top',
-        end: '+=2000',
+        end: '+=3000',
         scrub: true,
         pinSpacing: false,
       },
@@ -93,7 +93,7 @@ export default function MockupPage() {
   useIsomorphicLayoutEffect(() => {
     gsap.fromTo(
       document.querySelector('.fake-select'),
-      { opacity: 0, duration: 0 },
+      { opacity: 0, duration: 0, scale: 0.7 },
       {
         opacity: 1,
         stagger: 1,
@@ -108,21 +108,38 @@ export default function MockupPage() {
   });
 
   useIsomorphicLayoutEffect(() => {
-    if (refs.current) {
-      let state = Flip.getState(refs.current[3]);
-      Flip.from(state, {
-        ease: 'power1.inOut',
-        scaleX: 1.5,
-        simple: true,
+    gsap.fromTo(
+      document.querySelector('.fake-slider'),
+      { opacity: 0, duration: 0 },
+      {
+        opacity: 1,
+        stagger: 1,
         scrollTrigger: {
-          trigger: document.querySelector('#song-deconstruction'),
-          start: 'top top',
-          end: '+=500',
+          trigger: document.querySelector('.composition'),
+          start: 'bottom bottom',
+          end: '+=300',
           scrub: true,
         },
-      });
-    }
-  }, [refs.current]);
+      }
+    );
+  });
+
+  // useIsomorphicLayoutEffect(() => {
+  //   if (refs.current) {
+  //     let state = Flip.getState(refs.current[3]);
+  //     Flip.from(state, {
+  //       ease: 'power1.inOut',
+  //       scaleX: 1.5,
+  //       simple: true,
+  //       scrollTrigger: {
+  //         trigger: document.querySelector('#song-deconstruction'),
+  //         start: 'top top',
+  //         end: '+=500',
+  //         scrub: true,
+  //       },
+  //     });
+  //   }
+  // }, [refs.current]);
 
   return (
     <div className="pt-20 right-0" ref={displayPage} id="pin">
@@ -152,9 +169,8 @@ export default function MockupPage() {
             <span className="pl-4 text-[0.875rem] text-[#9ca3af] search-bar-input"></span>
           </div>
         </div>
-        <div className="pointer-events-none max-w-[300px] absolute top-[120px] left-[170px] fake-select">
+        <div className="pointer-events-none w-[290px] absolute top-[120px] left-[120px] fake-select">
           <div className="w-full my-1">
-            <p className="text-white">Tracks</p>
             <Select
               isMulti={true}
               defaultValue={[{ value: '1', label: 'Sting' }]}
@@ -193,10 +209,9 @@ export default function MockupPage() {
             />
           </div>
           <div className="w-full my-1">
-            <p className="text-white">Artists</p>
             <Select
               isMulti={true}
-              defaultValue={[{ value: '1', label: 'Sting' }]}
+              defaultValue={[{ value: '1', label: 'Do I Want to Know' }]}
               placeholder=""
               styles={{
                 multiValueRemove: (base) => ({
@@ -232,10 +247,13 @@ export default function MockupPage() {
             />
           </div>
           <div className="w-full my-1">
-            <p className="text-white">Genres</p>
             <Select
               isMulti={true}
-              defaultValue={[{ value: '1', label: 'Sting' }]}
+              defaultValue={[
+                { value: '1', label: 'funk' },
+                { value: '1', label: 'rock' },
+                { value: '1', label: 'jazz' },
+              ]}
               placeholder=""
               styles={{
                 multiValueRemove: (base) => ({
@@ -271,41 +289,135 @@ export default function MockupPage() {
             />
           </div>
         </div>
-        <div>
-          <div className="pointer-events-none w-[150px] absolute top-[400px] left-[170px]">
-            <Range
-              step={1}
-              min={1}
-              max={10}
-              values={[1,10]}
-              allowOverlap={false}
-              renderTrack={({ props, children }) => (
-                <div {...props} className="range-slider my-5 rounded-lg">
-                  {children}
-                </div>
-              )}
-              renderThumb={({ index, props, isDragged }) => (
-                <div {...props} className="range-slider-thumb-filter">
-                  {isDragged && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: '-38px',
-                        color: '#fff',
-                        fontWeight: 'bold',
-                        fontSize: '14px',
-                        padding: '4px',
-                        borderRadius: '4px',
-                        backgroundColor: '#548BF4',
-                      }}
-                    >
-                      1
-                    </div>
-                  )}
-                </div>
-              )}
-            ></Range>
-          </div>
+        <div className="pointer-events-none w-[150px] flex flex-col absolute top-[250px] left-[170px] fake-slider">
+          <Range
+            step={1}
+            min={1}
+            max={10}
+            values={[1, 10]}
+            allowOverlap={false}
+            renderTrack={({ props, children }) => (
+              <div {...props} className="range-slider my-5 rounded-lg">
+                {children}
+              </div>
+            )}
+            renderThumb={({ index, props, isDragged }) => (
+              <div {...props} className="range-slider-thumb-filter">
+                {isDragged && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-38px',
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      fontSize: '14px',
+                      padding: '4px',
+                      borderRadius: '4px',
+                      backgroundColor: '#548BF4',
+                    }}
+                  >
+                    1
+                  </div>
+                )}
+              </div>
+            )}
+          ></Range>
+          <Range
+            step={1}
+            min={1}
+            max={10}
+            values={[1, 10]}
+            allowOverlap={false}
+            renderTrack={({ props, children }) => (
+              <div {...props} className="range-slider my-5 rounded-lg">
+                {children}
+              </div>
+            )}
+            renderThumb={({ index, props, isDragged }) => (
+              <div {...props} className="range-slider-thumb-filter">
+                {isDragged && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-38px',
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      fontSize: '14px',
+                      padding: '4px',
+                      borderRadius: '4px',
+                      backgroundColor: '#548BF4',
+                    }}
+                  >
+                    1
+                  </div>
+                )}
+              </div>
+            )}
+          ></Range>
+          <Range
+            step={1}
+            min={1}
+            max={10}
+            values={[1, 10]}
+            allowOverlap={false}
+            renderTrack={({ props, children }) => (
+              <div {...props} className="range-slider my-5 rounded-lg">
+                {children}
+              </div>
+            )}
+            renderThumb={({ index, props, isDragged }) => (
+              <div {...props} className="range-slider-thumb-filter">
+                {isDragged && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-38px',
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      fontSize: '14px',
+                      padding: '4px',
+                      borderRadius: '4px',
+                      backgroundColor: '#548BF4',
+                    }}
+                  >
+                    1
+                  </div>
+                )}
+              </div>
+            )}
+          ></Range>
+          <Range
+            step={1}
+            min={1}
+            max={10}
+            values={[1, 10]}
+            allowOverlap={false}
+            renderTrack={({ props, children }) => (
+              <div {...props} className="range-slider my-5 rounded-lg">
+                {children}
+              </div>
+            )}
+            renderThumb={({ index, props, isDragged }) => (
+              <div {...props} className="range-slider-thumb-filter">
+                {isDragged && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-38px',
+                      color: '#fff',
+                      fontWeight: 'bold',
+                      fontSize: '14px',
+                      padding: '4px',
+                      borderRadius: '4px',
+                      backgroundColor: '#548BF4',
+                    }}
+                  >
+                    1
+                  </div>
+                )}
+              </div>
+            )}
+          ></Range>
         </div>
         <div className="grid grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-6 gap-2 px-10 absolute top-[70px] right-[200px] mx-auto">
           {Array(20)
@@ -321,94 +433,6 @@ export default function MockupPage() {
                 }}
               ></SongCard>
             ))}
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/imag1.jpg',
-              title: 'Fade into Black',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/imag2.jpg',
-              title: 'Fade into Black - Live',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/imag3.jpg',
-              title: 'One - Live',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/image4.jpg',
-              title: 'One',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/image4.jpg',
-              title: 'One',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/image4.jpg',
-              title: 'One',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/image4.jpg',
-              title: 'One',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/image4.jpg',
-              title: 'One',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/image4.jpg',
-              title: 'One',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/image4.jpg',
-              title: 'One',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
-          <SongCard
-            ref={setRefs}
-            item={{
-              link: '/image4.jpg',
-              title: 'One',
-              artist: 'Metallica',
-            }}
-          ></SongCard>
         </div>
       </div>
     </div>
