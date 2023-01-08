@@ -6,6 +6,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import { useEffect } from 'react';
+import LandingSectionThree from '../components/landing-page/LandingSectionThree';
+import LandingSectionTwo from '../components/landing-page/LandingSectionTwo';
 
 export default function Page({ accessToken }: { accessToken: string }) {
   useEffect(() => {
@@ -15,12 +17,17 @@ export default function Page({ accessToken }: { accessToken: string }) {
 
   return (
     <Layout>
-      <div className="grid grid-cols-hero grid-rows-hero relative" id="starter">
-        <MockupPage></MockupPage>
+      <div className='border-b-2 border-zinc-600'>
         <LandingSectionOne></LandingSectionOne>
-        <LandingSectionFour></LandingSectionFour>
       </div>
-      <div className="grid grid-cols-hero2 grid-rows-hero2 relative"></div>
+      <div className="grid grid-cols-hero grid-rows-hero relative" id="starter">
+        <div>
+          <LandingSectionTwo></LandingSectionTwo>
+          <LandingSectionThree></LandingSectionThree>
+          <LandingSectionFour></LandingSectionFour>
+        </div>
+        <MockupPage></MockupPage>
+      </div>
     </Layout>
   );
 }
