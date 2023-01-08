@@ -9,6 +9,7 @@ import Select from 'react-select';
 import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
 import { SelectMenuOption } from '../global/SelectMenuOption';
+import { Range } from 'react-range';
 
 export default function MockupPage() {
   const inputBarRef = useRef<HTMLDivElement>(null);
@@ -66,7 +67,7 @@ export default function MockupPage() {
                 scrub: true,
               },
             }
-          )
+          );
       }, inputBarRef);
       return () => ctx.revert();
     }
@@ -153,7 +154,7 @@ export default function MockupPage() {
         </div>
         <div className="pointer-events-none max-w-[300px] absolute top-[120px] left-[170px] fake-select">
           <div className="w-full my-1">
-            <p className='text-white'>Tracks</p>
+            <p className="text-white">Tracks</p>
             <Select
               isMulti={true}
               defaultValue={[{ value: '1', label: 'Sting' }]}
@@ -192,7 +193,7 @@ export default function MockupPage() {
             />
           </div>
           <div className="w-full my-1">
-            <p className='text-white'>Artists</p>
+            <p className="text-white">Artists</p>
             <Select
               isMulti={true}
               defaultValue={[{ value: '1', label: 'Sting' }]}
@@ -231,7 +232,7 @@ export default function MockupPage() {
             />
           </div>
           <div className="w-full my-1">
-            <p className='text-white'>Genres</p>
+            <p className="text-white">Genres</p>
             <Select
               isMulti={true}
               defaultValue={[{ value: '1', label: 'Sting' }]}
@@ -270,17 +271,56 @@ export default function MockupPage() {
             />
           </div>
         </div>
+        <div>
+          <div className="pointer-events-none w-[150px] absolute top-[400px] left-[170px]">
+            <Range
+              step={1}
+              min={1}
+              max={10}
+              values={[1,10]}
+              allowOverlap={false}
+              renderTrack={({ props, children }) => (
+                <div {...props} className="range-slider my-5 rounded-lg">
+                  {children}
+                </div>
+              )}
+              renderThumb={({ index, props, isDragged }) => (
+                <div {...props} className="range-slider-thumb-filter">
+                  {isDragged && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '-38px',
+                        color: '#fff',
+                        fontWeight: 'bold',
+                        fontSize: '14px',
+                        padding: '4px',
+                        borderRadius: '4px',
+                        backgroundColor: '#548BF4',
+                      }}
+                    >
+                      1
+                    </div>
+                  )}
+                </div>
+              )}
+            ></Range>
+          </div>
+        </div>
         <div className="grid grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-6 gap-2 px-10 absolute top-[70px] right-[200px] mx-auto">
-          {Array(20).fill().map((i, idx) => (
-            <SongCard ref={setRefs}
-              key={idx}
-              item={{
-                link: '/imag1.jpg',
-                title: 'Fade into Black',
-                artist: 'Metallica',
-                }}>
-            </SongCard>))
-          }
+          {Array(20)
+            .fill()
+            .map((i, idx) => (
+              <SongCard
+                ref={setRefs}
+                key={idx}
+                item={{
+                  link: '/imag1.jpg',
+                  title: 'Fade into Black',
+                  artist: 'Metallica',
+                }}
+              ></SongCard>
+            ))}
           <SongCard
             ref={setRefs}
             item={{

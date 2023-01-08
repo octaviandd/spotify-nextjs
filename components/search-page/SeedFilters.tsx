@@ -9,7 +9,15 @@ import { SelectMenuList } from '../global/SelectMenuList';
 import { SelectMenuOption } from '../global/SelectMenuOption';
 import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
 
-export default function SeedFilters({ type, queryLink, accessToken }: { type: string; queryLink: string, accessToken: string }) {
+export default function SeedFilters({
+  type,
+  queryLink,
+  accessToken,
+}: {
+  type: string;
+  queryLink: string;
+  accessToken: string;
+}) {
   const [isLoading, setLoading] = useState(false);
   const [items, setItems] = useState([]);
   const dispatch = useDispatch();

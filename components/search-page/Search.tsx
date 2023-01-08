@@ -10,14 +10,13 @@ import { useWindowSize } from './useWindowSize';
 import { gsap } from 'gsap';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-
 type Props = {
-  accessToken: string
+  accessToken: string;
 };
 
 const getMultiSelectValues = (state: RootState) => state.filters.seeds;
 
-export default function Search({accessToken}: Props) {
+export default function Search({ accessToken }: Props) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const seedsLength = Object.entries(useSelector(getMultiSelectValues)).reduce(
@@ -35,7 +34,6 @@ export default function Search({accessToken}: Props) {
     }
   };
 
-
   const size = useWindowSize();
 
   if (size.width < 768) {
@@ -46,7 +44,11 @@ export default function Search({accessToken}: Props) {
         </div>
         <div className="bg-black px-5 py-4">
           <SeedFilters type="artist" queryLink="search" accessToken={accessToken}></SeedFilters>
-          <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds" accessToken={accessToken}></SeedFilters>
+          <SeedFilters
+            type="genre"
+            queryLink="recommendations/available-genre-seeds"
+            accessToken={accessToken}
+          ></SeedFilters>
           <SeedFilters type="track" queryLink="search" accessToken={accessToken}></SeedFilters>
           {seedsLength > 5 && <span className="text-white">Too many selections</span>}
           <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>
@@ -71,7 +73,11 @@ export default function Search({accessToken}: Props) {
         <div className="lg:flex flex-col items-center hidden">
           <SearchInput isOpen={isOpen} handleOpen={setIsOpen} hidden={true}></SearchInput>
           <SeedFilters type="artist" queryLink="search" accessToken={accessToken}></SeedFilters>
-          <SeedFilters type="genre" queryLink="recommendations/available-genre-seeds" accessToken={accessToken}></SeedFilters>
+          <SeedFilters
+            type="genre"
+            queryLink="recommendations/available-genre-seeds"
+            accessToken={accessToken}
+          ></SeedFilters>
           <SeedFilters type="track" queryLink="search" accessToken={accessToken}></SeedFilters>
           {seedsLength > 5 && <span className="text-white">Too many selections</span>}
           <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>

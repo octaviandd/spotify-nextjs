@@ -23,9 +23,7 @@ export const SongCard = forwardRef<Ref, Props>((props, ref) => {
             width="100%"
             height="100%"
           />
-          <div
-            className="hidden z-10 absolute cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:block transition-all ease-in-out duration-500"
-          >
+          <div className="hidden z-10 absolute cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:block transition-all ease-in-out duration-500">
             <Image src="/Spotify_Icon_RGB_Green.png" width="52" height="52" />
           </div>
         </a>
