@@ -82,7 +82,7 @@ export default function MockupPage() {
         stagger: 1,
         scrollTrigger: {
           trigger: document.querySelector('.start-now'),
-          start: 'top top',
+          start: 'top+=300 top',
           end: '+=300',
           scrub: true,
         },
@@ -99,7 +99,7 @@ export default function MockupPage() {
         stagger: 1,
         scrollTrigger: {
           trigger: document.querySelector('.include-others'),
-          start: 'bottom bottom',
+          start: 'top centre',
           end: '+=300',
           scrub: true,
         },
@@ -116,7 +116,7 @@ export default function MockupPage() {
         stagger: 1,
         scrollTrigger: {
           trigger: document.querySelector('.composition'),
-          start: 'bottom bottom',
+          start: 'top center',
           end: '+=300',
           scrub: true,
         },
@@ -289,7 +289,7 @@ export default function MockupPage() {
             />
           </div>
         </div>
-        <div className="pointer-events-none w-[150px] flex flex-col absolute top-[250px] left-[170px] fake-slider">
+        <div className="pointer-events-none w-[190px] flex flex-col absolute top-[250px] left-[170px] fake-slider">
           <Range
             step={1}
             min={1}
@@ -419,15 +419,15 @@ export default function MockupPage() {
             )}
           ></Range>
         </div>
-        <div className="grid grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-6 gap-2 px-10 absolute top-[70px] right-[200px] mx-auto">
-          {Array(20)
+        <div className="grid grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 absolute top-[70px] right-[180px] mx-auto">
+          {Array(24)
             .fill()
             .map((i, idx) => (
               <SongCard
                 ref={setRefs}
                 key={idx}
                 item={{
-                  link: '/imag1.jpg',
+                  link: `/${idx + 1}.jpg`,
                   title: 'Fade into Black',
                   artist: 'Metallica',
                 }}
