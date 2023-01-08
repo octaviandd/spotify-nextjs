@@ -17,7 +17,7 @@ export default function Page({ accessToken }: { accessToken: string }) {
 
   return (
     <Layout>
-      <div className='border-b border-zinc-600 ml-20'>
+      <div className=' ml-20'>
         <LandingSectionOne></LandingSectionOne>
       </div>
       <div className="grid grid-cols-hero grid-rows-hero relative" id="starter">

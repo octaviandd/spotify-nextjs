@@ -5,6 +5,10 @@ import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Flip from 'gsap/dist/Flip';
 import gsap from 'gsap';
 import { useIsomorphicLayoutEffect, useArrayRef } from '../utils';
+import Select from 'react-select';
+import { SelectMenuList } from '../global/SelectMenuList';
+import { SelectMultiValueLabel } from '../global/SelectMultiValueLabel';
+import { SelectMenuOption } from '../global/SelectMenuOption';
 
 export default function MockupPage() {
   const inputBarRef = useRef<HTMLDivElement>(null);
@@ -77,6 +81,23 @@ export default function MockupPage() {
         stagger: 1,
         scrollTrigger: {
           trigger: document.querySelector('.start-now'),
+          start: 'top top',
+          end: '+=300',
+          scrub: true,
+        },
+      }
+    );
+  });
+
+  useIsomorphicLayoutEffect(() => {
+    gsap.fromTo(
+      document.querySelector('.fake-select'),
+      { opacity: 0, duration: 0 },
+      {
+        opacity: 1,
+        stagger: 1,
+        scrollTrigger: {
+          trigger: document.querySelector('.include-others'),
           start: 'bottom bottom',
           end: '+=300',
           scrub: true,
@@ -106,9 +127,9 @@ export default function MockupPage() {
     <div className="pt-20 right-0" ref={displayPage} id="pin">
       <div className="relative w-full h-full">
         <div className="bg-[#273138] opacity-[0.9] max-w-[550px] mt-[10px] mx-auto p-[10px] rounded-t-lg flex gap-1.5 blur-sm">
-          <div className="bg-[#4a5c66] inline-block w-[10px] h-[10px] rounded-full "></div>
-          <div className="bg-[#4a5c66] inline-block w-[10px] h-[10px] rounded-full "></div>
-          <div className="bg-[#4a5c66] inline-block w-[10px] h-[10px] rounded-full "></div>
+          <div className="bg-[red] inline-block w-[10px] h-[10px] rounded-full "></div>
+          <div className="bg-[yellow] inline-block w-[10px] h-[10px] rounded-full "></div>
+          <div className="bg-[green] inline-block w-[10px] h-[10px] rounded-full "></div>
         </div>
         <div className="h-[600px] blur-sm bg-[rgba(0,0,0,.2)] max-w-[550px] mx-auto opacity-[0.3]"></div>
         <div
@@ -128,6 +149,125 @@ export default function MockupPage() {
               />
             </svg>
             <span className="pl-4 text-[0.875rem] text-[#9ca3af] search-bar-input"></span>
+          </div>
+        </div>
+        <div className="pointer-events-none max-w-[300px] absolute top-[120px] left-[170px] fake-select">
+          <div className="w-full my-1">
+            <p className='text-white'>Tracks</p>
+            <Select
+              isMulti={true}
+              defaultValue={[{ value: '1', label: 'Sting' }]}
+              placeholder=""
+              styles={{
+                multiValueRemove: (base) => ({
+                  ...base,
+                  ':hover': {
+                    backgroundColor: 'inherit',
+                  },
+                }),
+                multiValue: (base) => ({
+                  ...base,
+                  backgroundColor: 'white',
+                }),
+                control: (base) => ({
+                  ...base,
+                  backgroundColor: '#16181c',
+                  border: 'none',
+                  paddingTop: '1px',
+                  paddingBottom: '1px',
+                }),
+                container: (base) => ({
+                  ...base,
+                  borderRadius: '15px',
+                  ':focus': {
+                    backgroundColor: '#1e293b',
+                  },
+                }),
+              }}
+              components={{
+                MenuList: SelectMenuList,
+                MultiValueLabel: SelectMultiValueLabel,
+                Option: SelectMenuOption,
+              }}
+            />
+          </div>
+          <div className="w-full my-1">
+            <p className='text-white'>Artists</p>
+            <Select
+              isMulti={true}
+              defaultValue={[{ value: '1', label: 'Sting' }]}
+              placeholder=""
+              styles={{
+                multiValueRemove: (base) => ({
+                  ...base,
+                  ':hover': {
+                    backgroundColor: 'inherit',
+                  },
+                }),
+                multiValue: (base) => ({
+                  ...base,
+                  backgroundColor: 'white',
+                }),
+                control: (base) => ({
+                  ...base,
+                  backgroundColor: '#16181c',
+                  border: 'none',
+                  paddingTop: '1px',
+                  paddingBottom: '1px',
+                }),
+                container: (base) => ({
+                  ...base,
+                  borderRadius: '15px',
+                  ':focus': {
+                    backgroundColor: '#1e293b',
+                  },
+                }),
+              }}
+              components={{
+                MenuList: SelectMenuList,
+                MultiValueLabel: SelectMultiValueLabel,
+                Option: SelectMenuOption,
+              }}
+            />
+          </div>
+          <div className="w-full my-1">
+            <p className='text-white'>Genres</p>
+            <Select
+              isMulti={true}
+              defaultValue={[{ value: '1', label: 'Sting' }]}
+              placeholder=""
+              styles={{
+                multiValueRemove: (base) => ({
+                  ...base,
+                  ':hover': {
+                    backgroundColor: 'inherit',
+                  },
+                }),
+                multiValue: (base) => ({
+                  ...base,
+                  backgroundColor: 'white',
+                }),
+                control: (base) => ({
+                  ...base,
+                  backgroundColor: '#16181c',
+                  border: 'none',
+                  paddingTop: '1px',
+                  paddingBottom: '1px',
+                }),
+                container: (base) => ({
+                  ...base,
+                  borderRadius: '15px',
+                  ':focus': {
+                    backgroundColor: '#1e293b',
+                  },
+                }),
+              }}
+              components={{
+                MenuList: SelectMenuList,
+                MultiValueLabel: SelectMultiValueLabel,
+                Option: SelectMenuOption,
+              }}
+            />
           </div>
         </div>
         <div className="grid grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-6 gap-2 px-10 absolute top-[70px] right-[200px] mx-auto">
@@ -229,7 +369,6 @@ export default function MockupPage() {
               artist: 'Metallica',
             }}
           ></SongCard>
-
         </div>
       </div>
     </div>
