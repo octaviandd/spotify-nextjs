@@ -12,7 +12,7 @@ export default function LandingSectionTwo({}: Props) {
   useIsomorphicLayoutEffect(() => {
   });
   return (
-    <div className="flex items-center mr-4 relative lg:pl-20">
+    <div className="flex items-center mr-4 relative lg:pl-20 start-now">
       <div className='flex flex-col mx-auto my-3 h-[1000px]'>
         <div style={{ background: 'linear-gradient(#d2a8ff, #a371f7 10%, #196c2e 70%, #2ea043 80%, #56d364)' }} className="h-full w-[3px] rounded-md mx-auto"></div>
         <div className="relative inline-block z-10 mt-3">

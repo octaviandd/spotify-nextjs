@@ -21,7 +21,7 @@ export default function MockupPage() {
         trigger: document.querySelector('#pin'),
         pin: true,
         start: 'top top',
-        end: '+=1000',
+        end: '+=2000',
         scrub: true,
         pinSpacing: false,
       },
@@ -33,19 +33,10 @@ export default function MockupPage() {
       let ctx = gsap.context(() => {
         tl.current = gsap
           .timeline()
-          .fromTo(
-            '.search-bar',
-            { opacity: 0, scaleX: 0, scaleY: 0 },
-            {
-              opacity: 1,
-              duration: 0.5,
-              scaleX: 1,
-              scaleY: 1,
-              transformOrigin: 'center',
-            }
-          )
           .to('.search-bar', {
-            y: -220,
+            translateY: -220,
+            translateX: -150,
+            scale: 0.5,
             duration: 1,
             scrollTrigger: {
               trigger: document.querySelector('#starter'),
@@ -67,10 +58,11 @@ export default function MockupPage() {
                 trigger: document.querySelector('.start-now'),
                 start: 'top top',
                 end: '+=175',
+                markers: true,
                 scrub: true,
               },
             }
-          );
+          )
       }, inputBarRef);
       return () => ctx.revert();
     }
@@ -85,8 +77,8 @@ export default function MockupPage() {
         stagger: 1,
         scrollTrigger: {
           trigger: document.querySelector('.start-now'),
-          start: 'top top',
-          end: '+=175',
+          start: 'bottom bottom',
+          end: '+=300',
           scrub: true,
         },
       }
@@ -104,7 +96,6 @@ export default function MockupPage() {
           trigger: document.querySelector('#song-deconstruction'),
           start: 'top top',
           end: '+=500',
-          markers: true,
           scrub: true,
         },
       });
@@ -139,7 +130,17 @@ export default function MockupPage() {
             <span className="pl-4 text-[0.875rem] text-[#9ca3af] search-bar-input"></span>
           </div>
         </div>
-        <div className="grid grid-cols-1 grid-rows-5 max-w-[550px] row-start-2 w-full songs-grid gap-2 px-10 absolute top-[200px] left-0 right-0 mx-auto">
+        <div className="grid grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-6 gap-2 px-10 absolute top-[70px] right-[200px] mx-auto">
+          {Array(20).fill().map((i, idx) => (
+            <SongCard ref={setRefs}
+              key={idx}
+              item={{
+                link: '/imag1.jpg',
+                title: 'Fade into Black',
+                artist: 'Metallica',
+                }}>
+            </SongCard>))
+          }
           <SongCard
             ref={setRefs}
             item={{
@@ -170,9 +171,65 @@ export default function MockupPage() {
               link: '/image4.jpg',
               title: 'One',
               artist: 'Metallica',
-              id: 'test',
             }}
           ></SongCard>
+          <SongCard
+            ref={setRefs}
+            item={{
+              link: '/image4.jpg',
+              title: 'One',
+              artist: 'Metallica',
+            }}
+          ></SongCard>
+          <SongCard
+            ref={setRefs}
+            item={{
+              link: '/image4.jpg',
+              title: 'One',
+              artist: 'Metallica',
+            }}
+          ></SongCard>
+          <SongCard
+            ref={setRefs}
+            item={{
+              link: '/image4.jpg',
+              title: 'One',
+              artist: 'Metallica',
+            }}
+          ></SongCard>
+          <SongCard
+            ref={setRefs}
+            item={{
+              link: '/image4.jpg',
+              title: 'One',
+              artist: 'Metallica',
+            }}
+          ></SongCard>
+          <SongCard
+            ref={setRefs}
+            item={{
+              link: '/image4.jpg',
+              title: 'One',
+              artist: 'Metallica',
+            }}
+          ></SongCard>
+          <SongCard
+            ref={setRefs}
+            item={{
+              link: '/image4.jpg',
+              title: 'One',
+              artist: 'Metallica',
+            }}
+          ></SongCard>
+          <SongCard
+            ref={setRefs}
+            item={{
+              link: '/image4.jpg',
+              title: 'One',
+              artist: 'Metallica',
+            }}
+          ></SongCard>
+
         </div>
       </div>
     </div>

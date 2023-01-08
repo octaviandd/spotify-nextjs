@@ -14,19 +14,30 @@ export type Ref = HTMLDivElement;
 
 export const SongCard = forwardRef<Ref, Props>((props, ref) => {
   return (
-    <div
-      className="flex items-center shadow-md w-full bg-white py-4"
-      ref={ref}
-      id={props.item.id ? props.item.id : undefined}
-    >
-      <div className="px-3 font-md"></div>
-      <div>
-        <Image src={props.item.link} width="48" height="48"></Image>
+    <div className="relative group w-[60px]" ref={ref}>
+      <div className="relative">
+        <a className="w-full h-full">
+          <img
+            src={props.item.link}
+            className="group-hover:opacity-40 rounded-lg transition ease-in-out"
+            width="100%"
+            height="100%"
+          />
+          <div
+            className="hidden z-10 absolute cursor-pointer top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:block transition-all ease-in-out duration-500"
+          >
+            <Image src="/Spotify_Icon_RGB_Green.png" width="52" height="52" />
+          </div>
+        </a>
       </div>
-      <div className="flex flex-col py-1 px-3">
-        <span className="text-[#4a4a4a] font-semibold text-sm">{props.item.title}</span>
-        <span className="text-slate-400 text-sm">{props.item.artist}</span>
-      </div>
+      {/* <div className="flex flex-col flex-start pt-2">
+        <span className="text-white text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">
+          {props.item.title}
+        </span>
+        <span className="text-[#6a6a6a] text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">
+          {props.item.artist}
+        </span>
+      </div> */}
     </div>
   );
 });
