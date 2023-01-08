@@ -14,12 +14,13 @@ export default function Navbar() {
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-col items-center"></div>
-            <div className="flex justify-between gap-1 w-10 h-8 lg:w-12 lg:h-10 ml-4">
+            <div className="flex justify-between gap-1 w-10 h-8 lg:w-12 lg:h-10 ml-4 relative">
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-slow"></div>
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-loud"></div>
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
+              <span className="absolute h-[20px] w-[40.5px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-[#00CA4E]" style={{ filter: 'blur(20px)' }}></span>
             </div>
           </div>
           <div className="flex items-center pr-2 mx-auto sm:pr-0">

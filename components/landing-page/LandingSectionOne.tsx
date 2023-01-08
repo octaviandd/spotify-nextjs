@@ -21,14 +21,14 @@ export default function LandingSectionOne() {
 
   return (
     <div className="row-start-1 row-end-2 col-start-1 mb-20">
-      <div className="flex flex-row flex-wrap pt-20 pb-20 lg:pl-20 ">
+      <div className="flex flex-row flex-wrap pt-20 pb-20">
         <div className="pb-6 text-[30px] text-slate-400">Looking for new music?</div>
         <div className="text-[60px] text-white leading-none">
-          Spotifier extends the Spotify search so you can find the perfect song.
+          Spotifier extends the daily Spotify functionality. Spotify on steroids.
         </div>
         <div className="pt-6 cursor-pointer group ease-in-out transition duration-200" ref={buttonRef}>
           <a className="text-[20px] bg-green-600 px-4 py-2 text-white flex items-center rounded action-button">
-            <button className="pr-2 start-now">Start now</button>
+            <button className="pr-2">Start now</button>
             <svg
               className="group-hover:translate-x-2 ease-in-out duration-300"
               width="24"
@@ -45,8 +45,6 @@ export default function LandingSectionOne() {
           </a>
         </div>
       </div>
-      <LandingSectionTwo></LandingSectionTwo>
-      <LandingSectionThree></LandingSectionThree>
     </div>
   );
 }
