@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
-import { SongCard } from './SongCard';
 import TextPlugin from 'gsap/dist/TextPlugin';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Flip from 'gsap/dist/Flip';
 import gsap from 'gsap';
-import { useIsomorphicLayoutEffect, useArrayRef } from '../utils';
+import { useIsomorphicLayoutEffect } from '../utils';
 import { MockSelect } from './MockSelect';
 import MockSliders from './MockSliders';
 import MockSearch from './MockSearch';
