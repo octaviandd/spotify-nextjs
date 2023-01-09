@@ -38,7 +38,7 @@ export default function SongsContainer({ accessToken }: { accessToken: string })
     }
 
     setLoading(true);
-    console.log(search)
+    console.log(search);
     getSpotifyData({
       token: accessToken as string,
       searchParams: search
