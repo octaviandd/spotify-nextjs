@@ -84,7 +84,7 @@ export default function LandingSectionFour() {
       </div>
       <div className="flex flex-col w-full mb-6 py-4 rounded-md ml-10">
         <span className="text-white text-6xl mb-10">Refine the search by track composition.</span>
-        <span className="text-white text-3xl text-left">
+        <span className="text-white text-3xl text-left" id='test2'>
           Each song is defined as a composition of multiple factors. Modify the search based on attributes such as how
           loudness, mode, energy, popularity or valence.
         </span>

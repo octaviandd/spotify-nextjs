@@ -2,9 +2,7 @@ import React, { useRef } from 'react';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import TextPlugin from 'gsap/dist/TextPlugin';
 import { useIsomorphicLayoutEffect } from '../utils';
-import LandingSectionTwo from './LandingSectionTwo';
 import { gsap } from 'gsap';
-import LandingSectionThree from './LandingSectionThree';
 
 export default function LandingSectionOne() {
   gsap.registerPlugin(ScrollTrigger, TextPlugin);

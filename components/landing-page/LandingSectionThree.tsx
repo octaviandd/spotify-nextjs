@@ -78,7 +78,9 @@ export default function LandingSectionThree() {
         ></div>
       </div>
       <div className="flex flex-col w-full mb-6 py-4 rounded-md ml-10">
-        <span className="text-white text-6xl mb-10">Include other tracks, artists or genres.</span>
+        <span className="text-white text-6xl mb-10" id="test-outro">
+          Include other tracks, artists or genres.
+        </span>
         <span className="text-white text-3xl text-left">
           Recommendations are generated based on the available information for a given seed entity and matched against
           similar artists and tracks. If there is sufficient information about the provided seeds, a list of tracks will

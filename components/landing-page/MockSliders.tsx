@@ -1,11 +1,14 @@
-import React from 'react';
-import { Range } from 'react-range';
-import { useIsomorphicLayoutEffect } from '../utils';
+import React, { useRef } from 'react';
+import { useArrayRef, useIsomorphicLayoutEffect } from '../utils';
 import { gsap } from 'gsap';
+import { SongFilter } from './SongFilter';
 
 type Props = {};
 
-export default function MockSliders({}: Props) {
+export default function MockSliders({ }: Props) {
+  const [refs, setRefs] = useArrayRef();
+  const secondTl: any = useRef();
+
   useIsomorphicLayoutEffect(() => {
     gsap.fromTo(
       document.querySelector('.fake-slider'),
@@ -22,46 +25,36 @@ export default function MockSliders({}: Props) {
       }
     );
   });
+
+  useIsomorphicLayoutEffect(() => {
+    if (refs.current) {
+      let ctx = gsap.context(() => {
+        secondTl.current = gsap.timeline().fromTo(
+          refs.current,
+          {
+            left: 0,
+          },
+          {
+            left: 'random(0, 100)',
+            duration: 2,
+            scrollTrigger: {
+              trigger: document.querySelector('.composition'),
+              start: 'top center-=200',
+              end: '+=400',
+              scrub: true,
+            },
+          }
+        );
+      }, refs.current);
+      return () => ctx.revert();
+    }
+  });
   return (
     <div className="pointer-events-none w-[190px] flex flex-col absolute top-[250px] left-[170px] fake-slider">
-      {Array(4)
-        .fill(null)
-        .map((i, idx) => (
-          <Range
-            key={idx}
-            step={1}
-            min={1}
-            onChange={(values) => console.log(values)}
-            max={10}
-            values={[1, 10]}
-            allowOverlap={false}
-            renderTrack={({ props, children }) => (
-              <div {...props} className="range-slider my-5 rounded-lg">
-                {children}
-              </div>
-            )}
-            renderThumb={({ props, isDragged }) => (
-              <div {...props} className="range-slider-thumb-filter">
-                {isDragged && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '-38px',
-                      color: '#fff',
-                      fontWeight: 'bold',
-                      fontSize: '14px',
-                      padding: '4px',
-                      borderRadius: '4px',
-                      backgroundColor: '#548BF4',
-                    }}
-                  >
-                    1
-                  </div>
-                )}
-              </div>
-            )}
-          ></Range>
-        ))}
+      <SongFilter ref={setRefs}></SongFilter>
+      <SongFilter ref={setRefs}></SongFilter>
+      <SongFilter ref={setRefs}></SongFilter>
+      <SongFilter ref={setRefs}></SongFilter>
     </div>
   );
 }
