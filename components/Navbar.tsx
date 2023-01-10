@@ -20,7 +20,10 @@ export default function Navbar() {
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-loud"></div>
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
-              <span className="absolute h-[20px] w-[40.5px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-[#00CA4E]" style={{ filter: 'blur(20px)' }}></span>
+              <span
+                className="absolute h-[20px] w-[40.5px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-[#00CA4E]"
+                style={{ filter: 'blur(20px)' }}
+              ></span>
             </div>
           </div>
           <div className="flex items-center pr-2 mx-auto sm:pr-0">

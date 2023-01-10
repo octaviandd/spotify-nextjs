@@ -4,8 +4,6 @@ import Image from 'next/image';
 interface Props {
   item: {
     link: string;
-    title: string;
-    artist: string;
     id?: string;
   };
 }
@@ -28,14 +26,6 @@ export const SongCard = forwardRef<Ref, Props>((props, ref) => {
           </div>
         </a>
       </div>
-      {/* <div className="flex flex-col flex-start pt-2">
-        <span className="text-white text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">
-          {props.item.title}
-        </span>
-        <span className="text-[#6a6a6a] text-xs text-ellipsis overflow-hidden whitespace-nowrap max-w-[85px]">
-          {props.item.artist}
-        </span>
-      </div> */}
     </div>
   );
 });

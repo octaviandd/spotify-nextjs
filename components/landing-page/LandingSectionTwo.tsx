@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 
 export default function LandingSectionTwo() {
   const tl: any = useRef();
-  const lineRef = useRef();
+  const lineRef = useRef<HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
     if (lineRef.current) {
@@ -32,10 +32,7 @@ export default function LandingSectionTwo() {
       <div className="flex flex-col mx-auto my-3 h-[1000px]">
         <div className="relative inline-block z-10 mt-3">
           <Image src="/Spotify_Icon_RGB_Green.png" width={24} height={24}></Image>
-          <span
-            className="absolute left-0 top-0 h-full w-full z-20 bg-[#00CA4E]"
-            style={{ filter: 'blur(17px)' }}
-          ></span>
+          <span className="absolute left-0 top-0 h-full w-full z-20 bg-[#00CA4E] blur-lg"></span>
         </div>
         <div
           ref={lineRef}
@@ -53,7 +50,3 @@ export default function LandingSectionTwo() {
     </div>
   );
 }
-
-const SearchBarStyle = {
-  boxShadow: '0 10px 15px -3px rgba(0,0,0,.1) 0 4px 6px -4px rgba(0,0,0,.1)',
-};
