@@ -4,8 +4,6 @@ import Image from 'next/image';
 interface Props {
   item: {
     link: string;
-    title: string;
-    artist: string;
     id?: string;
   };
 }

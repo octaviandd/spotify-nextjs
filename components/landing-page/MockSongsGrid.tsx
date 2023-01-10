@@ -8,6 +8,7 @@ type Props = {};
 export default function MockSongsGrid({}: Props) {
   const [refs, setRefs] = useArrayRef();
   const [refs2, setRefs2] = useArrayRef();
+  const [refs3, setRefs3] = useArrayRef();
   let tl: any = useRef();
   let tl2: any = useRef();
 
@@ -23,6 +24,24 @@ export default function MockSongsGrid({}: Props) {
           trigger: document.querySelector('.start-now'),
           start: 'top+=300 top',
           end: '+=300',
+          scrub: true,
+        },
+      }
+    );
+  });
+
+  useIsomorphicLayoutEffect(() => {
+    tl2.current = gsap.timeline();
+    tl2.current.fromTo(
+      refs2.current,
+      { opacity: 0, duration: 0 },
+      {
+        opacity: 1,
+        stagger: 1,
+        scrollTrigger: {
+          trigger: document.querySelector('.start-now'),
+          start: 'top+=300 top',
+          end: '+=1000',
           scrub: true,
         },
       }
@@ -64,6 +83,22 @@ export default function MockSongsGrid({}: Props) {
     });
   });
 
+  useIsomorphicLayoutEffect(() => {
+    const randomIndices = Array.from({ length: 8 }, () => Math.floor(Math.random() * refs2.current.length));
+    randomIndices.forEach((index) => {
+      gsap.timeline().to(refs2.current[index], {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: document.querySelector('#test2'),
+          start: 'top+=300 top',
+          end: '+=300',
+          scrub: true,
+          markers: true,
+        },
+      });
+    });
+  });
+
   return (
     <div className="absolute top-0 left-0 right-0 bottom-0">
       <div className="absolute grid z-50 grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto">
@@ -75,15 +110,12 @@ export default function MockSongsGrid({}: Props) {
               key={idx}
               item={{
                 link: `/${idx + 1}.jpg`,
-                title: 'Fade into Black',
-                artist: 'Metallica',
               }}
             ></SongCard>
           ))}
       </div>
       <div
-        id=""
-        className="absolute grid grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto"
+        className="absolute grid z-20 grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto"
       >
         {Array(24)
           .fill(null)
@@ -93,8 +125,21 @@ export default function MockSongsGrid({}: Props) {
               key={idx}
               item={{
                 link: `/${gsap.utils.random(1, 23, 1)}.jpg`,
-                title: 'Fade into Black',
-                artist: 'Metallica',
+              }}
+            ></SongCard>
+          ))}
+      </div>
+      <div
+        className="absolute grid grid-cols-4 z-10 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto"
+      >
+        {Array(24)
+          .fill(null)
+          .map((i, idx) => (
+            <SongCard
+              ref={setRefs2}
+              key={idx}
+              item={{
+                link: `/${gsap.utils.random(1, 23, 1)}.jpg`,
               }}
             ></SongCard>
           ))}

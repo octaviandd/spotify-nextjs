@@ -28,23 +28,6 @@ export default function MockupPage() {
     });
   }, []);
 
-  // useIsomorphicLayoutEffect(() => {
-  //   if (refs.current) {
-  //     let state = Flip.getState(refs.current[3]);
-  //     Flip.from(state, {
-  //       ease: 'power1.inOut',
-  //       scaleX: 1.5,
-  //       simple: true,
-  //       scrollTrigger: {
-  //         trigger: document.querySelector('#song-deconstruction'),
-  //         start: 'top top',
-  //         end: '+=500',
-  //         scrub: true,
-  //       },
-  //     });
-  //   }
-  // }, [refs.current]);
-
   return (
     <div className="pt-20 right-0" ref={displayPage} id="pin">
       <div className="relative w-full h-full">
