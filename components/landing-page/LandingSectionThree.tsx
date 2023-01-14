@@ -11,9 +11,28 @@ import { SongCard } from './SongCard';
 export default function LandingSectionThree() {
   const iconRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const songsRef = useRef<HTMLDivElement>(null);
   const tl: any = useRef();
   const [refs, setRefs] = useArrayRef();
   let timeline: any = useRef();
+
+  useIsomorphicLayoutEffect(() => {
+    timeline.current = gsap.timeline();
+    timeline.current.fromTo(
+      refs.current,
+      { opacity: 0, duration: 0 },
+      {
+        opacity: 1,
+        stagger: 1,
+        scrollTrigger: {
+          trigger: songsRef.current,
+          start: 'top bottom-=300',
+          end: '+=500',
+          scrub: true,
+        },
+      }
+    );
+  });
 
   useIsomorphicLayoutEffect(() => {
     if (iconRef.current) {
@@ -94,7 +113,7 @@ export default function LandingSectionThree() {
           Spotify API, we are able to deliver a tailored selection of tracks, complete with detailed information on the
           size of the matching pool.
         </span>
-        <div className="pointer-events-none w-[290px] mt-10 fake-select">
+        <div className="pointer-events-none w-[290px] mt-10 fake-select shadow-md bg-gray-900 p-2 rounded-lg lg:hidden">
           <div className="w-full my-1">
             {[
               { value: '1', label: 'Sting' },
@@ -155,7 +174,7 @@ export default function LandingSectionThree() {
             ))}
           </div>
         </div>
-        <div className="grid grid-cols-4 grid-rows-auto gap-y-4 mt-10">
+        <div className="grid grid-cols-4 grid-rows-auto gap-y-4 mt-10 lg:hidden" ref={songsRef}>
           {Array(24)
             .fill(null)
             .map((i, idx) => (

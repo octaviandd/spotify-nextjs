@@ -10,9 +10,28 @@ const SearchBarStyle = {
 
 export default function LandingSectionTwo() {
   const tl: any = useRef();
+  const songsRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
   const [refs, setRefs] = useArrayRef();
   let timeline: any = useRef();
+
+  useIsomorphicLayoutEffect(() => {
+    timeline.current = gsap.timeline();
+    timeline.current.fromTo(
+      refs.current,
+      { opacity: 0, duration: 0 },
+      {
+        opacity: 1,
+        stagger: 1,
+        scrollTrigger: {
+          trigger: songsRef.current,
+          start: 'top bottom-=300',
+          end: '+=500',
+          scrub: true,
+        },
+      }
+    );
+  });
 
   useIsomorphicLayoutEffect(() => {
     if (lineRef.current) {
@@ -56,7 +75,7 @@ export default function LandingSectionTwo() {
         </span>
         <div
           style={SearchBarStyle}
-          className="flex items-center mt-10 py-3 px-4 bg-[#ffffff] w-[275px] rounded-xl search-bar"
+          className="flex items-center mt-10 py-3 px-4 bg-[#ffffff] w-[275px] rounded-xl search-bar lg:hidden"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -68,7 +87,7 @@ export default function LandingSectionTwo() {
           </svg>
           <span className="pl-4 text-[0.875rem] text-[#9ca3af] search-bar-input">Ballads Metallica</span>
         </div>
-        <div className="grid grid-cols-4 grid-rows-auto gap-y-4 mt-10">
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-auto grid-rows-auto gap-y-4 gap-x-4 mt-10 lg:hidden" ref={songsRef}>
           {Array(24)
             .fill(null)
             .map((i, idx) => (
