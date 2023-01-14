@@ -8,9 +8,54 @@ import { SongCard } from './SongCard';
 export default function LandingSectionFour() {
   const iconRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const songsRef = useRef<HTMLDivElement>(null);
   const tl: any = useRef();
+  const timeline: any = useRef();
   const [refs, setRefs] = useArrayRef();
+  const [refs2, setRefs2] = useArrayRef();
   const secondTl: any = useRef();
+
+  useIsomorphicLayoutEffect(() => {
+    timeline.current = gsap.timeline();
+    timeline.current.fromTo(
+      refs2.current,
+      { opacity: 0, duration: 0 },
+      {
+        opacity: 1,
+        stagger: 1,
+        scrollTrigger: {
+          trigger: songsRef.current,
+          start: 'top bottom-=300',
+          end: '+=400',
+          scrub: true,
+        },
+      }
+    );
+  });
+
+  useIsomorphicLayoutEffect(() => {
+    if (refs.current) {
+      let ctx = gsap.context(() => {
+        secondTl.current = gsap.timeline().fromTo(
+          refs.current,
+          {
+            left: 0,
+          },
+          {
+            left: 'random(0, 100)',
+            duration: 2,
+            scrollTrigger: {
+              trigger: document.querySelector('.composition'),
+              start: 'top center-=200',
+              end: '+=400',
+              scrub: true,
+            },
+          }
+        );
+      }, refs.current);
+      return () => ctx.revert();
+    }
+  });
 
   useIsomorphicLayoutEffect(() => {
     if (iconRef.current) {
@@ -72,7 +117,7 @@ export default function LandingSectionFour() {
   return (
     <div className="flex mr-4 relative lg:pl-20 composition">
       <div className="flex flex-col mx-auto my-3 h-[1175px]">
-        <div className="relative inline-block z-10 mt-3" ref={iconRef}>
+        <div className="relative inline-block z-10 mt-3 w-[24px] h-[24px]" ref={iconRef}>
           <Image src="/connector.svg" width={24} height={24} className="rotate-90" />
           <span className="absolute left-0 top-0 h-full w-full z-20 bg-white blur-lg"></span>
         </div>
@@ -81,7 +126,7 @@ export default function LandingSectionFour() {
           style={{ background: 'linear-gradient(#000000, #797ef9, #797ef9' }}
           className="h-full w-[3px] rounded-md mx-auto"
         ></div>
-        <div className="relative inline-block z-10 mt-3">
+        <div className="relative inline-block z-10 mt-3 w-[24px] h-[24px]">
           <Image src="/Spotify_Icon_RGB_Green.png" width={24} height={24}></Image>
           <span className="absolute left-0 top-0 h-full w-full z-20 bg-[#00CA4E] blur-lg"></span>
         </div>
@@ -95,18 +140,18 @@ export default function LandingSectionFour() {
           Easily modify your search based on metrics such as loudness, mode, energy, popularity, and valence to find the
           perfect match for your needs.
         </span>
-        <div className="pointer-events-none w-[225px] flex flex-col fake-slider">
+        <div className="pointer-events-none w-[225px] flex flex-col fake-slider lg:hidden">
           <SongFilter ref={setRefs}></SongFilter>
           <SongFilter ref={setRefs}></SongFilter>
           <SongFilter ref={setRefs}></SongFilter>
           <SongFilter ref={setRefs}></SongFilter>
         </div>
-        <div className="grid grid-cols-4 grid-rows-auto gap-y-4 mt-10">
+        <div className="grid grid-cols-4 grid-rows-auto gap-y-4 mt-10 lg:hidden" ref={songsRef}>
           {Array(24)
             .fill(null)
             .map((i, idx) => (
               <SongCard
-                ref={setRefs}
+                ref={setRefs2}
                 key={idx}
                 item={{
                   link: `/${gsap.utils.random(1, 23, 1)}.jpg`,
