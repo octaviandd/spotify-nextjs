@@ -20,7 +20,7 @@ module.exports = {
         item: "auto",
       },
       gridTemplateColumns: {
-        hero: "minmax(600px, 25%) 1fr",
+        hero: "minmax(300px, 25%) 1fr",
         hero2: "minmax(700px, 25%) 1fr",
         mockup: "1fr",
         search: "minmax(500px, 25%) 1fr",

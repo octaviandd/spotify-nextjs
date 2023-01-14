@@ -37,9 +37,8 @@ export const MockSelect = (props: Props) => {
             { value: '1', label: 'jazz' },
           ],
         ].map((i, idx) => (
-          <div className="w-full my-1">
+          <div className="w-full my-1" key={idx}>
             <Select
-              key={idx}
               isMulti={true}
               defaultValue={Array.isArray(i) ? i : [i]}
               placeholder=""

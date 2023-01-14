@@ -17,16 +17,18 @@ export default function Page({ accessToken }: { accessToken: string }) {
 
   return (
     <Layout>
-      <div className=' ml-20'>
+      <div className='px-6'>
         <LandingSectionOne></LandingSectionOne>
       </div>
-      <div className="grid grid-cols-hero grid-rows-hero relative" id="starter">
+      <div className="flex px-6 lg:grid grid-cols-hero grid-rows-hero relative " id="starter">
         <div>
           <LandingSectionTwo></LandingSectionTwo>
           <LandingSectionThree></LandingSectionThree>
           <LandingSectionFour></LandingSectionFour>
         </div>
-        <MockupPage></MockupPage>
+        {/* <div className='lg:block hidden'>
+          <MockupPage></MockupPage>
+        </div> */}
       </div>
     </Layout>
   );

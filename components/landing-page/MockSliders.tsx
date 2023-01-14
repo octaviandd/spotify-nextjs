@@ -5,7 +5,7 @@ import { SongFilter } from './SongFilter';
 
 type Props = {};
 
-export default function MockSliders({ }: Props) {
+export default function MockSliders({}: Props) {
   const [refs, setRefs] = useArrayRef();
   const secondTl: any = useRef();
 
