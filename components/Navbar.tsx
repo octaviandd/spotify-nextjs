@@ -9,7 +9,7 @@ export default function Navbar() {
   const pathname = useRouter().pathname;
 
   return (
-    <nav className="bg-[#16181c] w-full py-1 font-artists sm:px-6 lg:px-20">
+    <nav className="bg-[#16181c] w-full py-1 font-artists px-6 lg:px-20">
       <div className="">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">

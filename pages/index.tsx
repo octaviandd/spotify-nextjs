@@ -20,7 +20,7 @@ export default function Page({ accessToken }: { accessToken: string }) {
       <div className='px-6 lg:px-20'>
         <LandingSectionOne></LandingSectionOne>
       </div>
-      <div className="flex lg:grid grid-cols-hero grid-rows-hero relative" id="starter">
+      <div className="flex lg:grid grid-cols-hero grid-rows-hero relative px-6 lg:px-0" id="starter">
         <div>
           <LandingSectionTwo></LandingSectionTwo>
           <LandingSectionThree></LandingSectionThree>
