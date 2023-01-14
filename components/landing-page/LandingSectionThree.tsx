@@ -113,7 +113,7 @@ export default function LandingSectionThree() {
           Spotify API, we are able to deliver a tailored selection of tracks, complete with detailed information on the
           size of the matching pool.
         </span>
-        <div className="pointer-events-none w-[290px] mt-10 fake-select shadow-md bg-gray-900 p-2 rounded-lg lg:hidden">
+        <div className="pointer-events-none w-[290px] mt-10 shadow-md bg-gray-900 p-2 rounded-lg lg:hidden">
           <div className="w-full my-1">
             {[
               { value: '1', label: 'Sting' },

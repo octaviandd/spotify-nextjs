@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signIn, useSession } from 'next-auth/react';
@@ -9,12 +9,12 @@ export default function Navbar() {
   const pathname = useRouter().pathname;
 
   return (
-    <nav className="bg-[#16181c] w-full py-1 font-artists">
-      <div className="px-2 sm:px-6 lg:px-8">
+    <nav className="bg-[#16181c] w-full py-1 font-artists sm:px-6 lg:px-20">
+      <div className="">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-col items-center"></div>
-            <div className="flex justify-between gap-1 w-10 h-8 lg:w-12 lg:h-10 ml-4 relative">
+            <div className="flex justify-between gap-1 w-10 h-8 lg:w-12 lg:h-10 relative">
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-slow"></div>
               <div className="bg-[#00CA4E] rounded-md scale-y-50 h-100 w-4 animate-bounce-quiet"></div>
@@ -57,11 +57,11 @@ export default function Navbar() {
                     callbackUrl: `${window.location.origin}/search`,
                   });
                 }}
-                className="inline-block mr-2"
+                className="inline-block"
               >
                 <button
                   type="button"
-                  className="flex items-center group ease-in-out transition duration-200 bg-green-500 hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center"
+                  className="flex items-center group ease-in-out transition duration-200 bg-[#00CA4E] hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center"
                 >
                   <span className="hidden md:inline-block pr-1">Connect with </span>
                   <span className="mr-3">Spotify</span>

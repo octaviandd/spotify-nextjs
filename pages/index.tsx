@@ -11,24 +11,22 @@ import LandingSectionTwo from '../components/landing-page/LandingSectionTwo';
 
 export default function Page({ accessToken }: { accessToken: string }) {
   useEffect(() => {
-    // if (accessToken) window.location.href = '/search';
+    if (accessToken) window.location.href = '/search';
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <Layout>
-      <div className='px-6'>
+      <div className='px-6 lg:px-20'>
         <LandingSectionOne></LandingSectionOne>
       </div>
-      <div className="flex px-6 lg:grid grid-cols-hero grid-rows-hero relative " id="starter">
+      <div className="flex lg:grid grid-cols-hero grid-rows-hero relative" id="starter">
         <div>
           <LandingSectionTwo></LandingSectionTwo>
           <LandingSectionThree></LandingSectionThree>
           <LandingSectionFour></LandingSectionFour>
         </div>
-        {/* <div className='lg:block hidden'>
-          <MockupPage></MockupPage>
-        </div> */}
+        <MockupPage></MockupPage>
       </div>
     </Layout>
   );

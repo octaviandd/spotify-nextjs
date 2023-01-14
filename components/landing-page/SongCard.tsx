@@ -12,7 +12,7 @@ export type Ref = HTMLDivElement;
 
 export const SongCard = forwardRef<Ref, Props>((props, ref) => {
   return (
-    <div className="relative group w-[60px] sm:w-[120px]" ref={ref}>
+    <div className="relative group w-[60px]" ref={ref}>
       <div className="relative">
         <a className="w-full h-full">
           <img

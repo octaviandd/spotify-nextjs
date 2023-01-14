@@ -6,9 +6,8 @@ import { SelectMenuOption } from '../global/SelectMenuOption';
 import { gsap } from 'gsap';
 import { useIsomorphicLayoutEffect } from '../utils';
 
-type Props = {};
 
-export const MockSelect = (props: Props) => {
+export const MockSelect = () => {
   useIsomorphicLayoutEffect(() => {
     gsap.fromTo(
       document.querySelector('.fake-select'),
@@ -17,7 +16,7 @@ export const MockSelect = (props: Props) => {
         opacity: 1,
         stagger: 1,
         scrollTrigger: {
-          trigger: document.querySelector('.include-others'),
+          trigger: document.querySelector('#test-outro'),
           start: 'top centre',
           end: '+=300',
           scrub: true,

@@ -23,8 +23,6 @@ export default function LandingSectionOne() {
       <div className="flex flex-row flex-wrap pt-20 pb-10 w-full lg:w-1/2">
         <div className="pb-6 text-[30px] text-slate-400">Looking for new music?</div>
         <div className="text-4xl text-white leading-none">
-          Spotifier.
-          <br />
           Advanced Spotify features for enhanced music experience
         </div>
         <div className="pt-6 cursor-pointer group ease-in-out transition duration-200" ref={buttonRef}>
@@ -49,7 +47,7 @@ export default function LandingSectionOne() {
       <div className="w-1/2 justify-center hidden lg:flex">
         <div className="relative inline-block z-10 mt-3">
           <Image src="/Spotify_Icon_RGB_Green.png" className="z-100" width={300} height={300}></Image>
-          <span className="absolute left-0 top-0 h-full w-full rounded-full z-20 bg-[#00CA4E] blur-lg opacity-50"></span>
+          <span className="absolute left-0 top-0 h-full w-full rounded-full scale-125 z-20 bg-[#00CA4E] blur-lg opacity-50"></span>
         </div>
       </div>
     </div>

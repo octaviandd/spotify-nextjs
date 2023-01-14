@@ -140,7 +140,7 @@ export default function LandingSectionFour() {
           Easily modify your search based on metrics such as loudness, mode, energy, popularity, and valence to find the
           perfect match for your needs.
         </span>
-        <div className="pointer-events-none w-[225px] flex flex-col fake-slider lg:hidden">
+        <div className="pointer-events-none w-[225px] flex flex-col lg:hidden">
           <SongFilter ref={setRefs}></SongFilter>
           <SongFilter ref={setRefs}></SongFilter>
           <SongFilter ref={setRefs}></SongFilter>

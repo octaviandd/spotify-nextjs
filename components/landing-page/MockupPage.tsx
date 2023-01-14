@@ -29,7 +29,7 @@ export default function MockupPage() {
   }, []);
 
   return (
-    <div className="pt-20 right-0" ref={displayPage} id="pin">
+    <div className="pt-20 right-0 hidden lg:block" ref={displayPage} id="pin">
       <div className="relative w-full h-full">
         <div className="bg-[#273138] opacity-[0.9] max-w-[550px] mt-[10px] mx-auto p-[10px] rounded-t-lg flex gap-1.5 blur-sm">
           <div className="bg-[red] inline-block w-[10px] h-[10px] rounded-full "></div>
