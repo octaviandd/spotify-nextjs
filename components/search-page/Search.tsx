@@ -69,17 +69,17 @@ export default function Search({ accessToken }: Props) {
     );
   } else {
     return (
-      <FlyInOutRight>
-        <div className="lg:flex flex-col items-center hidden">
-          <SearchInput isOpen={isOpen} handleOpen={setIsOpen} hidden={true}></SearchInput>
-          <SeedFilters type="artist" queryLink="search" accessToken={accessToken}></SeedFilters>
-          <SeedFilters
-            type="genre"
-            queryLink="recommendations/available-genre-seeds"
-            accessToken={accessToken}
-          ></SeedFilters>
-          <SeedFilters type="track" queryLink="search" accessToken={accessToken}></SeedFilters>
-          {seedsLength > 5 && <span className="text-white">Too many selections</span>}
+      <div className="lg:flex flex-col items-center hidden">
+        <SearchInput isOpen={isOpen} handleOpen={setIsOpen} hidden={true}></SearchInput>
+        <SeedFilters type="artist" queryLink="search" accessToken={accessToken}></SeedFilters>
+        <SeedFilters
+          type="genre"
+          queryLink="recommendations/available-genre-seeds"
+          accessToken={accessToken}
+        ></SeedFilters>
+        <SeedFilters type="track" queryLink="search" accessToken={accessToken}></SeedFilters>
+        {seedsLength > 5 && <span className="text-white">Too many selections</span>}
+        <div className="px-2 w-full">
           <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>
           <RangeFilter type="Danceability" max={1} min={0}></RangeFilter>
           <RangeFilter type="Duration_ms" max={600000} min={0}></RangeFilter>
@@ -94,7 +94,7 @@ export default function Search({ accessToken }: Props) {
           <RangeFilter type="Tempo" max={350} min={-50}></RangeFilter>
           <RangeFilter type="Valence" max={1} min={0}></RangeFilter>
         </div>
-      </FlyInOutRight>
+      </div>
     );
   }
 }

@@ -13,7 +13,6 @@ export default function MockSongsGrid({}: Props) {
   let tl2: any = useRef();
   let tl3: any = useRef();
 
-
   useIsomorphicLayoutEffect(() => {
     tl.current = gsap.timeline();
     tl.current.fromTo(
@@ -114,9 +113,7 @@ export default function MockSongsGrid({}: Props) {
             ></SongCard>
           ))}
       </div>
-      <div
-        className="absolute grid z-20 grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto"
-      >
+      <div className="absolute grid z-20 grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto">
         {Array(24)
           .fill(null)
           .map((i, idx) => (
@@ -129,9 +126,7 @@ export default function MockSongsGrid({}: Props) {
             ></SongCard>
           ))}
       </div>
-      <div
-        className="absolute grid grid-cols-4 z-10 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto"
-      >
+      <div className="absolute grid grid-cols-4 z-10 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto">
         {Array(24)
           .fill(null)
           .map((i, idx) => (

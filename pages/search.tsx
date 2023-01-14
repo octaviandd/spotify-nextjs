@@ -27,17 +27,9 @@ export default function Page({ accessToken }: { accessToken: string }) {
 
   return (
     <Layout>
-      <div
-        className={
-          isModalOpen
-            ? 'bg-[#000000] flex lg:grid grid-cols-search grid-rows-search pt-10 opacity-50 pointer-events-none relative'
-            : 'bg-[#000000] flex lg:grid grid-cols-search grid-rows-search pt-10 relative'
-        }
-      >
+      <div className={`bg-[#000000] flex lg:grid grid-cols-search grid-rows-search mt-10 ${isModalOpen ? 'opacity-50 pointer-events-none' : ''} relative px-6`}>
         <Search accessToken={accessToken}/>
-        <FadeInOut>
-          <SongsContainer accessToken={accessToken}></SongsContainer>
-        </FadeInOut>
+        <SongsContainer accessToken={accessToken}></SongsContainer>
       </div>
       {song?.id && window.location.href.includes('search') && (
         <SongModal updateBackground={(value: boolean) => setIsModalOpen(value)}></SongModal>

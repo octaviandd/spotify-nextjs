@@ -36,7 +36,6 @@ export default function SongsContainer({ accessToken }: { accessToken: string })
         filtersObject[key] = value;
       }
     }
-
     setLoading(true);
     getSpotifyData({
       token: accessToken as string,
@@ -95,10 +94,8 @@ export default function SongsContainer({ accessToken }: { accessToken: string })
             <div className="relative">
               <a className="w-full h-full">
                 <img
-                  src={item.album.images[1]?.url}
-                  className="group-hover:opacity-40 rounded-lg transition ease-in-out"
-                  width="100%"
-                  height="100%"
+                  src={item.album?.images[1]?.url || item.album?.images[0]?.url}
+                  className="group-hover:opacity-40 rounded-lg transition ease-in-out w-full h-full"
                 />
                 <div
                   onClick={() => setSong(item)}

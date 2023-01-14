@@ -6,7 +6,6 @@ import { SelectMenuOption } from '../global/SelectMenuOption';
 import { gsap } from 'gsap';
 import { useIsomorphicLayoutEffect } from '../utils';
 
-
 export const MockSelect = () => {
   useIsomorphicLayoutEffect(() => {
     gsap.fromTo(
