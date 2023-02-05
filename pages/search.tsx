@@ -27,7 +27,7 @@ export default function Page({ accessToken }: { accessToken: string }) {
 
   return (
     <Layout>
-      <div className={`bg-[#000000] flex lg:grid grid-cols-search grid-rows-search mt-10 ${isModalOpen ? 'opacity-50 pointer-events-none' : ''} relative px-6`}>
+      <div className={`bg-[#000000] flex lg:grid grid-cols-search grid-rows-search mt-10 ${isModalOpen ? 'opacity-50 pointer-events-none' : ''} relative`}>
         <Search accessToken={accessToken}/>
         <SongsContainer accessToken={accessToken}></SongsContainer>
       </div>

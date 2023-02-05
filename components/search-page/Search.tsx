@@ -25,6 +25,8 @@ export default function Search({ accessToken }: Props) {
   );
 
   const handleOpen = () => {
+    let navBarElHeight = document.querySelector('#main-nav')?.clientHeight;
+
     if (isOpen) {
       setIsOpen(false);
       gsap.to(ref.current, { duration: 0.5, top: '90%', ease: 'power2.out' });
@@ -51,19 +53,21 @@ export default function Search({ accessToken }: Props) {
           ></SeedFilters>
           <SeedFilters type="track" queryLink="search" accessToken={accessToken}></SeedFilters>
           {seedsLength > 5 && <span className="text-white">Too many selections</span>}
-          <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Danceability" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Duration_ms" max={600000} min={0}></RangeFilter>
-          <RangeFilter type="Energy" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Instrumentalness" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Key" max={11} min={0}></RangeFilter>
-          <RangeFilter type="Liveness" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Loudness" max={100} min={-10}></RangeFilter>
-          <RangeFilter type="Mode" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Popularity" max={100} min={0}></RangeFilter>
-          <RangeFilter type="Speechiness" max={1} min={0}></RangeFilter>
-          <RangeFilter type="Tempo" max={350} min={-50}></RangeFilter>
-          <RangeFilter type="Valence" max={1} min={0}></RangeFilter>
+          <div className="mt-4">
+            <RangeFilter type="Acousticness" max={1} min={0}></RangeFilter>
+            <RangeFilter type="Danceability" max={1} min={0}></RangeFilter>
+            <RangeFilter type="Duration_ms" max={600000} min={0}></RangeFilter>
+            <RangeFilter type="Energy" max={1} min={0}></RangeFilter>
+            <RangeFilter type="Instrumentalness" max={1} min={0}></RangeFilter>
+            <RangeFilter type="Key" max={11} min={0}></RangeFilter>
+            <RangeFilter type="Liveness" max={1} min={0}></RangeFilter>
+            <RangeFilter type="Loudness" max={100} min={-10}></RangeFilter>
+            <RangeFilter type="Mode" max={1} min={0}></RangeFilter>
+            <RangeFilter type="Popularity" max={100} min={0}></RangeFilter>
+            <RangeFilter type="Speechiness" max={1} min={0}></RangeFilter>
+            <RangeFilter type="Tempo" max={350} min={-50}></RangeFilter>
+            <RangeFilter type="Valence" max={1} min={0}></RangeFilter>
+          </div>
         </div>
       </div>
     );

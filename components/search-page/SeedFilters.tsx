@@ -96,6 +96,10 @@ export default function SeedFilters({
         onChange={setMultiSelectValues}
         placeholder={`Search for ${type}s...`}
         styles={{
+          input: (base) => ({
+            ...base,
+            color: 'white',
+          }),
           multiValueRemove: (base) => ({
             ...base,
             ':hover': {

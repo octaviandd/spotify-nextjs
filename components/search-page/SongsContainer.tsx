@@ -87,7 +87,7 @@ export default function SongsContainer({ accessToken }: { accessToken: string })
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-y-5 gap-x-3 px-1 lg:px-4">
+    <div className="flex flex-wrap justify-center gap-y-5 gap-x-3 px-1 lg:px-4 lg:mb-0 mb-28">
       {items.length > 0 &&
         items.map((item) => (
           <div key={item.id} className="relative group max-w-[85px] lg:max-w-[150px]">

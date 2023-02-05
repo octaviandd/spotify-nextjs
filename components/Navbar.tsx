@@ -1,15 +1,22 @@
-import React from 'react';
+import React, {  useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { gsap } from "gsap";
+import { useIsomorphicLayoutEffect } from './utils';
 
 export default function Navbar() {
   const { data: session } = useSession();
   const pathname = useRouter().pathname;
+  const loginRef = useRef<HTMLSpanElement>(null);
+
+  useIsomorphicLayoutEffect(() => {
+    gsap.fromTo(loginRef.current, { opacity: 0, x: '-30' }, { opacity: 1, duration: 1, x: 0 });
+  })
 
   return (
-    <nav className="bg-[#16181c] w-full py-1 font-artists px-6 lg:px-20">
+    <nav className="bg-[#16181c] w-full py-1 font-artists px-6 lg:px-20" id="main-nav">
       <div className="">
         <div className="relative flex items-center justify-between h-16">
           <div className="flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -26,7 +33,7 @@ export default function Navbar() {
               ></span>
             </div>
           </div>
-          <div className="flex items-center pr-2 mx-auto sm:pr-0">
+          {/* <div className="flex items-center pr-2 mx-auto sm:pr-0">
             {session?.user && (
               <div className="flex items-center text-md lg:text-lg">
                 <Link href="/search">
@@ -46,8 +53,8 @@ export default function Navbar() {
                 </Link>
               </div>
             )}
-          </div>
-          {!session?.user && (
+          </div> */}
+          {!session?.user ? (
             <div className="ml-auto relative">
               <a
                 href={`/api/auth/signin`}
@@ -63,9 +70,31 @@ export default function Navbar() {
                   type="button"
                   className="flex items-center group ease-in-out transition duration-200 bg-[#00CA4E] hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center"
                 >
-                  <span className="hidden md:inline-block pr-1">Connect with </span>
-                  <span className="mr-3">Spotify</span>
-                  <Image src="/chevron-right.svg" width={24} height={24} />
+                  <span className="md:inline-block pr-1">Connect with Spotify</span>
+                  <span ref={loginRef} className='w-[24px] h-[20px]'>
+                    <Image src="/chevron-right.svg" width={24} height={20} />
+                  </span>
+                </button>
+              </a>
+            </div>
+          ) : (
+             <div className="ml-auto relative">
+              <a
+                href={`/api/auth/signout`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  signOut({ callbackUrl: `${window.location.origin}`});
+                }}
+                className="inline-block"
+              >
+                <button
+                  type="button"
+                  className="flex items-center group ease-in-out transition duration-200 bg-[#00CA4E] hover:bg-green-600 focus:bg-green-700 focus:shadow-sm focus:ring-4 focus:ring-opacity-50 text-white w-full py-2.5 px-4 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center"
+                >
+                  <span className="md:inline-block pr-1">Logout</span>
+                  <span ref={loginRef} className='w-[24px] h-[20px]'>
+                    <Image src="/chevron-right.svg" width={24} height={20} />
+                  </span>
                 </button>
               </a>
             </div>
