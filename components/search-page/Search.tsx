@@ -25,8 +25,6 @@ export default function Search({ accessToken }: Props) {
   );
 
   const handleOpen = () => {
-    let navBarElHeight = document.querySelector('#main-nav')?.clientHeight;
-
     if (isOpen) {
       setIsOpen(false);
       gsap.to(ref.current, { duration: 0.5, top: '90%', ease: 'power2.out' });

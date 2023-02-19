@@ -91,7 +91,7 @@ export default function LandingSectionThree() {
   }, []);
 
   return (
-    <div className="flex mr-4 relative lg:pl-20 include-others">
+    <div className="flex mr-4 relative pl-4 lg:pl-20 include-others">
       <div className="flex flex-col mx-auto my-3 h-[1400px]">
         <div className="relative inline-block z-10 mt-3 w-[24px] h-[24px]" ref={iconRef}>
           <Image src="/connector.svg" width={24} height={24} className="rotate-90" />
@@ -103,7 +103,7 @@ export default function LandingSectionThree() {
           className="h-full w-[3px] rounded-md mx-auto"
         ></div>
       </div>
-      <div className="flex flex-col w-full mb-6 py-4 rounded-md ml-10">
+      <div className="flex flex-col w-full mb-6 py-4 rounded-md ml-6">
         <span className="text-white text-2xl lg:text-6xl mb-10" id="test-outro">
           Expand your search: Discover more music.
         </span>

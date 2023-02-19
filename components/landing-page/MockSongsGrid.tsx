@@ -99,7 +99,7 @@ export default function MockSongsGrid({}: Props) {
   });
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0">
+    <div className="">
       <div className="absolute grid z-50 grid-cols-4 grid-rows-auto max-w-[300px] row-start-2 w-full gap-x-14 px-10 top-[70px] right-[180px] mx-auto">
         {Array(24)
           .fill(null)

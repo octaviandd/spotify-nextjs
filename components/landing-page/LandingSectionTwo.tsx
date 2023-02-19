@@ -54,7 +54,7 @@ export default function LandingSectionTwo() {
   }, []);
 
   return (
-    <div className="flex mr-4 relative lg:pl-20 start-now">
+    <div className="flex mr-4 relative pl-4 lg:pl-20 start-now">
       <div className="flex flex-col mx-auto mb-3 h-[1000px]">
         <div className="relative inline-block z-10 w-[24px] h-[24px] mb-4">
           <Image src="/Spotify_Icon_RGB_Green.png" width={24} height={24}></Image>
@@ -87,7 +87,7 @@ export default function LandingSectionTwo() {
           </svg>
           <span className="pl-4 text-[0.875rem] text-[#9ca3af] search-bar-input">Ballads Metallica</span>
         </div>
-        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-auto grid-rows-auto gap-y-4 gap-x-4 mt-10 lg:hidden" ref={songsRef}>
+        <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-auto grid-rows-auto mt-10 lg:hidden" ref={songsRef}>
           {Array(24)
             .fill(null)
             .map((i, idx) => (

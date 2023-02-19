@@ -20,13 +20,20 @@ export default function Page({ accessToken }: { accessToken: string }) {
       <div className='px-6 lg:px-20'>
         <LandingSectionOne></LandingSectionOne>
       </div>
-      <div className="flex lg:grid grid-cols-hero grid-rows-hero relative px-6 lg:px-0" id="starter">
+      <div className="flex lg:grid grid-cols-hero grid-rows-hero relative" id="starter">
         <div>
           <LandingSectionTwo></LandingSectionTwo>
           <LandingSectionThree></LandingSectionThree>
           <LandingSectionFour></LandingSectionFour>
         </div>
+        <div>
         <MockupPage></MockupPage>
+        </div>
+      </div>
+      <div className="my-32 flex justify-center w-full">
+        <div className='text-5xl text-center text-white py-12 bg-[#00CA4E] rounded-md'>
+          <p>Connect with spotify</p>
+        </div>
       </div>
     </Layout>
   );

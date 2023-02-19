@@ -115,7 +115,7 @@ export default function LandingSectionFour() {
     }
   }, []);
   return (
-    <div className="flex mr-4 relative lg:pl-20 composition">
+    <div className="flex mr-4 relative pl-4 lg:pl-20 composition">
       <div className="flex flex-col mx-auto my-3 h-[1175px]">
         <div className="relative inline-block z-10 mt-3 w-[24px] h-[24px]" ref={iconRef}>
           <Image src="/connector.svg" width={24} height={24} className="rotate-90" />
